@@ -1,0 +1,60 @@
+.page-header {
+    background-color: #0e829b;
+    margin-top: 0px;
+    padding: 0px 0px 0px 30px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+    padding-bottom: 10px;
+}
+
+.content {
+    padding-left-left: 10px;
+    /*margin-top: 10px;*/
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Aeroport', cursive;
+}
+
+.release_modal-text-block {
+    position: static;
+    bottom: 20px;
+    right: 20px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.date {
+    color: #828282;
+}
+
+.save {
+    float: right;
+}
+
+.post-form textarea, .post-form input {
+    width: 100%;
+}
+
+.top-menu, .top-menu:hover, .top-menu:visited {
+    color: #ffffff;
+    float: right;
+    font-size: 26pt;
+    margin-right: 20px;
+}
+
+.post {
+    margin-bottom: 10px;
+    margin-left: 15px;
+}
+
+.post h1 a, .post h1 a:visited {
+    background-color: #ff9400;
+    color: #000000;
+}

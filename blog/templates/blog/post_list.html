@@ -1,0 +1,758 @@
+{% load static %}
+<html>
+    <head>
+        <title>С-ПЛАСТ</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+
+
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/jquery.treegrid.css' %}">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+{#        <script type="text/javascript" src="js/jquery.js"></script>#}
+{#<script type="text/javascript" src="js/jquery.treegrid.js"></script>#}
+
+
+    </head>
+    <body>
+        <div id="picoutput"></div>
+        <div class="page-header">
+            <h1><a href="/" class="head_title">С-ПЛАСТ </a></h1>
+        </div>
+        <div class="container-fluid" style="padding-top: 20px; padding-left: 30px">
+                <div class="col">
+                {#==================MODAL RELEASE===================#}
+                    <div class="row">
+                        <div class="container-fluid row">
+                            <form method="GET">
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Выпуск колодца</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col-sm-5" style="padding-left: 10px;">
+                                                <td>Дата производства:</td>
+                                                  <br>
+                                                  <br>
+                                                <td>Колодец:</td>
+                                                  <br>
+                                                  <br>
+                                                <td>Серийный номер:</td>
+                                                  <br>
+                                                  <br>
+                                                <td>Приход:</td>
+                                                  <br>
+                                                </div>
+                                                <div  class="col-sm-4" style="text-align: left">
+                                                    <input data-date-format="dd/mm/yyyy" id="release_date" style="height: 23px;">
+                                                    <br>
+                                                    <br>
+                                                    <select id="release_type" class="form-select" aria-label="Default select example">
+                                                      <option selected>{{ type_first_elem }}</option>
+                                                        {% for type in types %}
+                                                            <tr>
+                                                            {% if type.pk > 1 %}
+                                                                <tr>
+                                                                <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                                                </tr>
+                                                            {% endif %}
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <br>
+                                                    <br>
+                                                    <h2 id="release_serial" name="serial" style="margin-top: -6px; font-weight: inherit;"></h2>
+                                                    <br>
+                                                    <br>
+                                                    <select id="release_wh" class="form-select" aria-label="Default select example" style="margin-top: -49px; ">
+                                                      <option selected>{{ wh_first_elem }}</option>
+                                                        {% for wh in wh_lst %}
+                                                            <tr>
+                                                            {% if wh_lst.pk > 1 %}
+                                                                <tr>
+                                                                <option value="{{ wh.pk }}">{{ wh.type_name }}</option>
+                                                                </tr>
+                                                            {% endif %}
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button id="modal_cancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                        <button id="modal_save" type="button" class="btn btn-primary" onclick="">Выпустить</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                    <button id="release" name="but1" value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter" onclick="">
+                                        Выпустить
+                                    </button>
+                                    <button id="transfer" name="but1" value="val_2" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
+                                        Передать
+                                    </button>
+                                    <input id="access_token" type="hidden" name="access_token" value="<?php echo $_SESSION['access_token']; ?>" />
+
+                                    <button id="report" name="but1" value="val_3" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
+                                        Отчет М29
+                                    </button>
+                                   <button id="analytics" name="but1" value="val_4" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
+                                        Статистика
+                                    </button>
+
+                                    <button id="structure" name="but1" value="val_5" type="button" class="btn btn-secondary btn-sm" >
+                                        <a href="{% url 'structure' %}" style="text-decoration: none; color: white">Управление заявками</a>
+                                    </button>
+                                    <button id="journal" name="but1" value="val_6" type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
+                                        Журнал событий
+                                    </button>
+                            </form>
+                        </div>
+                    </div>
+                    {#=======================================================#}
+                    {#====================MODAL TRANSFER=====================#}
+                    <form method="GET">
+                        <div class="modal fade" id="exampleModalCenter_transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Перемещение</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                                  <div id="connect_well_arr" hidden></div>
+                                  <div id="connect_well_type" hidden></div>
+                                  <div id="parent_count" hidden>0</div>
+                                  <div id="serial_lst" hidden></div>
+                              </div>
+                              <div class="modal-body">
+                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                    <div class="row">
+                                        <div class="content-box" style="text-align: left; margin-left: 15px; width: 440px;">
+                                            <button id="button_add" style="margin-left: 0px;" name="but1"  value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_well_lst" onclick="initWellTbl({{ type_first_elem }})">
+                                                Добавить
+                                            </button>
+                                            <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px;">
+                                                <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px;">
+                                                    <th scope="col" ><span style="margin-left: 32px">Тип колодца</span></th>
+                                                    <th scope="col"><span style="margin-left: 235px">Количество</span></th>
+                                                </div>
+                                                <div class="row" id="" >
+                                                    <div class="scroll" style="height: 300px; overflow-y: scroll">
+                                                    <table id="transfer_well_lst" class="tree" style="margin-left: 20px; width: 450px;">
+                                                    </table>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                        <div class="row" style="margin-left: 0px; margin-top: 5px">
+                                            <div clacc="column">
+                                                <td>Всего к передаче:</td>
+                                                    <br>
+                                                    <br>
+                                                <td>Дата передачи:</td>
+                                                    <br>
+                                                    <br>
+                                                <td>Действие:</td>
+                                                    <br>
+                                                    <br>
+                                                <td><span id="transfer_field_text">Шифр:</span></td>
+                                                    <br>
+                                                    <br>
+                                                <td>Заявка:</td>
+                                            </div>
+                                            <div class="column" style="margin-left: 5px;">
+
+                                                <td><span id="transfer_well_counter">0</span></td>
+                                                    <br>
+                                                    <br>
+                                                <td><input data-date-format="dd/mm/yyyy" id="transaction_date" style="height: 23px; width: 105px"></td>
+                                                    <br>
+                                                    <br>
+                                                <td>
+                                                    <select id="transaction_action_type" class="form-select" aria-label="Default select example">
+                                                      <option value="transfer" selected>Перемещение</option>
+                                                        <tr>
+                                                            <option value="selling">Продажа</option>
+                                                        </tr>
+                                                    </select>
+                                                </td>
+                                                    <br>
+                                                    <br>
+                                                <td>
+                                                    <select id="transfer_code_num" class="form-select" aria-label="Default select example">
+                                                      <option selected>{{ type_first_elem }}</option>
+                                                        {% for type in types %}
+                                                            <tr>
+                                                            {% if type.pk > 1 %}
+                                                                <tr>
+                                                                <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                                                </tr>
+                                                            {% endif %}
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </select>
+                                                </td>
+                                                    <br>
+                                                    <br>
+                                                <td>
+                                                    <select id="transfer_mpz_num" class="form-select" aria-label="Default select example">
+                                                      <option selected>{{ type_first_elem }}</option>
+                                                        {% for type in types %}
+                                                            <tr>
+                                                            {% if type.pk > 1 %}
+                                                                <tr>
+                                                                <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                                                </tr>
+                                                            {% endif %}
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </select>
+                                                </td>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modal_transfer_cancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modal_transfer_save" type="button" class="btn btn-primary" onclick="">Переместить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+
+                    {#=======================================================#}
+                    {#=====================MODAL WELL LST ===================#}
+                    <form method="GET">
+                        <div class="modal fade" id="modal_well_lst" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Список колодцев</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              <div id="well_selected_array" hidden></div>
+                                <div id="well_selected_counter" value="" hidden>0</div>
+                              </div>
+                              <div class="modal-body">
+
+                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                    <div class="row">
+                                            <div class="column" style="margin-left: 15px">
+                                                Тип колодца:
+                                            </div>
+                                            <div class="column" style="margin-left: 5px">
+                                                <select id="modal_cb_type_lst" class="form-select" aria-label="Default select example">
+                                                    <option id="modal_cb_type_lst_first" value="{{ type_first_elem }}" selected>{{ type_first_elem }}</option>
+                                                      {% for type in types %}
+                                                            <tr>
+                                                            {% if type.pk > 1 %}
+                                                                <tr>
+                                                                <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                                                </tr>
+                                                            {% endif %}
+                                                            </tr>
+                                                        {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6" style="margin-left: -17px; padding-right: 0px;">Выбрано: </div>
+                                            <div id="well_counter" class="col-sm-1" style="margin-left: 2px">0</div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px; margin-left: 10px">
+                                                <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px;">
+                                                    <th scope="col" ><span style="padding-left: 60px">Тип</span></th>
+                                                    <th scope="col"><span style="margin-left: 92px">Серийный номер</span></th>
+                                                    <th scope="col"><span style="margin-left: 49px">Произведен</span></th>
+                                                </div>
+                                                <div class="row" id="" >
+                                                    <div class="scroll" style="height: 527px; overflow-y: scroll">
+                                                    <table id="modal_well_lst_table" class="tree" style="margin-left: 10px; width: 467px;" >
+                                                        <tr id="123" onclick="tbl_well_click(id())">
+                                                            <td class="col-sm-4" style="padding-left: 0px; ">С-пласт</td>
+                                                            <td class="col-sm-4" style="padding-left: 45px; "></td>
+                                                            <td style="padding-right: 20px; text-align: right"></td>
+                                                        </tr>
+                                                    </table>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modal_well_lst_cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                <button id="modal_well_lst_save" type="button" class="btn btn-primary" onclick="add_well_to_trans_lst()">Добавить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+
+                    {#=======================================================#}
+                    <div class="row">
+                    <div id="well_table" class=" container-fluid row" style="margin-top: -20px">
+                        <table class=" table table-bordered"  style="margin-bottom: 30px">
+                            <thead>
+                                <tr>
+                                  <th scope="col">Cерийный номер</th>
+                                  <th scope="col">Тип</th>
+                                  <th scope="col">Дата выпуска</th>
+                                  <th scope="col">Нахождение</th>
+                                  <th scope="col">Комментарий</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for well in wells %}
+                                    <tr>
+                                      <td scope="row"  >С-пласт {{ well.serial }}</td>
+                                      <td>{{ well.type }}</td>
+                                      <td>{{ well.created_date }}</td>
+                                      <td>{{ well.locate }}</td>
+                                      <td>{{ well.comment }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+
+
+
+
+        <!-- RELEASE MODAL FORM -->
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('.tree').treegrid();
+            $('.treegrid-1').exp
+        });
+        </script>
+
+
+        <script>
+        var modal;
+
+        $('#release_date').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+        $('#release_date').datepicker("setDate", new Date());
+
+        $('#release_date').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+
+        $('#release_date').datepicker("setDate", new Date());
+
+        $('.dropdown-toggle').dropdown();
+
+            $('#transaction_date').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+        $('#transaction_date').datepicker("setDate", new Date());
+
+        $('#transaction_date').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+
+        $('#transaction_date').datepicker("setDate", new Date());
+
+        $(document).ready(function() {
+            var infoModal = $('#release_serial');
+            var table = $('#well_table');
+            var trans_type = $('#transaction_action_type');
+
+
+            //OPEN MODAL EVENT
+            $("#release").click(function(e) {
+                $.ajax({
+                    type: "GET",
+                    url: "/",
+                    dataType: "json",
+                    data: {
+                    name: 'modal',
+                    },
+                    success: function(resp) {
+                        htmlData = resp.serial
+                        infoModal.html(htmlData)
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    }
+                });
+            });
+            $("#transfer").click(function(e)
+                {
+                    document.getElementById('connect_well_arr').innerHTML = ""
+                    document.getElementById('connect_well_type').innerHTML = ""
+                    document.getElementById('transfer_well_lst').innerHTML = ""
+                    document.getElementById('well_selected_array').innerHTML = ""
+                    document.getElementById('well_selected_counter').innerHTML = 0
+                    document.getElementById('well_counter').innerHTML = 0
+                    document.getElementById('parent_count').innerHTML = 0
+                    document.getElementById("serial_lst").innerHTML = "";
+
+                });
+                    {#=======================================================================#}
+
+                    $("#transaction_action_type").change(function(s) {
+                        if (trans_type.val() === 'selling'){
+                            document.getElementById('transfer_field_text').innerHTML = 'Покупатель:';
+                        }else {
+                            document.getElementById('transfer_field_text').innerHTML = 'Шифр:';
+                        }
+
+
+                    });
+
+                    $("#modal_cb_type_lst").change(function(s) {
+                        var type = $('#modal_cb_type_lst').val()
+                        document.getElementById("well_selected_counter").innerHTML = "0";
+                        document.getElementById("well_selected_counter").value = "";
+                        document.getElementById("well_counter").innerText = "0";
+                        document.getElementById("well_selected_array").innerHTML = "";
+
+                        document.getElementById("modal_well_lst_table").innerHTML = "";
+                        document.getElementById("modal_well_lst_table").innerHTML = "";
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/",
+                            dataType: "json",
+                            data: {
+                            event: 'get_well_lst',
+                                type: $('#modal_cb_type_lst').val()
+                            },
+
+                            success: function(resp) {
+
+                                $("#well_table").load("/ #well_table > *");
+                                var p_arr = document.getElementById("serial_lst").childNodes
+                                for (const [key, value] of Object.entries(resp)) {
+                                    var fl = true
+                                    console.log(value[1])
+                                    i = 0
+                                    for (;;){
+                                        if (i == p_arr.length) {
+                                            break
+                                        }
+                                        else {
+                                                console.log('========================')
+                                                console.log(value[1])
+                                                console.log(p_arr.item(i).textContent)
+                                            if (p_arr.item(i).textContent.search(value[1]) != -1) {
+                                                fl = false
+                                            }
+
+                                        }
+                                        i++
+                                    }
+                                    if (fl == true) {
+                                        $('#modal_well_lst_table').append('' +
+                                        '<tr class="" id="'+value[1]+'" style="background-color: white; cursor: pointer;"  onclick="tbl_well_click(id)" >\n' +
+                                        '<td class="col-sm-5" style="padding-left: 20px; ">С-пласт '+value[0]+'</td>\n' +
+                                        '<td class="col-sm-4" style="padding-left: 22px; ">'+value[1]+'</td>\n' +
+                                        '<td style="padding-right: 24; text-align: right">'+value[2]+'</td>\n' +
+                                        '</tr>'
+                                        );
+                                    }
+                                }
+                            },
+                            error: function(result) {
+                                var readyState = {
+                                1: "Loading",
+                                2: "Loaded",
+                                3: "Interactive",
+                                4: "Complete"
+                                };
+                                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                                }
+                            }
+                        });
+                    });
+
+            {#================================================================#}
+
+            $("#modal_save").click(function(s) {
+                $.ajax({
+                    type: "GET",
+                    url: "/",
+                    dataType: "json",
+                    data: {
+                    event: 'release',
+                        date: $('#release_date').val(),
+                        type: $('#release_type').val(),
+                        serial: htmlData,
+                        wh: $('#release_wh').val()
+                    },
+                    success: function(resp) {
+                        document.getElementById('modal_cancel').click()
+                        alert('Колодец выпущен!')
+                        $("#well_table").load("/ #well_table > *");
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    }
+                });
+            });
+        });
+
+
+        function initWellTbl(name)
+            {
+                document.getElementById('well_counter').innerHTML = 0;
+                document.getElementById('well_selected_array').innerHTML = ""
+                document.getElementById('well_selected_counter').innerHTML = 0
+                type_name = $('#modal_cb_type_lst_first').val()
+                document.getElementById("modal_well_lst_table").innerHTML = "";
+                $("#modal_cb_type_lst").val($("#modal_cb_type_lst option:first").val());
+                $.ajax({
+                    type: "GET",
+                    url: "/",
+                    dataType: "json",
+                    data: {
+                    event: 'get_well_lst',
+                        type: type_name
+                    },
+
+
+                    success: function(resp) {
+
+                        $("#well_table").load("/ #well_table > *");
+                        var p_arr = document.getElementById("serial_lst").childNodes
+                        console.log(p_arr)
+                        for (const [key, value] of Object.entries(resp)) {
+                            var fl = true
+                            console.log(value[1])
+                            i = 0
+                            for (;;){
+                                if (i == p_arr.length) {
+                                    break
+                                }
+                                else {
+                                        console.log('========================')
+                                        console.log(value[1])
+                                        console.log(p_arr.item(i).textContent)
+                                    if (p_arr.item(i).textContent.search(value[1]) != -1) {
+                                        fl = false
+                                    }
+                                }
+                                i++
+                            }
+                            if (fl == true) {
+                                $('#modal_well_lst_table').append('' +
+                                '<tr class="" id="'+value[1]+'" style="background-color: white; cursor: pointer;"  onclick="tbl_well_click(id)" >\n' +
+                                '<td class="col-sm-5" style="padding-left: 20px; ">С-пласт '+value[0]+'</td>\n' +
+                                '<td class="col-sm-4" style="padding-left: 22px; ">'+value[1]+'</td>\n' +
+                                '<td style="padding-right: 24; text-align: right">'+value[2]+'</td>\n' +
+                                '</tr>'
+                                );
+                            }
+                        }
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    }
+                });
+            }
+        function tbl_well_click(name)
+            {
+
+                var nodes = document.querySelectorAll('#well_selected_array *')
+                var sel_serial = name
+                var i = 0
+                var check = false
+                check = false
+                if (nodes.length == 0) {
+                    $('#well_selected_array').append('<span id="arr_'+name+'">'+name+'</span>');
+                    nodes = document.querySelectorAll('#well_selected_array *')
+                    document.getElementById('well_selected_counter').innerHTML = parseInt(nodes.length, 10)
+                    document.getElementById(name).style.backgroundColor = "#eeeeee";
+                }
+                else {
+                    for ([key, value] of Object.entries(nodes)) {
+                        if (value.innerHTML == name) {
+                            document.getElementById(name).style.backgroundColor = "#ffffff";
+                            document.getElementById('arr_'+name+'').remove()
+                            nodes = document.querySelectorAll('#well_selected_array *')
+                            document.getElementById('well_selected_counter').innerHTML = parseInt(nodes.length, 10)
+                            check = true
+                            break
+                        }
+                    }
+                    if (check == false) {
+                        $('#well_selected_array').append('<span id="arr_'+name+'">'+name+'</span>');
+                        nodes = document.querySelectorAll('#well_selected_array *')
+                        document.getElementById('well_selected_counter').innerHTML = parseInt(nodes.length, 10)
+                        document.getElementById(name).style.backgroundColor = "#eeeeee";
+                    }
+                }
+                document.getElementById('well_counter').innerText = nodes.length
+            }
+
+        function add_well_to_trans_lst(name)
+            {
+                var tbl_nodes = document.getElementById('transfer_well_lst').childNodes
+                var lst_sub_count = document.getElementById('connect_well_arr').childElementCount
+                var sub_type = document.getElementById('connect_well_type').innerHTML
+                var sub_arr = document.getElementById('connect_well_arr').childNodes
+                document.getElementById('modal_well_lst_cancel').click()
+                document.getElementById("connect_well_arr").innerHTML = document.getElementById("well_selected_array").innerHTML
+                document.getElementById("connect_well_type").innerHTML = document.getElementById("modal_cb_type_lst").value
+                if (tbl_nodes.length == 0) {
+                    $('#transfer_well_lst').append('<tr class="treegrid-1" id = "parent-1" >\n' +
+'                                                   <td id = "1">С-пласт '+document.getElementById('connect_well_type').innerHTML+'</td><td id="elem_count-1">'+document.getElementById('connect_well_arr').childElementCount+'</td>\n' +
+                                                    '</tr>');
+                    document.getElementById('parent_count').innerHTML = parseInt(document.getElementById('parent_count').textContent) + 1
+                    var i = 0
+                   for (;;) {
+                       $('#transfer_well_lst').append('<tr class="treegrid-parent-1" id="child-1-'+i+'">\n' +
+'                                                      <td id = "">'+document.getElementById('connect_well_arr').childNodes[i].textContent+'</td><td></td>\n' +
+'                                                      </tr>');
+                       i++
+                       if (i == document.getElementById('connect_well_arr').childElementCount) break;
+                   }
+                $('#transfer_well_lst').treegrid();
+                }
+                else {
+                    var i = 0
+                    var par_ind = 0
+                    var isNew = true
+                    for (;;) {
+                        var sub_type = document.getElementById('connect_well_type').innerHTML
+                       if (i == tbl_nodes.length) {break}
+                        else {
+                            var ch = tbl_nodes.item(i).childNodes
+                            if (tbl_nodes.item(i).id.search("parent") != -1) {
+                                console.log('PAR IND INC: '+par_ind)
+                                par_ind++
+                                if (tbl_nodes.item(i).textContent.search(sub_type) != -1) {
+                                                                    var par_id = ch.item(1).id
+                                console.log('elem_count-'+(par_ind))
+                                var par_ch_len = document.getElementById('elem_count-'+(par_ind)).textContent
+                                console.log('LEN: '+par_ch_len)
+
+                                isNew = false
+                                var j = 0
+                                for (;;) {
+                                    if (j == document.getElementById('connect_well_arr').childElementCount) {
+                                        console.log('IMPORT ELEM COMPLETE')
+                                        $('#transfer_well_lst').treegrid();
+                                        break;
+                                    }
+                                    else {
+                                         var par_ch_len = document.getElementById('elem_count-'+(par_ind)).textContent
+                                         $('#child-'+par_id+'-'+(par_ch_len-1+parseInt(j,10))).after('<tr class="treegrid-parent-'+ch.item(1).id+'" id="child-'+par_id+'-'+(parseInt(par_ch_len,10)+parseInt(j,10))+'">\n' +
+                                        '<td id = "">'+document.getElementById('connect_well_arr').childNodes[j].textContent+'</td><td></td>\n' +
+                                        '</tr>');
+                                         console.log(sub_arr.length)
+                                        j++
+                                    }
+                                }
+                                document.getElementById('elem_count-'+(par_ind)).innerText = parseInt(document.getElementById('elem_count-'+(par_ind)).textContent, 10) + parseInt(sub_arr.length, 10)
+                                i++
+                                }
+                                i++
+                            }
+                            else {
+                                i++
+                            }
+                       }
+                    }
+                    if (isNew == true) {
+                        console.log('NEW PARENT ELEM!')
+                        document.getElementById('parent_count').innerHTML = parseInt(document.getElementById('parent_count').textContent) + 1
+                        $('#transfer_well_lst').append('<tr class="treegrid-'+document.getElementById('parent_count').textContent+'" id = "parent-'+document.getElementById('parent_count').textContent+'" >\n' +
+                                                        '<td id = "'+document.getElementById('parent_count').textContent+'">С-пласт '+document.getElementById('connect_well_type').innerHTML+'</td><td id="elem_count-'+document.getElementById('parent_count').textContent+'">'+document.getElementById('connect_well_arr').childElementCount+'</td>\n' +
+                                                        '</tr>');
+
+                        var i = 0
+                        for (;;) {
+                        $('#transfer_well_lst').append('<tr class="treegrid-parent-'+document.getElementById('parent_count').textContent+'" id="child-'+document.getElementById('parent_count').textContent+'-'+i+'">\n' +
+                                                        '<td id = "">'+document.getElementById('connect_well_arr').childNodes[i].textContent+'</td><td></td>\n' +
+                                                        '</tr>');
+                        i++
+                        if (i == document.getElementById('connect_well_arr').childElementCount) break;
+
+                        }
+                        $('#transfer_well_lst').treegrid();
+                    }
+                }
+                i = 0
+                for (;;) {
+                    if (i == sub_arr.length) {
+                        break
+                    }
+                    else
+                        document.getElementById("serial_lst").append('<span id="">'+sub_arr.item(i).textContent+'</span>')
+                        i++
+                }
+
+                console.log(document.getElementById("serial_lst").childNodes)
+                document.getElementById("transfer_well_counter").innerHTML = document.getElementById("serial_lst").childNodes.length
+            }
+        </script>
+    </body>
+
+</html>
+

@@ -1,0 +1,1059 @@
+{% load static %}
+<html lang="en">
+<head>
+            <title>С-ПЛАСТ</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/jquery.treegrid.css' %}">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+<body>
+    <div id="picoutput"></div>
+    <div class="page-header">
+
+    <h1><a href="/" class="head_title">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">управление заявками</span> </a></h1>
+    </div>
+    <div class="row" style="width: 100%">
+    <div class="column" style="border-right: 1px solid #eeeeee; width: 12%; height: 90%; margin-left: 50px;">
+        <div  style="border-bottom: 1px solid #eeeeee; height: 35px; margin-left: 15px">
+            <div class="row">
+                <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 219px; height: 34px; font-size: 19px; border: none; outline: none; margin-left: -15px">
+                    <option id="modal_cb_type_lst_first" value="pg" selected>Проектные группы</option>
+                    <tr>
+                    <option value="os">Сторонние продажи</option>
+                    </tr>
+                </select>
+                <button id="addPG" name="but1" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 10px; background-color: #ffffff" data-toggle="modal" data-target="#modalNewPg" onclick="">
+                    <h1 style="margin-top: -8px; margin-left: -2px">+</h1>
+                </button>
+                <button id="addBY" name="but2" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 10px; background-color: #ffffff" data-toggle="modal" data-target="#modalNewBy" onclick="" hidden>
+                    <h1 style="margin-top: -8px; margin-left: -2px">+</h1>
+                </button>
+            </div>
+        {#===============MODAL ADD NEW PG===============#}
+        <form method="GET">
+            <div class="row">
+                <div class="container-fluid row">
+                    <form method="GET">
+                        <div class="modal fade" id="modalNewPg" tabindex="-1" role="dialog" aria-labelledby="modalNewPg" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Новая проектная группа</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                    <div class="row">
+                                        <div class="col-sm-4" style="padding-left: 10px;">
+                                        <td>Имя пр. группы:</td>
+                                        </div>
+                                        <div  class="col-sm-4" style="text-align: left">
+                                            <input  id="newPgName" style="height: 23px;">
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalNewPgCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalNewPgSave" type="button" class="btn btn-primary" onclick="">Создать</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+        {#==============================================#}
+        {#===============MODAL ADD NEW CODE=============#}
+        <form method="GET">
+            <div class="row">
+                <div class="container-fluid row">
+                    <form method="GET">
+                        <div class="modal fade" id="modalNewCode" tabindex="-1" role="dialog" aria-labelledby="modalNewCode" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="newCodeModalTitle">Новый шифр</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="newCodeConnect" hidden></div>
+                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                    <div class="row">
+                                        <div class="col-sm-4" style="padding-left: 10px;">
+                                        <td>Номер:</td>
+                                        </div>
+                                        <div  class="col-sm-4" style="text-align: left">
+                                            <input  id="newCodeNum" style="height: 23px;">
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalNewCodeCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalNewCodeSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </form>
+        {#==============================================#}
+        {#===============MODAL ADD NEW MPZ==============#}
+        <form method="GET">
+            <div class="row">
+                <div class="container-fluid row">
+                    <form method="GET">
+                        <div class="modal fade" id="modalNewMpz" tabindex="-1" role="dialog" aria-labelledby="modalNewMpz" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Новая заявка МПЗ</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="newMpzConnect" hidden></div>
+                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                    <div class="row">
+                                        <div class="col-sm-4" style="padding-left: 10px;">
+                                        <td>Номер заявки:</td>
+                                        </div>
+                                        <div  class="col-sm-4" style="text-align: left">
+                                            <input  id="newMpz" style="height: 23px;">
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalNewMpzCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalNewMpzSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+        {#==============================================#}
+        {#===============MODAL EDIT MPZ WELL============#}
+        <form method="GET">
+        <div class="row">
+            <div class="container-fluid row">
+                <form method="GET">
+                    <div class="modal fade" id="modalEditMpz" tabindex="-1" role="dialog" aria-labelledby="modalEditMpz" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Редактирование заявки</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div id="MpzNumConnect" hidden></div>
+                            <div id="WellTypeConnect" hidden></div>
+                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                <div class="row">
+                                    <div class="col-sm-4" style="padding-left: 10px;">
+                                    <td>Количество:</td>
+                                    </div>
+                                    <div  class="col-sm-4" style="text-align: left">
+                                        <select id="modal_well_num" class="form-select" aria-label="Default select example">
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button id="modalEditWellCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                            <button id="modalEditWellSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </form>
+    {#==============================================#}
+    {#===============MODAL ADD NEW BY===============#}
+    <form method="GET">
+    <div class="row">
+        <div class="container-fluid row">
+            <form method="GET">
+                <div class="modal fade" id="modalNewBy" tabindex="-1" role="dialog" aria-labelledby="modalNewBy" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Новый заказчик</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                            <div class="row">
+                                <div class="col-sm-4" style="padding-left: 10px;">
+                                <td>Имя покупателя:</td>
+                                </div>
+                                <div  class="col-sm-4" style="text-align: left">
+                                    <input  id="newByName" style="height: 23px;">
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button id="modalNewByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                        <button id="modalNewBySave" type="button" class="btn btn-primary" onclick="">Создать</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    </form>
+    {#==============================================#}
+    {#============MODAL ADD NEW BY APPL=============#}
+    <form method="GET">
+        <div class="row">
+            <div class="container-fluid row">
+                <form method="GET">
+                    <div class="modal fade" id="modalNewByAppl" tabindex="-1" role="dialog" aria-labelledby="modalNewByAppl" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Новая заявка</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div id="newApplByConnect" hidden></div>
+                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                <div class="row">
+                                    <div class="col-sm-6" style="padding-left: 10px;">
+                                    <td>Номер заявки:</td>
+                                    </div>
+                                    <div  class="col-sm-4" style="text-align: left">
+                                        <input  data-date-format="dd/mm/yyyy" id="appl_by_date" style="height: 23px; width: 95px; margin-left: -22px; padding-left: 5px; margin-top: 2px">
+                                    </div>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button id="modalNewApplByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                            <button id="modalNewApplBySave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </form>
+    {#==============================================#}
+    {#====================MAIN======================#}
+
+        </div>
+        <div id="tbl_cont" class="row" style=" margin-top: 0px">
+            <table id="table_struct" class="tree" style="margin-left: 0px; width: 270px;">
+                {% for pg  in pg_lst %}
+                    <tr id="node-{{ pg.pk }}" class="custom_hov treegrid-{{ pg.pk }}" style="height: 50px;">
+                        <td style="width: 240px;">{{ pg.pg_name }}</td>
+                    <td style="text-align: right">
+                        <button id="addCode" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewCode" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takePgName(name)">
+                            <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>
+                        </button>
+                    </td>
+                    <td style="text-align: right">
+                        <button id="delPG-{{ pg.pk }}" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" onclick="del_pg(name)">
+                            <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
+                        </button>
+                    </td>
+                    </tr>
+                    {% for code  in code_lst %}
+                        {% if  code.connect_id == pg.id %}
+
+                            <tr class="custom_hov treegrid-{{ pg.pk }}{{ code.id }} treegrid-parent-{{ pg.pk }}" style="width: 100px; height: 50px">
+                                <td>#{{ code.code_name }}</td>
+                                <td style="text-align: right">
+                                    <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewMpz" style=" height: 30px; width: 30px; margin-left: 0px; background-color: white; alignment: right" onclick="takeCodeName(name)">
+                                        <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>
+                                    </button>
+                                </td>
+                                <td style="text-align: right">
+                                    <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="del_code(name)">
+                                        <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% for mpz  in mpz_lst %}
+                                {% if  mpz.connect_id == code.id %}
+                                    <tr id="{{ mpz.pk }}" class="custom_hov treegrid-parent-{{ pg.pk }}{{ code.id }}" style="height: 50px;">
+                                        <td style="width: 100px">МПЗ №{{ mpz.mpz_appl_name }}</td>
+                                        <td style="text-align: right">
+                                            <button id="infoMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_mpz_data(name, {{ pg.pk }})">
+                                                <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>
+                                            </button>
+                                        </td>
+                                        <td style="text-align: right">
+                                            <button id="dellMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="del_mpz(name)">
+                                                <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="column" style="margin-left: -1px; margin-top: 7px">
+        <div class=" container row" style="margin-top: -20px">
+            <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px">
+                <thead class="">
+                    <tr >
+                      <th scope="col" style="width: 250px; text-align: center"><h1 id="GlobalMpzNumConnect" hidden></h1>Колодец</th>
+                      <th scope="col" style="width: 160px; text-align: center" >Всего в заявке</th>
+                      <th scope="col" style="width: 160px; text-align: center" >Выдано</th>
+                      <th scope="col" style="width: 160px; text-align: center" >К выдаче</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for type in types %}
+                        <tr  style="height: 50px">
+                          <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center;" >С-пласт {{ type.type_name }}</td>
+                          <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center;"  data-toggle="modal" data-target="#modalEditMpz" class="mpz_button" onclick="getWellName({{ type }})" >
+                              <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">?</span>
+                          </td>
+                          <td  id="tbl_well_given-{{ type }}" style="text-align: center" >?</td>
+                          <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >?</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
+    <script type="text/javascript">
+      $('#tbl_row').height(10);
+      $(document).ready(function() {
+        var tree_container = document.getElementById("table_struct");
+        var tree_pg_content = tree_container.innerHTML;
+        var tree = document.getElementById("table_struct");
+        var mpz_def_container = document.getElementById("mpz_tbl")
+        var mpz_def_content = mpz_def_container.innerHTML
+        var tree_state = true
+
+        $('.tree').treegrid();
+        $('.tree').treegrid('collapseAll');
+        $('#appl_by_date').datepicker({
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#appl_by_date').datepicker("setDate", new Date());
+
+            $('#appl_by_date').datepicker({
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+            });
+
+            $('#appl_by_date').datepicker("setDate", new Date());
+
+
+          //ADD NEW PG
+        {#=======================================================================#}
+
+        $("#modalNewPgSave").click(function(s)
+            {
+                $.ajax({
+                    type: "GET",
+                    url: "/structure/",
+                    dataType: "json",
+                    data: {
+                    event: 'new_pg',
+                        new_pg: $('#newPgName').val()
+                    },
+                    success: function(resp) {
+                        document.getElementById('modalNewPgCancel').click(),
+                        $("#table_struct").load("/ #table_struct > *"),
+                        window.location.reload();
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    },
+                });
+
+            });
+        $("#modalNewCodeSave").click(function(s)
+            {
+                $.ajax({
+                    type: "GET",
+                    url: "/structure/",
+                    dataType: "json",
+                    data: {
+                    event: 'new_code',
+                        new_code: $('#newCodeNum').val(),
+                        connect: $('#newCodeConnect').val()
+                    },
+                    success: function(resp) {
+                        document.getElementById('modalNewCodeCancel').click(),
+                        $("#table_struct").load("/ #table_struct > *"),
+                        window.location.reload();
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    },
+                });
+
+            });
+
+        $("#modalNewMpzSave").click(function(s)
+            {
+                $.ajax({
+                    type: "GET",
+                    url: "/structure/",
+                    dataType: "json",
+                    data: {
+                    event: 'new_mpz',
+                        new_mpz: $('#newMpz').val(),
+                        connect: $('#newMpzConnect').val()
+                    },
+                    success: function(resp) {
+                        document.getElementById('modalNewMpzCancel').click(),
+                        $("#table_struct").load("/ #table_struct > *"),
+                        window.location.reload();
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    },
+                });
+
+            });
+                {#====================================#}
+        $("#modalEditWellSave").click(function(s)
+            {
+                if (tree_state == true) {
+                    event_type = 'edit_mpz_well'
+                    cur_node_name = $('#MpzNumConnect').val()
+                    cur_par_name = NaN
+                    btn_name = 'infoMPZ-'+$('#MpzNumConnect').val()
+                }
+                else {
+                    event_type = 'edit_byapp_well'
+                    cur_node_name = (((document.getElementById($('#MpzNumConnect').val()).textContent).split('\n'))[1].split('#'))[1]
+                    cur_par_name = ((document.getElementById('node-'+($('#MpzNumConnect').val().split('-'))[1]).textContent).split('\n')) [1]
+                    btn_name = 'infoABY-'+$('#MpzNumConnect').val()
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "/structure/",
+                    dataType: "json",
+                    data: {
+                    event: event_type,
+                        mpz_name: cur_node_name,
+                        type_id: $('#WellTypeConnect').val(),
+                        new_value: $('#modal_well_num').val(),
+                        par_name: cur_par_name
+                    },
+                    success: function(resp) {
+
+                        document.getElementById('modalEditWellCancel').click(),
+                        document.getElementById(btn_name).click()
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    },
+                });
+
+            });
+        $("#cb_tree").change(function(s)
+            {
+                document.getElementById("table_struct").innerHTML = ""
+
+                if ($("#cb_tree").val() == "os") {
+                    tree_state = false
+                    document.getElementById("addPG").hidden = true
+                    document.getElementById("addBY").hidden = false
+                    $.ajax({
+                        type: "GET",
+                        url: "/structure/",
+                        dataType: "json",
+                        data: {
+                        event: 'get_by_data'
+                        },
+                        success: function(resp) {
+                            var i = 0
+                            for (const [key, value] of Object.entries(resp)) {
+                                {#console.log(value[[0]])#}
+
+                                $('#table_struct').append('<tr id="node-'+i+'" class="custom_hov treegrid-'+i+' treegrid-collapsed" style="height: 50px;">\n' +
+                                                            '<td id="node_name-'+i+'"style="width: 240px;">'+value[0]+'</td>\n' +
+                                                            '<td style="text-align: right">\n' +
+                                                            '<button id="addBYApp" name="node-'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takeNodeChName(name)">\n' +
+                                                            '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>\n' +
+                                                            '</button>\n' +
+                                                            '</td>\n' +
+                                                            '<td style="text-align: right">\n' +
+                                                            '<button id="delBY-'+i+'" name="'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" onclick="del_by(name)">\n' +
+                                                            '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                                            '</button>\n' +
+                                                            '</td>\n' +
+                                                            '</tr>');
+                                var appl_lst = value[1]
+                                var j = 0
+                                for (;;) {
+                                    if (j == appl_lst.length) {
+                                        break
+                                    }
+                                    else {
+                                        {#console.log(appl_lst[j])#}
+                                        $('#table_struct').append('<tr id="node-'+i+'-'+j+'" class="custom_hov treegrid-parent-'+i+'" style="height: 50px;">\n' +
+                                                                    '<td style="width: 100px">#'+appl_lst[j]+'</td>\n' +
+                                                                    '<td style="text-align: right">\n' +
+                                                                    '<button id="infoABY-node-'+i+'-'+j+'" name="node-'+i+'-'+j+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
+                                                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
+                                                                    '</button>\n' +
+                                                                    '</td>\n' +
+                                                                    '<td style="text-align: right">\n' +
+                                                                    '<button id="dellABY-'+j+'" name="node-'+i+'-'+j+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
+                                                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                                                    '</button>\n' +
+                                                                    '</td>\n' +
+                                                                    '</tr>');
+                                        j++
+                                    }
+                                }
+                                document.getElementById('node-'+i).name = j
+                                {#console.log(document.getElementById('node-'+i).name)#}
+                                i++
+                            }
+                            $("#table_struct").treegrid()
+                            $('#table_struct').treegrid('collapseAll');
+                        },
+                        error: function(result) {
+                            var readyState = {
+                            1: "Loading",
+                            2: "Loaded",
+                            3: "Interactive",
+                            4: "Complete"
+                            };
+                            if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                            }
+                        },
+                    });
+
+
+
+                    document.getElementById("mpz_tbl").innerHTML = mpz_def_content
+
+                }
+                else {
+                    tree_state = true
+                    document.getElementById("table_struct").innerHTML= tree_pg_content;
+                    $("#table_struct").treegrid()
+                    $('#table_struct').treegrid('collapseAll')
+                    document.getElementById("mpz_tbl").innerHTML = mpz_def_content
+                    document.getElementById("addBY").hidden = true
+                    document.getElementById("addPG").hidden = false
+                }
+
+            });
+        $("#modalNewBySave").click(function(s)
+            {
+                $.ajax({
+                    type: "GET",
+                    url: "/structure/",
+                    dataType: "json",
+                    data: {
+                    event: 'new_by',
+                        new_by: $('#newByName').val()
+                    },
+                    success: function(resp) {
+                        var cur_ind = (parseInt(resp.by_par_len, 10) - 1);
+                        document.getElementById('modalNewByCancel').click(),
+
+                        $('#table_struct').append('<tr id="node-'+cur_ind+'" class="custom_hov treegrid-'+cur_ind+'" style="height: 50px;">\n' +
+                                                        '<td id="node_name-'+cur_ind+'" style="width: 240px;">'+$('#newByName').val()+'</td>\n' +
+                                                        '<td style="text-align: right">\n' +
+                                                        '<button id="addBYApp" name="node-'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takeNodeChName(name)">\n' +
+                                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>\n' +
+                                                        '</button>\n' +
+                                                        '</td>\n' +
+                                                        '<td style="text-align: right">\n' +
+                                                        '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" onclick="del_by(name)">\n' +
+                                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                                        '</button>\n' +
+                                                        '</td>\n' +
+                                                        '</tr>'),
+                        document.getElementById('node-'+cur_ind).name = 0,
+                        $('.tree').treegrid(),
+                        $('#table_struct').treegrid('collapseAll');
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    },
+                });
+
+            });
+
+        $("#modalNewApplBySave").click(function(s)
+            {
+                app_name = $('#appl_by_date').val()
+                p_app_name = app_name.split('/')
+                cur_app_name = p_app_name[0]+'.'+p_app_name[1]+'.'+(parseInt(p_app_name[2],10)-2000)
+                par_name_str = document.getElementById(document.getElementById('newApplByConnect').textContent).textContent
+                par_name = par_name_str.split('\n')
+
+
+                $.ajax({
+                    type: "GET",
+                    url: "/structure/",
+                    dataType: "json",
+                    data: {
+                    event: 'new_app_by',
+                        new_app_by: cur_app_name,
+                        app_par_name: par_name[1]
+                    },
+                    success: function(resp) {
+                        console.log(resp)
+                        if (resp.result == 'success') {
+                            console.log('SUCCESS!!!')
+                            par_node_name = document.getElementById('newApplByConnect').value
+                        {#console.log(par_node_name)#}
+                        par_node_len = parseInt(document.getElementById(par_node_name).name,10)-1
+
+                        console.log(par_node_len)
+                        next_ch_ind = parseInt(par_node_len,10) +1
+                        next_ch_id = par_node_name+'-'+next_ch_ind
+                        let p_par_name = par_node_name.split('-')
+                        let par_ind = parseInt(p_par_name[1],10)
+                        document.getElementById('modalNewApplByCancel').click()
+                        if (par_node_len != -1) {
+                            $('#'+par_node_name+'-'+par_node_len).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 50px;">\n' +
+                                '<td style="width: 100px">#'+cur_app_name+'</td>\n' +
+                                '<td style="text-align: right">\n' +
+                                '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
+                                '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
+                                '</button>\n' +
+                                '</td>\n' +
+                                '<td style="text-align: right">\n' +
+                                '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
+                                '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                '</button>\n' +
+                                '</td>\n' +
+                                '</tr>');
+                        }
+                        else {
+                                $('#'+par_node_name).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 50px;">\n' +
+                                '<td style="width: 100px">#'+cur_app_name+'</td>\n' +
+                                '<td style="text-align: right">\n' +
+                                '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
+                                '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
+                                '</button>\n' +
+                                '</td>\n' +
+                                '<td style="text-align: right">\n' +
+                                '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
+                                '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                '</button>\n' +
+                                '</td>\n' +
+                                '</tr>');
+                        }
+
+                        $('.tree').treegrid('')
+                        $('.tree').treegrid('collapseAll')
+                            console.log(next_ch_id)
+                        }
+                        if (resp.result == 'denied') {
+                            console.log('DENIED!!!')
+                            alert('такое имя заявки уже существует!')
+                        }
+
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    },
+                });
+
+            });
+        $("#modal_well_num").change(function(s)
+            {
+                {#console.log($("#modal_well_num").val())#}
+
+            });
+      });
+
+    function del_pg(name)
+    {
+        $.ajax({
+            type: "GET",
+            url: "/structure/",
+            dataType: "json",
+            data: {
+            event: 'del_pg',
+                del_pg: name
+            },
+            success: function(resp) {
+                $("#table_struct").load("/ #table_struct > *");
+                window.location.reload()
+            },
+            error: function(result) {
+                var readyState = {
+                1: "Loading",
+                2: "Loaded",
+                3: "Interactive",
+                4: "Complete"
+                };
+                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                }
+            },
+        });
+        alert("DELPG!!! " + name)
+
+    }
+
+    function del_by(name)
+    {
+
+        $.ajax({
+            type: "GET",
+            url: "/structure/",
+            dataType: "json",
+            data: {
+            event: 'del_by',
+                del_by: document.getElementById('node_name-'+name).textContent
+            },
+            success: function(resp) {
+                $('#node-'+name).remove(),
+                $('.tree').treegrid()
+                $('#table_struct').treegrid('collapseAll');
+            },
+            error: function(result) {
+                var readyState = {
+                1: "Loading",
+                2: "Loaded",
+                3: "Interactive",
+                4: "Complete"
+                };
+                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                }
+            },
+        });
+        alert("DELBY!!! " + name)
+    }
+
+        function del_code(name)
+    {
+        $.ajax({
+            type: "GET",
+            url: "/structure/",
+            dataType: "json",
+            data: {
+            event: 'del_code',
+                del_code: name
+            },
+            success: function(resp) {
+                $("#table_struct").load("/ #table_struct > *");
+                window.location.reload()
+            },
+            error: function(result) {
+                var readyState = {
+                1: "Loading",
+                2: "Loaded",
+                3: "Interactive",
+                4: "Complete"
+                };
+                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                }
+            },
+        });
+        alert("DELCODE!!! " + name)
+
+    }
+
+    function del_mpz(name)
+    {
+        $.ajax({
+            type: "GET",
+            url: "/structure/",
+            dataType: "json",
+            data: {
+            event: 'del_mpz',
+                del_mpz: name
+            },
+            success: function(resp) {
+                $("#table_struct").load("/ #table_struct > *");
+                window.location.reload()
+            },
+            error: function(result) {
+                var readyState = {
+                1: "Loading",
+                2: "Loaded",
+                3: "Interactive",
+                4: "Complete"
+                };
+                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                }
+            },
+        });
+        alert("DELMPZ!!! " + name)
+
+    }
+
+    function takePgName(name)
+    {
+        htmlData = name
+        $('#newCodeConnect').html(htmlData)
+        $('#newCodeConnect').val(htmlData)
+
+    }
+
+        function takeNodeChName(name)
+    {
+        htmlData = name
+        $('#newApplByConnect').html(htmlData)
+        $('#newApplByConnect').val(htmlData)
+
+    }
+
+        function takeCodeName(name)
+    {
+        htmlData = name
+        $('#newMpzConnect').html(htmlData)
+        $('#newMpzConnect').val(htmlData)
+
+    }
+
+    function get_mpz_data(name)
+    {
+        $('.tree').treegrid('getAllNodes').each(function() {
+                this.style.backgroundColor = defaultStatus;
+                this.classList.add("custom_hov");
+        }),
+        document.getElementById(name).style.backgroundColor = '#eeeeee',
+        $.ajax({
+            type: "GET",
+            url: "/structure/",
+            dataType: "json",
+            data: {
+            event: 'get_mpz',
+                mpz_num: name
+            },
+
+        success: function(resp) {
+                document.getElementById("GlobalMpzNumConnect").innerHTML = name;
+                document.getElementById("MpzNumConnect").innerHTML = name;
+                document.getElementById("MpzNumConnect").value = name;
+                for (const [key, value] of Object.entries(resp)) {
+                    document.getElementById('tbl_well_in_mpz-' + value[0]).innerHTML = value[1];
+                    document.getElementById('tbl_well_in_mpz-' + value[0]).value = value[1];
+                    document.getElementById('tbl_well_given-' + value[0]).innerHTML = value[1];
+                    document.getElementById('tbl_well_pathof-' + value[0]).innerHTML = value[1];
+                }
+            },
+            error: function(result) {
+                var readyState = {
+                1: "Loading",
+                2: "Loaded",
+                3: "Interactive",
+                4: "Complete"
+                };
+                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                }
+            },
+        });
+    }
+
+    function getWellName(name)
+        {
+            var w_val = document.getElementById("tbl_well_in_mpz-" + name).value
+            document.getElementById("modal_well_num").innerHTML = "";
+            $('#modal_well_num').append('<option id="modal_select_well_num" selected ></option>');
+
+            for (const x of Array(101).keys()) {
+                if (x != w_val) {
+                    $('#modal_well_num').append('<option  value="'+x+'">'+x+'</option>');
+                }
+            }
+            document.getElementById("WellTypeConnect").innerHTML = name
+            document.getElementById("WellTypeConnect").value = name
+            document.getElementById("modal_select_well_num").innerHTML = w_val
+            document.getElementById("modal_select_well_num").value = w_val
+        }
+    function delAby(name)
+        {
+            console.log('DEL NAME: '+name)
+            ch_name_str = document.getElementById(name).textContent
+            ch_name_arr = ch_name_str.split('\n')
+            ch_name = ch_name_arr[1].split('#')
+            par_node_name_arr = name.split('-')
+            par_node_name = 'node-' + par_node_name_arr[1]
+            par_name_str = document.getElementById(par_node_name).textContent
+            par_node_arr = par_name_str.split('\n')
+
+            $.ajax({
+            type: "GET",
+            url: "/structure/",
+            dataType: "json",
+
+            data: {
+            event: 'del_app_by',
+                node_name: ch_name[1],
+                pr_name: par_node_arr[1]
+
+            },
+            success: function(resp) {
+                $('#'+name).remove(),
+                $('.tree').treegrid()
+                {#$('#table_struct').treegrid('collapseAll');#}
+            },
+            error: function(result) {
+                var readyState = {
+                1: "Loading",
+                2: "Loaded",
+                3: "Interactive",
+                4: "Complete"
+                };
+                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                }
+            },
+        });
+        }
+
+    function get_by_app_data(name)
+    {
+        node_name = (((document.getElementById(name).textContent).split('\n'))[1].split('#'))[1]
+        console.log(node_name)
+        par_name = ((document.getElementById('node-'+(name.split('-'))[1]).textContent).split('\n')) [1]
+        console.log(par_name)
+        $('.tree').treegrid('getAllNodes').each(function() {
+                this.style.backgroundColor = defaultStatus;
+                this.classList.add("custom_hov");
+        }),
+        document.getElementById(name).style.backgroundColor = '#eeeeee',
+        $.ajax({
+            type: "GET",
+            url: "/structure/",
+            dataType: "json",
+            data: {
+            event: 'get_app_by_data',
+                app_name: node_name,
+                par_name: par_name
+            },
+
+        success: function(resp) {
+                document.getElementById("GlobalMpzNumConnect").innerHTML = name;
+                document.getElementById("MpzNumConnect").innerHTML = name;
+                document.getElementById("MpzNumConnect").value = name;
+                for (const [key, value] of Object.entries(resp)) {
+                    document.getElementById('tbl_well_in_mpz-' + value[0]).innerHTML = value[1];
+                    document.getElementById('tbl_well_in_mpz-' + value[0]).value = value[1];
+                    document.getElementById('tbl_well_given-' + value[0]).innerHTML = value[1];
+                    document.getElementById('tbl_well_pathof-' + value[0]).innerHTML = value[1];
+                }
+            },
+        error: function(result) {
+            var readyState = {
+            1: "Loading",
+            2: "Loaded",
+            3: "Interactive",
+            4: "Complete"
+            };
+            if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+            }
+        },
+        });
+    }
+    </script>
+</body>
+</html>
