@@ -191,13 +191,13 @@
                                                     <br>
                                                     <br>
                                                 <td>
-                                                    <select id="transfer_code_num" class="form-select" aria-label="Default select example">
-                                                      <option selected>{{ type_first_elem }}</option>
-                                                        {% for type in types %}
+                                                    <select id="transfer_code_num" class="form-select" aria-label="Default select example" style="width: 130px">
+                                                      <option selected>{{ code_first_elem }}</option>
+                                                        {% for code in code_lst %}
                                                             <tr>
-                                                            {% if type.pk > 1 %}
+                                                            {% if code.code_name != code_first_elem %}
                                                                 <tr>
-                                                                <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                                                <option value="{{ code.code_name }}">{{ code.code_name }}</option>
                                                                 </tr>
                                                             {% endif %}
                                                             </tr>
@@ -207,13 +207,13 @@
                                                     <br>
                                                     <br>
                                                 <td>
-                                                    <select id="transfer_mpz_num" class="form-select" aria-label="Default select example">
-                                                      <option selected>{{ type_first_elem }}</option>
-                                                        {% for type in types %}
+                                                    <select id="transfer_mpz_num" class="form-select" aria-label="Default select example" style="width: 130px;">
+                                                      <option selected>{{ first_code_mpz_lst_first_elem }}</option>
+                                                        {% for mpz in first_code_mpz_lst %}
                                                             <tr>
-                                                            {% if type.pk > 1 %}
+                                                            {% if mpz != first_code_mpz_lst_first_elem %}
                                                                 <tr>
-                                                                <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                                                <option value="{{ mpz }}">{{ mpz }}</option>
                                                                 </tr>
                                                             {% endif %}
                                                             </tr>
@@ -396,6 +396,7 @@
             var infoModal = $('#release_serial');
             var table = $('#well_table');
             var trans_type = $('#transaction_action_type');
+            var appl_data_arr = {};
 
 
             //OPEN MODAL EVENT
@@ -434,86 +435,246 @@
                     document.getElementById('well_counter').innerHTML = 0
                     document.getElementById('parent_count').innerHTML = 0
                     document.getElementById("serial_lst").innerHTML = "";
+                    $.ajax({
+                        type: "GET",
+                        url: "/",
+                        dataType: "json",
+                        data: {
+                        event: 'get_init_transfer_data'
+                        },
+                        success: function(resp) {
+                            appl_data_arr = resp
+                        },
+                        error: function(result) {
+                            var readyState = {
+                            1: "Loading",
+                            2: "Loaded",
+                            3: "Interactive",
+                            4: "Complete"
+                            };
+                            if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                            }
+                        }
+                    });
+
 
                 });
                     {#=======================================================================#}
+                $("#transfer_code_num").change(function(s) {
 
-                    $("#transaction_action_type").change(function(s) {
-                        if (trans_type.val() === 'selling'){
-                            document.getElementById('transfer_field_text').innerHTML = 'Покупатель:';
-                        }else {
-                            document.getElementById('transfer_field_text').innerHTML = 'Шифр:';
-                        }
-
-
-                    });
-
-                    $("#modal_cb_type_lst").change(function(s) {
-                        var type = $('#modal_cb_type_lst').val()
-                        document.getElementById("well_selected_counter").innerHTML = "0";
-                        document.getElementById("well_selected_counter").value = "";
-                        document.getElementById("well_counter").innerText = "0";
-                        document.getElementById("well_selected_array").innerHTML = "";
-
-                        document.getElementById("modal_well_lst_table").innerHTML = "";
-                        document.getElementById("modal_well_lst_table").innerHTML = "";
-
-                        $.ajax({
-                            type: "GET",
-                            url: "/",
-                            dataType: "json",
-                            data: {
-                            event: 'get_well_lst',
-                                type: $('#modal_cb_type_lst').val()
-                            },
-
-                            success: function(resp) {
-
-                                $("#well_table").load("/ #well_table > *");
-                                var p_arr = document.getElementById("serial_lst").childNodes
-                                for (const [key, value] of Object.entries(resp)) {
-                                    var fl = true
-                                    console.log(value[1])
-                                    i = 0
-                                    for (;;){
-                                        if (i == p_arr.length) {
-                                            break
-                                        }
-                                        else {
-                                                console.log('========================')
-                                                console.log(value[1])
-                                                console.log(p_arr.item(i).textContent)
-                                            if (p_arr.item(i).textContent.search(value[1]) != -1) {
-                                                fl = false
-                                            }
-
-                                        }
-                                        i++
+                    let cur_app_name = $("#transfer_code_num").val()
+                    if (trans_type.val() === 'selling') {
+                        document.getElementById("transfer_mpz_num").innerText = ''
+                        i = 0
+                        for (;;){
+                            if (i == appl_data_arr[1].length) {
+                                    break
+                                }
+                                else {
+                                    console.log('==========================')
+                                    console.log(appl_data_arr[1][i][0])
+                                    console.log(cur_app_name)
+                                    if (appl_data_arr[1][i][0] == cur_app_name) {
+                                        $('#transfer_mpz_num').append('<option selected>'+appl_data_arr[1][i][1][0]+'</option>')
+                                        cur_ind = i
+                                        cur_first_name = appl_data_arr[1][i][1][0]
                                     }
-                                    if (fl == true) {
-                                        $('#modal_well_lst_table').append('' +
-                                        '<tr class="" id="'+value[1]+'" style="background-color: white; cursor: pointer;"  onclick="tbl_well_click(id)" >\n' +
-                                        '<td class="col-sm-5" style="padding-left: 20px; ">С-пласт '+value[0]+'</td>\n' +
-                                        '<td class="col-sm-4" style="padding-left: 22px; ">'+value[1]+'</td>\n' +
-                                        '<td style="padding-right: 24; text-align: right">'+value[2]+'</td>\n' +
-                                        '</tr>'
-                                        );
+
+                                }
+                                i++
+                        }
+                        i = 0
+                        for (;;){
+                            if (i == appl_data_arr[1][cur_ind][1].length) {
+                                    break
+                                }
+                                else {
+                                    if (appl_data_arr[1][cur_ind][1][i] != cur_first_name) {
+                                        $('#transfer_mpz_num').append('<option>'+appl_data_arr[1][cur_ind][1][i]+'</option>')
+                                    }
+
+                                }
+                                i++
+                        }
+                    }
+                    else {
+                        document.getElementById("transfer_mpz_num").innerText = ''
+                        i = 0
+                        for (;;){
+                            if (i == appl_data_arr[0].length) {
+                                    break
+                                }
+                                else {
+                                    console.log('==========================')
+                                    console.log(appl_data_arr[0][i][0])
+                                    console.log(cur_app_name)
+                                    if (appl_data_arr[0][i][0] == cur_app_name) {
+                                        $('#transfer_mpz_num').append('<option selected>'+appl_data_arr[0][i][1][0]+'</option>')
+                                        cur_ind = i
+                                        cur_first_name = appl_data_arr[0][i][1][0]
                                     }
                                 }
-                            },
-                            error: function(result) {
-                                var readyState = {
-                                1: "Loading",
-                                2: "Loaded",
-                                3: "Interactive",
-                                4: "Complete"
-                                };
-                                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
-                                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                                i++
+                        }
+                        i = 0
+                        for (;;){
+                            if (i == appl_data_arr[0][cur_ind][1].length) {
+                                    break
+                                }
+                                else {
+                                    if (appl_data_arr[0][cur_ind][1][i] != cur_first_name) {
+                                        $('#transfer_mpz_num').append('<option>'+appl_data_arr[0][cur_ind][1][i]+'</option>')
+                                    }
+                                }
+                                i++
+                        }
+                    }
+                });
+                $("#transaction_action_type").change(function(s) {
+                    if (trans_type.val() === 'selling'){
+                        document.getElementById('transfer_field_text').innerHTML = 'Покупатель:';
+                        first_buyer_name = appl_data_arr[1][0][0]
+                        first_buyer_appl_name = appl_data_arr[1][0][1][0]
+                        first_buyer_appl_lst = appl_data_arr[1][0][1]
+                        document.getElementById('transfer_code_num').innerText = ''
+                        document.getElementById('transfer_mpz_num').innerText = ''
+                        $('#transfer_code_num').append('<option selected>'+first_buyer_name+'</option>')
+                        $('#transfer_mpz_num').append('<option selected>'+first_buyer_appl_name+'</option>')
+                        let i = 0
+                        for (;;){
+                            if (i == appl_data_arr[1].length) {
+                                    break
+                                }
+                                else {
+                                    if (appl_data_arr[1][i][0] != first_buyer_name) {
+                                        $('#transfer_code_num').append('<option>'+appl_data_arr[1][i][0]+'</option>')
+                                    }
+
+                                }
+                                i++
+                        }
+                        i = 0
+                        for (;;){
+                            if (i == appl_data_arr[1][0][1].length) {
+                                    break
+                                }
+                                else {
+                                    if (appl_data_arr[1][0][1][i] != first_buyer_appl_name) {
+                                        $('#transfer_mpz_num').append('<option>'+appl_data_arr[1][0][1][i]+'</option>')
+                                    }
+
+                                }
+                                i++
+                        }
+                    }else {
+                        document.getElementById('transfer_field_text').innerHTML = 'Шифр:';
+                        document.getElementById('transfer_field_text').innerHTML = 'Покупатель:';
+                        first_code_name = appl_data_arr[0][0][0]
+                        first_code_appl_name = appl_data_arr[0][0][1][0]
+                        first_code_appl_lst = appl_data_arr[0][0][1]
+                        document.getElementById('transfer_code_num').innerText = ''
+                        document.getElementById('transfer_mpz_num').innerText = ''
+                        $('#transfer_code_num').append('<option selected>'+first_code_name+'</option>')
+                        $('#transfer_mpz_num').append('<option selected>'+first_code_appl_name+'</option>')
+                        let i = 0
+                        for (;;){
+                            if (i == appl_data_arr[0].length) {
+                                    break
+                                }
+                                else {
+                                    if (appl_data_arr[0][i][0] != first_code_name) {
+                                        $('#transfer_code_num').append('<option>'+appl_data_arr[0][i][0]+'</option>')
+                                    }
+
+                                }
+                                i++
+                        }
+                        i = 0
+                        for (;;){
+                            if (i == appl_data_arr[0][0][1].length) {
+                                    break
+                                }
+                                else {
+                                    if (appl_data_arr[0][0][1][i] != first_code_appl_name) {
+                                        $('#transfer_mpz_num').append('<option>'+appl_data_arr[0][0][1][i]+'</option>')
+                                    }
+
+                                }
+                                i++
+                        }
+                    }
+
+
+
+                });
+
+                $("#modal_cb_type_lst").change(function(s) {
+                    var type = $('#modal_cb_type_lst').val()
+                    document.getElementById("well_selected_counter").innerHTML = "0";
+                    document.getElementById("well_selected_counter").value = "";
+                    document.getElementById("well_counter").innerText = "0";
+                    document.getElementById("well_selected_array").innerHTML = "";
+
+                    document.getElementById("modal_well_lst_table").innerHTML = "";
+                    document.getElementById("modal_well_lst_table").innerHTML = "";
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/",
+                        dataType: "json",
+                        data: {
+                        event: 'get_well_lst',
+                            type: $('#modal_cb_type_lst').val()
+                        },
+
+                        success: function(resp) {
+
+                            $("#well_table").load("/ #well_table > *");
+                            var p_arr = document.getElementById("serial_lst").childNodes
+                            for (const [key, value] of Object.entries(resp)) {
+                                var fl = true
+                                console.log(value[1])
+                                i = 0
+                                for (;;){
+                                    if (i == p_arr.length) {
+                                        break
+                                    }
+                                    else {
+                                            console.log('========================')
+                                            console.log(value[1])
+                                            console.log(p_arr.item(i).textContent)
+                                        if (p_arr.item(i).textContent.search(value[1]) != -1) {
+                                            fl = false
+                                        }
+
+                                    }
+                                    i++
+                                }
+                                if (fl == true) {
+                                    $('#modal_well_lst_table').append('' +
+                                    '<tr class="" id="'+value[1]+'" style="background-color: white; cursor: pointer;"  onclick="tbl_well_click(id)" >\n' +
+                                    '<td class="col-sm-5" style="padding-left: 20px; ">С-пласт '+value[0]+'</td>\n' +
+                                    '<td class="col-sm-4" style="padding-left: 22px; ">'+value[1]+'</td>\n' +
+                                    '<td style="padding-right: 24; text-align: right">'+value[2]+'</td>\n' +
+                                    '</tr>'
+                                    );
                                 }
                             }
-                        });
+                        },
+                        error: function(result) {
+                            var readyState = {
+                            1: "Loading",
+                            2: "Loaded",
+                            3: "Interactive",
+                            4: "Complete"
+                            };
+                            if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                            }
+                        }
                     });
+                });
 
             {#================================================================#}
 

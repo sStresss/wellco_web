@@ -59,6 +59,44 @@ def post_list(request):
 
             return JsonResponse(data, content_type='application/json')
 
+        if req.find('get_init_transfer_data') != -1:
+            print('prepeare trans modal data init!')
+            code_lst = Code.objects.all().order_by('id')
+            appl_mpz_lst = Appl_mpz.objects.all().order_by('id')
+            buyer_lst = Byer.objects.all().order_by('id')
+            appl_buy_lst = Appl_byer.objects.all().order_by('id')
+            res_arr = []
+            p_res_arr = []
+            p_arr = []
+            pp_arr = []
+            data = {}
+            for elem in code_lst:
+                p_arr = []
+                pp_arr = []
+                p_arr.append(elem.code_name)
+                for p_elem in appl_mpz_lst:
+                    if elem.id == p_elem.connect_id:
+                        pp_arr.append(p_elem.mpz_appl_name)
+                p_arr.append(pp_arr)
+                p_res_arr.append(p_arr)
+            res_arr.append(p_res_arr)
+            data[0] = p_res_arr
+            p_res_arr = []
+            for elem in buyer_lst:
+                p_arr = []
+                pp_arr = []
+                p_arr.append(elem.by_name)
+                for p_elem in appl_buy_lst:
+                    if elem.id == p_elem.connect_id:
+                        pp_arr.append(p_elem.by_appl_name)
+                p_arr.append(pp_arr)
+                p_res_arr.append(p_arr)
+            res_arr.append(p_res_arr)
+            data[1] = p_res_arr
+            json_data = json.dumps(data)
+            json_res = json.loads(json_data)
+            print('json res: ', json_res)
+            return JsonResponse(json_res, content_type='application/json')
         if req.find('modal') != -1:
             cur_serial = var.objects.all().order_by('id')
             for elem in cur_serial:
@@ -125,11 +163,21 @@ def post_list(request):
             type_first_elem = types[0].type_name
 
             # get wh list
+            first_code_mpz_lst_first_elem = ''
             wh_lst = Warehouse.objects.all().order_by('id')
             wh_first_elem = wh_lst[0]
             types = WellType.objects.all().order_by('id')
+            code_lst = Code.objects.all().order_by('id')
+            code_first_elem = code_lst[0].code_name
+            appl_mpz_lst = Appl_mpz.objects.all().order_by('id')
+            first_code_mpz_lst = []
+            for elem in appl_mpz_lst:
+                if code_lst[0].id == elem.connect_id:
+                    first_code_mpz_lst.append(elem.mpz_appl_name)
+            print(len(first_code_mpz_lst))
+            first_code_mpz_lst_first_elem = first_code_mpz_lst[0]
 
-            return render(request, 'blog/post_list.html', {'wells': wells, 'types': types, 'type_first_elem': type_first_elem, 'wh_lst': wh_lst, 'wh_first_elem': wh_first_elem})
+            return render(request, 'blog/post_list.html', {'wells': wells, 'types': types, 'type_first_elem': type_first_elem, 'wh_lst': wh_lst, 'wh_first_elem': wh_first_elem, 'code_lst': code_lst, 'code_first_elem': code_first_elem, 'first_code_mpz_lst': first_code_mpz_lst, 'first_code_mpz_lst_first_elem': first_code_mpz_lst_first_elem})
 
 def structure(request):
     if request.method == "GET":
