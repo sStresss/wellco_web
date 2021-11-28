@@ -58,7 +58,6 @@ def post_list(request):
 
 
             return JsonResponse(data, content_type='application/json')
-
         if req.find('get_init_transfer_data') != -1:
             print('prepeare trans modal data init!')
             code_lst = Code.objects.all().order_by('id')
@@ -119,14 +118,9 @@ def post_list(request):
                 cur_part_month = '0' + str(cur_part_month)
             else:
                 cur_part_month = str(cur_part_month)
-
             cur_part_year = str(cur_date.year)
             cur_part_year = cur_part_year[2] + cur_part_year[3]
             cur_serial_num = cur_part_month + cur_part_year + '/' + str(cur_part_num)
-
-
-
-
             data = {
                 'serial': str(cur_serial_num)
             }
@@ -156,7 +150,27 @@ def post_list(request):
             print('JSON RES: ',json_res)
 
             return JsonResponse(json_res, content_type='application/json')
-
+        if req.find('transfer_well') != -1:
+            trans_type = p_arr[1]
+            trans_date = p_arr[2]
+            trans_target = p_arr[3]
+            trans_subtarget = p_arr[4]
+            serial_lst = str(p_arr[5]).split('%')
+            if trans_type == 'transfer':
+                print('TRANSFER!')
+                trans_comment = 'перемещен ' + trans_date + ' числа на объект ' + trans_target + ' по заявке МПЗ№' + trans_subtarget
+            else:
+                print('SELLING!')
+                trans_comment = 'продан ' + trans_date + ' числа организации ' + trans_target + ' по заявке №' + trans_subtarget
+            for elem in serial_lst:
+                record = Well.objects.get(serial=elem)
+                record.comment = trans_comment
+                record.locate = trans_target
+                record.req_num = trans_subtarget
+                record.trans_date = trans_date
+                record.save(update_fields=['comment', 'locate', 'req_num', 'trans_date'])
+            data = {'result': str('success')}
+            return JsonResponse(data, content_type='application/json')
         else:
             # get type list
             types = WellType.objects.all().order_by('id')

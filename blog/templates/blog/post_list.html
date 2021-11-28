@@ -132,6 +132,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
+                                  <div id="connect_well_full" hidden></div>
                                   <div id="connect_well_arr" hidden></div>
                                   <div id="connect_well_type" hidden></div>
                                   <div id="parent_count" hidden>0</div>
@@ -355,6 +356,7 @@
 
         <script>
         var modal;
+        var well_arr_trans_lst = [];
 
         $('#release_date').datepicker({
             weekStart: 1,
@@ -399,6 +401,7 @@
             var appl_data_arr = {};
 
 
+
             //OPEN MODAL EVENT
             $("#release").click(function(e) {
                 $.ajax({
@@ -425,6 +428,67 @@
                     }
                 });
             });
+            $("#modal_transfer_save").click(function(e)
+                {
+                    let serial_lst_sourse = document.getElementById("connect_well_full").childNodes
+                    if (serial_lst_sourse.length == 0) {
+                        alert('СПИСОК КОЛОДЦЕВ ПУСТ!')
+                    }
+                    else {
+                        let trans_date = ($('#transaction_date').val()).replaceAll('/', '.')
+                        let trans_act_type = trans_type.val()
+                        let trans_target = $('#transfer_code_num').val()
+                        let trans_subtarget = $('#transfer_mpz_num').val()
+                        let trans_serial_lst = ""
+                        i = 0
+                        for (;;){
+                            if (i == serial_lst_sourse.length) {
+                                    break
+                                }
+                                else {
+                                    if (trans_serial_lst.length == 0) {
+                                        trans_serial_lst = serial_lst_sourse.item(i).textContent
+                                    }
+                                    else {
+                                        trans_serial_lst = trans_serial_lst + '%' + serial_lst_sourse.item(i).textContent
+                                    }
+
+
+                                }
+                                i++
+                        }
+                        trans_serial_lst
+                        $.ajax({
+                            type: "GET",
+                            url: "/",
+                            dataType: "json",
+                            data: {
+                            event: 'transfer_well',
+                                subevent: trans_act_type,
+                                date: trans_date,
+                                target: trans_target,
+                                subtarget: trans_subtarget,
+                                serial_lst: trans_serial_lst
+                            },
+                            success: function(resp) {
+                                alert('КОЛОДЦЫ ПЕРЕМЕЩЕНЫ!')
+                                document.getElementById('modal_transfer_cancel').click()
+                                $("#well_table").load("/ #well_table > *");
+                            },
+                            error: function(result) {
+                                var readyState = {
+                                1: "Loading",
+                                2: "Loaded",
+                                3: "Interactive",
+                                4: "Complete"
+                                };
+                                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                                }
+                            }
+                        });
+                    }
+                });
             $("#transfer").click(function(e)
                 {
                     document.getElementById('connect_well_arr').innerHTML = ""
@@ -435,6 +499,7 @@
                     document.getElementById('well_counter').innerHTML = 0
                     document.getElementById('parent_count').innerHTML = 0
                     document.getElementById("serial_lst").innerHTML = "";
+                    document.getElementById("connect_well_full").innerHTML = "";
                     $.ajax({
                         type: "GET",
                         url: "/",
@@ -819,6 +884,7 @@
                 var sub_arr = document.getElementById('connect_well_arr').childNodes
                 document.getElementById('modal_well_lst_cancel').click()
                 document.getElementById("connect_well_arr").innerHTML = document.getElementById("well_selected_array").innerHTML
+                $("#connect_well_full").append(document.getElementById("well_selected_array").innerHTML)
                 document.getElementById("connect_well_type").innerHTML = document.getElementById("modal_cb_type_lst").value
                 if (tbl_nodes.length == 0) {
                     $('#transfer_well_lst').append('<tr class="treegrid-1" id = "parent-1" >\n' +

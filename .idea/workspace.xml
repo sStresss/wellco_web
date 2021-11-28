@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c345e260-c948-4e05-a42c-48aebf6e58db" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/site.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/post_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/post_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/blog.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/blog.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,8 +19,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/site$views.coverage" NAME="views Coverage Results" MODIFIED="1637133629231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/blog" />
+    <SUITE FILE_PATH="coverage/site$test.coverage" NAME="test Coverage Results" MODIFIED="1637506608485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/site$settings.coverage" NAME="settings Coverage Results" MODIFIED="1631868173744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mysite" />
+    <SUITE FILE_PATH="coverage/site$views.coverage" NAME="views Coverage Results" MODIFIED="1637133629231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/blog" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -35,23 +42,97 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blog/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2924">
-              <caret line="178" selection-start-line="178" selection-end-line="178" />
+            <state relative-caret-position="324">
+              <caret line="170" column="75" selection-start-line="170" selection-start-column="75" selection-end-line="170" selection-end-column="75" />
               <folding>
-                <element signature="e#0#45#0" expanded="true" />
+                <element signature="e#767#2051#0" />
+                <element signature="e#1205#1279#0" />
+                <element signature="e#1405#1476#0" />
+                <element signature="e#1511#1627#0" />
+                <element signature="e#1924#1978#0" />
+                <element signature="e#2118#3629#0" />
+                <element signature="e#2576#2893#0" />
+                <element signature="e#2724#2816#0" />
+                <element signature="e#3042#3356#0" />
+                <element signature="e#3188#3279#0" />
+                <element signature="e#3678#4808#0" />
+                <element signature="e#3776#3850#0" />
+                <element signature="e#3976#4047#0" />
+                <element signature="e#4082#4198#0" />
+                <element signature="e#4676#4737#0" />
+                <element signature="e#4864#5685#0" />
+                <element signature="e#5071#5441#0" />
+                <element signature="e#5123#5441#0" />
+                <element signature="e#5713#6885#0" />
+                <element signature="e#6330#6433#0" />
+                <element signature="e#7176#7338#0" />
+                <element signature="e#7390#7568#0" />
+                <element signature="e#7619#7804#0" />
+                <element signature="e#7854#8047#0" />
+                <element signature="e#8099#8284#0" />
+                <element signature="e#8335#8524#0" />
+                <element signature="e#8581#9314#0" />
+                <element signature="e#8758#8888#0" />
+                <element signature="e#9055#9197#0" />
+                <element signature="e#9365#10367#0" />
+                <element signature="e#9736#9968#0" />
+                <element signature="e#9805#9932#0" />
+                <element signature="e#10025#10204#0" />
+                <element signature="e#10422#11107#0" />
+                <element signature="e#10617#10987#0" />
+                <element signature="e#10761#10852#0" />
+                <element signature="e#11157#11428#0" />
+                <element signature="e#11478#11668#0" />
+                <element signature="e#11722#12525#0" />
+                <element signature="e#11867#11932#0" />
+                <element signature="e#12085#12216#0" />
+                <element signature="e#12137#12216#0" />
+                <element signature="e#12271#12387#0" />
+                <element signature="e#12579#13145#0" />
+                <element signature="e#12745#12809#0" />
+                <element signature="e#12866#13028#0" />
+                <element signature="e#12951#13028#0" />
+                <element signature="e#13204#14554#0" />
+                <element signature="e#13301#13365#0" />
+                <element signature="e#13469#13573#0" />
+                <element signature="e#13885#14140#0" />
+                <element signature="e#13959#14104#0" />
+                <element signature="e#14223#14406#0" />
+                <element signature="e#14841#14905#0" />
+                <element signature="e#15009#15113#0" />
+                <element signature="e#15263#15427#0" />
+                <element signature="e#15942#16310#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../itoDB/login.py">
+        <entry file="file://$PROJECT_DIR$/mysite/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+            <state relative-caret-position="1479">
+              <caret line="88" column="10" selection-start-line="88" selection-start-column="10" selection-end-line="88" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/css/blog.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -76,8 +157,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
-              <caret line="72" column="45" selection-start-line="72" selection-start-column="45" selection-end-line="72" selection-end-column="45" />
+            <state relative-caret-position="1666">
+              <caret line="100" column="27" selection-start-line="100" selection-start-column="27" selection-end-line="100" selection-end-column="27" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -100,17 +181,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/structure.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17935">
-              <caret line="1055" column="5" selection-start-line="1055" selection-start-column="5" selection-end-line="1055" selection-end-column="5" />
+            <state relative-caret-position="242">
+              <caret line="645" column="89" selection-start-line="645" selection-start-column="85" selection-end-line="645" selection-end-column="89" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="514" column="72" selection-start-line="514" selection-start-column="72" selection-end-line="514" selection-end-column="72" />
+            <state relative-caret-position="298">
+              <caret line="452" column="121" selection-start-line="452" selection-start-column="121" selection-end-line="452" selection-end-column="121" />
             </state>
           </provider>
         </entry>
@@ -129,13 +210,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>for</find>
-      <find>appen</find>
-      <find>classLi</find>
-      <find>add_well_to</find>
-      <find>each</find>
-      <find>transfer</find>
-      <find>console.</find>
       <find>console</find>
       <find>init</find>
       <find>select</find>
@@ -159,6 +233,13 @@
       <find>modalEditWellSave</find>
       <find>get_app</find>
       <find>MpzNumConnec</find>
+      <find>split</find>
+      <find>connect_well_arr</find>
+      <find>well_selected_array</find>
+      <find>child</find>
+      <find>node</find>
+      <find>.</find>
+      <find>load</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -187,8 +268,8 @@
         <option value="$PROJECT_DIR$/blog/admin.py" />
         <option value="$PROJECT_DIR$/blog/models.py" />
         <option value="$PROJECT_DIR$/blog/templates/blog/structure.html" />
-        <option value="$PROJECT_DIR$/blog/views.py" />
         <option value="$PROJECT_DIR$/blog/templates/blog/post_list.html" />
+        <option value="$PROJECT_DIR$/blog/views.py" />
       </list>
     </option>
   </component>
@@ -202,36 +283,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="site" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="site" type="462c0819:PsiDirectoryNode" />
-              <item name="blog" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="site" type="462c0819:PsiDirectoryNode" />
-              <item name="blog" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="site" type="462c0819:PsiDirectoryNode" />
-              <item name="blog" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="blog" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -264,7 +317,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.views">
+  <component name="RunManager" selected="Django server.site">
     <configuration name="structure.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/site/blog/templates/blog/structure.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -421,11 +474,12 @@
       <workItem from="1637919309014" duration="3475000" />
       <workItem from="1637923941195" duration="873000" />
       <workItem from="1637925417748" duration="1339000" />
+      <workItem from="1638011270410" duration="7993000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="520279000" />
+    <option name="totallyTimeSpent" value="529672000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -433,7 +487,7 @@
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.15191898" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.1444563" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32900432" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.32900432" />
@@ -444,8 +498,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946696" weight="0.32900432" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.28518122" side_tool="true" visible="true" weight="0.23376623" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.7148188" visible="true" weight="0.23376623" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.28464818" side_tool="true" visible="true" weight="0.2654388" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.7153518" visible="true" weight="0.2654388" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49946696" weight="0.32900432" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -481,31 +535,12 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_edit.html" />
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_detail.html" />
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/modal_release.html" />
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/base.html" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/test/support/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="161" selection-start-line="161" selection-end-line="161" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/threading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="925" selection-start-line="925" selection-end-line="925" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/django/urls/resolvers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="606" selection-start-line="606" selection-end-line="606" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/test/support/__init__.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/threading.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/django/urls/resolvers.py" />
     <entry file="file://$PROJECT_DIR$/blog/css/jquery.treegrid.bootstrap3.js" />
     <entry file="file://$PROJECT_DIR$/static/css/jquery.treegrid.bootstrap3.js" />
     <entry file="file://$PROJECT_DIR$/tree/css/jquery.treegrid.css" />
@@ -522,13 +557,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/django/db/models/fields/related.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="797" selection-start-line="797" selection-end-line="797" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/django/db/models/fields/related.py" />
     <entry file="file://$PROJECT_DIR$/blog/migrations/0016_code.py" />
     <entry file="file://$PROJECT_DIR$/blog/migrations/0007_code.py" />
     <entry file="file://$PROJECT_DIR$/blog/migrations/0006_auto_20211006_1324.py" />
@@ -553,13 +582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="90" column="31" lean-forward="true" selection-start-line="90" selection-start-column="31" selection-end-line="90" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/jquery.treegrid.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
@@ -567,13 +589,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/json/encoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3026">
-          <caret line="178" selection-start-line="178" selection-end-line="178" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/json/encoder.py" />
     <entry file="file://$PROJECT_DIR$/static/css/jquery.treegrid.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -588,20 +604,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/flask_admin/static/bootstrap/bootstrap3/swatch/cyborg/bootstrap.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="10" column="119362" selection-start-line="10" selection-start-column="119362" selection-end-line="10" selection-end-column="119362" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/blog.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/flask_admin/static/bootstrap/bootstrap3/swatch/cyborg/bootstrap.min.css" />
     <entry file="file://$PROJECT_DIR$/blog/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -633,20 +636,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/views.py">
+    <entry file="file://$PROJECT_DIR$/../itoDB/login.py" />
+    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2924">
-          <caret line="178" selection-start-line="178" selection-end-line="178" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1479">
+          <caret line="88" column="10" selection-start-line="88" selection-start-column="10" selection-end-line="88" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../itoDB/login.py">
+    <entry file="file://$PROJECT_DIR$/static/css/blog.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        <state relative-caret-position="51">
+          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -665,8 +673,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="72" column="45" selection-start-line="72" selection-start-column="45" selection-end-line="72" selection-end-column="45" />
+        <state relative-caret-position="1666">
+          <caret line="100" column="27" selection-start-line="100" selection-start-column="27" selection-end-line="100" selection-end-column="27" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -685,15 +693,81 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/structure.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17935">
-          <caret line="1055" column="5" selection-start-line="1055" selection-start-column="5" selection-end-line="1055" selection-end-column="5" />
+        <state relative-caret-position="242">
+          <caret line="645" column="89" selection-start-line="645" selection-start-column="85" selection-end-line="645" selection-end-column="89" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="514" column="72" selection-start-line="514" selection-start-column="72" selection-end-line="514" selection-end-column="72" />
+        <state relative-caret-position="298">
+          <caret line="452" column="121" selection-start-line="452" selection-start-column="121" selection-end-line="452" selection-end-column="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="170" column="75" selection-start-line="170" selection-start-column="75" selection-end-line="170" selection-end-column="75" />
+          <folding>
+            <element signature="e#767#2051#0" />
+            <element signature="e#1205#1279#0" />
+            <element signature="e#1405#1476#0" />
+            <element signature="e#1511#1627#0" />
+            <element signature="e#1924#1978#0" />
+            <element signature="e#2118#3629#0" />
+            <element signature="e#2576#2893#0" />
+            <element signature="e#2724#2816#0" />
+            <element signature="e#3042#3356#0" />
+            <element signature="e#3188#3279#0" />
+            <element signature="e#3678#4808#0" />
+            <element signature="e#3776#3850#0" />
+            <element signature="e#3976#4047#0" />
+            <element signature="e#4082#4198#0" />
+            <element signature="e#4676#4737#0" />
+            <element signature="e#4864#5685#0" />
+            <element signature="e#5071#5441#0" />
+            <element signature="e#5123#5441#0" />
+            <element signature="e#5713#6885#0" />
+            <element signature="e#6330#6433#0" />
+            <element signature="e#7176#7338#0" />
+            <element signature="e#7390#7568#0" />
+            <element signature="e#7619#7804#0" />
+            <element signature="e#7854#8047#0" />
+            <element signature="e#8099#8284#0" />
+            <element signature="e#8335#8524#0" />
+            <element signature="e#8581#9314#0" />
+            <element signature="e#8758#8888#0" />
+            <element signature="e#9055#9197#0" />
+            <element signature="e#9365#10367#0" />
+            <element signature="e#9736#9968#0" />
+            <element signature="e#9805#9932#0" />
+            <element signature="e#10025#10204#0" />
+            <element signature="e#10422#11107#0" />
+            <element signature="e#10617#10987#0" />
+            <element signature="e#10761#10852#0" />
+            <element signature="e#11157#11428#0" />
+            <element signature="e#11478#11668#0" />
+            <element signature="e#11722#12525#0" />
+            <element signature="e#11867#11932#0" />
+            <element signature="e#12085#12216#0" />
+            <element signature="e#12137#12216#0" />
+            <element signature="e#12271#12387#0" />
+            <element signature="e#12579#13145#0" />
+            <element signature="e#12745#12809#0" />
+            <element signature="e#12866#13028#0" />
+            <element signature="e#12951#13028#0" />
+            <element signature="e#13204#14554#0" />
+            <element signature="e#13301#13365#0" />
+            <element signature="e#13469#13573#0" />
+            <element signature="e#13885#14140#0" />
+            <element signature="e#13959#14104#0" />
+            <element signature="e#14223#14406#0" />
+            <element signature="e#14841#14905#0" />
+            <element signature="e#15009#15113#0" />
+            <element signature="e#15263#15427#0" />
+            <element signature="e#15942#16310#0" />
+          </folding>
         </state>
       </provider>
     </entry>
