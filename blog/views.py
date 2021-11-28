@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from datetime import datetime
 import json
+from dateutil.relativedelta import relativedelta
 
 def post_list(request):
     #get well list
@@ -176,8 +177,20 @@ def post_list(request):
             res_arr = []
             temp_p_arr = []
             pp_arr = []
-            range_start = '28.10.2021'
-            range_end = '28.11.2021'
+            if p_arr[2] == 'null':
+                date = datetime.now().date()
+                print(relativedelta(month=1))
+                p_range_start = str(date - relativedelta(months=1)).split('-')
+                range_start = p_range_start[2] + '.' + p_range_start[1] + '.' + p_range_start[0]
+                p_range_end = (str(date)).split('-')
+                range_end = p_range_end[2] + '.' + p_range_end[1] + '.' + p_range_end[0]
+                print('date start: ', range_start)
+                print('date end: ', range_end)
+            else:
+                range_start = str(p_arr[1]).replace('/','.')
+                range_end = str(p_arr[2]).replace('/', '.')
+                print('date start: ', range_start)
+                print('date end: ', range_end)
             # refactor start range date to datetime obj
             date_arr_start = range_start.split('.')
             p_range_start = datetime.date(datetime.now())
@@ -250,11 +263,6 @@ def post_list(request):
                 temp_p_arr.append(str(count_output))
                 res_arr.append(temp_p_arr)
             data = {}
-            # i = 0
-            # for elem in res_arr:
-            #     data[i] = elem
-            #     json_data = json.dumps(data)
-            #     i+=1
             data[0] = res_arr
             json_data = json.dumps(data)
             json_res = json.loads(json_data)

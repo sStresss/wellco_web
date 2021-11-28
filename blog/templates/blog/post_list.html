@@ -332,7 +332,7 @@
             {#====================MODAL M29 =========================#}
             <form method="GET">
                 <div class="modal fade" id="exampleModalCenter_m29" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
-                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px; width: 800px">
+                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px; width: 800px; max-height: 800px; height: 800px">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">Отчет М29</h5>
@@ -350,7 +350,7 @@
                                     <td><input data-date-format="dd/mm/yyyy" id="m29_date_end" style="height: 23px; width: 105px; margin-left: 5px;margin-right: 5px;"></td>
                                 </div>
                                 <div class="content" style="margin-left: auto">
-                                    <button id="m29_get" name="but1" value="val_5" type="button" class="btn btn-warning btn-sm" >
+                                    <button id="m29_get" name="but1" value="val_5" type="button" class="btn btn-warning btn-sm" onclick="modal_m29_get_data()">
                                         Сформировать
                                     </button>
                                     <button id="m29_save" name="but1" value="val_5" type="button" class="btn btn-info btn-sm" >
@@ -361,7 +361,7 @@
                                 </button>
                                 </div>
                             </div>
-                            <div class="row" style="padding-top: 10px; margin-left: auto; margin-right: auto">
+                            <div class="row" style="padding-top: 10px; margin-left: auto; margin-right: auto; height: 700px">
                                 <table class=" table table-bordered"  style="margin-bottom: 30px">
                                     <thead>
                                         <tr>
@@ -406,21 +406,7 @@
             todayHighlight: true,
         });
         $('#release_date').datepicker("setDate", new Date());
-        $('#release_date').datepicker({
-            weekStart: 1,
-            daysOfWeekHighlighted: "6,0",
-            autoclose: true,
-            todayHighlight: true,
-        });
-        $('#release_date').datepicker("setDate", new Date());
         $('.dropdown-toggle').dropdown();
-        $('#transaction_date').datepicker({
-            weekStart: 1,
-            daysOfWeekHighlighted: "6,0",
-            autoclose: true,
-            todayHighlight: true,
-        });
-        $('#transaction_date').datepicker("setDate", new Date());
         $('#transaction_date').datepicker({
             weekStart: 1,
             daysOfWeekHighlighted: "6,0",
@@ -435,27 +421,15 @@
             todayHighlight: true,
         });
         $('#m29_date_start').datepicker("setDate", new Date());
-        $('#m29_date_start').datepicker({
-            weekStart: 1,
-            daysOfWeekHighlighted: "6,0",
-            autoclose: true,
-            todayHighlight: true,
-        });
-        $('#m29_date_start').datepicker("setDate", new Date())
+        $('#m29_date_start').datepicker("setDate", "-1m");
         $('#m29_date_end').datepicker({
+            minDate:'-3M 0D',
             weekStart: 1,
             daysOfWeekHighlighted: "6,0",
             autoclose: true,
             todayHighlight: true,
         });
         $('#m29_date_end').datepicker("setDate", new Date());
-        $('#m29_date_end').datepicker({
-            weekStart: 1,
-            daysOfWeekHighlighted: "6,0",
-            autoclose: true,
-            todayHighlight: true,
-        });
-        $('#m29_date_end').datepicker("setDate", new Date())
         $(document).ready(function() {
             var infoModal = $('#release_serial');
             var table = $('#well_table');
@@ -1022,14 +996,18 @@
                 document.getElementById("transfer_well_counter").innerHTML = document.getElementById("serial_lst").childNodes.length
             };
         function modal_m29_init() {
+            document.getElementById('m29_tbl_body').innerHTML = ""
             $.ajax({
                 type: "GET",
                 url: "/",
                 dataType: "json",
                 data: {
                 event: 'm29_get_data',
+                    start_time: 'null',
+                    end_time: 'null'
                 },
                 success: function(resp) {
+
                     let data_arr = resp[0]
                     console.log(data_arr.length)
                     i = 0
@@ -1040,9 +1018,52 @@
                         else {
                             $("#m29_tbl_body").append("<tr> <td scope=\"row\" style=\"text-align: center\" >С-пласт "+data_arr[i][0]+"</td>\n" +
                                                         "<td style=\"text-align: center\">"+data_arr[i][1]+"</td>\n" +
-                                                        "<td style=\"text-align: center\">"+data_arr[i][2]+"</td>\n" +
                                                         "<td style=\"text-align: center\">"+data_arr[i][3]+"</td>\n" +
-                                                        "<td style=\"text-align: center\">"+data_arr[i][4]+"</td> </tr>")
+                                                        "<td style=\"text-align: center\">"+data_arr[i][4]+"</td>\n" +
+                                                        "<td style=\"text-align: center\">"+data_arr[i][2]+"</td> </tr>")
+                            i++
+                        }
+                    }
+                },
+                error: function(result) {
+                    var readyState = {
+                    1: "Loading",
+                    2: "Loaded",
+                    3: "Interactive",
+                    4: "Complete"
+                    };
+                    if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                        alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                    }
+                }
+            });
+        }
+        function modal_m29_get_data() {
+            document.getElementById('m29_tbl_body').innerHTML = ""
+            $.ajax({
+                type: "GET",
+                url: "/",
+                dataType: "json",
+                data: {
+                event: 'm29_get_data',
+                    start_time: $('#m29_date_start').val(),
+                    end_time: $('#m29_date_end').val()
+                },
+                success: function(resp) {
+                    document.getElementById('m29_tbl_body').innerHTML = ""
+                    let data_arr = resp[0]
+                    console.log(data_arr.length)
+                    i = 0
+                    for (;;) {
+                        if (i == data_arr.length) {
+                            break
+                        }
+                        else {
+                            $("#m29_tbl_body").append("<tr> <td scope=\"row\" style=\"text-align: center\" >С-пласт "+data_arr[i][0]+"</td>\n" +
+                                                        "<td style=\"text-align: center\">"+data_arr[i][1]+"</td>\n" +
+                                                        "<td style=\"text-align: center\">"+data_arr[i][3]+"</td>\n" +
+                                                        "<td style=\"text-align: center\">"+data_arr[i][4]+"</td>\n" +
+                                                        "<td style=\"text-align: center\">"+data_arr[i][2]+"</td> </tr>")
                             i++
                         }
                     }
