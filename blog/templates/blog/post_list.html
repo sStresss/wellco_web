@@ -28,7 +28,7 @@
             <button id="transfer" name="but1" value="val_2" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
                 Передать
             </button>
-            <button id="report" name="but1" value="val_3" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
+            <button id="report" name="but1" value="val_3" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter_m29" onclick="">
                 Отчет М29
             </button>
             <button id="analytics" name="but1" value="val_4" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
@@ -68,7 +68,7 @@
                 </div>
                 </div>
             </div>
-            {#==================MODAL RELEASE===================#}
+            {#====================MODAL RELEASE======================#}
             <div class="row">
                 <div class="container-fluid row">
                     <form method="GET">
@@ -143,7 +143,6 @@
                           </div>
                         </div>
                         <input id="access_token" type="hidden" name="access_token" value="<?php echo $_SESSION['access_token']; ?>" />
-
                     </form>
                 </div>
             </div>
@@ -262,7 +261,7 @@
                 </div>
             </form>
             {#=======================================================#}
-            {#=====================MODAL WELL LST ===================#}
+            {#====================MODAL WELL LST ====================#}
             <form method="GET">
                 <div class="modal fade" id="modal_well_lst" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -330,59 +329,52 @@
                 </div>
             </form>
             {#=======================================================#}
-            {#=====================MODAL WELL LST ===================#}
+            {#====================MODAL M29 =========================#}
             <form method="GET">
-                <div class="modal fade" id="modal_m29" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal fade" id="exampleModalCenter_m29" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px; width: 800px">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Список колодцев</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Отчет М29</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
-                      <div id="well_selected_array" hidden></div>
-                        <div id="well_selected_counter" value="" hidden>0</div>
                       </div>
-                      <div class="modal-body">
-                        <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                            <div class="row">
-                                    <div class="column" style="margin-left: 15px">
-                                        Тип колодца:
-                                    </div>
-                                    <div class="column" style="margin-left: 5px">
-                                        <select id="modal_cb_type_lst" class="form-select" aria-label="Default select example">
-                                            <option id="modal_cb_type_lst_first" value="{{ type_first_elem }}" selected>{{ type_first_elem }}</option>
-                                              {% for type in types %}
-                                                    <tr>
-                                                    {% if type.pk > 1 %}
-                                                        <tr>
-                                                        <option value="{{ type.type_name }}">{{ type.type_name }}</option>
-                                                        </tr>
-                                                    {% endif %}
-                                                    </tr>
-                                                {% endfor %}
-                                        </select>
-                                    </div>
+                      <div class="modal-body" style="">
+                        <div class="content-box" style="background-color: #ffffff;">
+                            <div class="row" style="margin-left: auto; margin-right: auto">
+                                <div>
+                                    <a>Период от </a>
+                                    <td><input data-date-format="dd/mm/yyyy" id="m29_date_start" style="height: 23px; width: 105px; margin-left: 5px"></td>
+                                    <a style="margin-left: 5px"> до </a>
+                                    <td><input data-date-format="dd/mm/yyyy" id="m29_date_end" style="height: 23px; width: 105px; margin-left: 5px;margin-right: 5px;"></td>
+                                </div>
+                                <div class="content" style="margin-left: auto">
+                                    <button id="m29_get" name="but1" value="val_5" type="button" class="btn btn-warning btn-sm" >
+                                        Сформировать
+                                    </button>
+                                    <button id="m29_save" name="but1" value="val_5" type="button" class="btn btn-info btn-sm" >
+                                        Сохранить
+                                    </button>
+                                    <button id="m29_print" name="but1" value="val_5" type="button" class="btn btn-info btn-sm" >
+                                    Печать
+                                </button>
+                                </div>
                             </div>
-                            <div class="row">
-                                    <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px; margin-left: 10px">
-                                        <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px;">
-                                            <th scope="col" ><span style="padding-left: 60px">Тип</span></th>
-                                            <th scope="col"><span style="margin-left: 92px">Серийный номер</span></th>
-                                            <th scope="col"><span style="margin-left: 49px">Произведен</span></th>
-                                        </div>
-                                        <div class="row" id="" >
-                                            <div class="scroll" style="height: 527px; overflow-y: scroll">
-                                            <table id="modal_well_lst_table" class="tree" style="margin-left: 10px; width: 467px;" >
-                                                <tr id="123" onclick="tbl_well_click(id())">
-                                                    <td class="col-sm-4" style="padding-left: 0px; ">С-пласт</td>
-                                                    <td class="col-sm-4" style="padding-left: 45px; "></td>
-                                                    <td style="padding-right: 20px; text-align: right"></td>
-                                                </tr>
-                                            </table>
-                                            </div>
-                                        </div>
-                                      </div>
+                            <div class="row" style="padding-top: 10px; margin-left: auto; margin-right: auto">
+                                <table class=" table table-bordered"  style="margin-bottom: 30px">
+                                    <thead>
+                                        <tr>
+                                          <th scope="col" style="text-align: center">Колодец</th>
+                                          <th scope="col" style="text-align: center">Сост. на начало</th>
+                                          <th scope="col" style="text-align: center">Приход</th>
+                                          <th scope="col" style="text-align: center">Уход</th>
+                                          <th scope="col" style="text-align: center">Сост. на конец</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                           </div>
                       </div>
@@ -436,6 +428,34 @@
             todayHighlight: true,
         });
         $('#transaction_date').datepicker("setDate", new Date());
+        $('#m29_date_start').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+        $('#m29_date_start').datepicker("setDate", new Date());
+        $('#m29_date_start').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+        $('#m29_date_start').datepicker("setDate", new Date())
+        $('#m29_date_end').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+        $('#m29_date_end').datepicker("setDate", new Date());
+        $('#m29_date_end').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+        $('#m29_date_end').datepicker("setDate", new Date())
         $(document).ready(function() {
             var infoModal = $('#release_serial');
             var table = $('#well_table');
