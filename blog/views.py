@@ -169,6 +169,7 @@ def post_list(request):
                 record.req_num = trans_subtarget
                 record.trans_date = trans_date
                 record.save(update_fields=['comment', 'locate', 'req_num', 'trans_date'])
+                print('done')
             data = {'result': str('success')}
             return JsonResponse(data, content_type='application/json')
         else:
