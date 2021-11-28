@@ -3,7 +3,7 @@ from django.utils import timezone
 from .models import Well, WellType, Warehouse, var, ProjectGroup, Code, Appl_mpz, Appl_mpz_data, Byer, Appl_byer, Appl_by_data
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-import datetime
+from datetime import datetime
 import json
 
 def post_list(request):
@@ -172,6 +172,94 @@ def post_list(request):
                 print('done')
             data = {'result': str('success')}
             return JsonResponse(data, content_type='application/json')
+        if req.find('m29_get_data') != -1:
+            res_arr = []
+            temp_p_arr = []
+            pp_arr = []
+            range_start = '28.10.2021'
+            range_end = '28.11.2021'
+            # refactor start range date to datetime obj
+            date_arr_start = range_start.split('.')
+            p_range_start = datetime.date(datetime.now())
+            range_start = p_range_start.replace(int(date_arr_start[2]), int(date_arr_start[1]), int(date_arr_start[0]))
+
+            # refactor end range date to datetime obj
+            date_arr_end = range_end.split('.')
+            p_range_end = datetime.date(datetime.now())
+            range_end = p_range_end.replace(int(date_arr_end[2]), int(date_arr_end[1]), int(date_arr_end[0]))
+
+            wells = WellType.objects.all().order_by('id')
+            for well in wells:
+                temp_p_arr = []
+                count_start = 0
+                count_end = 0
+                count_input = 0
+                count_output = 0
+                temp_p_arr.append(str(well.type_name))
+                rows = Well.objects.filter(type=well.type_name).order_by('id')
+                # get state by start and end range
+                for row in rows:
+                    rel_date = str(row.created_date)
+                    date_arr = rel_date.split('-')
+                    p_rel_date = datetime.date(datetime.now())
+                    rel_date = p_rel_date.replace(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]))
+
+                    if row.trans_date != None:
+                        trans_date = str(row.trans_date)
+                        date_arr = trans_date.split('.')
+                        p_trans_date = datetime.date(datetime.now())
+                        trans_date = p_trans_date.replace(int(date_arr[2]), int(date_arr[1]), int(date_arr[0]))
+
+                    if (rel_date < range_start and row.trans_date == None) or (
+                            rel_date < range_start and range_start <= trans_date):
+                        check_start = True
+                    else:
+                        check_start = False
+
+                    if (rel_date <= range_end and row.trans_date == None) or (
+                            rel_date <= range_end and range_end < trans_date):
+                        check_end = True
+                    else:
+                        check_end = False
+
+                    if (rel_date >= range_start) and (rel_date <= range_end):
+                        check_input = True
+                    else:
+                        check_input = False
+
+                    if row.trans_date != None:
+                        if (trans_date >= range_start) and (trans_date <= range_end):
+                            check_output = True
+                        else:
+                            check_output = False
+                    else:
+                        check_output = False
+
+                    if check_start == True:
+                        count_start += 1
+                    if check_end == True:
+                        count_end += 1
+                    if check_input == True:
+                        count_input += 1
+                    if check_output == True:
+                        count_output += 1
+
+                temp_p_arr.append(str(count_start))
+                temp_p_arr.append(str(count_end))
+                temp_p_arr.append(str(count_input))
+                temp_p_arr.append(str(count_output))
+                res_arr.append(temp_p_arr)
+            data = {}
+            # i = 0
+            # for elem in res_arr:
+            #     data[i] = elem
+            #     json_data = json.dumps(data)
+            #     i+=1
+            data[0] = res_arr
+            json_data = json.dumps(data)
+            json_res = json.loads(json_data)
+            print('json res: ', json_res)
+            return JsonResponse(json_res, content_type='application/json')
         else:
             # get type list
             types = WellType.objects.all().order_by('id')
