@@ -36,7 +36,7 @@ def post_list(request):
                 last_part_month = elem.month
                 last_part_num = elem.part_num
 
-            cur_date = datetime.datetime.now()
+            cur_date = datetime.now()
 
             if str(cur_date.month) != str(last_part_month):
                 cur_part_month = str(cur_date.month)
@@ -103,7 +103,7 @@ def post_list(request):
                 last_part_month = elem.month
                 last_part_num = elem.part_num
 
-            cur_date = datetime.datetime.now()
+            cur_date = datetime.now()
 
             if str(cur_date.month) != str(last_part_month):
                 cur_part_month = str(cur_date.month)
@@ -217,19 +217,23 @@ def post_list(request):
                     p_rel_date = datetime.date(datetime.now())
                     rel_date = p_rel_date.replace(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]))
 
-                    if row.trans_date != None:
+                    if str(row.trans_date) != '':
                         trans_date = str(row.trans_date)
                         date_arr = trans_date.split('.')
+                        print('transdate: ', row.trans_date)
+                        print('date_arr: ', date_arr)
                         p_trans_date = datetime.date(datetime.now())
                         trans_date = p_trans_date.replace(int(date_arr[2]), int(date_arr[1]), int(date_arr[0]))
+                    else:
+                        trans_date = None
 
-                    if (rel_date < range_start and row.trans_date == None) or (
+                    if (rel_date < range_start and atr(row.trans_date) == '') or (
                             rel_date < range_start and range_start <= trans_date):
                         check_start = True
                     else:
                         check_start = False
 
-                    if (rel_date <= range_end and row.trans_date == None) or (
+                    if (rel_date <= range_end and str(row.trans_date) == '') or (
                             rel_date <= range_end and range_end < trans_date):
                         check_end = True
                     else:
@@ -240,7 +244,7 @@ def post_list(request):
                     else:
                         check_input = False
 
-                    if row.trans_date != None:
+                    if str(row.trans_date) != '':
                         if (trans_date >= range_start) and (trans_date <= range_end):
                             check_output = True
                         else:
