@@ -4,8 +4,11 @@ from .models import Well, WellType, Warehouse, var, ProjectGroup, Code, Appl_mpz
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from datetime import datetime
+from datetime import timedelta
 import json
 from dateutil.relativedelta import relativedelta
+
+month_blocks_arr = []
 
 def post_list(request):
     #get well list
@@ -506,14 +509,16 @@ def statistic(request):
         print(req_dict)
         print('STATISTIC!')
         p_arr = []
-        head_arr = makeReleaseHead()
-        print('RELEASE HEAD: ', head_arr)
+        release_head_arr = makeReleaseHead()
+        print('RELEASE HEAD: ', release_head_arr)
+        release_subhead_arr = makeReleaseSubHead()
+        print('RELEASE SUB_HEAD: ', release_subhead_arr)
 
     return render(request, 'blog/statistic.html',
-                  {'pg_lst': '1'})
+                  {'releas_head': release_head_arr, 'releas_subhead': release_subhead_arr})
 
 
-
+#----------------------------------------STATISTIC RELEASE HEAD---------------------------------------------------------
 def makeReleaseHead():
     month_arr = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь',
                  'Ноябрь', 'Декабрь']
@@ -524,6 +529,7 @@ def makeReleaseHead():
     cell_name = ''
     mon_block_start = 0
     p_arr = []
+    print('CUR COUNT: ', cur_count)
     for i in range(cur_count):
         if i == 0:
             cell_name = ''
@@ -552,4 +558,170 @@ def getSummTblBackCellCount(years_count):
     res = years_count + 14
     return res
 
+#----------------------------------------STATISTIC RELEASE SUBHEAD------------------------------------------------------
 
+def makeReleaseSubHead():
+    # start custom init
+    years_count, cur_years_lst = getYearsCount()
+    cur_count = getSummTblFrontCellCount(int(years_count))
+    i = -1
+    cell_name = ''
+    arr_subblocks, arr_names_subblocks_start, arr_names_subblocks_end = getSubblocks()
+    p_arr = []
+    print('CUR COUNT: ', cur_count)
+    print('YEARS COUNT: ', years_count)
+    for i in range(cur_count):
+        if i == 0:
+            cell_name = 'Колодец'
+
+        if i > 0 and i <= years_count:
+            cell_name = str(cur_years_lst[i - 1])
+        if i > years_count and i < cur_count - 1:
+            cur_ind = i - years_count - 1
+            if str(arr_names_subblocks_start[cur_ind]) != 'O':
+                cell_name = str(arr_names_subblocks_start[cur_ind]) + '\n' + '↓' + '\n' + str(
+                    arr_names_subblocks_end[cur_ind])
+            else:
+                cell_name = str(arr_names_subblocks_start[cur_ind])
+        if i == cur_count - 1:
+            cell_name = 'Остаток'
+        p_arr.append(cell_name)
+    return p_arr
+
+def getSummTblFrontCellCount(years_count):
+    week_arr = getWeekLst()
+    count = 0
+    for elem in week_arr:
+        count = count + int(elem[1])
+    res = count + 1 + years_count + 1
+    return res
+
+def getWeekLst():
+    p_arr = []
+    week_arr = []
+    res_arr = []
+    cur_month = 1
+    past_month = 0
+    cur_year = int(datetime.now().year)
+    week_lst = culcWeekLst(cur_year)
+    # for each in week_lst:
+    #     # print(each)
+    count = 0
+    i = 1
+    for i in range(1,13,1):
+        count = 0
+        p_arr = []
+        pp_arr= []
+        day = 0
+        for elem in week_lst:
+            p_week = str(elem)
+            week = p_week.split('-')
+            if i == int(week[1]):
+                count+=1
+                pp_arr.append(week[2])
+            if count == 1:
+                day = int(week[2])
+        p_arr.append(i)
+        p_arr.append(count)
+        p_arr.append(day)
+        p_arr.append(pp_arr)
+        week_arr.append(p_arr)
+        i+=1
+    for elem in week_arr:
+        p_arr = []
+        mon = elem[0]
+        week = elem[1]
+        day = elem[2]
+        w_lst = elem[3]
+        l_lst = []
+        check = False
+
+        if day != 1:
+            p_rel_date = datetime.now().date()
+            rel_date = p_rel_date.replace(int(datetime.now().year), int(mon), 1)
+            if int(rel_date.weekday()) < 5:
+                week+=1
+                check = True
+        week+=1
+        if week == 7:
+            week = 6
+        if str(w_lst[0]) != '01' and check == True:
+            w_lst.insert(0, '01')
+            last_week_day = 0
+        i = 0
+        for i in range(len(w_lst)):
+            if i < len(w_lst)-1:
+                last_week_day = int(w_lst[i+1]) -1
+                if last_week_day < 10:
+                    last_week_day = '0' + str(last_week_day)
+                else:
+                    last_week_day = str(last_week_day)
+            else:
+                last_week_day = getMonthCount(datetime.now().year, mon)
+            l_lst.append(last_week_day)
+
+
+        w_lst.append('O')
+        l_lst.append(' ')
+        p_arr.append(mon)
+        p_arr.append(week)
+        p_arr.append(w_lst)
+        p_arr.append(l_lst)
+        res_arr.append(p_arr)
+    month_blocks_arr = res_arr
+
+    return res_arr
+
+def culcWeekLst(year):
+    """ will return all the week from selected year """
+    import datetime
+    WEEK = {'MONDAY': 0, 'TUESDAY': 1, 'WEDNESDAY': 2, 'THURSDAY': 3, 'FRIDAY': 4, 'SATURDAY': 5, 'SUNDAY': 6}
+    MONTH = {'JANUARY': 1, 'FEBRUARY': 2, 'MARCH': 3, 'APRIL': 4, 'MAY': 5, 'JUNE': 6, 'JULY': 7, 'AUGUST': 8,
+             'SEPTEMBER': 9, 'OCTOBER': 10, 'NOVEMBER': 11, 'DECEMBER': 12}
+    year = int(year)
+    month = MONTH['JANUARY']
+    day = WEEK['MONDAY']
+    dt = datetime.date(year, month, 1)
+    dow_lst = []
+    while dt.weekday() != day:
+        dt = dt + datetime.timedelta(days=1)
+    lst_month = MONTH.values()
+    sorted(lst_month)
+    for mont in lst_month:
+        while dt.month == mont:
+            dow_lst.append(dt)
+            dt = dt + datetime.timedelta(days=7)
+    return dow_lst
+
+def getMonthCount(year, month):
+    p_rel_date = datetime.now().date()
+    next_day = p_rel_date.replace(year, month, 1)
+    check_month = True
+    count = 0
+    while check_month == True:
+        next_day = next_day + timedelta(days=1)
+        count += 1
+        if int(next_day.month) != month:
+            check_month = False
+
+    return count
+
+def getSubblocks():
+    arr = []
+    name_arr = []
+    p_name_arr = []
+    count = 0
+    month_blocks_arr = getWeekLst()
+    for elem in month_blocks_arr:
+        weight = 120 / int(elem[1])
+        names = elem[2]
+        p_names = elem[3]
+        i = 0
+        for i in range(int(elem[1])):
+            count+=1
+            arr.append(weight)
+        for elem in names:
+            name_arr.append(elem)
+        for elem in p_names:
+            p_name_arr.append(str(elem))
+    return arr, name_arr, p_name_arr
