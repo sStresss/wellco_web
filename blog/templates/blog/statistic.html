@@ -14,10 +14,10 @@
         <h1><a href="/" class="head_title">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">статистика</span> </a></h1>
     </div>
     <table summary="Column one has the location and size of accommodation, other columns show the type and number of properties available" class=" table table-bordered">
-        <thead style="padding: 0">
-            <tr style="padding: 0">
-                {% for head_elem  in releas_subhead %}
-                    <th id="12" scope="col" style="min-width: 1px; font-size: 13px; padding: 0; text-align: center; font-weight: normal">
+        <thead style="padding: 0;">
+            <tr style="padding: 0; max-width: 10px;">
+                {% for head_elem  in releas_head %}
+                    <th id="12" scope="col" style="min-width: 2px; font-size: 12px; padding: 0px; text-align: center; font-weight: normal; ">
                         {{ head_elem }}
                     </th>
                 {% endfor %}

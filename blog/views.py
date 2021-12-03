@@ -579,7 +579,7 @@ def makeReleaseSubHead():
         if i > years_count and i < cur_count - 1:
             cur_ind = i - years_count - 1
             if str(arr_names_subblocks_start[cur_ind]) != 'O':
-                cell_name = str(arr_names_subblocks_start[cur_ind]) + '\n' + '↓' + '\n' + str(
+                cell_name = str(arr_names_subblocks_start[cur_ind]) + '\n' '\n' + str(
                     arr_names_subblocks_end[cur_ind])
             else:
                 cell_name = str(arr_names_subblocks_start[cur_ind])
