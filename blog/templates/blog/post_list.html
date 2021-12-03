@@ -31,8 +31,8 @@
             <button id="report" name="but1" value="val_3" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter_m29" onclick="modal_m29_init()">
                 Отчет М29
             </button>
-            <button id="analytics" name="but1" value="val_4" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
-                Статистика
+            <button id="statistic" name="but1" value="val_4" type="button" class="btn btn-warning btn-sm">
+                <a href="{% url 'statistic' %}" style="text-decoration: none; color: black">Статистика</a>
             </button>
             <button id="structure" name="but1" value="val_5" type="button" class="btn btn-secondary btn-sm" >
                 <a href="{% url 'structure' %}" style="text-decoration: none; color: white">Управление заявками</a>

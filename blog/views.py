@@ -227,7 +227,7 @@ def post_list(request):
                     else:
                         trans_date = None
 
-                    if (rel_date < range_start and atr(row.trans_date) == '') or (
+                    if (rel_date < range_start and str(row.trans_date) == '') or (
                             rel_date < range_start and range_start <= trans_date):
                         check_start = True
                     else:
@@ -499,6 +499,57 @@ def structure(request):
 
             return render(request, 'blog/structure.html', {'pg_lst': pg_dict, 'code_lst': code_dict, 'mpz_lst': mpz_dict, 'types': types})
 
+def statistic(request):
+    if request.method == "GET":
+        req = str(request.GET)
+        req_dict = request.GET.dict()
+        print(req_dict)
+        print('STATISTIC!')
+        p_arr = []
+        head_arr = makeReleaseHead()
+        print('RELEASE HEAD: ', head_arr)
 
+    return render(request, 'blog/statistic.html',
+                  {'pg_lst': '1'})
+
+
+
+def makeReleaseHead():
+    month_arr = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь',
+                 'Ноябрь', 'Декабрь']
+    #start custom init
+    years_count, cur_years_lst = getYearsCount()
+    cur_count = getSummTblBackCellCount(int(years_count))
+    i = -1
+    cell_name = ''
+    mon_block_start = 0
+    p_arr = []
+    for i in range(cur_count):
+        if i == 0:
+            cell_name = ''
+        if i > 0 and i <= years_count:
+            cell_name = ''
+        if i > years_count and i < cur_count-1:
+            cell_name = str(month_arr[i-years_count-1])
+        if i == cur_count-1:
+            cell_name = ''
+        p_arr.append(cell_name)
+    return p_arr
+
+def getYearsCount():
+    arr = []
+    now = int(datetime.now().date().year)
+    count = 1
+    st_date = 2020
+    arr.append(st_date)
+    while st_date != now:
+        st_date+=1
+        arr.append(st_date)
+        count+=1
+    return count, arr
+
+def getSummTblBackCellCount(years_count):
+    res = years_count + 14
+    return res
 
 
