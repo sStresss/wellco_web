@@ -507,19 +507,24 @@ def statistic(request):
         req = str(request.GET)
         req_dict = request.GET.dict()
         print(req_dict)
-        print('STATISTIC!')
         p_arr = []
-        release_head_arr = makeReleaseHead()
-        print('RELEASE HEAD: ', release_head_arr)
-        release_subhead_arr = makeReleaseSubHead()
-        print('RELEASE SUB_HEAD: ', release_subhead_arr)
-
-    return render(request, 'blog/statistic.html',
-                  {'releas_head': release_head_arr, 'releas_subhead': release_subhead_arr})
+        if req.find('stat_get_release_data') != -1:
+            release_subhead_arr = makeReleaseSubHead()
+            release_head_arr = makeReleaseHead(release_subhead_arr)
+            data = {}
+            data[0] = release_head_arr
+            data[1] = release_subhead_arr
+            json_data = json.dumps(data)
+            json_res = json.loads(json_data)
+            print('json res: ', json_res)
+            return JsonResponse(json_res, content_type='application/json')
+        else:
+            return render(request, 'blog/statistic.html',
+                          {'load': 'success'})
 
 
 #----------------------------------------STATISTIC RELEASE HEAD---------------------------------------------------------
-def makeReleaseHead():
+def makeReleaseHead(release_subhead_arr):
     month_arr = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь',
                  'Ноябрь', 'Декабрь']
     #start custom init
@@ -540,7 +545,23 @@ def makeReleaseHead():
         if i == cur_count-1:
             cell_name = ''
         p_arr.append(cell_name)
-    return p_arr
+    pp_arr = []
+    res_arr = []
+    i = 0
+    j = 0
+    for elem in release_subhead_arr:
+        pp_arr = []
+        i = 0
+        if len(elem) > 1:
+
+            pp_arr.append(p_arr[j])
+            for i in range(len(elem)-1):
+                pp_arr.append('')
+        else:
+            pp_arr.append(p_arr[j])
+        res_arr.append(pp_arr)
+        j+=1
+    return res_arr
 
 def getYearsCount():
     arr = []
@@ -562,38 +583,48 @@ def getSummTblBackCellCount(years_count):
 
 def makeReleaseSubHead():
     # start custom init
-    years_count, cur_years_lst = getYearsCount()
-    cur_count = getSummTblFrontCellCount(int(years_count))
-    i = -1
     cell_name = ''
-    arr_subblocks, arr_names_subblocks_start, arr_names_subblocks_end = getSubblocks()
+    years_count, cur_years_lst = getYearsCount()
+    month_blocks_arr = getWeekLst()
+    cur_count = len(month_blocks_arr) + 2 + years_count
+    i = -1
     p_arr = []
-    print('CUR COUNT: ', cur_count)
-    print('YEARS COUNT: ', years_count)
+    res_arr = []
+    pp_arr = []
     for i in range(cur_count):
+        pp_arr = []
+        j = 0
         if i == 0:
             cell_name = 'Колодец'
-
+            pp_arr.append(cell_name)
         if i > 0 and i <= years_count:
             cell_name = str(cur_years_lst[i - 1])
+            pp_arr.append(cell_name)
         if i > years_count and i < cur_count - 1:
             cur_ind = i - years_count - 1
-            if str(arr_names_subblocks_start[cur_ind]) != 'O':
-                cell_name = str(arr_names_subblocks_start[cur_ind]) + '\n' '\n' + str(
-                    arr_names_subblocks_end[cur_ind])
-            else:
-                cell_name = str(arr_names_subblocks_start[cur_ind])
+            elem = month_blocks_arr[cur_ind]
+            p_elem = elem[2]
+            for pp_elem in p_elem:
+                if str(pp_elem) != 'O':
+                    cell_name = str(pp_elem) + '\n' '\n' + str(
+                        elem[3][j])
+                else:
+                    cell_name = str(pp_elem)
+                j+=1
+                pp_arr.append(cell_name)
         if i == cur_count - 1:
             cell_name = 'Остаток'
-        p_arr.append(cell_name)
-    return p_arr
+            pp_arr.append(cell_name)
+        res_arr.append(pp_arr)
+
+    return res_arr
 
 def getSummTblFrontCellCount(years_count):
     week_arr = getWeekLst()
     count = 0
     for elem in week_arr:
         count = count + int(elem[1])
-    res = count + 1 + years_count + 1
+    res = count + 2 + years_count
     return res
 
 def getWeekLst():
@@ -669,6 +700,7 @@ def getWeekLst():
         p_arr.append(l_lst)
         res_arr.append(p_arr)
     month_blocks_arr = res_arr
+    # print('month_block_arr: ', month_blocks_arr)
 
     return res_arr
 

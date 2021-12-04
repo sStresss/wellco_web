@@ -14,19 +14,50 @@
         <h1><a href="/" class="head_title">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">статистика</span> </a></h1>
     </div>
     <table summary="Column one has the location and size of accommodation, other columns show the type and number of properties available" class=" table table-bordered">
-        <thead style="padding: 0;">
-            <tr style="padding: 0; max-width: 10px;">
-                {% for head_elem  in releas_head %}
-                    <th id="12" scope="col" style="min-width: 2px; font-size: 12px; padding: 0px; text-align: center; font-weight: normal; ">
-                        {{ head_elem }}
-                    </th>
-                {% endfor %}
-            </tr>
+        <thead id="release_tabe_head" style="padding: 0;">
         </thead>
         <tbody>
-
         </tbody>
     </table>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
 
+        $('.tree').treegrid();
+        $('.treegrid-1').exp
+    });
+    </script>
+    <script>
+        $(document).ready(function() {
+             $.ajax({
+                type: "GET",
+                url: "/statistic/",
+                dataType: "json",
+                data: {
+                name: 'stat_get_release_data',
+                },
+                success: function(resp) {
+                    console.log(resp)
+                },
+                error: function(result) {
+                    var readyState = {
+                    1: "Loading",
+                    2: "Loaded",
+                    3: "Interactive",
+                    4: "Complete"
+                    };
+                    if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                        alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
