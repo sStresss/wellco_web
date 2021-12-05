@@ -13,6 +13,9 @@
     <div class="page-header">
         <h1><a href="/" class="head_title">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">статистика</span> </a></h1>
     </div>
+    <div class="content-box" style=" text-align: center">
+        <a style="font-size: 25px; font-family: Calibri; font-weight: normal">Производство</a>
+    </div>
     <table summary="" class="table table-bordered">
         <thead id="" style="padding: 0;">
             <tr id="release_table_head">
@@ -23,6 +26,10 @@
         <tbody id="release_table_data">
         </tbody>
     </table>
+    <br>
+    <div class="content-box" style=" text-align: center">
+        <a style="font-size: 25px; font-family: Calibri; font-weight: normal">Перемещение</a>
+    </div>
     <table summary="" class="table table-bordered">
         <thead id="" style="padding: 0;">
             <tr id="transfer_table_head">
@@ -64,6 +71,10 @@
                     let release_subhead_arr = resp[1]
                     let release_data_arr = resp[2]
                     let release_color_arr = resp[3]
+                    let transfer_head_arr = resp[4]
+                    let transfer_subhead_arr = resp[5]
+                    let transfer_data_arr = []
+                    let transfet_color_arr = resp[7]
                     release_color_array = resp[3]
                     release_table_width = release_color_arr.length
                     release_table_height = release_data_arr.length
@@ -155,7 +166,40 @@
                             i++
                         }
                     }
+                    i = 0
+                    console.log(transfer_head_arr)
+                    for (;;) {
+                        if (i == transfer_head_arr.length) {
+                            break
+                        }
+                        else {
+                            $("#transfer_table_head").append("" +
+                                "<th id=\"par\" class=\"span\" colspan=\""+transfer_head_arr[i].length+"\" scope=\"colgroup\" style=\"min-width: 2px; font-size: 12px; padding: 0px; text-align: center; font-weight: normal; background-color: #8cbcd0\">\n" +
+                                ""+transfer_head_arr[i][0]+"" +
+                                "</th>\n")
+                            j = 0
+                            for (;;){
+                                if (j == transfer_subhead_arr[i].length) {
+                                    break
+                                }
+                                else {
 
+                                    if (i == 0) {
+                                        $("#transfer_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 70px; padding-right: 70px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
+                                        ""+transfer_subhead_arr[i][j]+"" +
+                                        "</th>")
+                                    }
+                                    else {
+                                        $("#transfer_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 11px; padding-left: 5px; padding-right: 5px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
+                                        ""+transfer_subhead_arr[i][j]+"" +
+                                        "</th>")
+                                    }
+                                    j++
+                                }
+                            }
+                            i++
+                        }
+                    }
                 },
                 error: function(result) {
                     var readyState = {

@@ -479,10 +479,12 @@ def statistic(request):
         if req.find('stat_get_release_data') != -1:
             release_subhead_arr = makeReleaseSubHead()
             release_head_arr = makeReleaseHead(release_subhead_arr)
+            print('release_subhead_arr', release_subhead_arr)
             release_data = makeReleaseData()
             release_color = getReleaseColorArray()
             transfer_head_arr = makeTransferHead()
             transfer_subhead_arr = makeTransferSubHead(transfer_head_arr)
+            print('transfer_subhead_arr', transfer_subhead_arr)
             transfer_color = getTransferColorArray(transfer_head_arr)
             data = {}
             data[0] = release_head_arr
@@ -841,6 +843,7 @@ def getReleaseColorArray():
 #----------------------------------------STATISTIC TRANSFER HEAD--------------------------------------------------------
 
 def makeTransferHead():
+    release_head_arr = []
     p_arr = []
     p_color_arr = []
     check = False
@@ -853,29 +856,33 @@ def makeTransferHead():
         p_arr.append(str(row.pg_name))
     p_arr.append('Сторонние продажи')
     p_arr.append('ИТОГО')
-    release_head_arr = p_arr
+    i = 0
+    pp_arr = []
+    for i in range(len(p_arr)):
+        pp_arr = []
+        if i == 0:
+            pp_arr.append(p_arr[i])
+        if i > 0:
+            pp_arr.append(p_arr[i])
+            pp_arr.append('')
+            pp_arr.append('')
+        release_head_arr.append(pp_arr)
+
+
     print('transfer_head_arr', release_head_arr)
     return release_head_arr
 
 def makeTransferSubHead(head_arr):
+    p_arr = []
     pp_arr = ['В заявках', 'Выдано', 'К выдаче']
     res_arr = []
     p_ind = 0
-    res_arr.append('Колодец')
+    p_arr.append('Колодец')
+    res_arr.append(p_arr)
     i = 0
-    for i in range((len(head_arr)-1)*3):
-        if p_ind == 0:
-            cell_name = pp_arr[0]
-            p_ind += 1
-        else:
-            if p_ind == 1:
-                cell_name = pp_arr[1]
-                p_ind += 1
-            else:
-                if p_ind == 2:
-                    cell_name = pp_arr[2]
-                    p_ind = 0
-        res_arr.append(cell_name)
+    for i in range((len(head_arr)-1)):
+        p_arr = []
+        res_arr.append(pp_arr)
     return res_arr
 
 
