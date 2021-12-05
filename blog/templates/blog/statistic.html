@@ -14,7 +14,11 @@
         <h1><a href="/" class="head_title">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">статистика</span> </a></h1>
     </div>
     <table summary="Column one has the location and size of accommodation, other columns show the type and number of properties available" class=" table table-bordered">
-        <thead id="release_tabe_head" style="padding: 0;">
+        <thead id="" style="padding: 0;">
+            <tr id="release_table_head">
+            </tr>
+            <tr id="release_table_subhead">
+            </tr>
         </thead>
         <tbody>
         </tbody>
@@ -43,7 +47,54 @@
                 name: 'stat_get_release_data',
                 },
                 success: function(resp) {
-                    console.log(resp)
+                    let release_head_arr = resp[0]
+                    let release_subhead_arr = resp[1]
+                    i = 0
+                    for (;;) {
+                        if (i == release_head_arr.length) {
+                            break
+                        }
+                        else {
+                            console.log(release_head_arr[i].length)
+                            $("#release_table_head").append("" +
+                                "<th id=\"par\" class=\"span\" colspan=\""+release_head_arr[i].length+"\" scope=\"colgroup\" style=\"min-width: 2px; font-size: 12px; padding: 0px; text-align: center; font-weight: normal;\">\n" +
+                                ""+release_head_arr[i][0]+"" +
+                                "</th>\n")
+                            j = 0
+                            for (;;){
+                                if (j == release_subhead_arr[i].length) {break}
+                                else {
+                                    if (i == 0) {
+                                        $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 90px; padding-right: 90px; text-align: center; font-weight: normal; \">\n" +
+                                        ""+release_subhead_arr[i][j]+"" +
+                                        "</th>")
+                                    }
+                                    else {
+                                        if (i > 0 && i < 3){
+                                            $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 10px; padding-right: 10px; text-align: center; font-weight: normal; \">\n" +
+                                        ""+release_subhead_arr[i][j]+"" +
+                                        "</th>")
+                                        }
+                                        else {
+                                            if (i == release_head_arr.length-1) {
+                                                $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 10px; padding-right: 10px; text-align: center; font-weight: normal; \">\n" +
+                                                ""+release_subhead_arr[i][j]+"" +
+                                                "</th>")
+                                            }
+                                            else {
+                                                $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding: 0.1rem; text-align: center; font-weight: normal; \">\n" +
+                                                ""+release_subhead_arr[i][j]+"" +
+                                                "</th>")
+                                            }
+                                        }
+                                    }
+
+                                    j++
+                                }
+                            }
+                            i++
+                        }
+                    }
                 },
                 error: function(result) {
                     var readyState = {

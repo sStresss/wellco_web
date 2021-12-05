@@ -606,7 +606,7 @@ def makeReleaseSubHead():
             p_elem = elem[2]
             for pp_elem in p_elem:
                 if str(pp_elem) != 'O':
-                    cell_name = str(pp_elem) + '\n' '\n' + str(
+                    cell_name = str(pp_elem) + '\n' + str(
                         elem[3][j])
                 else:
                     cell_name = str(pp_elem)
