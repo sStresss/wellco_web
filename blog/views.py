@@ -13,7 +13,6 @@ month_blocks_arr = []
 def post_list(request):
     #get well list
     wells = Well.objects.all().order_by('id')
-    # print('WELLS: ', wells)
     wells = wells.reverse()
     serial = '0'
     if request.method == "GET":
@@ -63,7 +62,6 @@ def post_list(request):
 
             return JsonResponse(data, content_type='application/json')
         if req.find('get_init_transfer_data') != -1:
-            print('prepeare trans modal data init!')
             code_lst = Code.objects.all().order_by('id')
             appl_mpz_lst = Appl_mpz.objects.all().order_by('id')
             buyer_lst = Byer.objects.all().order_by('id')
@@ -98,7 +96,6 @@ def post_list(request):
             data[1] = p_res_arr
             json_data = json.dumps(data)
             json_res = json.loads(json_data)
-            print('json res: ', json_res)
             return JsonResponse(json_res, content_type='application/json')
         if req.find('modal') != -1:
             cur_serial = var.objects.all().order_by('id')
@@ -151,8 +148,6 @@ def post_list(request):
                 json_res = json.loads(json_data)
             else:
                 json_res = {}
-            print('JSON RES: ',json_res)
-
             return JsonResponse(json_res, content_type='application/json')
         if req.find('transfer_well') != -1:
             trans_type = p_arr[1]
@@ -161,10 +156,8 @@ def post_list(request):
             trans_subtarget = p_arr[4]
             serial_lst = str(p_arr[5]).split('%')
             if trans_type == 'transfer':
-                print('TRANSFER!')
                 trans_comment = 'перемещен ' + trans_date + ' числа на объект ' + trans_target + ' по заявке МПЗ№' + trans_subtarget
             else:
-                print('SELLING!')
                 trans_comment = 'продан ' + trans_date + ' числа организации ' + trans_target + ' по заявке №' + trans_subtarget
             for elem in serial_lst:
                 record = Well.objects.get(serial=elem)
@@ -173,7 +166,6 @@ def post_list(request):
                 record.req_num = trans_subtarget
                 record.trans_date = trans_date
                 record.save(update_fields=['comment', 'locate', 'req_num', 'trans_date'])
-                print('done')
             data = {'result': str('success')}
             return JsonResponse(data, content_type='application/json')
         if req.find('m29_get_data') != -1:
@@ -182,18 +174,13 @@ def post_list(request):
             pp_arr = []
             if p_arr[2] == 'null':
                 date = datetime.now().date()
-                print(relativedelta(month=1))
                 p_range_start = str(date - relativedelta(months=1)).split('-')
                 range_start = p_range_start[2] + '.' + p_range_start[1] + '.' + p_range_start[0]
                 p_range_end = (str(date)).split('-')
                 range_end = p_range_end[2] + '.' + p_range_end[1] + '.' + p_range_end[0]
-                print('date start: ', range_start)
-                print('date end: ', range_end)
             else:
                 range_start = str(p_arr[1]).replace('/','.')
                 range_end = str(p_arr[2]).replace('/', '.')
-                print('date start: ', range_start)
-                print('date end: ', range_end)
             # refactor start range date to datetime obj
             date_arr_start = range_start.split('.')
             p_range_start = datetime.date(datetime.now())
@@ -223,8 +210,6 @@ def post_list(request):
                     if str(row.trans_date) != '':
                         trans_date = str(row.trans_date)
                         date_arr = trans_date.split('.')
-                        print('transdate: ', row.trans_date)
-                        print('date_arr: ', date_arr)
                         p_trans_date = datetime.date(datetime.now())
                         trans_date = p_trans_date.replace(int(date_arr[2]), int(date_arr[1]), int(date_arr[0]))
                     else:
@@ -273,7 +258,6 @@ def post_list(request):
             data[0] = res_arr
             json_data = json.dumps(data)
             json_res = json.loads(json_data)
-            print('json res: ', json_res)
             return JsonResponse(json_res, content_type='application/json')
         else:
             # get type list
@@ -292,7 +276,6 @@ def post_list(request):
             for elem in appl_mpz_lst:
                 if code_lst[0].id == elem.connect_id:
                     first_code_mpz_lst.append(elem.mpz_appl_name)
-            print(len(first_code_mpz_lst))
             first_code_mpz_lst_first_elem = first_code_mpz_lst[0]
 
             return render(request, 'blog/post_list.html', {'wells': wells, 'types': types, 'type_first_elem': type_first_elem, 'wh_lst': wh_lst, 'wh_first_elem': wh_first_elem, 'code_lst': code_lst, 'code_first_elem': code_first_elem, 'first_code_mpz_lst': first_code_mpz_lst, 'first_code_mpz_lst_first_elem': first_code_mpz_lst_first_elem})
@@ -301,7 +284,6 @@ def structure(request):
     if request.method == "GET":
         req = str(request.GET)
         req_dict = request.GET.dict()
-        print(req_dict)
         p_arr = []
         for elem in req_dict.items():
             p_arr.append(elem[1])
@@ -333,11 +315,9 @@ def structure(request):
             data = {'result': str('success')}
             return JsonResponse(data, content_type='application/json')
         if req.find('edit_mpz_well') != -1:
-            print('EDIT MPZ: ', p_arr)
             appl_data_arr = Appl_mpz_data.objects.all().order_by('id')
             cur_id = -1
             for elem in appl_data_arr:
-                print('elem: ', elem)
                 if elem.applID == p_arr[1] and elem.typeID == p_arr[2]:
                     cur_id = elem.id
             if cur_id == -1:
@@ -353,8 +333,6 @@ def structure(request):
             types = WellType.objects.all().order_by('id')
             appl_lst = Appl_mpz.objects.all().order_by('id')
             appl_cur_id = p_arr[1]
-
-            # print('well lst data: ', well_lst)
             data = {}
             arr = []
             p_arr = []
@@ -372,8 +350,6 @@ def structure(request):
                 data[i] = pp_arr
                 json_data = json.dumps(data)
             json_res = json.loads(json_data)
-            print('JSON RES: ', json_res)
-
             return JsonResponse(json_res, content_type='application/json')
         if req.find('get_by_data') != -1:
             data = {}
@@ -396,7 +372,6 @@ def structure(request):
         if req.find('new_by') != -1:
             Byer.objects.create(by_name=p_arr[1])
             buyers = Byer.objects.all().order_by('id')
-            print('BY LEN: ',buyers.__len__())
             json_res = {'by_par_len' : buyers.__len__()}
             return JsonResponse(json_res, content_type='application/json')
         if req.find('del_by') != -1:
@@ -444,9 +419,6 @@ def structure(request):
             for app in app_lst:
                 if app.by_appl_name == p_arr[1] and app.connect_id == cur_by_id:
                     cur_app_id = app.id
-            print('GET BY APP DATA')
-            print('BY ID: ', cur_by_id)
-            print('AP ID: ', cur_app_id)
             app_data_lst = Appl_by_data.objects.order_by('id')
             types_lst = WellType.objects.order_by('id')
             p_arr = []
@@ -464,7 +436,6 @@ def structure(request):
                 data[i] = pp_arr
                 json_data = json.dumps(data)
             json_res = json.loads(json_data)
-            print(json_res)
             return JsonResponse(json_res, content_type='application/json')
         if req.find('edit_byapp_well') != -1:
             app_name = p_arr[1]
@@ -482,7 +453,6 @@ def structure(request):
             appl_data_arr = Appl_by_data.objects.all().order_by('id')
             cur_id = -1
             for elem in appl_data_arr:
-                print('elem: ', elem)
                 if elem.applID == cur_app_id and elem.typeID == well_type_id and elem.parID == cur_by_id:
                     cur_id = elem.id
             if cur_id == -1:
@@ -491,7 +461,6 @@ def structure(request):
                 record = Appl_by_data.objects.get(id=cur_id)
                 record.w_value = new_val
                 record.save(update_fields=['w_value'])
-            print('EDIT BYAPP: ', p_arr)
             data = {'result': str('success')}
             return JsonResponse(data, content_type='application/json')
         else:
@@ -506,14 +475,12 @@ def statistic(request):
     if request.method == "GET":
         req = str(request.GET)
         req_dict = request.GET.dict()
-        print(req_dict)
         p_arr = []
         if req.find('stat_get_release_data') != -1:
             release_subhead_arr = makeReleaseSubHead()
             release_head_arr = makeReleaseHead(release_subhead_arr)
             release_data = makeReleaseData()
             release_color = getReleaseColorArray()
-            print('COLOR ARR: ', release_color)
             data = {}
             data[0] = release_head_arr
             data[1] = release_subhead_arr
@@ -538,7 +505,6 @@ def makeReleaseHead(release_subhead_arr):
     cell_name = ''
     mon_block_start = 0
     p_arr = []
-    print('CUR COUNT: ', cur_count)
     for i in range(cur_count):
         if i == 0:
             cell_name = ''
@@ -639,8 +605,6 @@ def getWeekLst():
     past_month = 0
     cur_year = int(datetime.now().year)
     week_lst = culcWeekLst(cur_year)
-    # for each in week_lst:
-    #     # print(each)
     count = 0
     i = 1
     for i in range(1,13,1):
@@ -704,7 +668,6 @@ def getWeekLst():
         p_arr.append(l_lst)
         res_arr.append(p_arr)
     month_blocks_arr = res_arr
-    # print('month_block_arr: ', month_blocks_arr)
 
     return res_arr
 
@@ -784,7 +747,6 @@ def makeReleaseData():
         p_data.append(cur_count_stat)
         data.append(p_data)
         p_data = []
-    print('release data array: ', data)
     return data
 
 def getYearsStat(type, well_rows):
@@ -854,7 +816,6 @@ def getReleaseColorArray():
     res_arr = []
     check = "0"
     month_blocks_arr = getWeekLst()
-    print('MONTH BLOCK ARR: ', month_blocks_arr)
     years_count, cur_years_lst = getYearsCount()
     cur_count = getSummTblFrontCellCount(int(years_count))
     for elem in month_blocks_arr:
@@ -867,5 +828,4 @@ def getReleaseColorArray():
     res_arr.append('1')
     while len(res_arr) != cur_count:
         res_arr.insert(0, "0")
-    # print('MONTH COLOR ARR: ', res_arr)
     return res_arr
