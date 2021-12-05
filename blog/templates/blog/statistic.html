@@ -57,7 +57,7 @@
                         else {
                             console.log(release_head_arr[i].length)
                             $("#release_table_head").append("" +
-                                "<th id=\"par\" class=\"span\" colspan=\""+release_head_arr[i].length+"\" scope=\"colgroup\" style=\"min-width: 2px; font-size: 12px; padding: 0px; text-align: center; font-weight: normal;\">\n" +
+                                "<th id=\"par\" class=\"span\" colspan=\""+release_head_arr[i].length+"\" scope=\"colgroup\" style=\"min-width: 2px; font-size: 12px; padding: 0px; text-align: center; font-weight: normal; background-color: #8cbcd0\">\n" +
                                 ""+release_head_arr[i][0]+"" +
                                 "</th>\n")
                             j = 0
@@ -65,24 +65,24 @@
                                 if (j == release_subhead_arr[i].length) {break}
                                 else {
                                     if (i == 0) {
-                                        $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 90px; padding-right: 90px; text-align: center; font-weight: normal; \">\n" +
+                                        $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 90px; padding-right: 90px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
                                         ""+release_subhead_arr[i][j]+"" +
                                         "</th>")
                                     }
                                     else {
                                         if (i > 0 && i < 3){
-                                            $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 10px; padding-right: 10px; text-align: center; font-weight: normal; \">\n" +
+                                            $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 10px; padding-right: 10px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
                                         ""+release_subhead_arr[i][j]+"" +
                                         "</th>")
                                         }
                                         else {
                                             if (i == release_head_arr.length-1) {
-                                                $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 10px; padding-right: 10px; text-align: center; font-weight: normal; \">\n" +
+                                                $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 10px; padding-right: 10px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
                                                 ""+release_subhead_arr[i][j]+"" +
                                                 "</th>")
                                             }
                                             else {
-                                                $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding: 0.1rem; text-align: center; font-weight: normal; \">\n" +
+                                                $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding: 0.1rem; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
                                                 ""+release_subhead_arr[i][j]+"" +
                                                 "</th>")
                                             }

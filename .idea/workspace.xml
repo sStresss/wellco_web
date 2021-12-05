@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c345e260-c948-4e05-a42c-48aebf6e58db" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/statistic.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/statistic.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -182,8 +180,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/statistic.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="72" column="52" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
+            <state relative-caret-position="533">
+              <caret line="84" column="236" selection-start-line="84" selection-start-column="236" selection-end-line="84" selection-end-column="236" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#a#0;n#h1#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -762,12 +760,12 @@
       <workItem from="1638342592495" duration="581000" />
       <workItem from="1638367836879" duration="13153000" />
       <workItem from="1638608984029" duration="3014000" />
-      <workItem from="1638612037485" duration="9630000" />
+      <workItem from="1638612037485" duration="10289000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="583495000" />
+    <option name="totallyTimeSpent" value="584154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1355,8 +1353,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/statistic.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="72" column="52" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
+        <state relative-caret-position="533">
+          <caret line="84" column="236" selection-start-line="84" selection-start-column="236" selection-end-line="84" selection-end-column="236" />
           <folding>
             <element signature="n#style#0;n#span#0;n#a#0;n#h1#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
