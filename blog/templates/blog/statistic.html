@@ -13,7 +13,7 @@
     <div class="page-header">
         <h1><a href="/" class="head_title">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">статистика</span> </a></h1>
     </div>
-    <table summary="Column one has the location and size of accommodation, other columns show the type and number of properties available" class=" table table-bordered">
+    <table summary="" class="table table-bordered">
         <thead id="" style="padding: 0;">
             <tr id="release_table_head">
             </tr>
@@ -21,6 +21,16 @@
             </tr>
         </thead>
         <tbody id="release_table_data">
+        </tbody>
+    </table>
+    <table summary="" class="table table-bordered">
+        <thead id="" style="padding: 0;">
+            <tr id="transfer_table_head">
+            </tr>
+            <tr id="transfer_table_subhead" style="">
+            </tr>
+        </thead>
+        <tbody id="transfer_table_data">
         </tbody>
     </table>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -145,7 +155,7 @@
                             i++
                         }
                     }
-                    j = 0
+
 
                 },
                 error: function(result) {
@@ -189,7 +199,6 @@
                     m++
                 }
             }
-
         };
         function release_data_area_color_refresh() {
             console.log('r color refresh')
@@ -225,7 +234,6 @@
                     i++
                 }
             }
-
         }
     </script>
 </body>

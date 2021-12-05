@@ -481,6 +481,8 @@ def statistic(request):
             release_head_arr = makeReleaseHead(release_subhead_arr)
             release_data = makeReleaseData()
             release_color = getReleaseColorArray()
+            transfer_head_arr = makeTransferHead()
+            transfer_color = getTransferColorArray(transfer_head_arr)
             data = {}
             data[0] = release_head_arr
             data[1] = release_subhead_arr
@@ -726,6 +728,7 @@ def getSubblocks():
     return arr, name_arr, p_name_arr
 
 #----------------------------------------STATISTIC RELEASE DATA---------------------------------------------------------
+
 def makeReleaseData():
     data = []
     p_data = []
@@ -829,3 +832,59 @@ def getReleaseColorArray():
     while len(res_arr) != cur_count:
         res_arr.insert(0, "0")
     return res_arr
+
+#----------------------------------------STATISTIC TRANSFER HEAD--------------------------------------------------------
+
+def makeTransferHead():
+    p_arr = []
+    p_color_arr = []
+    check = False
+    ch_count = 0
+    i = 0
+
+    manager_rows = ProjectGroup.objects.all().order_by('id')
+    p_arr.append('Колодцы')
+    for row in manager_rows:
+        p_arr.append(str(row.pg_name))
+    p_arr.append('Сторонние продажи')
+    p_arr.append('ИТОГО')
+    release_head_arr = p_arr
+    print('transfer_head_arr', release_head_arr)
+
+    return release_head_arr
+
+def getTransferColorArray(head_arr):
+    i = 0
+    ch_count = 0
+    p_color_arr = []
+    p_arr = []
+    check = False
+    p_color_arr.append(check)
+    for i in range((len(head_arr)-1)*3):
+        if i > 0:
+            if ch_count == 3:
+                if check == True:
+                    check = False
+                else:
+                    check = True
+                ch_count = 0
+            ch_count+=1
+            p_color_arr.append(check)
+    p_arr.append('Сторонние продажи')
+    if check == True:
+        check = False
+    else:
+        check = True
+    p_color_arr.append(check)
+    p_color_arr.append(check)
+    p_color_arr.append(check)
+    p_arr.append('ИТОГО')
+    if check == True:
+        check = False
+    else:
+        check = True
+    p_color_arr.append(check)
+    p_color_arr.append(check)
+    p_color_arr.append(check)
+    release_color_arr = p_color_arr
+    print('release_color_arr: ', release_color_arr)
