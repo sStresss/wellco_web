@@ -482,12 +482,17 @@ def statistic(request):
             release_data = makeReleaseData()
             release_color = getReleaseColorArray()
             transfer_head_arr = makeTransferHead()
+            transfer_subhead_arr = makeTransferSubHead(transfer_head_arr)
             transfer_color = getTransferColorArray(transfer_head_arr)
             data = {}
             data[0] = release_head_arr
             data[1] = release_subhead_arr
             data[2] = release_data
             data[3] = release_color
+            data[4] = transfer_head_arr
+            data[5] = transfer_subhead_arr
+            data[6] = []
+            data[7] = transfer_color
             json_data = json.dumps(data)
             json_res = json.loads(json_data)
             return JsonResponse(json_res, content_type='application/json')
@@ -843,15 +848,37 @@ def makeTransferHead():
     i = 0
 
     manager_rows = ProjectGroup.objects.all().order_by('id')
-    p_arr.append('Колодцы')
+    p_arr.append('')
     for row in manager_rows:
         p_arr.append(str(row.pg_name))
     p_arr.append('Сторонние продажи')
     p_arr.append('ИТОГО')
     release_head_arr = p_arr
     print('transfer_head_arr', release_head_arr)
-
     return release_head_arr
+
+def makeTransferSubHead(head_arr):
+    pp_arr = ['В заявках', 'Выдано', 'К выдаче']
+    res_arr = []
+    p_ind = 0
+    res_arr.append('Колодец')
+    i = 0
+    for i in range((len(head_arr)-1)*3):
+        if p_ind == 0:
+            cell_name = pp_arr[0]
+            p_ind += 1
+        else:
+            if p_ind == 1:
+                cell_name = pp_arr[1]
+                p_ind += 1
+            else:
+                if p_ind == 2:
+                    cell_name = pp_arr[2]
+                    p_ind = 0
+        res_arr.append(cell_name)
+    return res_arr
+
+
 
 def getTransferColorArray(head_arr):
     i = 0
