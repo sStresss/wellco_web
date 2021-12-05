@@ -512,13 +512,15 @@ def statistic(request):
             release_subhead_arr = makeReleaseSubHead()
             release_head_arr = makeReleaseHead(release_subhead_arr)
             release_data = makeReleaseData()
+            release_color = getReleaseColorArray()
+            print('COLOR ARR: ', release_color)
             data = {}
             data[0] = release_head_arr
             data[1] = release_subhead_arr
             data[2] = release_data
+            data[3] = release_color
             json_data = json.dumps(data)
             json_res = json.loads(json_data)
-            print('json res: ', json_res)
             return JsonResponse(json_res, content_type='application/json')
         else:
             return render(request, 'blog/statistic.html',
@@ -847,3 +849,23 @@ def getCurState(cur_well_type, loc_arr):
         if type.find(cur_well_type) != -1 and loc.find('склад') != -1:
             count+=1
     return count
+
+def getReleaseColorArray():
+    res_arr = []
+    check = "0"
+    month_blocks_arr = getWeekLst()
+    print('MONTH BLOCK ARR: ', month_blocks_arr)
+    years_count, cur_years_lst = getYearsCount()
+    cur_count = getSummTblFrontCellCount(int(years_count))
+    for elem in month_blocks_arr:
+        if check == "1":
+            check = "0"
+        else:
+            check = "1"
+        for p_elem in elem[2]:
+            res_arr.append(check)
+    res_arr.append('1')
+    while len(res_arr) != cur_count:
+        res_arr.insert(0, "0")
+    # print('MONTH COLOR ARR: ', res_arr)
+    return res_arr

@@ -50,6 +50,7 @@
                     let release_head_arr = resp[0]
                     let release_subhead_arr = resp[1]
                     let release_data_arr = resp[2]
+                    let release_color_arr = resp[3]
                     i = 0
                     for (;;) {
                         if (i == release_head_arr.length) {
@@ -111,7 +112,7 @@
                                 } else {
                                     console.log("release_data_row_" + i)
                                     if (release_data_arr[i][j] == "0") {
-                                        data_color = "#cecece"
+                                        data_color = "#aeaeae"
                                         data_text_weight = "normal"
                                     }
                                     else {
@@ -123,7 +124,13 @@
                                             data_text_weight = "normal"
                                         }
                                     }
-                                    $("#release_data_row_" + i).append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding: 0.4rem; padding-top:5px; padding-bottom: 5px; text-align: center; font-weight: "+data_text_weight+";color: "+data_color+"\"; \">\n" +
+                                    if (release_color_arr[j] == "0") {
+                                        data_background = "#fff"
+                                    }
+                                    else {
+                                        data_background = "#f1f1f1"
+                                    }
+                                    $("#release_data_row_" + i).append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding: 0.4rem; padding-top:5px; padding-bottom: 5px; text-align: center; font-weight: "+data_text_weight+";color: "+data_color+"; background-color: "+data_background+" ; \">\n" +
                                         ""+release_data_arr[i][j]+"" +
                                         "</th>")
                                     j++
