@@ -17,10 +17,10 @@
         <thead id="" style="padding: 0;">
             <tr id="release_table_head">
             </tr>
-            <tr id="release_table_subhead">
+            <tr id="release_table_subhead" style="">
             </tr>
         </thead>
-        <tbody>
+        <tbody id="release_table_data">
         </tbody>
     </table>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -49,6 +49,7 @@
                 success: function(resp) {
                     let release_head_arr = resp[0]
                     let release_subhead_arr = resp[1]
+                    let release_data_arr = resp[2]
                     i = 0
                     for (;;) {
                         if (i == release_head_arr.length) {
@@ -65,7 +66,7 @@
                                 if (j == release_subhead_arr[i].length) {break}
                                 else {
                                     if (i == 0) {
-                                        $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 90px; padding-right: 90px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
+                                        $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 70px; padding-right: 70px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
                                         ""+release_subhead_arr[i][j]+"" +
                                         "</th>")
                                     }
@@ -95,6 +96,44 @@
                             i++
                         }
                     }
+                    i = 0
+                    for (;;) {
+                        if (i == release_data_arr.length) {
+                            break
+                        } else {
+                            $("#release_table_data").append("" +
+                                "<tr id=\"release_data_row_"+i+"\">\n" +
+                                "</tr>")
+                            j = 0
+                            for (; ;) {
+                                if (j == release_data_arr[i].length) {
+                                    break
+                                } else {
+                                    console.log("release_data_row_" + i)
+                                    if (release_data_arr[i][j] == "0") {
+                                        data_color = "#cecece"
+                                        data_text_weight = "normal"
+                                    }
+                                    else {
+                                        data_color = "#000000"
+                                        if (j > 0) {
+                                           data_text_weight = "bold"
+                                        }
+                                        else {
+                                            data_text_weight = "normal"
+                                        }
+                                    }
+                                    $("#release_data_row_" + i).append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding: 0.4rem; padding-top:5px; padding-bottom: 5px; text-align: center; font-weight: "+data_text_weight+";color: "+data_color+"\"; \">\n" +
+                                        ""+release_data_arr[i][j]+"" +
+                                        "</th>")
+                                    j++
+                                }
+                            }
+                            i++
+                        }
+                    }
+                    j = 0
+
                 },
                 error: function(result) {
                     var readyState = {

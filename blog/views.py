@@ -511,9 +511,11 @@ def statistic(request):
         if req.find('stat_get_release_data') != -1:
             release_subhead_arr = makeReleaseSubHead()
             release_head_arr = makeReleaseHead(release_subhead_arr)
+            release_data = makeReleaseData()
             data = {}
             data[0] = release_head_arr
             data[1] = release_subhead_arr
+            data[2] = release_data
             json_data = json.dumps(data)
             json_res = json.loads(json_data)
             print('json res: ', json_res)
@@ -757,3 +759,91 @@ def getSubblocks():
         for elem in p_names:
             p_name_arr.append(str(elem))
     return arr, name_arr, p_name_arr
+
+#----------------------------------------STATISTIC RELEASE DATA---------------------------------------------------------
+def makeReleaseData():
+    data = []
+    p_data = []
+    # get well type lst
+    welltype_rows = WellType.objects.all().order_by('id')
+    # cur.execute("SELECT WellType, DateRelease FROM tbl_main")
+    well_rows = Well.objects.order_by('id')
+    # cur.execute("SELECT WellType, Location FROM tbl_main")
+    # loc_rows = cur.fetchall()
+    for row in welltype_rows:
+        years_stat = getYearsStat(row.type_name, well_rows)
+        week_stat = getWeekStat(row.type_name, well_rows)
+        cur_count_stat = getCurState(row.type_name, well_rows)
+        p_data.append('С-пласт ' + str(row.type_name))
+        for elem in years_stat:
+            p_data.append(elem)
+        for p_elem in week_stat:
+            p_data.append(p_elem)
+        p_data.append(cur_count_stat)
+        data.append(p_data)
+        p_data = []
+    print('release data array: ', data)
+    return data
+
+def getYearsStat(type, well_rows):
+    res_arr = []
+    years_count, years_arr = getYearsCount()
+
+    for year in years_arr:
+        count = 0
+        for row in well_rows:
+            p_row = str(row.created_date).split('-')
+            y_row = p_row[0]
+            # pp_row = str(row.type).split(' ')
+            t_row = row.type
+            if t_row == str(type) and y_row == str(year):
+                count+=1
+        res_arr.append(count)
+    return res_arr
+
+def getWeekStat(cur_well_type, well_rows):
+    res_arr = []
+    month_blocks_arr = getWeekLst()
+    for elem in month_blocks_arr:
+        i = 0
+        mon_count = 0
+        mon_arr= []
+        mon = elem[0]
+        week_start = elem[2]
+        week_end = elem[3]
+        for i in range(0, len(week_start)-1, 1):
+
+            count = 0
+            start_day = int(week_start[i])
+            end_day = int(week_end[i])
+            date = datetime.now().date()
+            date_start = date.replace(int(datetime.now().year), int(mon), start_day)
+            date_end = date.replace(int(datetime.now().year), int(mon), end_day)
+            for well in well_rows:
+                date_rel = str(well.created_date)
+                p_day_rel = date_rel.split('-')
+                day_rel = int(p_day_rel[2])
+                mon_rel = int(p_day_rel[1])
+                year_rel = int(p_day_rel[0])
+
+                well_type = str(well.type)
+                date_rel = date.replace(int(year_rel), int(mon_rel), int(day_rel))
+                if well_type.find(cur_well_type) != -1 and date_rel >= date_start and date_rel <= date_end:
+                    count+=1
+            mon_count = mon_count+count
+            mon_arr.append(count)
+        for p_elem in mon_arr:
+            res_arr.append(p_elem)
+        res_arr.append(mon_count)
+        mon_count = 0
+        mon_arr = []
+    return res_arr
+
+def getCurState(cur_well_type, loc_arr):
+    count = 0
+    for well in loc_arr:
+        type = str(well.type)
+        loc = str(well.locate)
+        if type.find(cur_well_type) != -1 and loc.find('склад') != -1:
+            count+=1
+    return count

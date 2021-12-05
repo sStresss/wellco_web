@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c345e260-c948-4e05-a42c-48aebf6e58db" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/statistic.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/statistic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,9 +38,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="608" column="50" selection-start-line="608" selection-start-column="50" selection-end-line="608" selection-end-column="50" />
+            <state relative-caret-position="357">
+              <caret line="517" column="34" selection-start-line="517" selection-start-column="34" selection-end-line="517" selection-end-column="34" />
               <folding>
+                <element signature="e#473#12764#0" />
+                <element signature="e#649#12764#0" />
                 <element signature="e#884#2159#0" />
                 <element signature="e#1322#1396#0" />
                 <element signature="e#1513#1584#0" />
@@ -62,6 +65,7 @@
                 <element signature="e#6073#6224#0" />
                 <element signature="e#6259#6405#0" />
                 <element signature="e#6458#6804#0" />
+                <element signature="e#6977#11565#0" />
                 <element signature="e#7093#7583#0" />
                 <element signature="e#7618#7820#0" />
                 <element signature="e#8482#11310#0" />
@@ -71,6 +75,7 @@
                 <element signature="e#11592#12764#0" />
                 <element signature="e#12209#12312#0" />
                 <element signature="e#12794#22189#0" />
+                <element signature="e#12830#22189#0" />
                 <element signature="e#13055#13217#0" />
                 <element signature="e#13269#13447#0" />
                 <element signature="e#13498#13683#0" />
@@ -98,11 +103,13 @@
                 <element signature="e#18624#18688#0" />
                 <element signature="e#18745#18907#0" />
                 <element signature="e#18830#18907#0" />
+                <element signature="e#19083#20433#0" />
                 <element signature="e#19180#19244#0" />
                 <element signature="e#19348#19452#0" />
                 <element signature="e#19764#20019#0" />
                 <element signature="e#19838#19983#0" />
                 <element signature="e#20102#20285#0" />
+                <element signature="e#20492#21794#0" />
                 <element signature="e#20720#20784#0" />
                 <element signature="e#20888#20992#0" />
                 <element signature="e#21142#21306#0" />
@@ -117,9 +124,15 @@
                 <element signature="e#23642#23861#0" />
                 <element signature="e#23784#23839#0" />
                 <element signature="e#23909#23946#0" />
+                <element signature="e#25248#26092#0" />
                 <element signature="e#25305#25363#0" />
                 <element signature="e#25415#25489#0" />
+                <element signature="e#25285#25687#0" />
+                <element signature="e#25440#25687#0" />
+                <element signature="e#25484#25558#0" />
+                <element signature="e#25731#25789#0" />
                 <element signature="e#26161#26310#0" />
+                <element signature="e#26334#28413#0" />
                 <element signature="e#26498#26521#0" />
                 <element signature="e#26606#27078#0" />
                 <element signature="e#26712#26927#0" />
@@ -180,8 +193,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/statistic.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
-              <caret line="84" column="236" selection-start-line="84" selection-start-column="236" selection-end-line="84" selection-end-column="236" />
+            <state relative-caret-position="203">
+              <caret line="112" column="69" selection-start-line="112" selection-start-column="69" selection-end-line="112" selection-end-column="69" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#a#0;n#h1#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -205,8 +218,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="1056" selection-start-line="1056" selection-end-line="1068" selection-end-column="21" />
+            <state relative-caret-position="394">
+              <caret line="1062" column="58" lean-forward="true" selection-start-line="1062" selection-start-column="58" selection-end-line="1062" selection-end-column="58" />
               <folding>
                 <element signature="n#head#0;n#html#0;n#!!top" />
                 <element signature="e#770#837#0#DjangoTemplate" />
@@ -482,7 +495,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>newApplByConnect</find>
       <find>&amp;&amp;</find>
       <find>.name</find>
       <find>del_app</find>
@@ -512,6 +524,7 @@
       <find>getSubblocks</find>
       <find>getWeekLst</find>
       <find>month_block_arr:</find>
+      <find>month_blocks_arr</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -760,12 +773,12 @@
       <workItem from="1638342592495" duration="581000" />
       <workItem from="1638367836879" duration="13153000" />
       <workItem from="1638608984029" duration="3014000" />
-      <workItem from="1638612037485" duration="10289000" />
+      <workItem from="1638612037485" duration="15822000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="584154000" />
+    <option name="totallyTimeSpent" value="589687000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -784,8 +797,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946696" weight="0.32900432" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.29157782" side_tool="true" visible="true" weight="0.32719395" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.7084222" visible="true" weight="0.32719395" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.29157782" side_tool="true" visible="true" weight="0.29685807" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.7084222" visible="true" weight="0.29685807" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.32827735" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -981,9 +994,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="608" column="50" selection-start-line="608" selection-start-column="50" selection-end-line="608" selection-end-column="50" />
+        <state relative-caret-position="357">
+          <caret line="517" column="34" selection-start-line="517" selection-start-column="34" selection-end-line="517" selection-end-column="34" />
           <folding>
+            <element signature="e#473#12764#0" />
+            <element signature="e#649#12764#0" />
             <element signature="e#884#2159#0" />
             <element signature="e#1322#1396#0" />
             <element signature="e#1513#1584#0" />
@@ -1006,6 +1021,7 @@
             <element signature="e#6073#6224#0" />
             <element signature="e#6259#6405#0" />
             <element signature="e#6458#6804#0" />
+            <element signature="e#6977#11565#0" />
             <element signature="e#7093#7583#0" />
             <element signature="e#7618#7820#0" />
             <element signature="e#8482#11310#0" />
@@ -1015,6 +1031,7 @@
             <element signature="e#11592#12764#0" />
             <element signature="e#12209#12312#0" />
             <element signature="e#12794#22189#0" />
+            <element signature="e#12830#22189#0" />
             <element signature="e#13055#13217#0" />
             <element signature="e#13269#13447#0" />
             <element signature="e#13498#13683#0" />
@@ -1042,11 +1059,13 @@
             <element signature="e#18624#18688#0" />
             <element signature="e#18745#18907#0" />
             <element signature="e#18830#18907#0" />
+            <element signature="e#19083#20433#0" />
             <element signature="e#19180#19244#0" />
             <element signature="e#19348#19452#0" />
             <element signature="e#19764#20019#0" />
             <element signature="e#19838#19983#0" />
             <element signature="e#20102#20285#0" />
+            <element signature="e#20492#21794#0" />
             <element signature="e#20720#20784#0" />
             <element signature="e#20888#20992#0" />
             <element signature="e#21142#21306#0" />
@@ -1061,9 +1080,15 @@
             <element signature="e#23642#23861#0" />
             <element signature="e#23784#23839#0" />
             <element signature="e#23909#23946#0" />
+            <element signature="e#25248#26092#0" />
             <element signature="e#25305#25363#0" />
             <element signature="e#25415#25489#0" />
+            <element signature="e#25285#25687#0" />
+            <element signature="e#25440#25687#0" />
+            <element signature="e#25484#25558#0" />
+            <element signature="e#25731#25789#0" />
             <element signature="e#26161#26310#0" />
+            <element signature="e#26334#28413#0" />
             <element signature="e#26498#26521#0" />
             <element signature="e#26606#27078#0" />
             <element signature="e#26712#26927#0" />
@@ -1089,8 +1114,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="1056" selection-start-line="1056" selection-end-line="1068" selection-end-column="21" />
+        <state relative-caret-position="394">
+          <caret line="1062" column="58" lean-forward="true" selection-start-line="1062" selection-start-column="58" selection-end-line="1062" selection-end-column="58" />
           <folding>
             <element signature="n#head#0;n#html#0;n#!!top" />
             <element signature="e#770#837#0#DjangoTemplate" />
@@ -1353,8 +1378,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/statistic.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="84" column="236" selection-start-line="84" selection-start-column="236" selection-end-line="84" selection-end-column="236" />
+        <state relative-caret-position="203">
+          <caret line="112" column="69" selection-start-line="112" selection-start-column="69" selection-end-line="112" selection-end-column="69" />
           <folding>
             <element signature="n#style#0;n#span#0;n#a#0;n#h1#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
