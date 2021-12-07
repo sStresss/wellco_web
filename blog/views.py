@@ -484,12 +484,9 @@ def statistic(request):
             transfer_head_arr = makeTransferHead()
             transfer_subhead_arr = makeTransferSubHead(transfer_head_arr)
             transfer_color = getTransferColorArray(transfer_head_arr)
-            inReq_data = getInRequestsDataArr()
-            print('inREQ ARR: ', inReq_data)
-            relData = getReleaseDataArray()
-            print('RELEA ARR: ', relData)
-            delta_data = getDeltaDataArr(inReq_data, relData)
-            print('DELTA ARR: ', delta_data)
+            transfer_data = getReleaseResultDataArray()
+            print('TRANSFER DATA: ', transfer_data)
+
             data = {}
             data[0] = release_head_arr
             data[1] = release_subhead_arr
@@ -891,47 +888,39 @@ def makeTransferSubHead(head_arr):
 
 #----------------------------------------STATISTIC RELEASE DATA---------------------------------------------------------
 
-def getResultDataArray():
-    getInRequestsDataArr()
-    getReleaseDataArray()
-    getDeltaDataArr()
-
-    release_data_array = []
-
-    sql_con = pymysql.connect(host=GlobalValues.sql_hostname,
-                              port=GlobalValues.sql_port,
-                              user=GlobalValues.sql_username,
-                              passwd=GlobalValues.sql_password,
-                              db=GlobalValues.sql_dbname)
-    with sql_con:
-        cur = sql_con.cursor()
-        cur.execute(
-            "SELECT ID, TypeName FROM tbl_type ")
-        type_rows = cur.fetchall()
-        p_arr = []
-        j = 0
-        elem = self.in_req_data_array[0][1]
-        pp_arr = []
-        for j in range(len(elem)):
-            i = 0
-            pp_arr = []
-            for i in range(len(self.in_req_data_array)):
-                elem_in_req = self.in_req_data_array[i][1]
-                data_in_req = elem_in_req[j]
-                elem_release = self.release_data_array[i][1]
-                data_release = elem_release[j]
-                elem_delta = self.delta_data_array[i][1]
-                data_delta = elem_delta[j]
-                pp_arr.append(data_in_req)
-                pp_arr.append(data_release)
-                pp_arr.append(data_delta)
-            p_arr.append(pp_arr)
+def getReleaseResultDataArray():
+    in_req_data_array = getInRequestsDataArr()
+    release_data_array = getReleaseDataArray()
+    delta_data_array = getDeltaDataArr(in_req_data_array, release_data_array)
+    # cur.execute(
+    #     "SELECT ID, TypeName FROM tbl_type ")
+    # type_rows = cur.fetchall()
+    type_rows = WellType.objects.all().order_by('id')
+    p_arr = []
+    j = 0
+    elem = in_req_data_array[0][1]
+    pp_arr = []
+    for j in range(len(elem)):
         i = 0
-        for elem in p_arr:
-            type_name = 'С-пласт ' + str(type_rows[i][1])
-            elem.insert(0, type_name)
-            i+=1
-        self.result_data_arr = p_arr
+        pp_arr = []
+        for i in range(len(in_req_data_array)):
+            elem_in_req = in_req_data_array[i][1]
+            data_in_req = elem_in_req[j]
+            elem_release = release_data_array[i][1]
+            data_release = elem_release[j]
+            elem_delta = delta_data_array[i][1]
+            data_delta = elem_delta[j]
+            pp_arr.append(data_in_req)
+            pp_arr.append(data_release)
+            pp_arr.append(data_delta)
+        p_arr.append(pp_arr)
+    i = 0
+    for elem in p_arr:
+        type_name = 'С-пласт ' + str(type_rows[i].type_name)
+        elem.insert(0, type_name)
+        i+=1
+    result_data_arr = p_arr
+    return result_data_arr
 
 def getInRequestsDataArr():
     #GET IN REQUESTS DATA ARRAY

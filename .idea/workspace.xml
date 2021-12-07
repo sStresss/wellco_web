@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c345e260-c948-4e05-a42c-48aebf6e58db" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/site.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/site.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blog/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="1113" column="32" selection-start-line="1113" selection-start-column="32" selection-end-line="1113" selection-end-column="32" />
+            <state relative-caret-position="323">
+              <caret line="487" column="50" selection-start-line="487" selection-start-column="50" selection-end-line="487" selection-end-column="50" />
               <folding>
                 <element signature="e#473#12056#0" />
                 <element signature="e#619#12056#0" />
@@ -664,15 +661,16 @@
       <workItem from="1638608984029" duration="3014000" />
       <workItem from="1638612037485" duration="40050000" />
       <workItem from="1638791782330" duration="4069000" />
-      <workItem from="1638875544656" duration="11899000" />
+      <workItem from="1638875544656" duration="13211000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="629883000" />
+    <option name="totallyTimeSpent" value="631195000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -687,8 +685,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946696" weight="0.32900432" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.29264393" side_tool="true" visible="true" weight="0.20454545" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.7073561" visible="true" weight="0.20454545" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.29264393" side_tool="true" visible="true" weight="0.33874458" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.7073561" visible="true" weight="0.33874458" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.32827735" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -840,8 +838,8 @@
     <entry file="file://$PROJECT_DIR$/../Python38/Lib/site-packages/django/contrib/admin/filters.py" />
     <entry file="file://$PROJECT_DIR$/blog/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="1113" column="32" selection-start-line="1113" selection-start-column="32" selection-end-line="1113" selection-end-column="32" />
+        <state relative-caret-position="323">
+          <caret line="487" column="50" selection-start-line="487" selection-start-column="50" selection-end-line="487" selection-end-column="50" />
           <folding>
             <element signature="e#473#12056#0" />
             <element signature="e#619#12056#0" />
