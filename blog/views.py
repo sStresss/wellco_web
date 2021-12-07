@@ -484,7 +484,12 @@ def statistic(request):
             transfer_head_arr = makeTransferHead()
             transfer_subhead_arr = makeTransferSubHead(transfer_head_arr)
             transfer_color = getTransferColorArray(transfer_head_arr)
-            getInRequestsDataArr()
+            inReq_data = getInRequestsDataArr()
+            print('inREQ ARR: ', inReq_data)
+            relData = getReleaseDataArray()
+            print('RELEA ARR: ', relData)
+            delta_data = getDeltaDataArr(inReq_data, relData)
+            print('DELTA ARR: ', delta_data)
             data = {}
             data[0] = release_head_arr
             data[1] = release_subhead_arr
@@ -952,32 +957,36 @@ def getInRequestsDataArr():
         p_arr.append(pp_arr)
         obj_lst_arr.append(p_arr)
 
-    print('OBJ LST ARR: ', obj_lst_arr)
+
     pm_req_lst = []
     p_arr = []
     for elem in obj_lst_arr:
         p_arr = []
         pp_arr = []
         p_arr.append(elem[0])
+        p_req_rows = Appl_mpz.objects.all().order_by('id')
         for p_elem in elem[1]:
-            cur.execute(
-                "SELECT ID FROM tbl_requestlst WHERE codeID = (" + str(
-                    p_elem) + ")")
-            p_req_rows = Appl_mpz.objects.all().order_by('id')
+            req_rows = []
+            # cur.execute(
+            #     "SELECT ID FROM tbl_requestlst WHERE codeID = (" + str(
+            #         p_elem) + ")")
+
             for ppp_elem in p_req_rows:
-                if ppp_elem.
-            req_rows = cur.fetchall()
+                if ppp_elem.connect_id == p_elem:
+                    req_rows.append(ppp_elem.pk)
             for row in req_rows:
-                pp_arr.append(row[0])
+                pp_arr.append(row)
         p_arr.append(pp_arr)
         pm_req_lst.append(p_arr)
         p_arr = []
         pp_arr = []
     obj_lst_arr = []
 
-    cur.execute(
-        "SELECT ID, TypeName FROM tbl_type ")
-    type_rows = cur.fetchall()
+    # cur.execute(
+    #     "SELECT ID, TypeName FROM tbl_type ")
+    # type_rows = cur.fetchall()
+    type_rows = WellType.objects.all().order_by('id')
+
     for elem in pm_req_lst:
         pp_arr = []
         p_arr = []
@@ -995,15 +1004,21 @@ def getInRequestsDataArr():
                 for pp_elem in type_rows:
 
                     data = 0
-                    cur.execute(
-                        "SELECT w_value FROM tbl_appl_data WHERE applID = (" + str(
-                            p_elem) + ") AND typeID = (" + str(pp_elem[0]) + ")")
-                    req_data_rows = cur.fetchall()
+                    # cur.execute(
+                    #     "SELECT w_value FROM tbl_appl_data WHERE applID = (" + str(
+                    #         p_elem) + ") AND typeID = (" + str(pp_elem[0]) + ")")
+                    # req_data_rows = cur.fetchall()
+                    p_req_data_rows = Appl_mpz_data.objects.all().order_by('id')
+                    req_data_rows = []
+
+                    for p_req_elem in p_req_data_rows:
+                        if (str(p_req_elem.applID_id) == str(p_elem)) and (str(p_req_elem.typeID_id) == str(pp_elem.pk)):
+                            req_data_rows.append(p_req_elem.w_value)
                     if len(req_data_rows) == 0:
                         data = 0
                     else:
                         for row in req_data_rows:
-                            data = int(row[0])
+                            data = int(row)
                     ppp_arr.append(data)
                 pp_arr.append(ppp_arr)
             ppp_arr = []
@@ -1024,15 +1039,20 @@ def getInRequestsDataArr():
     for elem in type_rows:
         p_arr= []
         data = 0
-        cur.execute(
-            "SELECT w_value FROM tbl_buyers_appl_data WHERE typeID = (" + str(
-                elem[0]) + ")")
-        buyers_appl_data_rows = cur.fetchall()
+        # cur.execute(
+        #     "SELECT w_value FROM tbl_buyers_appl_data WHERE typeID = (" + str(
+        #         elem[0]) + ")")
+        # buyers_appl_data_rows = cur.fetchall()
+        buyers_appl_data_rows = []
+        p_buyers_appl_data_rows = Appl_by_data.objects.all().order_by('id')
+        for p_buy_data_elem in p_buyers_appl_data_rows:
+            if p_buy_data_elem.typeID_id == elem.pk:
+                buyers_appl_data_rows.append(p_buy_data_elem.w_value)
         if len(buyers_appl_data_rows) == 0:
             data = 0
         else:
             for row in buyers_appl_data_rows:
-                data = data + int(row[0])
+                data = data + int(row)
         pp_arr.append(data)
     other_ind = len(obj_lst_arr) + 1
     p_arr.append(other_ind)
@@ -1058,133 +1078,126 @@ def getInRequestsDataArr():
     p_arr.append(summ_ind)
     p_arr.append(pp_arr)
     obj_lst_arr.append(p_arr)
-    self.in_req_data_array = obj_lst_arr
+    return obj_lst_arr
 
 def getReleaseDataArray():
     #GET RELEASE DATA ARRAY
     #GET PM DATA ARRAY
 
-    sql_con = pymysql.connect(host=GlobalValues.sql_hostname,
-                              port=GlobalValues.sql_port,
-                              user=GlobalValues.sql_username,
-                              passwd=GlobalValues.sql_password,
-                              db=GlobalValues.sql_dbname)
-    with sql_con:
-        cur = sql_con.cursor()
-        release_data_arr = []
-        pm_arr = []
+    release_data_arr = []
+    pm_arr = []
 
-        cur = sql_con.cursor()
-        cur.execute("SELECT ID FROM tbl_manager")
-        pm_rows = cur.fetchall()
+    # cur.execute("SELECT ID FROM tbl_manager")
+    # pm_rows = cur.fetchall()
+    pm_rows = ProjectGroup.objects.all().order_by('id')
+    type_rows = WellType.objects.all().order_by('id')
 
-        cur.execute(
-            "SELECT ID, TypeName FROM tbl_type ")
-        type_rows = cur.fetchall()
-
-        for row in pm_rows:
-            p_arr = []
-            pp_arr = []
-            p_arr.append(row[0])
-
-            cur.execute("SELECT code FROM tbl_codes WHERE pgID = (" + str(row[0]) + ")")
-            codes_names_rows = cur.fetchall()
-
-            for p_row in codes_names_rows:
-                pp_arr.append(p_row[0])
-            p_arr.append(pp_arr)
-            pm_arr.append(p_arr)
-#             # print('codes by pg: ', pm_arr)
+    for row in pm_rows:
         p_arr = []
         pp_arr = []
-        ppp_arr = []
-        for elem in pm_arr:
-            codes = elem[1]
-            for type in type_rows:
-                p_type = 'С-пласт '
+        p_arr.append(row.pk)
+        codes_names_rows = []
+        p_code_names_rows = Code.objects.all().order_by('id')
+        for p_code_name_elem in p_code_names_rows:
+            if p_code_name_elem.connect_id == row.pk:
+                codes_names_rows.append(p_code_name_elem.code_name)
 
-                count = 0
-                for p_elem in codes:
-                    p_type = 'С-пласт ' + type[1]
-                    cur.execute("SELECT ID FROM tbl_main WHERE WellType Like '" + str(p_type) + "' AND Location Like '" + str(
-                    p_elem) + "'")
-                    well_rows = cur.fetchall()
-                    count = count + len(well_rows)
-                ppp_arr.append(count)
-            pp_arr.append(elem[0])
-            pp_arr.append(ppp_arr)
-            p_arr.append(pp_arr)
-            pp_arr = []
-            ppp_arr = []
-        release_data_arr = p_arr
+        for p_row in codes_names_rows:
+            pp_arr.append(p_row)
+        p_arr.append(pp_arr)
+        pm_arr.append(p_arr)
+    p_arr = []
+    pp_arr = []
+    ppp_arr = []
+    for elem in pm_arr:
+        codes = elem[1]
+        for type in type_rows:
+            p_type = 'С-пласт '
+            count = 0
+            for p_elem in codes:
+                p_type = type.type_name
+                well_rows = []
+                p_well_rows = Well.objects.all().order_by('id')
+                for p_well_elem in p_well_rows:
+                    if (p_well_elem.type == p_type and p_well_elem.locate == p_elem):
+                        well_rows.append(p_well_elem.pk)
+                count = count + len(well_rows)
+            ppp_arr.append(count)
+        pp_arr.append(elem[0])
+        pp_arr.append(ppp_arr)
+        p_arr.append(pp_arr)
+        pp_arr = []
+        ppp_arr = []
+    release_data_arr = p_arr
 
     #PM DATA ARRAY DONE
     #GET OTHER DATA ARR
-        cur.execute(
-            "SELECT bName FROM tbl_buyers ")
-        buyers_rows = cur.fetchall()
-        pp_arr = []
-        p_arr = []
-        for type in type_rows:
-            p_type = 'С-пласт ' + type[1]
-            count = 0
-            for buyer in buyers_rows:
-                cur.execute("SELECT ID FROM tbl_main WHERE WellType Like '" + str(p_type) + "' AND Location Like '" + str(
-                    buyer[0]) + "'")
-                well_rows = cur.fetchall()
-                count = count + len(well_rows)
-            pp_arr.append(count)
+    buyers_rows = Byer.objects.all().order_by('id')
+    pp_arr = []
+    p_arr = []
+    for type in type_rows:
+        p_type = type.type_name
+        count = 0
+        for buyer in buyers_rows:
+            well_rows = []
+            p_well_rows = Well.objects.all().order_by('id')
+            for p_well_elem in p_well_rows:
+                if (p_well_elem.type == p_type) and (p_well_elem.locate == buyer.by_name):
+                    well_rows.append(p_well_elem.pk)
+            count = count + len(well_rows)
+        pp_arr.append(count)
 
-        other_ind = len(release_data_arr) + 1
-        p_arr.append(other_ind)
-        p_arr.append(pp_arr)
-        release_data_arr.append(p_arr)
+    other_ind = len(release_data_arr) + 1
+    p_arr.append(other_ind)
+    p_arr.append(pp_arr)
+    release_data_arr.append(p_arr)
 
     #OTHER DATA APPEND TO RELEASE ARR
     #GET SUMM DATA AND APPEND TO RELEASE DATA ARR
-        i = 0
+    i = 0
+    j = 0
+    p_arr = []
+    pp_arr = []
+    for i in range(len(release_data_arr[0][1])):
+        data = 0
         j = 0
-        p_arr = []
-        pp_arr = []
-        for i in range(len(release_data_arr[0][1])):
-            data = 0
-            j = 0
-            for j in range(len(release_data_arr)):
-                elem = release_data_arr[j][1]
-                data = data + int(elem[i])
-            pp_arr.append(data)
-        p_arr = []
-        summ_ind = other_ind + 1
-        p_arr.append(summ_ind)
-        p_arr.append(pp_arr)
-        release_data_arr.append(p_arr)
-        self.release_data_array = release_data_arr
+        for j in range(len(release_data_arr)):
+            elem = release_data_arr[j][1]
+            data = data + int(elem[i])
+        pp_arr.append(data)
+    p_arr = []
+    summ_ind = other_ind + 1
+    p_arr.append(summ_ind)
+    p_arr.append(pp_arr)
+    release_data_arr.append(p_arr)
+    return release_data_arr
 
-def getDeltaDataArr():
+def getDeltaDataArr(in_req_data_array, release_data_array):
     delta_data_arr = []
     i = 0
     j = 0
     p_arr = []
     pp_arr = []
     ppp_arr = []
-    for i in range(len(self.in_req_data_array)):
+    for i in range(len(in_req_data_array)):
         data = 0
         pp_arr = []
         ppp_arr = []
         j = 0
-        elem = self.in_req_data_array[0][1]
+        elem = in_req_data_array[0][1]
         for j in range(len(elem)):
-            elem_in_req = self.in_req_data_array[i][1]
-            elem_release = self.release_data_array[i][1]
+            elem_in_req = in_req_data_array[i][1]
+            elem_release = release_data_array[i][1]
             data_in_req = elem_in_req[j]
             data_release = elem_release[j]
             data = data_in_req - data_release
             ppp_arr.append(data)
-        pp_arr.append(self.in_req_data_array[i][0])
+        pp_arr.append(in_req_data_array[i][0])
         pp_arr.append(ppp_arr)
         p_arr.append(pp_arr)
         delta_data_arr = p_arr
-        self.delta_data_array = delta_data_arr
+        delta_data_array = delta_data_arr
+    return delta_data_arr
 
 def getTransferColorArray(head_arr):
     i = 0
