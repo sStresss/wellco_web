@@ -494,7 +494,7 @@ def statistic(request):
             data[3] = release_color
             data[4] = transfer_head_arr
             data[5] = transfer_subhead_arr
-            data[6] = []
+            data[6] = transfer_data
             data[7] = transfer_color
             json_data = json.dumps(data)
             json_res = json.loads(json_data)
@@ -1193,32 +1193,35 @@ def getTransferColorArray(head_arr):
     ch_count = 0
     p_color_arr = []
     p_arr = []
-    check = False
+    check = "0"
     p_color_arr.append(check)
-    for i in range((len(head_arr)-1)*3):
+    check = "1"
+    for i in range((len(head_arr))*3):
         if i > 0:
             if ch_count == 3:
-                if check == True:
-                    check = False
+                if check == "1":
+                    check = "0"
                 else:
-                    check = True
+                    check = "1"
                 ch_count = 0
             ch_count+=1
             p_color_arr.append(check)
     p_arr.append('Сторонние продажи')
-    if check == True:
-        check = False
+    if check == "1":
+        check = "0"
     else:
-        check = True
+        check = "1"
     p_color_arr.append(check)
     p_color_arr.append(check)
     p_color_arr.append(check)
     p_arr.append('ИТОГО')
-    if check == True:
-        check = False
+    if check == "1":
+        check = "0"
     else:
-        check = True
+        check = "1"
     p_color_arr.append(check)
     p_color_arr.append(check)
     p_color_arr.append(check)
     release_color_arr = p_color_arr
+    print("TRANSFER COLOR: ", release_color_arr)
+    return release_color_arr

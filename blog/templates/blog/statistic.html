@@ -73,8 +73,8 @@
                     let release_color_arr = resp[3]
                     let transfer_head_arr = resp[4]
                     let transfer_subhead_arr = resp[5]
-                    let transfer_data_arr = []
-                    let transfet_color_arr = resp[7]
+                    let transfer_data_arr = resp[6]
+                    let transfer_color_arr = resp[7]
                     release_color_array = resp[3]
                     release_table_width = release_color_arr.length
                     release_table_height = release_data_arr.length
@@ -200,6 +200,51 @@
                             i++
                         }
                     }
+                    i = 0
+                    console.log(transfer_data_arr)
+                    console.log(transfer_color_arr)
+                    for (;;) {
+                        if (i == transfer_data_arr.length) {
+                            break
+                        } else {
+                            $("#transfer_table_data").append("" +
+                                "<tr id=\"transfer_data_row_"+i+"\">\n" +
+                                "</tr>")
+                            j = 0
+                            for (; ;) {
+                                if (j == transfer_data_arr[i].length) {
+                                    break
+                                } else {
+                                    if (transfer_data_arr[i][j] == "0") {
+                                        data_color = "#aeaeae"
+                                        data_text_weight = "normal"
+                                    }
+                                    else {
+                                        data_color = "#000000"
+                                        if (j > 0) {
+                                           data_text_weight = "bold"
+                                        }
+                                        else {
+                                            data_text_weight = "normal"
+                                        }
+                                    }
+                                    if (transfer_color_arr[j] == "0") {
+                                        data_background = "#fff"
+                                    }
+                                    else {
+                                        data_background = "#f1f1f1"
+                                    }
+                                    $("#transfer_data_row_" + i).append("<th id=\"t_"+i+"_"+j+"\" name=\"r_"+i+"_"+j+"\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding: 0.4rem; padding-top:5px; padding-bottom: 5px; text-align: center; font-weight: "+data_text_weight+";color: "+data_color+"; background-color: "+data_background+";\" onclick= \"\">\n" +
+                                        ""+transfer_data_arr[i][j]+"" +
+                                        "</th>")
+                                    j++
+                                }
+                            }
+                            i++
+                        }
+                    }
+                    i = 0
+
                 },
                 error: function(result) {
                     var readyState = {
