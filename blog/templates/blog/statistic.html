@@ -58,6 +58,9 @@
         var release_table_height = 0
         var release_table_width = 0
         var release_color_array = []
+        var transfer_table_height = 0
+        var transfer_table_width = 0
+        var transfer_color_array = []
         $(document).ready(function() {
              $.ajax({
                 type: "GET",
@@ -78,6 +81,9 @@
                     release_color_array = resp[3]
                     release_table_width = release_color_arr.length
                     release_table_height = release_data_arr.length
+                    transfer_color_array = resp[7]
+                    transfer_table_width = transfer_color_arr.length
+                    transfer_table_height = transfer_data_arr.length
                     i = 0
                     for (;;) {
                         if (i == release_head_arr.length) {
@@ -234,7 +240,7 @@
                                     else {
                                         data_background = "#f1f1f1"
                                     }
-                                    $("#transfer_data_row_" + i).append("<th id=\"t_"+i+"_"+j+"\" name=\"r_"+i+"_"+j+"\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding: 0.4rem; padding-top:5px; padding-bottom: 5px; text-align: center; font-weight: "+data_text_weight+";color: "+data_color+"; background-color: "+data_background+";\" onclick= \"\">\n" +
+                                    $("#transfer_data_row_" + i).append("<th id=\"t_"+i+"_"+j+"\" name=\"r_"+i+"_"+j+"\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding: 0.4rem; padding-top:5px; padding-bottom: 5px; text-align: center; font-weight: "+data_text_weight+";color: "+data_color+"; background-color: "+data_background+";\" onclick= \"transfer_data_item_was_clicked("+i+","+j+")\">\n" +
                                         ""+transfer_data_arr[i][j]+"" +
                                         "</th>")
                                     j++
@@ -316,6 +322,70 @@
                             }
                             document.getElementById("r_"+i+"_"+j).style.backgroundColor = b_color
                             document.getElementById("r_"+i+"_"+j).style.color = t_color
+                        }
+                        j++
+                    }
+                    i++
+                }
+            }
+        }
+        function transfer_data_item_was_clicked(i,j) {
+            console.log(i)
+            console.log(j)
+            console.log(transfer_table_width)
+            console.log(transfer_table_height)
+            transfer_data_area_color_refresh()
+            n = 0
+            for (;;) {
+                if (n == transfer_table_height) {
+                    break
+                }
+                else {
+                    document.getElementById("t_"+n+"_"+j).style.backgroundColor = "329afe";
+                    document.getElementById("t_"+n+"_"+j).style.color = "ffffff";
+                    n++
+                }
+            }
+            m = 0
+            for (;;) {
+                if (m == transfer_table_width) {
+                    break
+                }
+                else {
+                    document.getElementById("t_"+i+"_"+m).style.backgroundColor = "#329afe";
+                    document.getElementById("t_"+i+"_"+m).style.color = "ffffff";
+                    m++
+                }
+            }
+        };
+        function transfer_data_area_color_refresh() {
+            console.log('t color refresh')
+            i = 0
+            for (;;){
+                if (i == transfer_table_height) {
+                    break
+                }
+                else {
+                    j = 0
+                    for (;;) {
+                        if (j == transfer_table_width) {
+                            break
+                        }
+                        else {
+                            if (transfer_color_array[j] == "0") {
+                                b_color = "#fff"
+                            }
+                            else {
+                                b_color = "#f1f1f1"
+                            }
+                            if (document.getElementById("t_"+i+"_"+j).textContent == "0") {
+                                t_color = "#aeaeae"
+                            }
+                            else {
+                                t_color = "#000000"
+                            }
+                            document.getElementById("t_"+i+"_"+j).style.backgroundColor = b_color
+                            document.getElementById("t_"+i+"_"+j).style.color = t_color
                         }
                         j++
                     }

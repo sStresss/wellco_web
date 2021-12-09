@@ -892,9 +892,6 @@ def getReleaseResultDataArray():
     in_req_data_array = getInRequestsDataArr()
     release_data_array = getReleaseDataArray()
     delta_data_array = getDeltaDataArr(in_req_data_array, release_data_array)
-    # cur.execute(
-    #     "SELECT ID, TypeName FROM tbl_type ")
-    # type_rows = cur.fetchall()
     type_rows = WellType.objects.all().order_by('id')
     p_arr = []
     j = 0
@@ -1189,39 +1186,23 @@ def getDeltaDataArr(in_req_data_array, release_data_array):
     return delta_data_arr
 
 def getTransferColorArray(head_arr):
+    print('LEN HEAD ARR: ', head_arr)
     i = 0
     ch_count = 0
     p_color_arr = []
     p_arr = []
     check = "0"
     p_color_arr.append(check)
-    check = "1"
-    for i in range((len(head_arr))*3):
+    for i in range((len(head_arr))):
         if i > 0:
-            if ch_count == 3:
-                if check == "1":
-                    check = "0"
-                else:
-                    check = "1"
-                ch_count = 0
-            ch_count+=1
+            if check == "1":
+                check = "0"
+            else:
+                check = "1"
             p_color_arr.append(check)
-    p_arr.append('Сторонние продажи')
-    if check == "1":
-        check = "0"
-    else:
-        check = "1"
-    p_color_arr.append(check)
-    p_color_arr.append(check)
-    p_color_arr.append(check)
-    p_arr.append('ИТОГО')
-    if check == "1":
-        check = "0"
-    else:
-        check = "1"
-    p_color_arr.append(check)
-    p_color_arr.append(check)
-    p_color_arr.append(check)
+            p_color_arr.append(check)
+            p_color_arr.append(check)
     release_color_arr = p_color_arr
-    print("TRANSFER COLOR: ", release_color_arr)
+    print("TRANSFER COLOR LEN: ", release_color_arr.__len__())
+    print("TRANSFER COLOR LEN: ", release_color_arr)
     return release_color_arr
