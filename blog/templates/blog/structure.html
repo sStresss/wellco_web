@@ -15,8 +15,8 @@
             <h1><a href="/" class="head_title">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">управление заявками</span> </a></h1>
         </div>
         <div class="row" style="width: 100%">
-            <div class="column" style="border-right: 1px solid #eeeeee; width: 12%; height: 90%; margin-left: 50px;">
-                <div  style="border-bottom: 1px solid #eeeeee; height: 35px; margin-left: 15px">
+            <div class="column" style="border-right: 2px solid #eeeeee; width: 12%; height: 1000px; margin-left: 50px;">
+                <div  style="border-bottom: 1px solid #eeeeee; height: 35px; margin-left: 15px; ">
                     <div class="row">
                         <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 219px; height: 34px; font-size: 19px; border: none; outline: none; margin-left: -15px">
                             <option id="modal_cb_type_lst_first" value="pg" selected>Проектные группы</option>
@@ -31,246 +31,269 @@
                             <h1 style="margin-top: -8px; margin-left: -2px">+</h1>
                         </button>
                     </div>
-                {#===============MODAL ADD NEW PG===============#}
-                <form method="GET">
-                    <div class="row">
-                        <div class="container-fluid row">
-                            <form method="GET">
-                                <div class="modal fade" id="modalNewPg" tabindex="-1" role="dialog" aria-labelledby="modalNewPg" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Новая проектная группа</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                            <div class="row">
-                                                <div class="col-sm-4" style="padding-left: 10px;">
-                                                <td>Имя пр. группы:</td>
-                                                </div>
-                                                <div  class="col-sm-4" style="text-align: left">
-                                                    <input  id="newPgName" style="height: 23px;">
-                                                </div>
-                                            </div>
-                                          </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button id="modalNewPgCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                        <button id="modalNewPgSave" type="button" class="btn btn-primary" onclick="">Создать</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </form>
-                {#==============================================#}
-                {#===============MODAL ADD NEW CODE=============#}
-                <form method="GET">
-                    <div class="row">
-                        <div class="container-fluid row">
-                            <form method="GET">
-                                <div class="modal fade" id="modalNewCode" tabindex="-1" role="dialog" aria-labelledby="modalNewCode" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="newCodeModalTitle">Новый шифр</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div id="newCodeConnect" hidden></div>
-                                        <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                            <div class="row">
-                                                <div class="col-sm-4" style="padding-left: 10px;">
-                                                <td>Номер:</td>
-                                                </div>
-                                                <div  class="col-sm-4" style="text-align: left">
-                                                    <input  id="newCodeNum" style="height: 23px;">
-                                                </div>
-                                            </div>
-                                          </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button id="modalNewCodeCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                        <button id="modalNewCodeSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </form>
-                {#==============================================#}
-                {#===============MODAL ADD NEW MPZ==============#}
-                <form method="GET">
-                    <div class="row">
-                        <div class="container-fluid row">
-                            <form method="GET">
-                                <div class="modal fade" id="modalNewMpz" tabindex="-1" role="dialog" aria-labelledby="modalNewMpz" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Новая заявка МПЗ</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div id="newMpzConnect" hidden></div>
-                                        <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                            <div class="row">
-                                                <div class="col-sm-4" style="padding-left: 10px;">
-                                                <td>Номер заявки:</td>
-                                                </div>
-                                                <div  class="col-sm-4" style="text-align: left">
-                                                    <input  id="newMpz" style="height: 23px;">
-                                                </div>
-                                            </div>
-                                          </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button id="modalNewMpzCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                        <button id="modalNewMpzSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </form>
-                {#==============================================#}
-                {#===============MODAL EDIT MPZ WELL============#}
-                <form method="GET">
-                <div class="row">
-                    <div class="container-fluid row">
-                        <form method="GET">
-                            <div class="modal fade" id="modalEditMpz" tabindex="-1" role="dialog" aria-labelledby="modalEditMpz" aria-hidden="true">
-                              <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Редактирование заявки</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <div id="MpzNumConnect" hidden></div>
-                                    <div id="WellTypeConnect" hidden></div>
-                                    <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                        <div class="row">
-                                            <div class="col-sm-4" style="padding-left: 10px;">
-                                            <td>Количество:</td>
-                                            </div>
-                                            <div  class="col-sm-4" style="text-align: left">
-                                                <select id="modal_well_num" class="form-select" aria-label="Default select example">
-
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                      </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button id="modalEditWellCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                    <button id="modalEditWellSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </form>
-            {#==============================================#}
-            {#===============MODAL ADD NEW BY===============#}
-            <form method="GET">
-            <div class="row">
-                <div class="container-fluid row">
+                    {#===============MODAL ADD NEW PG===============#}
                     <form method="GET">
-                        <div class="modal fade" id="modalNewBy" tabindex="-1" role="dialog" aria-labelledby="modalNewBy" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Новый заказчик</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                    <div class="row">
-                                        <div class="col-sm-4" style="padding-left: 10px;">
-                                        <td>Имя покупателя:</td>
+                        <div class="row">
+                            <div class="container-fluid row">
+                                <form method="GET">
+                                    <div class="modal fade" id="modalNewPg" tabindex="-1" role="dialog" aria-labelledby="modalNewPg" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Новая проектная группа</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                                <div class="row">
+                                                    <div class="col-sm-4" style="padding-left: 10px;">
+                                                    <td>Имя пр. группы:</td>
+                                                    </div>
+                                                    <div  class="col-sm-4" style="text-align: left">
+                                                        <input  id="newPgName" style="height: 23px;">
+                                                    </div>
+                                                </div>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button id="modalNewPgCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                            <button id="modalNewPgSave" type="button" class="btn btn-primary" onclick="">Создать</button>
+                                          </div>
                                         </div>
-                                        <div  class="col-sm-4" style="text-align: left">
-                                            <input  id="newByName" style="height: 23px;">
-                                        </div>
+                                      </div>
                                     </div>
-                                  </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button id="modalNewByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                <button id="modalNewBySave" type="button" class="btn btn-primary" onclick="">Создать</button>
-                              </div>
+                                </form>
                             </div>
-                          </div>
                         </div>
                     </form>
-
-                </div>
-            </div>
-            </form>
-            {#==============================================#}
-            {#============MODAL ADD NEW BY APPL=============#}
-            <form method="GET">
-                <div class="row">
-                    <div class="container-fluid row">
-                        <form method="GET">
-                            <div class="modal fade" id="modalNewByAppl" tabindex="-1" role="dialog" aria-labelledby="modalNewByAppl" aria-hidden="true">
-                              <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Новая заявка</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <div id="newApplByConnect" hidden></div>
-                                    <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                        <div class="row">
-                                            <div class="col-sm-6" style="padding-left: 10px;">
-                                            <td>Номер заявки:</td>
-                                            </div>
-                                            <div  class="col-sm-4" style="text-align: left">
-                                                <input  data-date-format="dd/mm/yyyy" id="appl_by_date" style="height: 23px; width: 95px; margin-left: -22px; padding-left: 5px; margin-top: 2px">
-                                            </div>
+                    {#==============================================#}
+                    {#===============MODAL ADD NEW CODE=============#}
+                    <form method="GET">
+                        <div class="row">
+                            <div class="container-fluid row">
+                                <form method="GET">
+                                    <div class="modal fade" id="modalNewCode" tabindex="-1" role="dialog" aria-labelledby="modalNewCode" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="newCodeModalTitle">Новый шифр</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div id="newCodeConnect" hidden></div>
+                                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                                <div class="row">
+                                                    <div class="col-sm-4" style="padding-left: 10px;">
+                                                    <td>Номер:</td>
+                                                    </div>
+                                                    <div  class="col-sm-4" style="text-align: left">
+                                                        <input  id="newCodeNum" style="height: 23px;">
+                                                    </div>
+                                                </div>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button id="modalNewCodeCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                            <button id="modalNewCodeSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                                          </div>
                                         </div>
                                       </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button id="modalNewApplByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                    <button id="modalNewApplBySave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </form>
+                    {#==============================================#}
+                    {#===============MODAL ADD NEW MPZ==============#}
+                    <form method="GET">
+                        <div class="row">
+                            <div class="container-fluid row">
+                                <form method="GET">
+                                    <div class="modal fade" id="modalNewMpz" tabindex="-1" role="dialog" aria-labelledby="modalNewMpz" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Новая заявка МПЗ</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div id="newMpzConnect" hidden></div>
+                                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                                <div class="row">
+                                                    <div class="col-sm-4" style="padding-left: 10px;">
+                                                    <td>Номер заявки:</td>
+                                                    </div>
+                                                    <div  class="col-sm-4" style="text-align: left">
+                                                        <input  id="newMpz" style="height: 23px;">
+                                                    </div>
+                                                </div>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button id="modalNewMpzCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                            <button id="modalNewMpzSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </form>
+                    {#==============================================#}
+                    {#===============MODAL EDIT MPZ WELL============#}
+                    <form method="GET">
+                        <div class="row">
+                            <div class="container-fluid row">
+                                <form method="GET">
+                                    <div class="modal fade" id="modalEditMpz" tabindex="-1" role="dialog" aria-labelledby="modalEditMpz" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Редактирование заявки</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div id="MpzNumConnect" hidden></div>
+                                            <div id="WellTypeConnect" hidden></div>
+                                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                                <div class="row">
+                                                    <div class="col-sm-4" style="padding-left: 10px;">
+                                                    <td>Количество:</td>
+                                                    </div>
+                                                    <div  class="col-sm-4" style="text-align: left">
+                                                        <select id="modal_well_num" class="form-select" aria-label="Default select example">
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button id="modalEditWellCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                            <button id="modalEditWellSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+            </form>
+                    {#==============================================#}
+                    {#===============MODAL ADD NEW BY===============#}
+                    <form method="GET">
+                    <div class="row">
+                        <div class="container-fluid row">
+                            <form method="GET">
+                                <div class="modal fade" id="modalNewBy" tabindex="-1" role="dialog" aria-labelledby="modalNewBy" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Новый заказчик</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col-sm-4" style="padding-left: 10px;">
+                                                <td>Имя покупателя:</td>
+                                                </div>
+                                                <div  class="col-sm-4" style="text-align: left">
+                                                    <input  id="newByName" style="height: 23px;">
+                                                </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button id="modalNewByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                        <button id="modalNewBySave" type="button" class="btn btn-primary" onclick="">Создать</button>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
-                        </form>
+                            </form>
+
+                        </div>
                     </div>
-                </div>
-            </form>
-            {#==============================================#}
-            {#====================MAIN======================#}
+                    </form>
+                    {#==============================================#}
+                    {#============MODAL ADD NEW BY APPL=============#}
+                    <form method="GET">
+                        <div class="row">
+                            <div class="container-fluid row">
+                                <form method="GET">
+                                    <div class="modal fade" id="modalNewByAppl" tabindex="-1" role="dialog" aria-labelledby="modalNewByAppl" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Новая заявка</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div id="newApplByConnect" hidden></div>
+                                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                                <div class="row">
+                                                    <div class="col-sm-6" style="padding-left: 10px;">
+                                                    <td>Номер заявки:</td>
+                                                    </div>
+                                                    <div  class="col-sm-4" style="text-align: left">
+                                                        <input  data-date-format="dd/mm/yyyy" id="appl_by_date" style="height: 23px; width: 95px; margin-left: -22px; padding-left: 5px; margin-top: 2px">
+                                                    </div>
+                                                </div>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button id="modalNewApplByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                            <button id="modalNewApplBySave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </form>
+                    {#==============================================#}
+                    {#===============MODAL ADD DELL PG==============#}
+                    <form method="GET">
+                        <div class="row">
+                            <div class="container-fluid row">
+                                <form method="GET">
+                                    <div class="modal fade" id="modalDellPg" tabindex="-1" role="dialog" aria-labelledby="modalNewByAppl" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div id="connect_del_pg" hidden></div>
+                                          <div class="modal-body" style="text-align: center">
+                                            Вы уверены что хотите удалить проектную группу?
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button id="modalDellPgCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                            <button id="modalDellPgSave" type="button" class="btn btn-primary" onclick="del_pg()">Удалить</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </form>
+                    {#==============================================#}
 
                 </div>
                 <div id="tbl_cont" class="row" style=" margin-top: 0px">
@@ -284,7 +307,7 @@
                                 </button>
                             </td>
                             <td style="text-align: right">
-                                <button id="delPG-{{ pg.pk }}" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" onclick="del_pg(name)">
+                                <button id="delPG-{{ pg.pk }}" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" data-toggle="modal" data-target="#modalDellPg" onclick="del_pg_get_modal(name)">
                                     <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
                                 </button>
                             </td>
@@ -365,233 +388,278 @@
         <script type="text/javascript">
             $('#tbl_row').height(10);
             $(document).ready(function() {
-            var tree_container = document.getElementById("table_struct");
-            var tree_pg_content = tree_container.innerHTML;
-            var tree = document.getElementById("table_struct");
-            var mpz_def_container = document.getElementById("mpz_tbl")
-            var mpz_def_content = mpz_def_container.innerHTML
-            var tree_state = true
+                var tree_container = document.getElementById("table_struct");
+                var tree_pg_content = tree_container.innerHTML;
+                var tree = document.getElementById("table_struct");
+                var mpz_def_container = document.getElementById("mpz_tbl")
+                var mpz_def_content = mpz_def_container.innerHTML
+                var tree_state = true
 
-            $('.tree').treegrid();
-            $('.tree').treegrid('collapseAll');
-            $('#appl_by_date').datepicker({
-                    weekStart: 1,
-                    daysOfWeekHighlighted: "6,0",
-                    autoclose: true,
-                    todayHighlight: true,
-                });
+                $('.tree').treegrid();
+                $('.tree').treegrid('collapseAll');
+                $('#appl_by_date').datepicker({
+                        weekStart: 1,
+                        daysOfWeekHighlighted: "6,0",
+                        autoclose: true,
+                        todayHighlight: true,
+                    });
                 $('#appl_by_date').datepicker("setDate", new Date());
-
                 $('#appl_by_date').datepicker({
                     weekStart: 1,
                     daysOfWeekHighlighted: "6,0",
                     autoclose: true,
                     todayHighlight: true,
                 });
-
                 $('#appl_by_date').datepicker("setDate", new Date());
-
-
-              //ADD NEW PG
-            {#=======================================================================#}
-
-            $("#modalNewPgSave").click(function(s)
-                {
-                    $.ajax({
-                        type: "GET",
-                        url: "/structure/",
-                        dataType: "json",
-                        data: {
-                        event: 'new_pg',
-                            new_pg: $('#newPgName').val()
-                        },
-                        success: function(resp) {
-                            document.getElementById('modalNewPgCancel').click(),
-                            $("#table_struct").load("/ #table_struct > *"),
-                            window.location.reload();
-                        },
-                        error: function(result) {
-                            var readyState = {
-                            1: "Loading",
-                            2: "Loaded",
-                            3: "Interactive",
-                            4: "Complete"
-                            };
-                            if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
-                                alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
-                            }
-                        },
-                    });
-
-                });
-            $("#modalNewCodeSave").click(function(s)
-                {
-                    $.ajax({
-                        type: "GET",
-                        url: "/structure/",
-                        dataType: "json",
-                        data: {
-                        event: 'new_code',
-                            new_code: $('#newCodeNum').val(),
-                            connect: $('#newCodeConnect').val()
-                        },
-                        success: function(resp) {
-                            document.getElementById('modalNewCodeCancel').click(),
-                            $("#table_struct").load("/ #table_struct > *"),
-                            window.location.reload();
-                        },
-                        error: function(result) {
-                            var readyState = {
-                            1: "Loading",
-                            2: "Loaded",
-                            3: "Interactive",
-                            4: "Complete"
-                            };
-                            if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
-                                alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
-                            }
-                        },
-                    });
-
-                });
-
-            $("#modalNewMpzSave").click(function(s)
-                {
-                    $.ajax({
-                        type: "GET",
-                        url: "/structure/",
-                        dataType: "json",
-                        data: {
-                        event: 'new_mpz',
-                            new_mpz: $('#newMpz').val(),
-                            connect: $('#newMpzConnect').val()
-                        },
-                        success: function(resp) {
-                            document.getElementById('modalNewMpzCancel').click(),
-                            $("#table_struct").load("/ #table_struct > *"),
-                            window.location.reload();
-                        },
-                        error: function(result) {
-                            var readyState = {
-                            1: "Loading",
-                            2: "Loaded",
-                            3: "Interactive",
-                            4: "Complete"
-                            };
-                            if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
-                                alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
-                            }
-                        },
-                    });
-
-                });
-                    {#====================================#}
-            $("#modalEditWellSave").click(function(s)
-                {
-                    if (tree_state == true) {
-                        event_type = 'edit_mpz_well'
-                        cur_node_name = $('#MpzNumConnect').val()
-                        cur_par_name = NaN
-                        btn_name = 'infoMPZ-'+$('#MpzNumConnect').val()
-                    }
-                    else {
-                        event_type = 'edit_byapp_well'
-                        cur_node_name = (((document.getElementById($('#MpzNumConnect').val()).textContent).split('\n'))[1].split('#'))[1]
-                        cur_par_name = ((document.getElementById('node-'+($('#MpzNumConnect').val().split('-'))[1]).textContent).split('\n')) [1]
-                        btn_name = 'infoABY-'+$('#MpzNumConnect').val()
-                    }
-                    $.ajax({
-                        type: "GET",
-                        url: "/structure/",
-                        dataType: "json",
-                        data: {
-                        event: event_type,
-                            mpz_name: cur_node_name,
-                            type_id: $('#WellTypeConnect').val(),
-                            new_value: $('#modal_well_num').val(),
-                            par_name: cur_par_name
-                        },
-                        success: function(resp) {
-
-                            document.getElementById('modalEditWellCancel').click(),
-                            document.getElementById(btn_name).click()
-                        },
-                        error: function(result) {
-                            var readyState = {
-                            1: "Loading",
-                            2: "Loaded",
-                            3: "Interactive",
-                            4: "Complete"
-                            };
-                            if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
-                                alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
-                            }
-                        },
-                    });
-
-                });
-            $("#cb_tree").change(function(s)
-                {
-                    document.getElementById("table_struct").innerHTML = ""
-
-                    if ($("#cb_tree").val() == "os") {
-                        tree_state = false
-                        document.getElementById("addPG").hidden = true
-                        document.getElementById("addBY").hidden = false
+                $("#modalNewPgSave").click(function(s) {
                         $.ajax({
                             type: "GET",
                             url: "/structure/",
                             dataType: "json",
                             data: {
-                            event: 'get_by_data'
+                            event: 'new_pg',
+                                new_pg: $('#newPgName').val()
                             },
                             success: function(resp) {
-                                var i = 0
-                                for (const [key, value] of Object.entries(resp)) {
-                                    {#console.log(value[[0]])#}
+                                document.getElementById('modalNewPgCancel').click(),
+                                $("#table_struct").load("/ #table_struct > *"),
+                                window.location.reload();
+                            },
+                            error: function(result) {
+                                var readyState = {
+                                1: "Loading",
+                                2: "Loaded",
+                                3: "Interactive",
+                                4: "Complete"
+                                };
+                                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                                }
+                            },
+                        });
 
-                                    $('#table_struct').append('<tr id="node-'+i+'" class="custom_hov treegrid-'+i+' treegrid-collapsed" style="height: 50px;">\n' +
-                                                                '<td id="node_name-'+i+'"style="width: 240px;">'+value[0]+'</td>\n' +
+                    });
+                $("#modalNewCodeSave").click(function(s) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/structure/",
+                            dataType: "json",
+                            data: {
+                            event: 'new_code',
+                                new_code: $('#newCodeNum').val(),
+                                connect: $('#newCodeConnect').val()
+                            },
+                            success: function(resp) {
+                                document.getElementById('modalNewCodeCancel').click(),
+                                $("#table_struct").load("/ #table_struct > *"),
+                                window.location.reload();
+                            },
+                            error: function(result) {
+                                var readyState = {
+                                1: "Loading",
+                                2: "Loaded",
+                                3: "Interactive",
+                                4: "Complete"
+                                };
+                                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                                }
+                            },
+                        });
+
+                    });
+                $("#modalNewMpzSave").click(function(s) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/structure/",
+                            dataType: "json",
+                            data: {
+                            event: 'new_mpz',
+                                new_mpz: $('#newMpz').val(),
+                                connect: $('#newMpzConnect').val()
+                            },
+                            success: function(resp) {
+                                document.getElementById('modalNewMpzCancel').click(),
+                                $("#table_struct").load("/ #table_struct > *"),
+                                window.location.reload();
+                            },
+                            error: function(result) {
+                                var readyState = {
+                                1: "Loading",
+                                2: "Loaded",
+                                3: "Interactive",
+                                4: "Complete"
+                                };
+                                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                                }
+                            },
+                        });
+
+                    });
+                $("#modalEditWellSave").click(function(s) {
+                        if (tree_state == true) {
+                            event_type = 'edit_mpz_well'
+                            cur_node_name = $('#MpzNumConnect').val()
+                            cur_par_name = NaN
+                            btn_name = 'infoMPZ-'+$('#MpzNumConnect').val()
+                        }
+                        else {
+                            event_type = 'edit_byapp_well'
+                            cur_node_name = (((document.getElementById($('#MpzNumConnect').val()).textContent).split('\n'))[1].split('#'))[1]
+                            cur_par_name = ((document.getElementById('node-'+($('#MpzNumConnect').val().split('-'))[1]).textContent).split('\n')) [1]
+                            btn_name = 'infoABY-'+$('#MpzNumConnect').val()
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: "/structure/",
+                            dataType: "json",
+                            data: {
+                            event: event_type,
+                                mpz_name: cur_node_name,
+                                type_id: $('#WellTypeConnect').val(),
+                                new_value: $('#modal_well_num').val(),
+                                par_name: cur_par_name
+                            },
+                            success: function(resp) {
+
+                                document.getElementById('modalEditWellCancel').click(),
+                                document.getElementById(btn_name).click()
+                            },
+                            error: function(result) {
+                                var readyState = {
+                                1: "Loading",
+                                2: "Loaded",
+                                3: "Interactive",
+                                4: "Complete"
+                                };
+                                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                                }
+                            },
+                        });
+
+                    });
+                $("#cb_tree").change(function(s) {
+                        document.getElementById("table_struct").innerHTML = ""
+
+                        if ($("#cb_tree").val() == "os") {
+                            tree_state = false
+                            document.getElementById("addPG").hidden = true
+                            document.getElementById("addBY").hidden = false
+                            $.ajax({
+                                type: "GET",
+                                url: "/structure/",
+                                dataType: "json",
+                                data: {
+                                event: 'get_by_data'
+                                },
+                                success: function(resp) {
+                                    var i = 0
+                                    for (const [key, value] of Object.entries(resp)) {
+                                        {#console.log(value[[0]])#}
+
+                                        $('#table_struct').append('<tr id="node-'+i+'" class="custom_hov treegrid-'+i+' treegrid-collapsed" style="height: 50px;">\n' +
+                                                                    '<td id="node_name-'+i+'"style="width: 240px;">'+value[0]+'</td>\n' +
+                                                                    '<td style="text-align: right">\n' +
+                                                                    '<button id="addBYApp" name="node-'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takeNodeChName(name)">\n' +
+                                                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>\n' +
+                                                                    '</button>\n' +
+                                                                    '</td>\n' +
+                                                                    '<td style="text-align: right">\n' +
+                                                                    '<button id="delBY-'+i+'" name="'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" onclick="del_by(name)">\n' +
+                                                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                                                    '</button>\n' +
+                                                                    '</td>\n' +
+                                                                    '</tr>');
+                                        var appl_lst = value[1]
+                                        var j = 0
+                                        for (;;) {
+                                            if (j == appl_lst.length) {
+                                                break
+                                            }
+                                            else {
+                                                {#console.log(appl_lst[j])#}
+                                                $('#table_struct').append('<tr id="node-'+i+'-'+j+'" class="custom_hov treegrid-parent-'+i+'" style="height: 50px;">\n' +
+                                                                            '<td style="width: 100px">#'+appl_lst[j]+'</td>\n' +
+                                                                            '<td style="text-align: right">\n' +
+                                                                            '<button id="infoABY-node-'+i+'-'+j+'" name="node-'+i+'-'+j+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
+                                                                            '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
+                                                                            '</button>\n' +
+                                                                            '</td>\n' +
+                                                                            '<td style="text-align: right">\n' +
+                                                                            '<button id="dellABY-'+j+'" name="node-'+i+'-'+j+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
+                                                                            '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                                                            '</button>\n' +
+                                                                            '</td>\n' +
+                                                                            '</tr>');
+                                                j++
+                                            }
+                                        }
+                                        document.getElementById('node-'+i).name = j
+                                        {#console.log(document.getElementById('node-'+i).name)#}
+                                        i++
+                                    }
+                                    $("#table_struct").treegrid()
+                                    $('#table_struct').treegrid('collapseAll');
+                                },
+                                error: function(result) {
+                                    var readyState = {
+                                    1: "Loading",
+                                    2: "Loaded",
+                                    3: "Interactive",
+                                    4: "Complete"
+                                    };
+                                    if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                        alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                                    }
+                                },
+                            });
+
+
+
+                            document.getElementById("mpz_tbl").innerHTML = mpz_def_content
+
+                        }
+                        else {
+                            tree_state = true
+                            document.getElementById("table_struct").innerHTML= tree_pg_content;
+                            $("#table_struct").treegrid()
+                            $('#table_struct').treegrid('collapseAll')
+                            document.getElementById("mpz_tbl").innerHTML = mpz_def_content
+                            document.getElementById("addBY").hidden = true
+                            document.getElementById("addPG").hidden = false
+                        }
+
+                    });
+                $("#modalNewBySave").click(function(s) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/structure/",
+                            dataType: "json",
+                            data: {
+                            event: 'new_by',
+                                new_by: $('#newByName').val()
+                            },
+                            success: function(resp) {
+                                var cur_ind = (parseInt(resp.by_par_len, 10) - 1);
+                                document.getElementById('modalNewByCancel').click(),
+
+                                $('#table_struct').append('<tr id="node-'+cur_ind+'" class="custom_hov treegrid-'+cur_ind+'" style="height: 50px;">\n' +
+                                                                '<td id="node_name-'+cur_ind+'" style="width: 240px;">'+$('#newByName').val()+'</td>\n' +
                                                                 '<td style="text-align: right">\n' +
-                                                                '<button id="addBYApp" name="node-'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takeNodeChName(name)">\n' +
+                                                                '<button id="addBYApp" name="node-'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takeNodeChName(name)">\n' +
                                                                 '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>\n' +
                                                                 '</button>\n' +
                                                                 '</td>\n' +
                                                                 '<td style="text-align: right">\n' +
-                                                                '<button id="delBY-'+i+'" name="'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" onclick="del_by(name)">\n' +
+                                                                '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" onclick="del_by(name)">\n' +
                                                                 '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
                                                                 '</button>\n' +
                                                                 '</td>\n' +
-                                                                '</tr>');
-                                    var appl_lst = value[1]
-                                    var j = 0
-                                    for (;;) {
-                                        if (j == appl_lst.length) {
-                                            break
-                                        }
-                                        else {
-                                            {#console.log(appl_lst[j])#}
-                                            $('#table_struct').append('<tr id="node-'+i+'-'+j+'" class="custom_hov treegrid-parent-'+i+'" style="height: 50px;">\n' +
-                                                                        '<td style="width: 100px">#'+appl_lst[j]+'</td>\n' +
-                                                                        '<td style="text-align: right">\n' +
-                                                                        '<button id="infoABY-node-'+i+'-'+j+'" name="node-'+i+'-'+j+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
-                                                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
-                                                                        '</button>\n' +
-                                                                        '</td>\n' +
-                                                                        '<td style="text-align: right">\n' +
-                                                                        '<button id="dellABY-'+j+'" name="node-'+i+'-'+j+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
-                                                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
-                                                                        '</button>\n' +
-                                                                        '</td>\n' +
-                                                                        '</tr>');
-                                            j++
-                                        }
-                                    }
-                                    document.getElementById('node-'+i).name = j
-                                    {#console.log(document.getElementById('node-'+i).name)#}
-                                    i++
-                                }
-                                $("#table_struct").treegrid()
+                                                                '</tr>'),
+                                document.getElementById('node-'+cur_ind).name = 0,
+                                $('.tree').treegrid(),
                                 $('#table_struct').treegrid('collapseAll');
                             },
                             error: function(result) {
@@ -607,160 +675,97 @@
                             },
                         });
 
-
-
-                        document.getElementById("mpz_tbl").innerHTML = mpz_def_content
-
-                    }
-                    else {
-                        tree_state = true
-                        document.getElementById("table_struct").innerHTML= tree_pg_content;
-                        $("#table_struct").treegrid()
-                        $('#table_struct').treegrid('collapseAll')
-                        document.getElementById("mpz_tbl").innerHTML = mpz_def_content
-                        document.getElementById("addBY").hidden = true
-                        document.getElementById("addPG").hidden = false
-                    }
-
-                });
-            $("#modalNewBySave").click(function(s)
-                {
-                    $.ajax({
-                        type: "GET",
-                        url: "/structure/",
-                        dataType: "json",
-                        data: {
-                        event: 'new_by',
-                            new_by: $('#newByName').val()
-                        },
-                        success: function(resp) {
-                            var cur_ind = (parseInt(resp.by_par_len, 10) - 1);
-                            document.getElementById('modalNewByCancel').click(),
-
-                            $('#table_struct').append('<tr id="node-'+cur_ind+'" class="custom_hov treegrid-'+cur_ind+'" style="height: 50px;">\n' +
-                                                            '<td id="node_name-'+cur_ind+'" style="width: 240px;">'+$('#newByName').val()+'</td>\n' +
-                                                            '<td style="text-align: right">\n' +
-                                                            '<button id="addBYApp" name="node-'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takeNodeChName(name)">\n' +
-                                                            '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>\n' +
-                                                            '</button>\n' +
-                                                            '</td>\n' +
-                                                            '<td style="text-align: right">\n' +
-                                                            '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" onclick="del_by(name)">\n' +
-                                                            '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
-                                                            '</button>\n' +
-                                                            '</td>\n' +
-                                                            '</tr>'),
-                            document.getElementById('node-'+cur_ind).name = 0,
-                            $('.tree').treegrid(),
-                            $('#table_struct').treegrid('collapseAll');
-                        },
-                        error: function(result) {
-                            var readyState = {
-                            1: "Loading",
-                            2: "Loaded",
-                            3: "Interactive",
-                            4: "Complete"
-                            };
-                            if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
-                                alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
-                            }
-                        },
                     });
-
-                });
-
-            $("#modalNewApplBySave").click(function(s)
-                {
-                    app_name = $('#appl_by_date').val()
-                    p_app_name = app_name.split('/')
-                    cur_app_name = p_app_name[0]+'.'+p_app_name[1]+'.'+(parseInt(p_app_name[2],10)-2000)
-                    par_name_str = document.getElementById(document.getElementById('newApplByConnect').textContent).textContent
-                    par_name = par_name_str.split('\n')
+                $("#modalNewApplBySave").click(function(s) {
+                        app_name = $('#appl_by_date').val()
+                        p_app_name = app_name.split('/')
+                        cur_app_name = p_app_name[0]+'.'+p_app_name[1]+'.'+(parseInt(p_app_name[2],10)-2000)
+                        par_name_str = document.getElementById(document.getElementById('newApplByConnect').textContent).textContent
+                        par_name = par_name_str.split('\n')
 
 
-                    $.ajax({
-                        type: "GET",
-                        url: "/structure/",
-                        dataType: "json",
-                        data: {
-                        event: 'new_app_by',
-                            new_app_by: cur_app_name,
-                            app_par_name: par_name[1]
-                        },
-                        success: function(resp) {
-                            console.log(resp)
-                            if (resp.result == 'success') {
-                                console.log('SUCCESS!!!')
-                                par_node_name = document.getElementById('newApplByConnect').value
-                            {#console.log(par_node_name)#}
-                            par_node_len = parseInt(document.getElementById(par_node_name).name,10)-1
+                        $.ajax({
+                            type: "GET",
+                            url: "/structure/",
+                            dataType: "json",
+                            data: {
+                            event: 'new_app_by',
+                                new_app_by: cur_app_name,
+                                app_par_name: par_name[1]
+                            },
+                            success: function(resp) {
+                                console.log(resp)
+                                if (resp.result == 'success') {
+                                    console.log('SUCCESS!!!')
+                                    par_node_name = document.getElementById('newApplByConnect').value
+                                {#console.log(par_node_name)#}
+                                par_node_len = parseInt(document.getElementById(par_node_name).name,10)-1
 
-                            console.log(par_node_len)
-                            next_ch_ind = parseInt(par_node_len,10) +1
-                            next_ch_id = par_node_name+'-'+next_ch_ind
-                            let p_par_name = par_node_name.split('-')
-                            let par_ind = parseInt(p_par_name[1],10)
-                            document.getElementById('modalNewApplByCancel').click()
-                            if (par_node_len != -1) {
-                                $('#'+par_node_name+'-'+par_node_len).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 50px;">\n' +
-                                    '<td style="width: 100px">#'+cur_app_name+'</td>\n' +
-                                    '<td style="text-align: right">\n' +
-                                    '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
-                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
-                                    '</button>\n' +
-                                    '</td>\n' +
-                                    '<td style="text-align: right">\n' +
-                                    '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
-                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
-                                    '</button>\n' +
-                                    '</td>\n' +
-                                    '</tr>');
-                            }
-                            else {
-                                    $('#'+par_node_name).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 50px;">\n' +
-                                    '<td style="width: 100px">#'+cur_app_name+'</td>\n' +
-                                    '<td style="text-align: right">\n' +
-                                    '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
-                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
-                                    '</button>\n' +
-                                    '</td>\n' +
-                                    '<td style="text-align: right">\n' +
-                                    '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
-                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
-                                    '</button>\n' +
-                                    '</td>\n' +
-                                    '</tr>');
-                            }
+                                console.log(par_node_len)
+                                next_ch_ind = parseInt(par_node_len,10) +1
+                                next_ch_id = par_node_name+'-'+next_ch_ind
+                                let p_par_name = par_node_name.split('-')
+                                let par_ind = parseInt(p_par_name[1],10)
+                                document.getElementById('modalNewApplByCancel').click()
+                                if (par_node_len != -1) {
+                                    $('#'+par_node_name+'-'+par_node_len).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 50px;">\n' +
+                                        '<td style="width: 100px">#'+cur_app_name+'</td>\n' +
+                                        '<td style="text-align: right">\n' +
+                                        '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
+                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
+                                        '</button>\n' +
+                                        '</td>\n' +
+                                        '<td style="text-align: right">\n' +
+                                        '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
+                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                        '</button>\n' +
+                                        '</td>\n' +
+                                        '</tr>');
+                                }
+                                else {
+                                        $('#'+par_node_name).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 50px;">\n' +
+                                        '<td style="width: 100px">#'+cur_app_name+'</td>\n' +
+                                        '<td style="text-align: right">\n' +
+                                        '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
+                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
+                                        '</button>\n' +
+                                        '</td>\n' +
+                                        '<td style="text-align: right">\n' +
+                                        '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
+                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                        '</button>\n' +
+                                        '</td>\n' +
+                                        '</tr>');
+                                }
 
-                            $('.tree').treegrid('')
-                            $('.tree').treegrid('collapseAll')
-                                console.log(next_ch_id)
-                            }
-                            if (resp.result == 'denied') {
-                                console.log('DENIED!!!')
-                                alert('такое имя заявки уже существует!')
-                            }
+                                $('.tree').treegrid('')
+                                $('.tree').treegrid('collapseAll')
+                                    console.log(next_ch_id)
+                                }
+                                if (resp.result == 'denied') {
+                                    console.log('DENIED!!!')
+                                    alert('такое имя заявки уже существует!')
+                                }
 
-                        },
-                        error: function(result) {
-                            var readyState = {
-                            1: "Loading",
-                            2: "Loaded",
-                            3: "Interactive",
-                            4: "Complete"
-                            };
-                            if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
-                                alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
-                            }
-                        },
+                            },
+                            error: function(result) {
+                                var readyState = {
+                                1: "Loading",
+                                2: "Loaded",
+                                3: "Interactive",
+                                4: "Complete"
+                                };
+                                if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                                    alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                                }
+                            },
+                        });
+
                     });
+                $("#modal_well_num").change(function(s) {
+                        {#console.log($("#modal_well_num").val())#}
 
-                });
-            $("#modal_well_num").change(function(s)
-                {
-                    {#console.log($("#modal_well_num").val())#}
-
-                });
+                    });
             });
             function del_pg(name) {
                 $.ajax({
@@ -769,7 +774,7 @@
                     dataType: "json",
                     data: {
                     event: 'del_pg',
-                        del_pg: name
+                        del_pg: document.getElementById("connect_del_pg").textContent
                     },
                     success: function(resp) {
                         $("#table_struct").load("/ #table_struct > *");
@@ -787,7 +792,6 @@
                         }
                     },
                 });
-                alert("DELPG!!! " + name)
 
             }
             function del_by(name) {
@@ -1029,6 +1033,9 @@
                     }
                 },
                 });
+            }
+            function del_pg_get_modal(name) {
+                document.getElementById("connect_del_pg").innerHTML = name
             }
         </script>
     </body>
