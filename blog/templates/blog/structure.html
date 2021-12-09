@@ -1,7 +1,6 @@
 {% load static %}
 <html lang="en">
     <head>
-                <title>С-ПЛАСТ</title>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
             <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
@@ -270,12 +269,12 @@
                         </div>
                     </form>
                     {#==============================================#}
-                    {#===============MODAL ADD DELL PG==============#}
+                    {#=================MODAL DELL PG================#}
                     <form method="GET">
                         <div class="row">
                             <div class="container-fluid row">
                                 <form method="GET">
-                                    <div class="modal fade" id="modalDellPg" tabindex="-1" role="dialog" aria-labelledby="modalNewByAppl" aria-hidden="true">
+                                    <div class="modal fade" id="modalDellPg" tabindex="-1" role="dialog" aria-labelledby="modalDellPg" aria-hidden="true">
                                       <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div id="connect_del_pg" hidden></div>
@@ -285,6 +284,54 @@
                                           <div class="modal-footer">
                                             <button id="modalDellPgCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
                                             <button id="modalDellPgSave" type="button" class="btn btn-primary" onclick="del_pg()">Удалить</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </form>
+                    {#==============================================#}
+                    {#=================MODAL DELL CODE==============#}
+                    <form method="GET">
+                        <div class="row">
+                            <div class="container-fluid row">
+                                <form method="GET">
+                                    <div class="modal fade" id="modalDellCode" tabindex="-1" role="dialog" aria-labelledby="modalDellCode" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content" hidden>
+                                            <div id="connect_del_code"></div>
+                                          <div class="modal-body" style="text-align: center">
+                                            Вы уверены что хотите удалить шифр?
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button id="modalDellCodeCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                            <button id="modalDellCodeSave" type="button" class="btn btn-primary" onclick="del_code()">Удалить</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </form>
+                    {#==============================================#}
+                    {#=================MODAL DELL MPZ===============#}
+                    <form method="GET">
+                        <div class="row">
+                            <div class="container-fluid row">
+                                <form method="GET">
+                                    <div class="modal fade" id="modalDellMpz" tabindex="-1" role="dialog" aria-labelledby="modalDellMpz" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div id="connect_del_mpz" hidden></div>
+                                          <div class="modal-body" style="text-align: center">
+                                            Вы уверены что хотите удалить заявку?
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button id="modalDellMpzCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                            <button id="modalDellMpzSave" type="button" class="btn btn-primary" onclick="del_mpz()">Удалить</button>
                                           </div>
                                         </div>
                                       </div>
@@ -323,7 +370,7 @@
                                             </button>
                                         </td>
                                         <td style="text-align: right">
-                                            <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="del_code(name)">
+                                            <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellCode" onclick="del_code_get_modal(name)">
                                                 <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
                                             </button>
                                         </td>
@@ -338,7 +385,7 @@
                                                     </button>
                                                 </td>
                                                 <td style="text-align: right">
-                                                    <button id="dellMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="del_mpz(name)">
+                                                    <button id="dellMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellMpz" onclick="del_mpz_get_modal(name)">
                                                         <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
                                                     </button>
                                                 </td>
@@ -367,10 +414,10 @@
                                 <tr  style="height: 50px">
                                   <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center;" >С-пласт {{ type.type_name }}</td>
                                   <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center;"  data-toggle="modal" data-target="#modalEditMpz" class="mpz_button" onclick="getWellName({{ type }})" >
-                                      <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">?</span>
+                                      <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
                                   </td>
-                                  <td  id="tbl_well_given-{{ type }}" style="text-align: center" >?</td>
-                                  <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >?</td>
+                                  <td  id="tbl_well_given-{{ type }}" style="text-align: center" >-</td>
+                                  <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >-</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -830,7 +877,7 @@
                     dataType: "json",
                     data: {
                     event: 'del_code',
-                        del_code: name
+                        del_code: document.getElementById("connect_del_code").textContent
                     },
                     success: function(resp) {
                         $("#table_struct").load("/ #table_struct > *");
@@ -848,7 +895,6 @@
                         }
                     },
                 });
-                alert("DELCODE!!! " + name)
 
             }
             function del_mpz(name) {
@@ -858,7 +904,7 @@
                     dataType: "json",
                     data: {
                     event: 'del_mpz',
-                        del_mpz: name
+                        del_mpz: document.getElementById("connect_del_mpz").textContent
                     },
                     success: function(resp) {
                         $("#table_struct").load("/ #table_struct > *");
@@ -876,7 +922,6 @@
                         }
                     },
                 });
-                alert("DELMPZ!!! " + name)
 
             }
             function takePgName(name) {
@@ -1037,6 +1082,13 @@
             function del_pg_get_modal(name) {
                 document.getElementById("connect_del_pg").innerHTML = name
             }
+            function del_code_get_modal(name) {
+                document.getElementById("connect_del_code").innerHTML = name
+            }
+            function del_mpz_get_modal(name) {
+                document.getElementById("connect_del_mpz").innerHTML = name
+            }
+
         </script>
     </body>
 </html>
