@@ -375,6 +375,7 @@ def structure(request):
             json_res = {'by_par_len' : buyers.__len__()}
             return JsonResponse(json_res, content_type='application/json')
         if req.find('del_by') != -1:
+            print('DELL BY: ', p_arr[1])
             record = Byer.objects.get(by_name = p_arr[1])
             record.delete()
             data = {'result': str('success')}

@@ -300,8 +300,8 @@
                                 <form method="GET">
                                     <div class="modal fade" id="modalDellCode" tabindex="-1" role="dialog" aria-labelledby="modalDellCode" aria-hidden="true">
                                       <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content" hidden>
-                                            <div id="connect_del_code"></div>
+                                        <div class="modal-content">
+                                            <div id="connect_del_code" hidden></div>
                                           <div class="modal-body" style="text-align: center">
                                             Вы уверены что хотите удалить шифр?
                                           </div>
@@ -332,6 +332,56 @@
                                           <div class="modal-footer">
                                             <button id="modalDellMpzCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
                                             <button id="modalDellMpzSave" type="button" class="btn btn-primary" onclick="del_mpz()">Удалить</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </form>
+                    {#==============================================#}
+                    {#=================MODAL DELL BY================#}
+                    <form method="GET">
+                        <div class="row">
+                            <div class="container-fluid row">
+                                <form method="GET">
+                                    <div class="modal fade" id="modalDellBy" tabindex="-1" role="dialog" aria-labelledby="modalDellBy" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div id="connect_del_by" hidden></div>
+                                            <div id="connect_del_by_ind" hidden></div>
+                                          <div class="modal-body" style="text-align: center">
+                                            Вы уверены что хотите удалить покупателя?
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button id="modalDellByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                            <button id="modalDellBySave" type="button" class="btn btn-primary" onclick="del_by()">Удалить</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </form>
+                    {#==============================================#}
+                    {#===============MODAL DELL BYAPPL==============#}
+                    <form method="GET">
+                        <div class="row">
+                            <div class="container-fluid row">
+                                <form method="GET">
+                                    <div class="modal fade" id="modalDellByAppl" tabindex="-1" role="dialog" aria-labelledby="modalDellByAppl" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div id="connect_del_byappl" hidden></div>
+                                            <div id="connect_del_byappl_ind" hidden></div>
+                                          <div class="modal-body" style="text-align: center">
+                                            Вы уверены что хотите удалить покупателя?
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button id="modalDellByApplCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                            <button id="modalDellByApplSave" type="button" class="btn btn-primary" onclick="delAby()">Удалить</button>
                                           </div>
                                         </div>
                                       </div>
@@ -604,7 +654,6 @@
                                 success: function(resp) {
                                     var i = 0
                                     for (const [key, value] of Object.entries(resp)) {
-                                        {#console.log(value[[0]])#}
 
                                         $('#table_struct').append('<tr id="node-'+i+'" class="custom_hov treegrid-'+i+' treegrid-collapsed" style="height: 50px;">\n' +
                                                                     '<td id="node_name-'+i+'"style="width: 240px;">'+value[0]+'</td>\n' +
@@ -614,7 +663,7 @@
                                                                     '</button>\n' +
                                                                     '</td>\n' +
                                                                     '<td style="text-align: right">\n' +
-                                                                    '<button id="delBY-'+i+'" name="'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" onclick="del_by(name)">\n' +
+                                                                    '<button id="delBY-'+i+'" name="'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
                                                                     '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
                                                                     '</button>\n' +
                                                                     '</td>\n' +
@@ -635,7 +684,7 @@
                                                                             '</button>\n' +
                                                                             '</td>\n' +
                                                                             '<td style="text-align: right">\n' +
-                                                                            '<button id="dellABY-'+j+'" name="node-'+i+'-'+j+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
+                                                                            '<button id="dellABY-'+j+'" name="node-'+i+'-'+j+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
                                                                             '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
                                                                             '</button>\n' +
                                                                             '</td>\n' +
@@ -700,7 +749,7 @@
                                                                 '</button>\n' +
                                                                 '</td>\n' +
                                                                 '<td style="text-align: right">\n' +
-                                                                '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" onclick="del_by(name)">\n' +
+                                                                '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
                                                                 '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
                                                                 '</button>\n' +
                                                                 '</td>\n' +
@@ -763,7 +812,7 @@
                                         '</button>\n' +
                                         '</td>\n' +
                                         '<td style="text-align: right">\n' +
-                                        '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
+                                        '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
                                         '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
                                         '</button>\n' +
                                         '</td>\n' +
@@ -778,7 +827,7 @@
                                         '</button>\n' +
                                         '</td>\n' +
                                         '<td style="text-align: right">\n' +
-                                        '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" onclick="delAby(name)">\n' +
+                                        '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
                                         '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
                                         '</button>\n' +
                                         '</td>\n' +
@@ -841,7 +890,7 @@
                 });
 
             }
-            function del_by(name) {
+            function del_by() {
 
                 $.ajax({
                     type: "GET",
@@ -849,12 +898,14 @@
                     dataType: "json",
                     data: {
                     event: 'del_by',
-                        del_by: document.getElementById('node_name-'+name).textContent
+                        del_by: document.getElementById('connect_del_by').textContent
                     },
                     success: function(resp) {
-                        $('#node-'+name).remove(),
-                        $('.tree').treegrid()
-                        $('#table_struct').treegrid('collapseAll');
+                        document.getElementById('modalDellByCancel').click()
+                        $('#node-'+document.getElementById('connect_del_by_ind').textContent).remove(),
+                        $('.tree').treegrid('collapseAll'),
+
+                        $('#table_struct').treegrid('');
                     },
                     error: function(result) {
                         var readyState = {
@@ -868,7 +919,6 @@
                         }
                     },
                 });
-                alert("DELBY!!! " + name)
             }
             function del_code(name) {
                 $.ajax({
@@ -996,15 +1046,14 @@
                 document.getElementById("modal_select_well_num").innerHTML = w_val
                 document.getElementById("modal_select_well_num").value = w_val
             }
-            function delAby(name) {
-                console.log('DEL NAME: '+name)
-                ch_name_str = document.getElementById(name).textContent
-                ch_name_arr = ch_name_str.split('\n')
-                ch_name = ch_name_arr[1].split('#')
-                par_node_name_arr = name.split('-')
-                par_node_name = 'node-' + par_node_name_arr[1]
-                par_name_str = document.getElementById(par_node_name).textContent
-                par_node_arr = par_name_str.split('\n')
+            function delAby() {
+                ch_name = ''
+                par_name = ''
+                console.log(document.getElementById('connect_del_byappl').textContent)
+                ch_name = ((((document.getElementById(document.getElementById('connect_del_byappl').textContent).textContent).split('\n'))[1]).split('#'))[1]
+                par_name = ((document.getElementById('node-'+((document.getElementById('connect_del_byappl').textContent).split('-'))[1]).textContent).split('\n'))[1]
+                console.log(ch_name)
+                console.log(par_name)
 
                 $.ajax({
                 type: "GET",
@@ -1013,14 +1062,14 @@
 
                 data: {
                 event: 'del_app_by',
-                    node_name: ch_name[1],
-                    pr_name: par_node_arr[1]
+                    node_name: ch_name,
+                    pr_name: par_name
 
                 },
                 success: function(resp) {
-                    $('#'+name).remove(),
-                    $('.tree').treegrid()
-                    {#$('#table_struct').treegrid('collapseAll');#}
+                    document.getElementById('modalDellByApplCancel').click()
+                    $('#'+document.getElementById('connect_del_byappl').textContent).remove(),
+                    $('.tree').treegrid('')
                 },
                 error: function(result) {
                     var readyState = {
@@ -1083,10 +1132,19 @@
                 document.getElementById("connect_del_pg").innerHTML = name
             }
             function del_code_get_modal(name) {
+                console.log(name)
                 document.getElementById("connect_del_code").innerHTML = name
             }
             function del_mpz_get_modal(name) {
+                console.log(name)
                 document.getElementById("connect_del_mpz").innerHTML = name
+            }
+            function del_by_get_modal(name) {
+                document.getElementById("connect_del_by").innerHTML = document.getElementById('node_name-'+name).textContent
+                document.getElementById("connect_del_by_ind").innerHTML = name
+            }
+            function del_byappl_get_modal(name) {
+                document.getElementById("connect_del_byappl").innerHTML = name
             }
 
         </script>
