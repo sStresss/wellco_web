@@ -18,9 +18,9 @@
                 <div  style="border-bottom: 1px solid #eeeeee; height: 35px; margin-left: 15px; ">
                     <div class="row">
                         <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 219px; height: 34px; font-size: 19px; border: none; outline: none; margin-left: -15px">
-                            <option id="modal_cb_type_lst_first" value="pg" selected>Проектные группы</option>
+                            <option id="pg" value="pg" selected>Проектные группы</option>
                             <tr>
-                            <option value="os">Сторонние продажи</option>
+                            <option id="os" value="os">Сторонние продажи</option>
                             </tr>
                         </select>
                         <button id="addPG" name="but1" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 10px; background-color: #ffffff" data-toggle="modal" data-target="#modalNewPg" onclick="">
@@ -886,6 +886,9 @@
                         document.getElementById('modalDellByCancel').click()
                         $('#node-'+document.getElementById('connect_del_by_ind').textContent).remove(),
                         $('.tree').treegrid('collapseAll')
+                        $("#cb_tree").val('os').trigger('chosen:updated');
+                        $("#cb_tree").val('os').trigger('change');
+
                     },
                     error: function(result) {
                         var readyState = {
