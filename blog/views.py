@@ -292,16 +292,47 @@ def structure(request):
         for elem in req_dict.items():
             p_arr.append(elem[1])
         if req.find('new_pg') != -1:
-            ProjectGroup.objects.create(pg_name=p_arr[1])
-            data = {'result': str('success')}
+            unique = 'false'
+            pg_lst = ProjectGroup.objects.all().order_by('id')
+            for pg in pg_lst:
+                if pg.pg_name == p_arr[1]:
+                    unique = 'true'
+                    break
+            if unique == 'false':
+                ProjectGroup.objects.create(pg_name=p_arr[1])
+                data = {'result': str('success')}
+            else:
+                data = {'result': str('error')}
             return JsonResponse(data, content_type='application/json')
         if req.find('new_code') != -1:
-            Code.objects.create(code_name= p_arr[1], connect_id=p_arr[2])
-            data = {'result': str('success')}
+            unique = 'false'
+            code_lst = Code.objects.all().order_by('id')
+            for code in code_lst:
+                if code.code_name == p_arr[1]:
+                    unique = 'true'
+                    break
+            if unique == 'false':
+                Code.objects.create(code_name= p_arr[1], connect_id=p_arr[2])
+                data = {'result': str('success')}
+            else:
+                data = {'result': str('error')}
             return JsonResponse(data, content_type='application/json')
         if req.find('new_mpz') != -1:
-            Appl_mpz.objects.create(mpz_appl_name=p_arr[1], connect_id=p_arr[2])
-            data = {'result': str('success')}
+            unique = 'false'
+            mpz_lst = Appl_mpz.objects.all().order_by('id')
+            print(mpz_lst)
+            for mpz in mpz_lst:
+                print('==============')
+                print('mpz: ', mpz.mpz_appl_name)
+                print('new: ', p_arr[1])
+                if mpz.mpz_appl_name == p_arr[1]:
+                    unique = 'true'
+                    break
+            if unique == 'false':
+                Appl_mpz.objects.create(mpz_appl_name=p_arr[1], connect_id=p_arr[2])
+                data = {'result': str('success')}
+            else:
+                data = {'result': str('error')}
             return JsonResponse(data, content_type='application/json')
         if req.find('del_pg') != -1:
             record = ProjectGroup.objects.get(id = p_arr[1])

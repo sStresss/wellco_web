@@ -518,9 +518,14 @@
                                 new_pg: $('#newPgName').val()
                             },
                             success: function(resp) {
-                                document.getElementById('modalNewPgCancel').click(),
-                                $("#table_struct").load("/ #table_struct > *"),
-                                window.location.reload();
+                                if (resp.result == 'success') {
+                                    document.getElementById('modalNewPgCancel').click(),
+                                    $("#table_struct").load("/ #table_struct > *"),
+                                    window.location.reload();
+                                }
+                                else {
+                                    alert('Такая проектная группа уже есть в списке!')
+                                }
                             },
                             error: function(result) {
                                 var readyState = {
@@ -547,9 +552,14 @@
                                 connect: $('#newCodeConnect').val()
                             },
                             success: function(resp) {
-                                document.getElementById('modalNewCodeCancel').click(),
-                                $("#table_struct").load("/ #table_struct > *"),
-                                window.location.reload();
+                                if (resp.result == 'success') {
+                                   document.getElementById('modalNewCodeCancel').click(),
+                                    $("#table_struct").load("/ #table_struct > *"),
+                                    window.location.reload();
+                                }
+                                else {
+                                    alert('такой шифр уже существует!')
+                                }
                             },
                             error: function(result) {
                                 var readyState = {
@@ -576,9 +586,15 @@
                                 connect: $('#newMpzConnect').val()
                             },
                             success: function(resp) {
-                                document.getElementById('modalNewMpzCancel').click(),
-                                $("#table_struct").load("/ #table_struct > *"),
-                                window.location.reload();
+                                console.log(resp)
+                                if (resp.result == 'success') {
+                                   document.getElementById('modalNewMpzCancel').click(),
+                                    $("#table_struct").load("/ #table_struct > *"),
+                                    window.location.reload();
+                                }
+                                else {
+                                    alert('Такая заявка уже существует!')
+                                }
                             },
                             error: function(result) {
                                 var readyState = {
