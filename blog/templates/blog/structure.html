@@ -738,25 +738,30 @@
                                 new_by: $('#newByName').val()
                             },
                             success: function(resp) {
-                                var cur_ind = (parseInt(resp.by_par_len, 10) - 1);
-                                document.getElementById('modalNewByCancel').click(),
+                                console.log(resp.unique)
+                                if (resp.unique == 'false') {
+                                    var cur_ind = (parseInt(resp.by_par_len, 10) - 1);
+                                    document.getElementById('modalNewByCancel').click(),
 
-                                $('#table_struct').append('<tr id="node-'+cur_ind+'" class="custom_hov treegrid-'+cur_ind+'" style="height: 50px;">\n' +
-                                                                '<td id="node_name-'+cur_ind+'" style="width: 240px;">'+$('#newByName').val()+'</td>\n' +
-                                                                '<td style="text-align: right">\n' +
-                                                                '<button id="addBYApp" name="node-'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takeNodeChName(name)">\n' +
-                                                                '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>\n' +
-                                                                '</button>\n' +
-                                                                '</td>\n' +
-                                                                '<td style="text-align: right">\n' +
-                                                                '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
-                                                                '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
-                                                                '</button>\n' +
-                                                                '</td>\n' +
-                                                                '</tr>'),
-                                document.getElementById('node-'+cur_ind).name = 0,
-                                $('.tree').treegrid(),
-                                $('#table_struct').treegrid('collapseAll');
+                                    $('#table_struct').append('<tr id="node-'+cur_ind+'" class="custom_hov treegrid-'+cur_ind+'" style="height: 50px;">\n' +
+                                                                    '<td id="node_name-'+cur_ind+'" style="width: 240px;">'+$('#newByName').val()+'</td>\n' +
+                                                                    '<td style="text-align: right">\n' +
+                                                                    '<button id="addBYApp" name="node-'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takeNodeChName(name)">\n' +
+                                                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>\n' +
+                                                                    '</button>\n' +
+                                                                    '</td>\n' +
+                                                                    '<td style="text-align: right">\n' +
+                                                                    '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
+                                                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                                                    '</button>\n' +
+                                                                    '</td>\n' +
+                                                                    '</tr>'),
+                                    document.getElementById('node-'+cur_ind).name = 0,
+                                    $('.tree').treegrid(),
+                                    $('#table_struct').treegrid('collapseAll');
+                                }
+                                else {alert('Такой покупатель уже есть в списке!')}
+
                             },
                             error: function(result) {
                                 var readyState = {
@@ -886,7 +891,6 @@
                         document.getElementById('modalDellByCancel').click()
                         $('#node-'+document.getElementById('connect_del_by_ind').textContent).remove(),
                         $('.tree').treegrid('collapseAll')
-                        $("#cb_tree").val('os').trigger('chosen:updated');
                         $("#cb_tree").val('os').trigger('change');
 
                     },

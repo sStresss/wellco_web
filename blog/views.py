@@ -370,9 +370,17 @@ def structure(request):
             json_res = json.loads(json_data)
             return JsonResponse(json_res, content_type='application/json')
         if req.find('new_by') != -1:
-            Byer.objects.create(by_name=p_arr[1])
+            unique = 'false'
             buyers = Byer.objects.all().order_by('id')
-            json_res = {'by_par_len' : buyers.__len__()}
+            for buyer in buyers:
+                if p_arr[1] == buyer.by_name:
+                    unique = 'true'
+                    break
+            if unique == 'false':
+                Byer.objects.create(by_name=p_arr[1])
+                json_res = {'unique': unique, 'by_par_len' : buyers.__len__()}
+            else:
+                json_res = {'unique' : unique}
             return JsonResponse(json_res, content_type='application/json')
         if req.find('del_by') != -1:
             print('DELL BY: ', p_arr[1])
