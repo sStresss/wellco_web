@@ -5,8 +5,10 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from datetime import datetime
 from datetime import timedelta
+import pymysql
 import json
 from dateutil.relativedelta import relativedelta
+import time
 
 month_blocks_arr = []
 
@@ -15,6 +17,8 @@ def post_list(request):
     wells = Well.objects.all().order_by('id')
     wells = wells.reverse()
     serial = '0'
+    # mysql_data = pullMySqlBase('localhost', 3303, 'root', 'root', 'welldb')
+    # pushPostgreSqlServer(mysql_data)
     if request.method == "GET":
         req = str(request.GET)
         req_dict = request.GET.dict()
@@ -1215,3 +1219,43 @@ def getTransferColorArray(head_arr):
     print("TRANSFER COLOR LEN: ", release_color_arr.__len__())
     print("TRANSFER COLOR LEN: ", release_color_arr)
     return release_color_arr
+
+#----------------------------------------------DB TRANSFER--------------------------------------------------------------
+
+def pullMySqlBase(SqlHostname, SqlPort, SqlUserName, SqlPwd, SqlDBName):
+    con = pymysql.connect(host=SqlHostname,
+                          port=SqlPort,
+                          user=SqlUserName,
+                          passwd=SqlPwd,
+                          db=SqlDBName)
+    with con:
+        data = con.cursor()
+        data.execute("SELECT * FROM tbl_main")
+        data_rows = data.fetchall()
+    return data_rows
+
+def pushPostgreSqlServer(data):
+    for elem in data:
+        if elem[5] != None:
+            comment = elem[5]
+        else:
+            comment = ''
+        if elem[6] != None:
+            req_num = elem[6]
+        else:
+            req_num = ''
+        if elem[7] != None:
+            trans_date = elem[7]
+        else:
+            trans_date = ''
+        print(elem)
+        release_date_arr = str(elem[3]).split('.')
+        well = Well()
+        well.serial = elem[1]
+        well.type = (str(elem[2]).split(' '))[1]
+        well.created_date = release_date_arr[2] + '-' + release_date_arr[1] + '-' + release_date_arr[0]
+        well.locate = elem[4]
+        well.comment = comment
+        well.req_num = req_num
+        well.trans_date = trans_date
+        well.release()
