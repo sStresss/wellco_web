@@ -792,51 +792,33 @@
                             success: function(resp) {
                                 console.log(resp)
                                 if (resp.result == 'success') {
-                                    console.log('SUCCESS!!!')
-                                    par_node_name = document.getElementById('newApplByConnect').value
-                                {#console.log(par_node_name)#}
-                                par_node_len = parseInt(document.getElementById(par_node_name).name,10)-1
 
-                                console.log(par_node_len)
-                                next_ch_ind = parseInt(par_node_len,10) +1
+                                par_node_name = document.getElementById('newApplByConnect').value
+                                console.log('par node name: '+par_node_name)
+                                console.log(par_node_name)
+                                par_node_len = parseInt(document.getElementById(par_node_name).name,10) -1
+                                console.log('par node len before add record: '+par_node_len)
+                                next_ch_ind = par_node_len + 1
                                 next_ch_id = par_node_name+'-'+next_ch_ind
                                 let p_par_name = par_node_name.split('-')
                                 let par_ind = parseInt(p_par_name[1],10)
                                 document.getElementById('modalNewApplByCancel').click()
-                                if (par_node_len != -1) {
-                                    $('#'+par_node_name+'-'+par_node_len).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 50px;">\n' +
-                                        '<td style="width: 100px">#'+cur_app_name+'</td>\n' +
-                                        '<td style="text-align: right">\n' +
-                                        '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
-                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
-                                        '</button>\n' +
-                                        '</td>\n' +
-                                        '<td style="text-align: right">\n' +
-                                        '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
-                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
-                                        '</button>\n' +
-                                        '</td>\n' +
-                                        '</tr>');
-                                }
-                                else {
-                                        $('#'+par_node_name).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 50px;">\n' +
-                                        '<td style="width: 100px">#'+cur_app_name+'</td>\n' +
-                                        '<td style="text-align: right">\n' +
-                                        '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
-                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
-                                        '</button>\n' +
-                                        '</td>\n' +
-                                        '<td style="text-align: right">\n' +
-                                        '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
-                                        '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
-                                        '</button>\n' +
-                                        '</td>\n' +
-                                        '</tr>');
-                                }
-
+                               $('#'+par_node_name).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 50px;">\n' +
+                                '<td style="width: 100px">#'+cur_app_name+'</td>\n' +
+                                '<td style="text-align: right">\n' +
+                                '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
+                                '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
+                                '</button>\n' +
+                                '</td>\n' +
+                                '<td style="text-align: right">\n' +
+                                '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
+                                '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                '</button>\n' +
+                                '</td>\n' +
+                                '</tr>');
+                                document.getElementById(par_node_name).name = parseInt(document.getElementById(par_node_name).name,10) + 1
+                                    console.log('par node len after add record: '+document.getElementById(par_node_name).name)
                                 $('.tree').treegrid('')
-                                $('.tree').treegrid('collapseAll')
-                                    console.log(next_ch_id)
                                 }
                                 if (resp.result == 'denied') {
                                     console.log('DENIED!!!')
@@ -856,7 +838,7 @@
                                 }
                             },
                         });
-
+                        console.log('new buy appl creating done!')
                     });
                 $("#modal_well_num").change(function(s) {
                         {#console.log($("#modal_well_num").val())#}
@@ -903,9 +885,7 @@
                     success: function(resp) {
                         document.getElementById('modalDellByCancel').click()
                         $('#node-'+document.getElementById('connect_del_by_ind').textContent).remove(),
-                        $('.tree').treegrid('collapseAll'),
-
-                        $('#table_struct').treegrid('');
+                        $('.tree').treegrid('collapseAll')
                     },
                     error: function(result) {
                         var readyState = {
@@ -1049,11 +1029,8 @@
             function delAby() {
                 ch_name = ''
                 par_name = ''
-                console.log(document.getElementById('connect_del_byappl').textContent)
                 ch_name = ((((document.getElementById(document.getElementById('connect_del_byappl').textContent).textContent).split('\n'))[1]).split('#'))[1]
                 par_name = ((document.getElementById('node-'+((document.getElementById('connect_del_byappl').textContent).split('-'))[1]).textContent).split('\n'))[1]
-                console.log(ch_name)
-                console.log(par_name)
 
                 $.ajax({
                 type: "GET",
@@ -1067,7 +1044,7 @@
 
                 },
                 success: function(resp) {
-                    document.getElementById('modalDellByApplCancel').click()
+                    document.getElementById('modalDellByApplCancel').click(),
                     $('#'+document.getElementById('connect_del_byappl').textContent).remove(),
                     $('.tree').treegrid('')
                 },
