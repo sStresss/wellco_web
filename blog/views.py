@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from .models import Well, WellType, Warehouse, var, ProjectGroup, Code, Appl_mpz, Appl_mpz_data, Byer, Appl_byer, Appl_by_data
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
@@ -263,6 +265,17 @@ def post_list(request):
             json_data = json.dumps(data)
             json_res = json.loads(json_data)
             return JsonResponse(json_res, content_type='application/json')
+        if req.find('check_login') != -1:
+            user = authenticate(username=str(p_arr[1]), password=str(p_arr[2]))
+            if user is not None:
+                data = {
+                    'result': str('success')
+                }
+            else:
+                data = {
+                    'result': str('error')
+                }
+            return JsonResponse(data, content_type='application/json')
         else:
             # get type list
             types = WellType.objects.all().order_by('id')
