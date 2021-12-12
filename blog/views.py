@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from .models import Well, WellType, Warehouse, var, ProjectGroup, Code, Appl_mpz, Appl_mpz_data, Byer, Appl_byer, Appl_by_data
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
@@ -266,8 +266,27 @@ def post_list(request):
             json_res = json.loads(json_data)
             return JsonResponse(json_res, content_type='application/json')
         if req.find('check_login') != -1:
+            print('check login')
             user = authenticate(username=str(p_arr[1]), password=str(p_arr[2]))
             if user is not None:
+                if user.is_active:
+                    request.session.set_expiry(86400)  # sets the exp. value of the session
+                    login(request, user)  # the user is now logged in
+                data = {
+                    'result': str('success')
+                }
+            else:
+                data = {
+                    'result': str('error')
+                }
+            return JsonResponse(data, content_type='application/json')
+        if req.find('check_session') != -1:
+            print('check session')
+            user = authenticate(username=str(p_arr[1]), password=str(p_arr[2]))
+            if user is not None:
+                if user.is_active:
+                    request.session.set_expiry(86400)  # sets the exp. value of the session
+                    login(request, user)  # the user is now logged in
                 data = {
                     'result': str('success')
                 }

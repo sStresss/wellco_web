@@ -39,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="275" column="40" selection-start-line="275" selection-start-column="40" selection-end-line="275" selection-end-column="40" />
+            <state relative-caret-position="160">
+              <caret line="268" column="30" selection-start-line="268" selection-start-column="30" selection-end-line="268" selection-end-column="30" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
                 <element signature="e#610#683#0" />
@@ -71,7 +71,6 @@
                 <element signature="e#8355#10436#0" />
                 <element signature="e#8681#8951#0" />
                 <element signature="e#9838#10026#0" />
-                <element signature="e#10927#12056#0" />
                 <element signature="e#11544#11647#0" />
                 <element signature="e#12086#21056#0" />
                 <element signature="e#12266#22240#0" />
@@ -706,8 +705,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="449" column="23" selection-start-line="449" selection-start-column="23" selection-end-line="449" selection-end-column="23" />
+            <state relative-caret-position="-199">
+              <caret line="459" column="78" selection-start-line="459" selection-start-column="78" selection-end-line="459" selection-end-column="78" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#button#0;n#div#2;n#body#0;n#html#0;n#!!top" />
@@ -825,9 +824,15 @@
                 <element signature="n#style#0;n#a#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#script#7;n#body#0;n#html#0;n#!!top" />
                 <element signature="e#26829#26909#0" />
+                <element signature="e#31496#31678#0#HTML" />
+                <element signature="e#31731#31913#0#HTML" />
                 <element signature="e#26985#27127#0#HTML" />
+                <element signature="e#27276#27418#0#HTML" />
                 <element signature="e#27527#27669#0#HTML" />
                 <element signature="e#27833#28005#0#HTML" />
+                <element signature="e#34275#34784#0#HTML" />
+                <element signature="e#34314#34476#0#HTML" />
+                <element signature="e#34586#34766#0#HTML" />
                 <element signature="e#28600#28719#0" />
                 <element signature="e#28765#29314#0" />
                 <element signature="e#28808#28990#0#HTML" />
@@ -1347,12 +1352,12 @@
       <workItem from="1638875544656" duration="17002000" />
       <workItem from="1639033960214" duration="490000" />
       <workItem from="1639034882640" duration="28882000" />
-      <workItem from="1639210601991" duration="40015000" />
+      <workItem from="1639210601991" duration="42865000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="704373000" />
+    <option name="totallyTimeSpent" value="707223000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1932" height="1092" extended-state="0" />
@@ -1970,17 +1975,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/blog.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="65" column="26" lean-forward="true" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/blog/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="275" column="40" selection-start-line="275" selection-start-column="40" selection-end-line="275" selection-end-column="40" />
+        <state relative-caret-position="160">
+          <caret line="268" column="30" selection-start-line="268" selection-start-column="30" selection-end-line="268" selection-end-column="30" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
             <element signature="e#610#683#0" />
@@ -2011,7 +2009,6 @@
             <element signature="e#8355#10436#0" />
             <element signature="e#8681#8951#0" />
             <element signature="e#9838#10026#0" />
-            <element signature="e#10927#12056#0" />
             <element signature="e#11544#11647#0" />
             <element signature="e#12086#21056#0" />
             <element signature="e#12266#22240#0" />
@@ -2193,10 +2190,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/blog.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="65" column="26" lean-forward="true" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="449" column="23" selection-start-line="449" selection-start-column="23" selection-end-line="449" selection-end-column="23" />
+        <state relative-caret-position="-199">
+          <caret line="459" column="78" selection-start-line="459" selection-start-column="78" selection-end-line="459" selection-end-column="78" />
           <folding>
             <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#button#0;n#div#2;n#body#0;n#html#0;n#!!top" />
@@ -2314,9 +2318,15 @@
             <element signature="n#style#0;n#a#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#script#7;n#body#0;n#html#0;n#!!top" />
             <element signature="e#26829#26909#0" />
+            <element signature="e#31496#31678#0#HTML" />
+            <element signature="e#31731#31913#0#HTML" />
             <element signature="e#26985#27127#0#HTML" />
+            <element signature="e#27276#27418#0#HTML" />
             <element signature="e#27527#27669#0#HTML" />
             <element signature="e#27833#28005#0#HTML" />
+            <element signature="e#34275#34784#0#HTML" />
+            <element signature="e#34314#34476#0#HTML" />
+            <element signature="e#34586#34766#0#HTML" />
             <element signature="e#28600#28719#0" />
             <element signature="e#28765#29314#0" />
             <element signature="e#28808#28990#0#HTML" />
