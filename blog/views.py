@@ -378,13 +378,38 @@ def structure(request):
                     if str(well.applID) == str(appl_cur_id) and str(well.typeID) == str(type.id):
                         value = int(well.w_value)
                 p_arr.append(value)
+            print('MPZ IN: ', p_arr)
+            wells = Well.objects.all().order_by('id')
+            appls = Appl_mpz.objects.all().order_by('id')
+            mpz_cur_num = '0'
+            for appl in appls:
+                if str(appl.id) == str(appl_cur_id):
+                    mpz_cur_num = str(appl.mpz_appl_name)
+            ppp_arr = []
+            for type in types:
+                well_counter = 0
+                for well in wells:
+                    if str(well.req_num) == str(mpz_cur_num) and str(well.type) == str(type.type_name):
+                        well_counter+=1
+                ppp_arr.append(well_counter )
+            print('MPZ OUT: ', ppp_arr)
+
+            j = 0
+            pppp_arr = []
+            for j in range(len(types)):
+                delta = int(p_arr[j]) - int(ppp_arr[j])
+                pppp_arr.append(delta)
+            print('MPZ DELTA: ', pppp_arr)
             for i in range(len(types)):
                 pp_arr = []
                 pp_arr.append(str(types[i]))
                 pp_arr.append(str(p_arr[i]))
+                pp_arr.append(str(ppp_arr[i]))
+                pp_arr.append(str(pppp_arr[i]))
                 data[i] = pp_arr
                 json_data = json.dumps(data)
             json_res = json.loads(json_data)
+            print('json_res: ', json_res)
             return JsonResponse(json_res, content_type='application/json')
         if req.find('get_by_data') != -1:
             data = {}

@@ -1017,8 +1017,8 @@
                         for (const [key, value] of Object.entries(resp)) {
                             document.getElementById('tbl_well_in_mpz-' + value[0]).innerHTML = value[1];
                             document.getElementById('tbl_well_in_mpz-' + value[0]).value = value[1];
-                            document.getElementById('tbl_well_given-' + value[0]).innerHTML = value[1];
-                            document.getElementById('tbl_well_pathof-' + value[0]).innerHTML = value[1];
+                            document.getElementById('tbl_well_given-' + value[0]).innerHTML = value[2];
+                            document.getElementById('tbl_well_pathof-' + value[0]).innerHTML = value[3];
                         }
                     },
                     error: function(result) {
