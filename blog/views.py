@@ -590,7 +590,6 @@ def statistic(request):
             return render(request, 'blog/statistic.html',
                           {'load': 'success'})
 
-
 #----------------------------------------STATISTIC RELEASE HEAD---------------------------------------------------------
 def makeReleaseHead(release_subhead_arr):
     month_arr = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь',

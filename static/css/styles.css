@@ -297,3 +297,7 @@ footer {
 .scroll::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 100px rgb(14,130,155);
 }
+
+.modal-open .container-fluid, .modal-open  .container {
+    -webkit-filter: blur(5px) grayscale(90%);
+}
