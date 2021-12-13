@@ -8,13 +8,13 @@
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         <link rel="stylesheet" href="{% static 'css/jquery.treegrid.css' %}">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-
     </head>
     <body>
         <div class="background-container">
             <div id="picoutput"></div>
             <div class="page-header">
-                <h1><a class="head_title" style="cursor: pointer" onclick="main_reload()">С-ПЛАСТ </a></h1>
+                <h1><img src="{% static '/image/sinaps_.png' %}" class="image" alt="" style="height: 45px; margin-bottom
+                : 5px"><a class="head_title" style="cursor: pointer; margin-left: 10px" onclick="main_reload()">С-ПЛАСТ </a></h1>
             </div>
             <div class="container-fluid" style="padding-top: 0px; padding-left: 30px">
                 <button id="release" name="but1" value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter" onclick="">
@@ -488,37 +488,6 @@
                 let session = window.localStorage.getItem('session_token')
                 let user = window.localStorage.getItem('session_user')
                 let islogined = window.localStorage.getItem('islogined')
-                {#console.log(session)#}
-                {#  $.ajax({#}
-                {#     type: "GET",#}
-                {#     url: "/",#}
-                {#     dataType: "json",#}
-                {#     data: {#}
-                {#        name: 'check_session',#}
-                {#         user: user,#}
-                {#        token: session#}
-                {#     },#}
-                {#     success: function(resp) {#}
-                {#         if (resp.result == 'success') {#}
-                {#             console.log('user logged in')#}
-                {#         }#}
-                {#         else {#}
-                {#             $('#modalLogin').modal({backdrop: 'static', keyboard: false, style: ''})#}
-                {#             $('#modalLogin').modal('show')#}
-                {#         }#}
-                {#     },#}
-                {#     error: function(result) {#}
-                {#         var readyState = {#}
-                {#         1: "Loading",#}
-                {#         2: "Loaded",#}
-                {#         3: "Interactive",#}
-                {#         4: "Complete"#}
-                {#         };#}
-                {#         if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {#}
-                {#             alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);#}
-                {#         }#}
-                {#     }#}
-                {# });#}
                 if (islogined == 'true') {
                     console.log('user logged in')
                 }
@@ -1244,7 +1213,6 @@
                 }
             }
             function main_reload() {
-
                 window.location.reload(true)
                 window.localStorage.setItem('islogined', 'true');
             }
