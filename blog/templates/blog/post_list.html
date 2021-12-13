@@ -63,323 +63,9 @@
                     </div>
                     </div>
                 </div>
-                {#========================LOGIN==========================#}
-
-                {#=======================================================#}
-                {#====================MODAL RELEASE======================#}
-                <div class="row">
-                    <div class="container-fluid row">
-                        <form method="GET">
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                              <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Выпуск колодца</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                        <div class="row">
-                                            <div class="col-sm-5" style="padding-left: 10px;">
-                                            <td>Дата производства:</td>
-                                              <br>
-                                              <br>
-                                            <td>Колодец:</td>
-                                              <br>
-                                              <br>
-                                            <td>Серийный номер:</td>
-                                              <br>
-                                              <br>
-                                            <td>Приход:</td>
-                                              <br>
-                                            </div>
-                                            <div  class="col-sm-4" style="text-align: left">
-                                                <input data-date-format="dd/mm/yyyy" id="release_date" style="height: 23px;">
-                                                <br>
-                                                <br>
-                                                <select id="release_type" class="form-select" aria-label="Default select example">
-                                                  <option selected>{{ type_first_elem }}</option>
-                                                    {% for type in types %}
-                                                        <tr>
-                                                        {% if type.pk > 1 %}
-                                                            <tr>
-                                                            <option value="{{ type.type_name }}">{{ type.type_name }}</option>
-                                                            </tr>
-                                                        {% endif %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                </select>
-                                                <br>
-                                                <br>
-                                                <h2 id="release_serial" name="serial" style="margin-top: -6px; font-weight: inherit;"></h2>
-                                                <br>
-                                                <br>
-                                                <select id="release_wh" class="form-select" aria-label="Default select example" style="margin-top: -49px; ">
-                                                  <option selected>{{ wh_first_elem }}</option>
-                                                    {% for wh in wh_lst %}
-                                                        <tr>
-                                                        {% if wh_lst.pk > 1 %}
-                                                            <tr>
-                                                            <option value="{{ wh.pk }}">{{ wh.type_name }}</option>
-                                                            </tr>
-                                                        {% endif %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                </select>
-                                                <br>
-                                            </div>
-                                        </div>
-                                      </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button id="modal_cancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                    <button id="modal_save" type="button" class="btn btn-primary" onclick="">Выпустить</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <input id="access_token" type="hidden" name="access_token" value="<?php echo $_SESSION['access_token']; ?>" />
-                        </form>
-                    </div>
-                </div>
-                {#=======================================================#}
-                {#====================MODAL TRANSFER=====================#}
-                <form method="GET">
-                    <div class="modal fade" id="exampleModalCenter_transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Перемещение</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                              <div id="connect_well_full" hidden></div>
-                              <div id="connect_well_arr" hidden></div>
-                              <div id="connect_well_type" hidden></div>
-                              <div id="parent_count" hidden>0</div>
-                              <div id="serial_lst" hidden></div>
-                          </div>
-                          <div class="modal-body">
-                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                <div class="row">
-                                    <div class="content-box" style="text-align: left; margin-left: 15px; width: 440px;">
-                                        <button id="button_add" style="margin-left: 0px;" name="but1"  value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_well_lst" onclick="initWellTbl({{ type_first_elem }})">
-                                            Добавить
-                                        </button>
-                                        <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px;">
-                                            <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px;">
-                                                <th scope="col" ><span style="margin-left: 32px">Тип колодца</span></th>
-                                                <th scope="col"><span style="margin-left: 235px">Количество</span></th>
-                                            </div>
-                                            <div class="row" id="" >
-                                                <div class="scroll" style="height: 300px; overflow-y: scroll">
-                                                <table id="transfer_well_lst" class="tree" style="margin-left: 20px; width: 450px;">
-                                                </table>
-                                                </div>
-                                            </div>
-                                          </div>
-                                    <div class="row" style="margin-left: 0px; margin-top: 5px">
-                                        <div clacc="column">
-                                            <td>Всего к передаче:</td>
-                                                <br>
-                                                <br>
-                                            <td>Дата передачи:</td>
-                                                <br>
-                                                <br>
-                                            <td>Действие:</td>
-                                                <br>
-                                                <br>
-                                            <td><span id="transfer_field_text">Шифр:</span></td>
-                                                <br>
-                                                <br>
-                                            <td>Заявка:</td>
-                                        </div>
-                                        <div class="column" style="margin-left: 5px;">
-
-                                            <td><span id="transfer_well_counter">0</span></td>
-                                                <br>
-                                                <br>
-                                            <td><input data-date-format="dd/mm/yyyy" id="transaction_date" style="height: 23px; width: 105px"></td>
-                                                <br>
-                                                <br>
-                                            <td>
-                                                <select id="transaction_action_type" class="form-select" aria-label="Default select example">
-                                                  <option value="transfer" selected>Перемещение</option>
-                                                    <tr>
-                                                        <option value="selling">Продажа</option>
-                                                    </tr>
-                                                </select>
-                                            </td>
-                                                <br>
-                                                <br>
-                                            <td>
-                                                <select id="transfer_code_num" class="form-select" aria-label="Default select example" style="width: 130px">
-                                                  <option selected>{{ code_first_elem }}</option>
-                                                    {% for code in code_lst %}
-                                                        <tr>
-                                                        {% if code.code_name != code_first_elem %}
-                                                            <tr>
-                                                            <option value="{{ code.code_name }}">{{ code.code_name }}</option>
-                                                            </tr>
-                                                        {% endif %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                </select>
-                                            </td>
-                                                <br>
-                                                <br>
-                                            <td>
-                                                <select id="transfer_mpz_num" class="form-select" aria-label="Default select example" style="width: 130px;">
-                                                  <option selected>{{ first_code_mpz_lst_first_elem }}</option>
-                                                    {% for mpz in first_code_mpz_lst %}
-                                                        <tr>
-                                                        {% if mpz != first_code_mpz_lst_first_elem %}
-                                                            <tr>
-                                                            <option value="{{ mpz }}">{{ mpz }}</option>
-                                                            </tr>
-                                                        {% endif %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                </select>
-                                            </td>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                              </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button id="modal_transfer_cancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                            <button id="modal_transfer_save" type="button" class="btn btn-primary" onclick="">Переместить</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </form>
-                {#=======================================================#}
-                {#====================MODAL WELL LST ====================#}
-                <form method="GET">
-                    <div class="modal fade" id="modal_well_lst" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Список колодцев</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          <div id="well_selected_array" hidden></div>
-                            <div id="well_selected_counter" value="" hidden>0</div>
-                          </div>
-                          <div class="modal-body">
-
-                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                <div class="row">
-                                        <div class="column" style="margin-left: 15px">
-                                            Тип колодца:
-                                        </div>
-                                        <div class="column" style="margin-left: 5px">
-                                            <select id="modal_cb_type_lst" class="form-select" aria-label="Default select example">
-                                                <option id="modal_cb_type_lst_first" value="{{ type_first_elem }}" selected>{{ type_first_elem }}</option>
-                                                  {% for type in types %}
-                                                        <tr>
-                                                        {% if type.pk > 1 %}
-                                                            <tr>
-                                                            <option value="{{ type.type_name }}">{{ type.type_name }}</option>
-                                                            </tr>
-                                                        {% endif %}
-                                                        </tr>
-                                                    {% endfor %}
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-6" style="margin-left: -17px; padding-right: 0px;">Выбрано: </div>
-                                        <div id="well_counter" class="col-sm-1" style="margin-left: 2px">0</div>
-                                </div>
-                                <div class="row">
-                                        <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px; margin-left: 10px">
-                                            <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px;">
-                                                <th scope="col" ><span style="padding-left: 60px">Тип</span></th>
-                                                <th scope="col"><span style="margin-left: 92px">Серийный номер</span></th>
-                                                <th scope="col"><span style="margin-left: 49px">Произведен</span></th>
-                                            </div>
-                                            <div class="row" id="" >
-                                                <div class="scroll" style="height: 527px; overflow-y: scroll">
-                                                <table id="modal_well_lst_table" class="tree" style="margin-left: 10px; width: 467px;" >
-                                                    <tr id="123" onclick="tbl_well_click(id())">
-                                                        <td class="col-sm-4" style="padding-left: 0px; ">С-пласт</td>
-                                                        <td class="col-sm-4" style="padding-left: 45px; "></td>
-                                                        <td style="padding-right: 20px; text-align: right"></td>
-                                                    </tr>
-                                                </table>
-                                                </div>
-                                            </div>
-                                          </div>
-                                </div>
-                              </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button id="modal_well_lst_cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                            <button id="modal_well_lst_save" type="button" class="btn btn-primary" onclick="add_well_to_trans_lst()">Добавить</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </form>
-                {#=======================================================#}
-                {#=======================MODAL M29=======================#}
-                <form method="GET">
-                    <div class="modal fade" id="exampleModalCenter_m29" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
-                        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px; width: 800px; max-height: 800px; height: 800px">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Отчет М29</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body" style="">
-                            <div class="content-box" style="background-color: #ffffff;">
-                                <div class="row" style="margin-left: auto; margin-right: auto">
-                                    <div>
-                                        <a>Период от </a>
-                                        <td><input data-date-format="dd/mm/yyyy" id="m29_date_start" style="height: 23px; width: 105px; margin-left: 5px"></td>
-                                        <a style="margin-left: 5px"> до </a>
-                                        <td><input data-date-format="dd/mm/yyyy" id="m29_date_end" style="height: 23px; width: 105px; margin-left: 5px;margin-right: 5px;"></td>
-                                    </div>
-                                    <div class="content" style="margin-left: auto">
-                                        <button id="m29_get" name="but1" value="val_5" type="button" class="btn btn-warning btn-sm" onclick="modal_m29_get_data()">
-                                            Сформировать
-                                        </button>
-                                        <button id="m29_save" name="but1" value="val_5" type="button" class="btn btn-info btn-sm" >
-                                            Сохранить
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="row" style="padding-top: 10px; margin-left: auto; margin-right: auto; height: 700px">
-                                    <table class=" table table-bordered"  style="margin-bottom: 30px">
-                                        <thead>
-                                            <tr>
-                                              <th scope="col" style="text-align: center; width: 180px">Колодец</th>
-                                              <th scope="col" style="text-align: center; width: 150px">Сост. на начало</th>
-                                              <th scope="col" style="text-align: center; width: 135px">Приход</th>
-                                              <th scope="col" style="text-align: center; width: 135px">Уход</th>
-                                              <th scope="col" style="text-align: center; width: 150px">Сост. на конец</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="m29_tbl_body">
-                                        </tbody>
-                                    </table>
-                                </div>
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </form>
-                {#=======================================================#}
             </div>
         </div>
+        {#========================LOGIN==========================#}
         <form method="GET">
             <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
@@ -424,6 +110,315 @@
               </div>
             </div>
         </form>
+        {#=======================================================#}
+        {#====================MODAL RELEASE======================#}
+        <form method="GET">
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Выпуск колодца</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                        <div class="row">
+                            <div class="col-sm-5" style="padding-left: 10px;">
+                            <td>Дата производства:</td>
+                              <br>
+                              <br>
+                            <td>Колодец:</td>
+                              <br>
+                              <br>
+                            <td>Серийный номер:</td>
+                              <br>
+                              <br>
+                            <td>Приход:</td>
+                              <br>
+                            </div>
+                            <div  class="col-sm-4" style="text-align: left">
+                                <input data-date-format="dd/mm/yyyy" id="release_date" style="height: 23px;">
+                                <br>
+                                <br>
+                                <select id="release_type" class="form-select" aria-label="Default select example">
+                                  <option selected>{{ type_first_elem }}</option>
+                                    {% for type in types %}
+                                        <tr>
+                                        {% if type.pk > 1 %}
+                                            <tr>
+                                            <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                            </tr>
+                                        {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </select>
+                                <br>
+                                <br>
+                                <h2 id="release_serial" name="serial" style="margin-top: -6px; font-weight: inherit;"></h2>
+                                <br>
+                                <br>
+                                <select id="release_wh" class="form-select" aria-label="Default select example" style="margin-top: -49px; ">
+                                  <option selected>{{ wh_first_elem }}</option>
+                                    {% for wh in wh_lst %}
+                                        <tr>
+                                        {% if wh_lst.pk > 1 %}
+                                            <tr>
+                                            <option value="{{ wh.pk }}">{{ wh.type_name }}</option>
+                                            </tr>
+                                        {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </select>
+                                <br>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="modal_cancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                    <button id="modal_save" type="button" class="btn btn-primary" onclick="">Выпустить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <input id="access_token" type="hidden" name="access_token" value="<?php echo $_SESSION['access_token']; ?>" />
+        </form>
+        {#=======================================================#}
+        {#====================MODAL TRANSFER=====================#}
+        <form method="GET">
+            <div class="modal fade" id="exampleModalCenter_transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Перемещение</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                      <div id="connect_well_full" hidden></div>
+                      <div id="connect_well_arr" hidden></div>
+                      <div id="connect_well_type" hidden></div>
+                      <div id="parent_count" hidden>0</div>
+                      <div id="serial_lst" hidden></div>
+                  </div>
+                  <div class="modal-body">
+                    <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                        <div class="row">
+                            <div class="content-box" style="text-align: left; margin-left: 15px; width: 440px;">
+                                <button id="button_add" style="margin-left: 0px;" name="but1"  value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_well_lst" onclick="initWellTbl({{ type_first_elem }})">
+                                    Добавить
+                                </button>
+                                <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px;">
+                                    <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px;">
+                                        <th scope="col" ><span style="margin-left: 32px">Тип колодца</span></th>
+                                        <th scope="col"><span style="margin-left: 235px">Количество</span></th>
+                                    </div>
+                                    <div class="row" id="" >
+                                        <div class="scroll" style="height: 300px; overflow-y: scroll">
+                                        <table id="transfer_well_lst" class="tree" style="margin-left: 20px; width: 450px;">
+                                        </table>
+                                        </div>
+                                    </div>
+                                  </div>
+                            <div class="row" style="margin-left: 0px; margin-top: 5px">
+                                <div clacc="column">
+                                    <td>Всего к передаче:</td>
+                                        <br>
+                                        <br>
+                                    <td>Дата передачи:</td>
+                                        <br>
+                                        <br>
+                                    <td>Действие:</td>
+                                        <br>
+                                        <br>
+                                    <td><span id="transfer_field_text">Шифр:</span></td>
+                                        <br>
+                                        <br>
+                                    <td>Заявка:</td>
+                                </div>
+                                <div class="column" style="margin-left: 5px;">
+
+                                    <td><span id="transfer_well_counter">0</span></td>
+                                        <br>
+                                        <br>
+                                    <td><input data-date-format="dd/mm/yyyy" id="transaction_date" style="height: 23px; width: 105px"></td>
+                                        <br>
+                                        <br>
+                                    <td>
+                                        <select id="transaction_action_type" class="form-select" aria-label="Default select example">
+                                          <option value="transfer" selected>Перемещение</option>
+                                            <tr>
+                                                <option value="selling">Продажа</option>
+                                            </tr>
+                                        </select>
+                                    </td>
+                                        <br>
+                                        <br>
+                                    <td>
+                                        <select id="transfer_code_num" class="form-select" aria-label="Default select example" style="width: 130px">
+                                          <option selected>{{ code_first_elem }}</option>
+                                            {% for code in code_lst %}
+                                                <tr>
+                                                {% if code.code_name != code_first_elem %}
+                                                    <tr>
+                                                    <option value="{{ code.code_name }}">{{ code.code_name }}</option>
+                                                    </tr>
+                                                {% endif %}
+                                                </tr>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                        <br>
+                                        <br>
+                                    <td>
+                                        <select id="transfer_mpz_num" class="form-select" aria-label="Default select example" style="width: 130px;">
+                                          <option selected>{{ first_code_mpz_lst_first_elem }}</option>
+                                            {% for mpz in first_code_mpz_lst %}
+                                                <tr>
+                                                {% if mpz != first_code_mpz_lst_first_elem %}
+                                                    <tr>
+                                                    <option value="{{ mpz }}">{{ mpz }}</option>
+                                                    </tr>
+                                                {% endif %}
+                                                </tr>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="modal_transfer_cancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                    <button id="modal_transfer_save" type="button" class="btn btn-primary" onclick="">Переместить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+        {#=======================================================#}
+        {#====================MODAL WELL LST ====================#}
+        <form method="GET">
+            <div class="modal fade" id="modal_well_lst" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Список колодцев</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  <div id="well_selected_array" hidden></div>
+                    <div id="well_selected_counter" value="" hidden>0</div>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                        <div class="row">
+                                <div class="column" style="margin-left: 15px">
+                                    Тип колодца:
+                                </div>
+                                <div class="column" style="margin-left: 5px">
+                                    <select id="modal_cb_type_lst" class="form-select" aria-label="Default select example">
+                                        <option id="modal_cb_type_lst_first" value="{{ type_first_elem }}" selected>{{ type_first_elem }}</option>
+                                          {% for type in types %}
+                                                <tr>
+                                                {% if type.pk > 1 %}
+                                                    <tr>
+                                                    <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                                    </tr>
+                                                {% endif %}
+                                                </tr>
+                                            {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-sm-6" style="margin-left: -17px; padding-right: 0px;">Выбрано: </div>
+                                <div id="well_counter" class="col-sm-1" style="margin-left: 2px">0</div>
+                        </div>
+                        <div class="row">
+                                <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px; margin-left: 10px">
+                                    <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px;">
+                                        <th scope="col" ><span style="padding-left: 60px">Тип</span></th>
+                                        <th scope="col"><span style="margin-left: 92px">Серийный номер</span></th>
+                                        <th scope="col"><span style="margin-left: 49px">Произведен</span></th>
+                                    </div>
+                                    <div class="row" id="" >
+                                        <div class="scroll" style="height: 527px; overflow-y: scroll">
+                                        <table id="modal_well_lst_table" class="tree" style="margin-left: 10px; width: 467px;" >
+                                            <tr id="123" onclick="tbl_well_click(id())">
+                                                <td class="col-sm-4" style="padding-left: 0px; ">С-пласт</td>
+                                                <td class="col-sm-4" style="padding-left: 45px; "></td>
+                                                <td style="padding-right: 20px; text-align: right"></td>
+                                            </tr>
+                                        </table>
+                                        </div>
+                                    </div>
+                                  </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="modal_well_lst_cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button id="modal_well_lst_save" type="button" class="btn btn-primary" onclick="add_well_to_trans_lst()">Добавить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+        {#=======================================================#}
+        {#=======================MODAL M29=======================#}
+        <form method="GET">
+            <div class="modal fade" id="exampleModalCenter_m29" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px; width: 800px; max-height: 800px; height: 800px">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Отчет М29</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" style="">
+                    <div class="content-box" style="background-color: #ffffff;">
+                        <div class="row" style="margin-left: auto; margin-right: auto">
+                            <div>
+                                <a>Период от </a>
+                                <td><input data-date-format="dd/mm/yyyy" id="m29_date_start" style="height: 23px; width: 105px; margin-left: 5px"></td>
+                                <a style="margin-left: 5px"> до </a>
+                                <td><input data-date-format="dd/mm/yyyy" id="m29_date_end" style="height: 23px; width: 105px; margin-left: 5px;margin-right: 5px;"></td>
+                            </div>
+                            <div class="content" style="margin-left: auto">
+                                <button id="m29_get" name="but1" value="val_5" type="button" class="btn btn-warning btn-sm" onclick="modal_m29_get_data()">
+                                    Сформировать
+                                </button>
+                                <button id="m29_save" name="but1" value="val_5" type="button" class="btn btn-info btn-sm" >
+                                    Сохранить
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 10px; margin-left: auto; margin-right: auto; height: 700px">
+                            <table class=" table table-bordered"  style="margin-bottom: 30px">
+                                <thead>
+                                    <tr>
+                                      <th scope="col" style="text-align: center; width: 180px">Колодец</th>
+                                      <th scope="col" style="text-align: center; width: 150px">Сост. на начало</th>
+                                      <th scope="col" style="text-align: center; width: 135px">Приход</th>
+                                      <th scope="col" style="text-align: center; width: 135px">Уход</th>
+                                      <th scope="col" style="text-align: center; width: 150px">Сост. на конец</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="m29_tbl_body">
+                                </tbody>
+                            </table>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+        {#=======================================================#}
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -492,36 +487,38 @@
             $(document).ready(function() {
                 let login_data = window.localStorage.getItem('login_data')
                 console.log(login_data)
-                 $.ajax({
-                    type: "GET",
-                    url: "/",
-                    dataType: "json",
-                    data: {
-                    name: 'check_session',
-                        login: login_data.login,
-                        password: login_data.password,
-                    },
-                    success: function(resp) {
-                        if (resp.result == 'success') {
-                            console.log('user logged in')
-                        }
-                        else {
-                            $('#modalLogin').modal({backdrop: 'static', keyboard: false, style: ''})
-                            $('#modalLogin').modal('show')
-                        }
-                    },
-                    error: function(result) {
-                        var readyState = {
-                        1: "Loading",
-                        2: "Loaded",
-                        3: "Interactive",
-                        4: "Complete"
-                        };
-                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
-                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
-                        }
-                    }
-                });
+                 $('#modalLogin').modal({backdrop: 'static', keyboard: false, style: ''})
+                 $('#modalLogin').modal('show')
+                //  $.ajax({
+                //     type: "GET",
+                //     url: "/",
+                //     dataType: "json",
+                //     data: {
+                //     name: 'check_session',
+                //         login: login_data.login,
+                //         password: login_data.password,
+                //     },
+                //     success: function(resp) {
+                //         if (resp.result == 'success') {
+                //             console.log('user logged in')
+                //         }
+                //         else {
+                //             $('#modalLogin').modal({backdrop: 'static', keyboard: false, style: ''})
+                //             $('#modalLogin').modal('show')
+                //         }
+                //     },
+                //     error: function(result) {
+                //         var readyState = {
+                //         1: "Loading",
+                //         2: "Loaded",
+                //         3: "Interactive",
+                //         4: "Complete"
+                //         };
+                //         if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                //             alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                //         }
+                //     }
+                // });
 
                 var infoModal = $('#release_serial');
                 var table = $('#well_table');

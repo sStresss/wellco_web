@@ -286,7 +286,7 @@ def post_list(request):
             if user is not None:
                 if user.is_active:
                     request.session.set_expiry(86400)  # sets the exp. value of the session
-                    login(request, user)  # the user is now logged in
+                    print()  # the user is now logged in
                 data = {
                     'result': str('success')
                 }

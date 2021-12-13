@@ -9,472 +9,406 @@
             <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
-        <div id="picoutput"></div>
-        <div class="page-header">
-            <h1><a href="/" class="head_title">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">управление заявками</span> </a></h1>
-        </div>
-        <div class="row" style="width: 100%">
-            <div class="column" style="border-right: 2px solid #eeeeee; width: 12%; height: 1000px; margin-left: 50px;">
-                <div  style="border-bottom: 1px solid #eeeeee; height: 35px; margin-left: 15px; ">
-                    <div class="row">
-                        <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 219px; height: 34px; font-size: 19px; border: none; outline: none; margin-left: -15px">
-                            <option id="pg" value="pg" selected>Проектные группы</option>
-                            <tr>
-                            <option id="os" value="os">Сторонние продажи</option>
-                            </tr>
-                        </select>
-                        <button id="addPG" name="but1" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 10px; background-color: #ffffff" data-toggle="modal" data-target="#modalNewPg" onclick="">
-                            <h1 style="margin-top: -8px; margin-left: -2px">+</h1>
-                        </button>
-                        <button id="addBY" name="but2" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 10px; background-color: #ffffff" data-toggle="modal" data-target="#modalNewBy" onclick="" hidden>
-                            <h1 style="margin-top: -8px; margin-left: -2px">+</h1>
-                        </button>
+        <div class="background-container">
+            <div id="picoutput"></div>
+            <div class="page-header">
+                <h1><a href="/" class="head_title">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">управление заявками</span> </a></h1>
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="column" style="border-right: 2px solid #eeeeee; width: 12%; height: 1000px; margin-left: 50px;">
+                    <div  style="border-bottom: 1px solid #eeeeee; height: 35px; margin-left: 15px; ">
+                        <div class="row">
+                            <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 219px; height: 34px; font-size: 19px; border: none; outline: none; margin-left: -15px">
+                                <option id="pg" value="pg" selected>Проектные группы</option>
+                                <tr>
+                                <option id="os" value="os">Сторонние продажи</option>
+                                </tr>
+                            </select>
+                            <button id="addPG" name="but1" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 10px; background-color: #ffffff" data-toggle="modal" data-target="#modalNewPg" onclick="">
+                                <h1 style="margin-top: -8px; margin-left: -2px">+</h1>
+                            </button>
+                            <button id="addBY" name="but2" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 10px; background-color: #ffffff" data-toggle="modal" data-target="#modalNewBy" onclick="" hidden>
+                                <h1 style="margin-top: -8px; margin-left: -2px">+</h1>
+                            </button>
+                        </div>
+
+
                     </div>
-                    {#===============MODAL ADD NEW PG===============#}
-                    <form method="GET">
+                    <div id="tbl_cont" class="row" style=" margin-top: 0px">
+                        <table id="table_struct" class="tree" style="margin-left: 0px; width: 270px;">
+                            {% for pg  in pg_lst %}
+                                <tr id="node-{{ pg.pk }}" class="custom_hov treegrid-{{ pg.pk }}" style="height: 50px;">
+                                    <td style="width: 240px;">{{ pg.pg_name }}</td>
+                                <td style="text-align: right">
+                                    <button id="addCode" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewCode" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takePgName(name)">
+                                        <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>
+                                    </button>
+                                </td>
+                                <td style="text-align: right">
+                                    <button id="delPG-{{ pg.pk }}" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" data-toggle="modal" data-target="#modalDellPg" onclick="del_pg_get_modal(name)">
+                                        <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
+                                    </button>
+                                </td>
+                                </tr>
+                                {% for code  in code_lst %}
+                                    {% if  code.connect_id == pg.id %}
+
+                                        <tr class="custom_hov treegrid-{{ pg.pk }}{{ code.id }} treegrid-parent-{{ pg.pk }}" style="width: 100px; height: 50px">
+                                            <td>#{{ code.code_name }}</td>
+                                            <td style="text-align: right">
+                                                <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewMpz" style=" height: 30px; width: 30px; margin-left: 0px; background-color: white; alignment: right" onclick="takeCodeName(name)">
+                                                    <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>
+                                                </button>
+                                            </td>
+                                            <td style="text-align: right">
+                                                <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellCode" onclick="del_code_get_modal(name)">
+                                                    <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        {% for mpz  in mpz_lst %}
+                                            {% if  mpz.connect_id == code.id %}
+                                                <tr id="{{ mpz.pk }}" class="custom_hov treegrid-parent-{{ pg.pk }}{{ code.id }}" style="height: 50px;">
+                                                    <td style="width: 100px">МПЗ №{{ mpz.mpz_appl_name }}</td>
+                                                    <td style="text-align: right">
+                                                        <button id="infoMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_mpz_data(name, {{ pg.pk }})">
+                                                            <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>
+                                                        </button>
+                                                    </td>
+                                                    <td style="text-align: right">
+                                                        <button id="dellMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellMpz" onclick="del_mpz_get_modal(name)">
+                                                            <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="column" style="margin-left: -1px; margin-top: 7px">
+                    <div class=" container row" style="margin-top: -20px">
+                        <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px">
+                            <thead class="">
+                                <tr >
+                                  <th scope="col" style="width: 250px; text-align: center"><h1 id="GlobalMpzNumConnect" hidden></h1>Колодец</th>
+                                  <th scope="col" style="width: 160px; text-align: center" >Всего в заявке</th>
+                                  <th scope="col" style="width: 160px; text-align: center" >Выдано</th>
+                                  <th scope="col" style="width: 160px; text-align: center" >К выдаче</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for type in types %}
+                                    <tr  style="height: 50px">
+                                      <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center;" >С-пласт {{ type.type_name }}</td>
+                                      <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center;"  data-toggle="modal" data-target="#modalEditMpz" class="mpz_button" onclick="getWellName({{ type }})" >
+                                          <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
+                                      </td>
+                                      <td  id="tbl_well_given-{{ type }}" style="text-align: center" >-</td>
+                                      <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >-</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#===============MODAL ADD NEW PG===============#}
+        <form method="GET">
+            <div class="modal fade" id="modalNewPg" tabindex="-1" role="dialog" aria-labelledby="modalNewPg" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Новая проектная группа</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="content-box" style="text-align:right; background-color: #ffffff;">
                         <div class="row">
-                            <div class="container-fluid row">
-                                <form method="GET">
-                                    <div class="modal fade" id="modalNewPg" tabindex="-1" role="dialog" aria-labelledby="modalNewPg" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Новая проектная группа</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body">
-                                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                                <div class="row">
-                                                    <div class="col-sm-4" style="padding-left: 10px;">
-                                                    <td>Имя пр. группы:</td>
-                                                    </div>
-                                                    <div  class="col-sm-4" style="text-align: left">
-                                                        <input  id="newPgName" style="height: 23px;">
-                                                    </div>
-                                                </div>
-                                              </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button id="modalNewPgCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                            <button id="modalNewPgSave" type="button" class="btn btn-primary" onclick="">Создать</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </form>
+                            <div class="col-sm-4" style="padding-left: 10px;">
+                            <td>Имя пр. группы:</td>
+                            </div>
+                            <div  class="col-sm-4" style="text-align: left">
+                                <input  id="newPgName" style="height: 23px;">
                             </div>
                         </div>
-                    </form>
-                    {#==============================================#}
-                    {#===============MODAL ADD NEW CODE=============#}
-                    <form method="GET">
-                        <div class="row">
-                            <div class="container-fluid row">
-                                <form method="GET">
-                                    <div class="modal fade" id="modalNewCode" tabindex="-1" role="dialog" aria-labelledby="modalNewCode" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title" id="newCodeModalTitle">Новый шифр</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body">
-                                            <div id="newCodeConnect" hidden></div>
-                                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                                <div class="row">
-                                                    <div class="col-sm-4" style="padding-left: 10px;">
-                                                    <td>Номер:</td>
-                                                    </div>
-                                                    <div  class="col-sm-4" style="text-align: left">
-                                                        <input  id="newCodeNum" style="height: 23px;">
-                                                    </div>
-                                                </div>
-                                              </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button id="modalNewCodeCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                            <button id="modalNewCodeSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
-                                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="modalNewPgCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                    <button id="modalNewPgSave" type="button" class="btn btn-primary" onclick="">Создать</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+        {#==============================================#}
+        {#===============MODAL ADD NEW CODE=============#}
+        <form method="GET">
+                        <div class="modal fade" id="modalNewCode" tabindex="-1" role="dialog" aria-labelledby="modalNewCode" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="newCodeModalTitle">Новый шифр</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="newCodeConnect" hidden></div>
+                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                    <div class="row">
+                                        <div class="col-sm-4" style="padding-left: 10px;">
+                                        <td>Номер:</td>
                                         </div>
-                                      </div>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-                    </form>
-                    {#==============================================#}
-                    {#===============MODAL ADD NEW MPZ==============#}
-                    <form method="GET">
-                        <div class="row">
-                            <div class="container-fluid row">
-                                <form method="GET">
-                                    <div class="modal fade" id="modalNewMpz" tabindex="-1" role="dialog" aria-labelledby="modalNewMpz" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Новая заявка МПЗ</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body">
-                                            <div id="newMpzConnect" hidden></div>
-                                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                                <div class="row">
-                                                    <div class="col-sm-4" style="padding-left: 10px;">
-                                                    <td>Номер заявки:</td>
-                                                    </div>
-                                                    <div  class="col-sm-4" style="text-align: left">
-                                                        <input  id="newMpz" style="height: 23px;">
-                                                    </div>
-                                                </div>
-                                              </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button id="modalNewMpzCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                            <button id="modalNewMpzSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
-                                          </div>
+                                        <div  class="col-sm-4" style="text-align: left">
+                                            <input  id="newCodeNum" style="height: 23px;">
                                         </div>
-                                      </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </form>
-                    {#==============================================#}
-                    {#===============MODAL EDIT MPZ WELL============#}
-                    <form method="GET">
-                        <div class="row">
-                            <div class="container-fluid row">
-                                <form method="GET">
-                                    <div class="modal fade" id="modalEditMpz" tabindex="-1" role="dialog" aria-labelledby="modalEditMpz" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Редактирование заявки</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body">
-                                            <div id="MpzNumConnect" hidden></div>
-                                            <div id="WellTypeConnect" hidden></div>
-                                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                                <div class="row">
-                                                    <div class="col-sm-4" style="padding-left: 10px;">
-                                                    <td>Количество:</td>
-                                                    </div>
-                                                    <div  class="col-sm-4" style="text-align: left">
-                                                        <select id="modal_well_num" class="form-select" aria-label="Default select example">
-
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                              </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button id="modalEditWellCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                            <button id="modalEditWellSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-            </form>
-                    {#==============================================#}
-                    {#===============MODAL ADD NEW BY===============#}
-                    <form method="GET">
-                    <div class="row">
-                        <div class="container-fluid row">
-                            <form method="GET">
-                                <div class="modal fade" id="modalNewBy" tabindex="-1" role="dialog" aria-labelledby="modalNewBy" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Новый заказчик</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                            <div class="row">
-                                                <div class="col-sm-4" style="padding-left: 10px;">
-                                                <td>Имя покупателя:</td>
-                                                </div>
-                                                <div  class="col-sm-4" style="text-align: left">
-                                                    <input  id="newByName" style="height: 23px;">
-                                                </div>
-                                            </div>
-                                          </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button id="modalNewByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                        <button id="modalNewBySave" type="button" class="btn btn-primary" onclick="">Создать</button>
-                                      </div>
                                     </div>
                                   </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalNewCodeCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalNewCodeSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+        {#==============================================#}
+        {#===============MODAL ADD NEW MPZ==============#}
+        <form method="GET">
+                        <div class="modal fade" id="modalNewMpz" tabindex="-1" role="dialog" aria-labelledby="modalNewMpz" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Новая заявка МПЗ</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="newMpzConnect" hidden></div>
+                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                    <div class="row">
+                                        <div class="col-sm-4" style="padding-left: 10px;">
+                                        <td>Номер заявки:</td>
+                                        </div>
+                                        <div  class="col-sm-4" style="text-align: left">
+                                            <input  id="newMpz" style="height: 23px;">
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalNewMpzCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalNewMpzSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+</form>
+        {#==============================================#}
+        {#===============MODAL EDIT MPZ WELL============#}
+        <form method="GET">
+                        <div class="modal fade" id="modalEditMpz" tabindex="-1" role="dialog" aria-labelledby="modalEditMpz" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Редактирование заявки</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="MpzNumConnect" hidden></div>
+                                <div id="WellTypeConnect" hidden></div>
+                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                    <div class="row">
+                                        <div class="col-sm-4" style="padding-left: 10px;">
+                                        <td>Количество:</td>
+                                        </div>
+                                        <div  class="col-sm-4" style="text-align: left">
+                                            <select id="modal_well_num" class="form-select" aria-label="Default select example">
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalEditWellCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalEditWellSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+        {#==============================================#}
+        {#===============MODAL ADD NEW BY===============#}
+        <form method="GET">
+                    <div class="modal fade" id="modalNewBy" tabindex="-1" role="dialog" aria-labelledby="modalNewBy" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Новый заказчик</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                <div class="row">
+                                    <div class="col-sm-4" style="padding-left: 10px;">
+                                    <td>Имя покупателя:</td>
+                                    </div>
+                                    <div  class="col-sm-4" style="text-align: left">
+                                        <input  id="newByName" style="height: 23px;">
+                                    </div>
                                 </div>
-                            </form>
-
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button id="modalNewByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                            <button id="modalNewBySave" type="button" class="btn btn-primary" onclick="">Создать</button>
+                          </div>
                         </div>
+                      </div>
                     </div>
-                    </form>
-                    {#==============================================#}
-                    {#============MODAL ADD NEW BY APPL=============#}
-                    <form method="GET">
-                        <div class="row">
-                            <div class="container-fluid row">
-                                <form method="GET">
-                                    <div class="modal fade" id="modalNewByAppl" tabindex="-1" role="dialog" aria-labelledby="modalNewByAppl" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Новая заявка</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body">
-                                            <div id="newApplByConnect" hidden></div>
-                                            <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                                <div class="row">
-                                                    <div class="col-sm-6" style="padding-left: 10px;">
-                                                    <td>Номер заявки:</td>
-                                                    </div>
-                                                    <div  class="col-sm-4" style="text-align: left">
-                                                        <input  data-date-format="dd/mm/yyyy" id="appl_by_date" style="height: 23px; width: 95px; margin-left: -22px; padding-left: 5px; margin-top: 2px">
-                                                    </div>
-                                                </div>
-                                              </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button id="modalNewApplByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                            <button id="modalNewApplBySave" type="button" class="btn btn-primary" onclick="">Добавить</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </form>
-                    {#==============================================#}
-                    {#=================MODAL DELL PG================#}
-                    <form method="GET">
-                        <div class="row">
-                            <div class="container-fluid row">
-                                <form method="GET">
-                                    <div class="modal fade" id="modalDellPg" tabindex="-1" role="dialog" aria-labelledby="modalDellPg" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div id="connect_del_pg" hidden></div>
-                                          <div class="modal-body" style="text-align: center">
-                                            Вы уверены что хотите удалить проектную группу?
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button id="modalDellPgCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                            <button id="modalDellPgSave" type="button" class="btn btn-primary" onclick="del_pg()">Удалить</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </form>
-                    {#==============================================#}
-                    {#=================MODAL DELL CODE==============#}
-                    <form method="GET">
-                        <div class="row">
-                            <div class="container-fluid row">
-                                <form method="GET">
-                                    <div class="modal fade" id="modalDellCode" tabindex="-1" role="dialog" aria-labelledby="modalDellCode" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div id="connect_del_code" hidden></div>
-                                          <div class="modal-body" style="text-align: center">
-                                            Вы уверены что хотите удалить шифр?
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button id="modalDellCodeCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                            <button id="modalDellCodeSave" type="button" class="btn btn-primary" onclick="del_code()">Удалить</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </form>
-                    {#==============================================#}
-                    {#=================MODAL DELL MPZ===============#}
-                    <form method="GET">
-                        <div class="row">
-                            <div class="container-fluid row">
-                                <form method="GET">
-                                    <div class="modal fade" id="modalDellMpz" tabindex="-1" role="dialog" aria-labelledby="modalDellMpz" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div id="connect_del_mpz" hidden></div>
-                                          <div class="modal-body" style="text-align: center">
-                                            Вы уверены что хотите удалить заявку?
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button id="modalDellMpzCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                            <button id="modalDellMpzSave" type="button" class="btn btn-primary" onclick="del_mpz()">Удалить</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </form>
-                    {#==============================================#}
-                    {#=================MODAL DELL BY================#}
-                    <form method="GET">
-                        <div class="row">
-                            <div class="container-fluid row">
-                                <form method="GET">
-                                    <div class="modal fade" id="modalDellBy" tabindex="-1" role="dialog" aria-labelledby="modalDellBy" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div id="connect_del_by" hidden></div>
-                                            <div id="connect_del_by_ind" hidden></div>
-                                          <div class="modal-body" style="text-align: center">
-                                            Вы уверены что хотите удалить покупателя?
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button id="modalDellByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                            <button id="modalDellBySave" type="button" class="btn btn-primary" onclick="del_by()">Удалить</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </form>
-                    {#==============================================#}
-                    {#===============MODAL DELL BYAPPL==============#}
-                    <form method="GET">
-                        <div class="row">
-                            <div class="container-fluid row">
-                                <form method="GET">
-                                    <div class="modal fade" id="modalDellByAppl" tabindex="-1" role="dialog" aria-labelledby="modalDellByAppl" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div id="connect_del_byappl" hidden></div>
-                                            <div id="connect_del_byappl_ind" hidden></div>
-                                          <div class="modal-body" style="text-align: center">
-                                            Вы уверены что хотите удалить покупателя?
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button id="modalDellByApplCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                            <button id="modalDellByApplSave" type="button" class="btn btn-primary" onclick="delAby()">Удалить</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </form>
-                    {#==============================================#}
-
-                </div>
-                <div id="tbl_cont" class="row" style=" margin-top: 0px">
-                    <table id="table_struct" class="tree" style="margin-left: 0px; width: 270px;">
-                        {% for pg  in pg_lst %}
-                            <tr id="node-{{ pg.pk }}" class="custom_hov treegrid-{{ pg.pk }}" style="height: 50px;">
-                                <td style="width: 240px;">{{ pg.pg_name }}</td>
-                            <td style="text-align: right">
-                                <button id="addCode" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewCode" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takePgName(name)">
-                                    <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>
+                </form>
+        {#==============================================#}
+        {#============MODAL ADD NEW BY APPL=============#}
+        <form method="GET">
+                        <div class="modal fade" id="modalNewByAppl" tabindex="-1" role="dialog" aria-labelledby="modalNewByAppl" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Новая заявка</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
                                 </button>
-                            </td>
-                            <td style="text-align: right">
-                                <button id="delPG-{{ pg.pk }}" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" data-toggle="modal" data-target="#modalDellPg" onclick="del_pg_get_modal(name)">
-                                    <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
-                                </button>
-                            </td>
-                            </tr>
-                            {% for code  in code_lst %}
-                                {% if  code.connect_id == pg.id %}
-
-                                    <tr class="custom_hov treegrid-{{ pg.pk }}{{ code.id }} treegrid-parent-{{ pg.pk }}" style="width: 100px; height: 50px">
-                                        <td>#{{ code.code_name }}</td>
-                                        <td style="text-align: right">
-                                            <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewMpz" style=" height: 30px; width: 30px; margin-left: 0px; background-color: white; alignment: right" onclick="takeCodeName(name)">
-                                                <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>
-                                            </button>
-                                        </td>
-                                        <td style="text-align: right">
-                                            <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellCode" onclick="del_code_get_modal(name)">
-                                                <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    {% for mpz  in mpz_lst %}
-                                        {% if  mpz.connect_id == code.id %}
-                                            <tr id="{{ mpz.pk }}" class="custom_hov treegrid-parent-{{ pg.pk }}{{ code.id }}" style="height: 50px;">
-                                                <td style="width: 100px">МПЗ №{{ mpz.mpz_appl_name }}</td>
-                                                <td style="text-align: right">
-                                                    <button id="infoMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_mpz_data(name, {{ pg.pk }})">
-                                                        <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>
-                                                    </button>
-                                                </td>
-                                                <td style="text-align: right">
-                                                    <button id="dellMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellMpz" onclick="del_mpz_get_modal(name)">
-                                                        <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                    </table>
-                </div>
-            </div>
-            <div class="column" style="margin-left: -1px; margin-top: 7px">
-                <div class=" container row" style="margin-top: -20px">
-                    <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px">
-                        <thead class="">
-                            <tr >
-                              <th scope="col" style="width: 250px; text-align: center"><h1 id="GlobalMpzNumConnect" hidden></h1>Колодец</th>
-                              <th scope="col" style="width: 160px; text-align: center" >Всего в заявке</th>
-                              <th scope="col" style="width: 160px; text-align: center" >Выдано</th>
-                              <th scope="col" style="width: 160px; text-align: center" >К выдаче</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for type in types %}
-                                <tr  style="height: 50px">
-                                  <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center;" >С-пласт {{ type.type_name }}</td>
-                                  <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center;"  data-toggle="modal" data-target="#modalEditMpz" class="mpz_button" onclick="getWellName({{ type }})" >
-                                      <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
-                                  </td>
-                                  <td  id="tbl_well_given-{{ type }}" style="text-align: center" >-</td>
-                                  <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >-</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+                              </div>
+                              <div class="modal-body">
+                                <div id="newApplByConnect" hidden></div>
+                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                                    <div class="row">
+                                        <div class="col-sm-6" style="padding-left: 10px;">
+                                        <td>Номер заявки:</td>
+                                        </div>
+                                        <div  class="col-sm-4" style="text-align: left">
+                                            <input  data-date-format="dd/mm/yyyy" id="appl_by_date" style="height: 23px; width: 95px; margin-left: -22px; padding-left: 5px; margin-top: 2px">
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalNewApplByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalNewApplBySave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+        {#==============================================#}
+        {#=================MODAL DELL PG================#}
+        <form method="GET">
+                        <div class="modal fade" id="modalDellPg" tabindex="-1" role="dialog" aria-labelledby="modalDellPg" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div id="connect_del_pg" hidden></div>
+                              <div class="modal-body" style="text-align: center">
+                                Вы уверены что хотите удалить проектную группу?
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalDellPgCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalDellPgSave" type="button" class="btn btn-primary" onclick="del_pg()">Удалить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+        {#==============================================#}
+        {#=================MODAL DELL CODE==============#}
+        <form method="GET">
+                        <div class="modal fade" id="modalDellCode" tabindex="-1" role="dialog" aria-labelledby="modalDellCode" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div id="connect_del_code" hidden></div>
+                              <div class="modal-body" style="text-align: center">
+                                Вы уверены что хотите удалить шифр?
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalDellCodeCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalDellCodeSave" type="button" class="btn btn-primary" onclick="del_code()">Удалить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+        {#==============================================#}
+        {#=================MODAL DELL MPZ===============#}
+        <form method="GET">
+                        <div class="modal fade" id="modalDellMpz" tabindex="-1" role="dialog" aria-labelledby="modalDellMpz" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div id="connect_del_mpz" hidden></div>
+                              <div class="modal-body" style="text-align: center">
+                                Вы уверены что хотите удалить заявку?
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalDellMpzCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalDellMpzSave" type="button" class="btn btn-primary" onclick="del_mpz()">Удалить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+        {#==============================================#}
+        {#=================MODAL DELL BY================#}
+        <form method="GET">
+                        <div class="modal fade" id="modalDellBy" tabindex="-1" role="dialog" aria-labelledby="modalDellBy" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div id="connect_del_by" hidden></div>
+                                <div id="connect_del_by_ind" hidden></div>
+                              <div class="modal-body" style="text-align: center">
+                                Вы уверены что хотите удалить покупателя?
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalDellByCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalDellBySave" type="button" class="btn btn-primary" onclick="del_by()">Удалить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+        {#==============================================#}
+        {#===============MODAL DELL BYAPPL==============#}
+        <form method="GET">
+                        <div class="modal fade" id="modalDellByAppl" tabindex="-1" role="dialog" aria-labelledby="modalDellByAppl" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div id="connect_del_byappl" hidden></div>
+                                <div id="connect_del_byappl_ind" hidden></div>
+                              <div class="modal-body" style="text-align: center">
+                                Вы уверены что хотите удалить покупателя?
+                              </div>
+                              <div class="modal-footer">
+                                <button id="modalDellByApplCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                                <button id="modalDellByApplSave" type="button" class="btn btn-primary" onclick="delAby()">Удалить</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+        {#==============================================#}
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
