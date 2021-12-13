@@ -151,36 +151,36 @@
         {#==============================================#}
         {#===============MODAL ADD NEW CODE=============#}
         <form method="GET">
-                        <div class="modal fade" id="modalNewCode" tabindex="-1" role="dialog" aria-labelledby="modalNewCode" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="newCodeModalTitle">Новый шифр</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div id="newCodeConnect" hidden></div>
-                                <div class="content-box" style="text-align:right; background-color: #ffffff;">
-                                    <div class="row">
-                                        <div class="col-sm-4" style="padding-left: 10px;">
-                                        <td>Номер:</td>
-                                        </div>
-                                        <div  class="col-sm-4" style="text-align: left">
-                                            <input  id="newCodeNum" style="height: 23px;">
-                                        </div>
-                                    </div>
-                                  </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button id="modalNewCodeCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
-                                <button id="modalNewCodeSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
-                              </div>
+            <div class="modal fade" id="modalNewCode" tabindex="-1" role="dialog" aria-labelledby="modalNewCode" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="newCodeModalTitle">Новый шифр</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="newCodeConnect" hidden></div>
+                    <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                        <div class="row">
+                            <div class="col-sm-4" style="padding-left: 10px;">
+                            <td>Номер:</td>
                             </div>
-                          </div>
+                            <div  class="col-sm-4" style="text-align: left">
+                                <input  id="newCodeNum" style="height: 23px;">
+                            </div>
                         </div>
-                    </form>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="modalNewCodeCancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                    <button id="modalNewCodeSave" type="button" class="btn btn-primary" onclick="">Добавить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
         {#==============================================#}
         {#===============MODAL ADD NEW MPZ==============#}
         <form method="GET">
@@ -417,6 +417,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
         <script type="text/javascript">
+            window.localStorage.setItem('islogined', 'true');
             $('#tbl_row').height(10);
             $(document).ready(function() {
                 var tree_container = document.getElementById("table_struct");

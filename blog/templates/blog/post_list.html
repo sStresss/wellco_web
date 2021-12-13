@@ -14,7 +14,7 @@
         <div class="background-container">
             <div id="picoutput"></div>
             <div class="page-header">
-                <h1><a href="/" class="head_title">С-ПЛАСТ </a></h1>
+                <h1><a class="head_title" style="cursor: pointer" onclick="main_reload()">С-ПЛАСТ </a></h1>
             </div>
             <div class="container-fluid" style="padding-top: 0px; padding-left: 30px">
                 <button id="release" name="but1" value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter" onclick="">
@@ -434,8 +434,10 @@
         });
         </script>
         <script>
+            window.addEventListener("beforeunload", () => localStorage.removeItem('islogined'));
             var input_password = document.getElementById("modalLogin_password");
             var input_login = document.getElementById("modalLogin_login");
+            var session_token = ''
             input_password.addEventListener("keyup", function(event) {
               if (event.keyCode === 13) {
                 event.preventDefault();
@@ -448,11 +450,8 @@
                 document.getElementById("modal_login_save").click();
               }
             });
-            const person = {
-                login: "",
-                password: "",
-            }
-            window.localStorage.setItem('login_data', JSON.stringify(person));
+
+
             $('#release_date').datepicker({
                 weekStart: 1,
                 daysOfWeekHighlighted: "6,0",
@@ -485,41 +484,48 @@
             });
             $('#m29_date_end').datepicker("setDate", new Date());
             $(document).ready(function() {
-                let login_data = window.localStorage.getItem('login_data')
-                console.log(login_data)
-                 $('#modalLogin').modal({backdrop: 'static', keyboard: false, style: ''})
-                 $('#modalLogin').modal('show')
-                //  $.ajax({
-                //     type: "GET",
-                //     url: "/",
-                //     dataType: "json",
-                //     data: {
-                //     name: 'check_session',
-                //         login: login_data.login,
-                //         password: login_data.password,
-                //     },
-                //     success: function(resp) {
-                //         if (resp.result == 'success') {
-                //             console.log('user logged in')
-                //         }
-                //         else {
-                //             $('#modalLogin').modal({backdrop: 'static', keyboard: false, style: ''})
-                //             $('#modalLogin').modal('show')
-                //         }
-                //     },
-                //     error: function(result) {
-                //         var readyState = {
-                //         1: "Loading",
-                //         2: "Loaded",
-                //         3: "Interactive",
-                //         4: "Complete"
-                //         };
-                //         if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
-                //             alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
-                //         }
-                //     }
-                // });
 
+                let session = window.localStorage.getItem('session_token')
+                let user = window.localStorage.getItem('session_user')
+                let islogined = window.localStorage.getItem('islogined')
+                {#console.log(session)#}
+                {#  $.ajax({#}
+                {#     type: "GET",#}
+                {#     url: "/",#}
+                {#     dataType: "json",#}
+                {#     data: {#}
+                {#        name: 'check_session',#}
+                {#         user: user,#}
+                {#        token: session#}
+                {#     },#}
+                {#     success: function(resp) {#}
+                {#         if (resp.result == 'success') {#}
+                {#             console.log('user logged in')#}
+                {#         }#}
+                {#         else {#}
+                {#             $('#modalLogin').modal({backdrop: 'static', keyboard: false, style: ''})#}
+                {#             $('#modalLogin').modal('show')#}
+                {#         }#}
+                {#     },#}
+                {#     error: function(result) {#}
+                {#         var readyState = {#}
+                {#         1: "Loading",#}
+                {#         2: "Loaded",#}
+                {#         3: "Interactive",#}
+                {#         4: "Complete"#}
+                {#         };#}
+                {#         if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {#}
+                {#             alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);#}
+                {#         }#}
+                {#     }#}
+                {# });#}
+                if (islogined == 'true') {
+                    console.log('user logged in')
+                }
+                else {
+                    $('#modalLogin').modal({backdrop: 'static', keyboard: false, style: ''})
+                    $('#modalLogin').modal('show')
+                }
                 var infoModal = $('#release_serial');
                 var table = $('#well_table');
                 var trans_type = $('#transaction_action_type');
@@ -1210,7 +1216,12 @@
                             password: password_data,
                         },
                         success: function(resp) {
+                            console.log('resp')
+                            console.log(resp)
                             if (resp.result == 'success') {
+
+
+                                window.localStorage.setItem('islogined', 'true');
                                 document.getElementById('modal_login_cancel').click()
                             }
                             else {
@@ -1232,8 +1243,12 @@
                     });
                 }
             }
-        </script>
+            function main_reload() {
 
-</body>
+                window.location.reload(true)
+                window.localStorage.setItem('islogined', 'true');
+            }
+        </script>
+    </body>
 </html>
 
