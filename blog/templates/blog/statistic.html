@@ -9,37 +9,57 @@
             <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
 <body>
-    <div id="picoutput"></div>
-    <div class="page-header">
-        <h1><img src="{% static '/image/sinaps_.png' %}" class="image" alt="" style="height: 45px; margin-bottom: 5px"><a href="/" class="head_title" style="margin-left: 10px">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">статистика</span> </a></h1>
+    <div class="background-container">
+        <div id="picoutput"></div>
+        <div class="page-header">
+            <h1><img src="{% static '/image/sinaps_.png' %}" class="image" alt="" style="height: 45px; margin-bottom: 5px"><a onclick="backMain()" class="head_title" style="margin-left: 10px">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">статистика</span> </a></h1>
+        </div>
+        <div class="content-box" style=" text-align: center">
+            <a style="font-size: 25px; font-family: Calibri; font-weight: normal">Производство</a>
+        </div>
+        <table summary="" class="table table-bordered">
+            <thead id="" style="padding: 0;">
+                <tr id="release_table_head">
+                </tr>
+                <tr id="release_table_subhead" style="">
+                </tr>
+            </thead>
+            <tbody id="release_table_data">
+            </tbody>
+        </table>
+        <br>
+        <div class="content-box" style=" text-align: center">
+            <a style="font-size: 25px; font-family: Calibri; font-weight: normal">Перемещение</a>
+        </div>
+        <table summary="" class="table table-bordered">
+            <thead id="" style="padding: 0;">
+                <tr id="transfer_table_head">
+                </tr>
+                <tr id="transfer_table_subhead" style="">
+                </tr>
+            </thead>
+            <tbody id="transfer_table_data">
+            </tbody>
+        </table>
     </div>
-    <div class="content-box" style=" text-align: center">
-        <a style="font-size: 25px; font-family: Calibri; font-weight: normal">Производство</a>
-    </div>
-    <table summary="" class="table table-bordered">
-        <thead id="" style="padding: 0;">
-            <tr id="release_table_head">
-            </tr>
-            <tr id="release_table_subhead" style="">
-            </tr>
-        </thead>
-        <tbody id="release_table_data">
-        </tbody>
-    </table>
-    <br>
-    <div class="content-box" style=" text-align: center">
-        <a style="font-size: 25px; font-family: Calibri; font-weight: normal">Перемещение</a>
-    </div>
-    <table summary="" class="table table-bordered">
-        <thead id="" style="padding: 0;">
-            <tr id="transfer_table_head">
-            </tr>
-            <tr id="transfer_table_subhead" style="">
-            </tr>
-        </thead>
-        <tbody id="transfer_table_data">
-        </tbody>
-    </table>
+    {#===============MODAL NOT LOGINED==============#}
+    <form method="GET">
+                    <div class="modal fade" id="modalNotLogined" tabindex="-1" role="dialog" aria-labelledby="modalNotLogined" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div id="connect_del_byappl" hidden></div>
+                            <div id="connect_del_byappl_ind" hidden></div>
+                          <div class="modal-body">
+                            Вход в систему не выполнен!
+                          </div>
+                          <div class="modal-footer" style="text-align: center;">
+                            <button id="modalBtnLogin" type="button" class="btn btn-primary" style="" onclick="goLogin()">Авторизация</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </form>
+    {#==============================================#}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -55,6 +75,16 @@
     });
     </script>
     <script>
+        let islogined = window.sessionStorage.getItem('islocallogined')
+        if ((islogined == null)) {
+            $('#modalNotLogined').modal({backdrop: 'static', keyboard: false, style: ''})
+            $('#modalNotLogined').modal('show')
+        }
+
+        else {
+            window.addEventListener("beforeunload", () => sessionStorage.removeItem('islocallogined'));
+            sessionStorage.setItem('state', 'true')
+        }
         window.localStorage.setItem('islogined', 'true');
         var release_table_height = 0
         var release_table_width = 0
@@ -393,6 +423,15 @@
                     i++
                 }
             }
+        };
+        function backMain() {
+            window.sessionStorage.setItem('islogined', 'true');
+            window.location.href = '/'
+        }
+        function goLogin() {
+            window.addEventListener("beforeunload", () => sessionStorage.removeItem('islogined'));
+            window.addEventListener("beforeunload", () => sessionStorage.removeItem('islocallogined'));
+            window.location.href = '/'
         }
 
     </script>

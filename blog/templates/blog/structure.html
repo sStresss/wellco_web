@@ -12,10 +12,10 @@
         <div class="background-container">
             <div id="picoutput"></div>
             <div class="page-header">
-                <h1><img src="{% static '/image/sinaps_.png' %}" class="image" alt="" style="height: 45px; margin-bottom: 5px"><a href="/" class="head_title" style="margin-left: 10px">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">управление заявками</span> </a></h1>
+                <h1><img src="{% static '/image/sinaps_.png' %}" class="image" alt="" style="height: 45px; margin-bottom: 5px"><a onclick="backMain()" class="head_title" style="margin-left: 10px; cursor: pointer">С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">управление заявками</span> </a></h1>
             </div>
             <div class="row" style="width: 100%">
-                <div class="column" style="border-right: 2px solid #eeeeee; width: 12%; height: 1000px; margin-left: 50px;">
+                <div class="column" style="border-right: 2px solid #eeeeee; width: 12%; height: 900px; margin-left: 50px;">
                     <div  style="border-bottom: 1px solid #eeeeee; height: 35px; margin-left: 15px; ">
                         <div class="row">
                             <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 219px; height: 34px; font-size: 19px; border: none; outline: none; margin-left: -15px">
@@ -113,6 +113,32 @@
                                 {% endfor %}
                             </tbody>
                         </table>
+                    </div>
+                    <div>
+                        <div class=" container row" style="margin-top: -20px">
+                        <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px">
+                            <thead class="">
+                                <tr >
+                                  <th scope="col" style="width: 250px; text-align: center"><h1 id="GlobalMpzNumConnect" hidden></h1>Колодец</th>
+                                  <th scope="col" style="width: 160px; text-align: center" >Всего в заявке</th>
+                                  <th scope="col" style="width: 160px; text-align: center" >Выдано</th>
+                                  <th scope="col" style="width: 160px; text-align: center" >К выдаче</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for type in types %}
+                                    <tr  style="height: 50px">
+                                      <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center;" >С-пласт {{ type.type_name }}</td>
+                                      <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center;"  data-toggle="modal" data-target="#modalEditMpz" class="mpz_button" onclick="getWellName({{ type }})" >
+                                          <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
+                                      </td>
+                                      <td  id="tbl_well_given-{{ type }}" style="text-align: center" >-</td>
+                                      <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >-</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -409,6 +435,24 @@
                         </div>
                     </form>
         {#==============================================#}
+        {#===============MODAL NOT LOGINED==============#}
+        <form method="GET">
+                        <div class="modal fade" id="modalNotLogined" tabindex="-1" role="dialog" aria-labelledby="modalNotLogined" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div id="connect_del_byappl" hidden></div>
+                                <div id="connect_del_byappl_ind" hidden></div>
+                              <div class="modal-body">
+                                Вход в систему не выполнен!
+                              </div>
+                              <div class="modal-footer" style="text-align: center;">
+                                <button id="modalBtnLogin" type="button" class="btn btn-primary" style="" onclick="goLogin()">Авторизация</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+        {#==============================================#}
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -417,7 +461,18 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
         <script type="text/javascript">
-            window.localStorage.setItem('islogined', 'true');
+
+            let islogined = window.sessionStorage.getItem('islocallogined')
+            if ((islogined == null)) {
+                $('#modalNotLogined').modal({backdrop: 'static', keyboard: false, style: ''})
+                $('#modalNotLogined').modal('show')
+            }
+
+            else {
+                window.addEventListener("beforeunload", () => sessionStorage.removeItem('islocallogined'));
+                sessionStorage.setItem('state', 'true')
+            }
+
             $('#tbl_row').height(10);
             $(document).ready(function() {
                 var tree_container = document.getElementById("table_struct");
@@ -1078,6 +1133,15 @@
             }
             function del_byappl_get_modal(name) {
                 document.getElementById("connect_del_byappl").innerHTML = name
+            }
+            function backMain() {
+                window.sessionStorage.setItem('islogined', 'true');
+                window.location.href = '/'
+            }
+            function goLogin() {
+                window.addEventListener("beforeunload", () => sessionStorage.removeItem('islogined'));
+                window.addEventListener("beforeunload", () => sessionStorage.removeItem('islocallogined'));
+                window.location.href = '/'
             }
 
         </script>

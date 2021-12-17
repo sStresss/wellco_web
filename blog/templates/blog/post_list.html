@@ -27,10 +27,10 @@
                     Отчет М29
                 </button>
                 <button id="statistic" name="but1" value="val_4" type="button" class="btn btn-warning btn-sm">
-                    <a href="{% url 'statistic' %}" style="text-decoration: none; color: black">Статистика</a>
+                    <a href="{% url 'statistic' %}" style="text-decoration: none; color: black" onclick="goStatistic()">Статистика</a>
                 </button>
                 <button id="structure" name="but1" value="val_5" type="button" class="btn btn-secondary btn-sm" >
-                    <a href="{% url 'structure' %}" style="text-decoration: none; color: white">Управление заявками</a>
+                    <a href="{% url 'structure' %}" style="text-decoration: none; color: white" onclick="goStructure()">Управление заявками</a>
                 </button>
                 <button id="journal" name="but1" value="val_6" type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
                     Журнал событий
@@ -428,13 +428,11 @@
         <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
-
             $('.tree').treegrid();
             $('.treegrid-1').exp
         });
         </script>
         <script>
-            window.addEventListener("beforeunload", () => localStorage.removeItem('islogined'));
             var input_password = document.getElementById("modalLogin_password");
             var input_login = document.getElementById("modalLogin_login");
             var session_token = ''
@@ -450,8 +448,6 @@
                 document.getElementById("modal_login_save").click();
               }
             });
-
-
             $('#release_date').datepicker({
                 weekStart: 1,
                 daysOfWeekHighlighted: "6,0",
@@ -484,10 +480,10 @@
             });
             $('#m29_date_end').datepicker("setDate", new Date());
             $(document).ready(function() {
-
-                let session = window.localStorage.getItem('session_token')
-                let user = window.localStorage.getItem('session_user')
-                let islogined = window.localStorage.getItem('islogined')
+                console.log('123')
+                let session = window.sessionStorage.getItem('session_token')
+                let user = window.sessionStorage.getItem('session_user')
+                let islogined = window.sessionStorage.getItem('islogined')
                 if (islogined == 'true') {
                     console.log('user logged in')
                 }
@@ -1170,7 +1166,7 @@
                     check_login_empty = true
                 }
                 if (password_data.length == 0) {
-                    document.getElementById('modalLogin_password_error').innerHTML = 'введите логин'
+                    document.getElementById('modalLogin_password_error').innerHTML = 'введите пароль'
                     document.getElementById('modalLogin_password_error').hidden = false
                     check_password_empty = true
                 }
@@ -1188,9 +1184,7 @@
                             console.log('resp')
                             console.log(resp)
                             if (resp.result == 'success') {
-
-
-                                window.localStorage.setItem('islogined', 'true');
+                                window.sessionStorage.setItem('islogined', 'true');
                                 document.getElementById('modal_login_cancel').click()
                             }
                             else {
@@ -1214,7 +1208,13 @@
             }
             function main_reload() {
                 window.location.reload(true)
-                window.localStorage.setItem('islogined', 'true');
+                window.sessionStorage.setItem('islogined', 'true');
+            }
+            function goStructure() {
+                window.sessionStorage.setItem('islocallogined', 'true')
+            }
+            function goStatistic() {
+                window.sessionStorage.setItem('islocallogined', 'true')
             }
         </script>
     </body>
