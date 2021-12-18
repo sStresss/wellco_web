@@ -19,7 +19,7 @@
 
                     <div class="col-sm-5" style="max-height: 60px; margin-left: -5.5%">
                         <a class="head_title" style=" cursor: pointer; margin-left: 10px; margin-top: 5px;" onclick="backMain()">
-                            <h1 style="max-height: 40px;">
+                            <h1 style="max-height: 40px; min-width: 900px">
                                 С-ПЛАСТ | <span style="height: 20px; vertical-align: top; ">управление заявками</span>
                             </h1>
                         </a>
@@ -44,7 +44,6 @@
                             </button>
                         </div>
                     </div>
-{#                test#}
                     <div id="tbl_cont" class="row" style=" margin-top: 5px; margin-left: -40px; margin-right: -16px">
                         <table id="table_struct" class="tree" style="width: 350px; border-top: 1px solid #eeeeee;">
                             {% for pg  in pg_lst %}
@@ -746,7 +745,7 @@
                             success: function(resp) {
                                 console.log(resp.unique)
                                 if (resp.unique == 'false') {
-                                    var cur_ind = (parseInt(resp.by_par_len, 10) - 1);
+                                    var cur_ind = (parseInt(resp.by_par_len, 10));
                                     document.getElementById('modalNewByCancel').click(),
 
                                     $('#table_struct').append('<tr id="node-'+cur_ind+'" class="custom_hov treegrid-'+cur_ind+'" style="height: 30px;">\n' +
