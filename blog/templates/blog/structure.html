@@ -27,10 +27,10 @@
                 </div>
             </div>
             <div class="row" style="width: 100%; margin-top: 0px">
-                <div class="col-sm-2" style="border-right: 2px solid #eeeeee; height: 900px; max-width: 298px; margin-left: 40px; margin-top: 0px">
-                    <div  style="height: 35px; margin-left: 15px; margin-top: 20px">
-                        <div class="row" style="border-bottom: 1px solid #eeeeee;">
-                            <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 219px; height: 34px; font-size: 19px; border: none; outline: none; margin-left: -15px">
+                <div class="col-sm-2" style="border-right: 3px solid #eeeeee; height: 900px; max-width: 298px; margin-left: 40px; margin-top: 0px">
+                    <div  style="height: 35px; margin-left: 15px; margin-top: 10px">
+                        <div class="row" style="margin-left: -50px">
+                            <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 219px; height: 34px; font-size: 19px; border: none; outline: none; margin-left: 20px; margin-bottom: 5px">
                                 <option id="pg" value="pg" selected>Проектные группы</option>
                                 <tr>
                                 <option id="os" value="os">Сторонние продажи</option>
@@ -44,26 +44,25 @@
                             </button>
                         </div>
                     </div>
-                    <div id="tbl_cont" class="row" style=" margin-top: 0px">
-                        <table id="table_struct" class="tree" style="margin-left: 0px; width: 270px;">
+                    <div id="tbl_cont" class="row" style=" margin-top: 5px; margin-left: -40px; margin-right: -16px">
+                        <table id="table_struct" class="tree" style="width: 350px; border-top: 1px solid #eeeeee;">
                             {% for pg  in pg_lst %}
-                                <tr id="node-{{ pg.pk }}" class="custom_hov treegrid-{{ pg.pk }}" style="height: 50px;">
-                                    <td style="width: 240px;">{{ pg.pg_name }}</td>
-                                <td style="text-align: right">
-                                    <button id="addCode" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewCode" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takePgName(name)">
-                                        <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>
-                                    </button>
-                                </td>
-                                <td style="text-align: right">
-                                    <button id="delPG-{{ pg.pk }}" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" data-toggle="modal" data-target="#modalDellPg" onclick="del_pg_get_modal(name)">
-                                        <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
-                                    </button>
-                                </td>
+                                <tr id="node-{{ pg.pk }}" class="custom_hov treegrid-{{ pg.pk }}" style="height: 30px; max-height: 30px;">
+                                    <td style="max-width: 160px;width: 160px;padding-left: 25px">{{ pg.pg_name }}</td>
+                                    <td style="text-align: right; vertical-align: center">
+                                        <button id="addCode" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewCode" style="height: 20px; width: 20px; margin-left: 39px; margin-right: 10px; background-color: white;" onclick="takePgName(name)">
+                                            <h5 style="margin-top: -9px; margin-left: -7px; color: #aaaaaa">+</h5>
+                                        </button>
+                                    </td>
+                                    <td style="text-align: right">
+                                        <button id="delPG-{{ pg.pk }}" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 42px; background-color: white" data-toggle="modal" data-target="#modalDellPg" onclick="del_pg_get_modal(name)">
+                                            <h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>
+                                        </button>
+                                    </td>
                                 </tr>
                                 {% for code  in code_lst %}
                                     {% if  code.connect_id == pg.id %}
-
-                                        <tr class="custom_hov treegrid-{{ pg.pk }}{{ code.id }} treegrid-parent-{{ pg.pk }}" style="width: 100px; height: 50px">
+                                        <tr class="custom_hov treegrid-{{ pg.pk }}{{ code.id }} treegrid-parent-{{ pg.pk }}" style="width: 100px; height: 30px; max-height: 30px">
                                             <td>#{{ code.code_name }}</td>
                                             <td style="text-align: right">
                                                 <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewMpz" style=" height: 30px; width: 30px; margin-left: 0px; background-color: white; alignment: right" onclick="takeCodeName(name)">
@@ -78,7 +77,7 @@
                                         </tr>
                                         {% for mpz  in mpz_lst %}
                                             {% if  mpz.connect_id == code.id %}
-                                                <tr id="{{ mpz.pk }}" class="custom_hov treegrid-parent-{{ pg.pk }}{{ code.id }}" style="height: 50px;">
+                                                <tr id="{{ mpz.pk }}" class="custom_hov treegrid-parent-{{ pg.pk }}{{ code.id }}" style="height: 30px; max-height: 30px">
                                                     <td style="width: 100px">МПЗ №{{ mpz.mpz_appl_name }}</td>
                                                     <td style="text-align: right">
                                                         <button id="infoMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_mpz_data(name, {{ pg.pk }})">
