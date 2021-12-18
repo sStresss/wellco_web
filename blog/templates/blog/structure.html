@@ -48,9 +48,9 @@
                         <table id="table_struct" class="tree" style="width: 350px; border-top: 1px solid #eeeeee;">
                             {% for pg  in pg_lst %}
                                 <tr id="node-{{ pg.pk }}" class="custom_hov treegrid-{{ pg.pk }}" style="height: 30px; max-height: 30px;">
-                                    <td style="max-width: 160px;width: 160px;padding-left: 25px">{{ pg.pg_name }}</td>
-                                    <td style="text-align: right; vertical-align: center">
-                                        <button id="addCode" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewCode" style="height: 20px; width: 20px; margin-left: 39px; margin-right: 10px; background-color: white;" onclick="takePgName(name)">
+                                    <td style="max-width: 200px;width: 200px;padding-left: 25px">{{ pg.pg_name }}</td>
+                                    <td style="text-align: right;">
+                                        <button id="addCode" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewCode" style="height: 20px; width: 20px; margin-left: 9px; margin-right: 10px; background-color: white;" onclick="takePgName(name)">
                                             <h5 style="margin-top: -9px; margin-left: -7px; color: #aaaaaa">+</h5>
                                         </button>
                                     </td>
@@ -62,31 +62,31 @@
                                 </tr>
                                 {% for code  in code_lst %}
                                     {% if  code.connect_id == pg.id %}
-                                        <tr class="custom_hov treegrid-{{ pg.pk }}{{ code.id }} treegrid-parent-{{ pg.pk }}" style="width: 100px; height: 30px; max-height: 30px">
-                                            <td>#{{ code.code_name }}</td>
+                                        <tr class="custom_hov treegrid-{{ pg.pk }}{{ code.id }} treegrid-parent-{{ pg.pk }}" style="width: 100px; height: 30px; max-height: 30px; margin-left: 0px">
+                                            <td style="padding-left: 40px">#{{ code.code_name }}</td>
                                             <td style="text-align: right">
-                                                <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewMpz" style=" height: 30px; width: 30px; margin-left: 0px; background-color: white; alignment: right" onclick="takeCodeName(name)">
-                                                    <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>
+                                                <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewMpz" style=" height: 20px; width: 20px; margin-left: 0px; margin-right: 10px ; background-color: white; alignment: right" onclick="takeCodeName(name)">
+                                                    <h5 style="margin-top: -9px; margin-left: -7px; color: #aaaaaa">+</h5>
                                                 </button>
                                             </td>
                                             <td style="text-align: right">
-                                                <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellCode" onclick="del_code_get_modal(name)">
-                                                    <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
+                                                <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -25px; margin-right: 42px ; background-color: white" data-toggle="modal" data-target="#modalDellCode" onclick="del_code_get_modal(name)">
+                                                    <h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>
                                                 </button>
                                             </td>
                                         </tr>
                                         {% for mpz  in mpz_lst %}
                                             {% if  mpz.connect_id == code.id %}
                                                 <tr id="{{ mpz.pk }}" class="custom_hov treegrid-parent-{{ pg.pk }}{{ code.id }}" style="height: 30px; max-height: 30px">
-                                                    <td style="width: 100px">МПЗ №{{ mpz.mpz_appl_name }}</td>
+                                                    <td style=" padding-left: 40px">МПЗ №{{ mpz.mpz_appl_name }}</td>
                                                     <td style="text-align: right">
-                                                        <button id="infoMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_mpz_data(name, {{ pg.pk }})">
-                                                            <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>
+                                                        <button id="infoMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: 0px;margin-right: 10px; background-color: white" onclick="get_mpz_data(name, {{ pg.pk }})">
+                                                            <h5 style="margin-top: -6px; margin-left: -2px; color: #aaaaaa">i</h5>
                                                         </button>
                                                     </td>
                                                     <td style="text-align: right">
-                                                        <button id="dellMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellMpz" onclick="del_mpz_get_modal(name)">
-                                                            <h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>
+                                                        <button id="dellMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -25px; margin-right: 42px; background-color: white" data-toggle="modal" data-target="#modalDellMpz" onclick="del_mpz_get_modal(name)">
+                                                            <h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>
                                                         </button>
                                                     </td>
                                                 </tr>
