@@ -94,7 +94,6 @@
         }
 
         else {
-            window.addEventListener("beforeunload", () => sessionStorage.removeItem('islocallogined'));
             sessionStorage.setItem('state', 'true')
         }
         window.localStorage.setItem('islogined', 'true');

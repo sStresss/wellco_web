@@ -26,10 +26,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row" style="width: 100%; margin-top: 20px">
-                <div class="col-sm-2" style="border-right: 2px solid #eeeeee; width: 12%; height: 900px; margin-left: 50px;">
-                    <div  style="border-bottom: 1px solid #eeeeee; height: 35px; margin-left: 15px; ">
-                        <div class="row">
+            <div class="row" style="width: 100%; margin-top: 0px">
+                <div class="col-sm-2" style="border-right: 2px solid #eeeeee; height: 900px; max-width: 298px; margin-left: 40px; margin-top: 0px">
+                    <div  style="height: 35px; margin-left: 15px; margin-top: 20px">
+                        <div class="row" style="border-bottom: 1px solid #eeeeee;">
                             <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 219px; height: 34px; font-size: 19px; border: none; outline: none; margin-left: -15px">
                                 <option id="pg" value="pg" selected>Проектные группы</option>
                                 <tr>
@@ -43,8 +43,6 @@
                                 <h1 style="margin-top: -8px; margin-left: -2px">+</h1>
                             </button>
                         </div>
-
-
                     </div>
                     <div id="tbl_cont" class="row" style=" margin-top: 0px">
                         <table id="table_struct" class="tree" style="margin-left: 0px; width: 270px;">
@@ -101,7 +99,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-sm-6" style="margin-left: -15px; margin-top: 7px">
+                <div class="col-sm-4" style="margin-left: 15px; margin-top: 40px">
                     <div class=" container row" style="margin-top: -20px">
                         <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px">
                             <thead class="">
@@ -481,7 +479,6 @@
             }
 
             else {
-                window.addEventListener("beforeunload", () => sessionStorage.removeItem('islocallogined'));
                 sessionStorage.setItem('state', 'true')
             }
 
