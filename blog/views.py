@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.contrib.auth.models import User
-from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login
 from .models import Well, WellType, Warehouse, var, ProjectGroup, Code, Appl_mpz, Appl_mpz_data, Byer, Appl_byer, Appl_by_data
 from django.shortcuts import render, get_object_or_404
