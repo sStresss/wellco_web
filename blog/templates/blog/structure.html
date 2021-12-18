@@ -51,7 +51,7 @@
                                     <td style="max-width: 200px;width: 200px;padding-left: 25px">{{ pg.pg_name }}</td>
                                     <td style="text-align: right;">
                                         <button id="addCode" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewCode" style="height: 20px; width: 20px; margin-left: 9px; margin-right: 10px; background-color: white;" onclick="takePgName(name)">
-                                            <h5 style="margin-top: -9px; margin-left: -7px; color: #aaaaaa">+</h5>
+                                            <h5 style="margin-top: -9px; margin-left: -6px; color: #aaaaaa">+</h5>
                                         </button>
                                     </td>
                                     <td style="text-align: right">
@@ -66,7 +66,7 @@
                                             <td style="padding-left: 40px">#{{ code.code_name }}</td>
                                             <td style="text-align: right">
                                                 <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewMpz" style=" height: 20px; width: 20px; margin-left: 0px; margin-right: 10px ; background-color: white; alignment: right" onclick="takeCodeName(name)">
-                                                    <h5 style="margin-top: -9px; margin-left: -7px; color: #aaaaaa">+</h5>
+                                                    <h5 style="margin-top: -9px; margin-left: -6px; color: #aaaaaa">+</h5>
                                                 </button>
                                             </td>
                                             <td style="text-align: right">
@@ -81,7 +81,7 @@
                                                     <td style=" padding-left: 40px">МПЗ №{{ mpz.mpz_appl_name }}</td>
                                                     <td style="text-align: right">
                                                         <button id="infoMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: 0px;margin-right: 10px; background-color: white" onclick="get_mpz_data(name, {{ pg.pk }})">
-                                                            <h5 style="margin-top: -6px; margin-left: -2px; color: #aaaaaa">i</h5>
+                                                            <h5 style="margin-top: -8px; margin-left: -2px; color: #aaaaaa">i</h5>
                                                         </button>
                                                     </td>
                                                     <td style="text-align: right">
@@ -470,17 +470,14 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
         <script type="text/javascript">
-
             let islogined = window.sessionStorage.getItem('islocallogined')
             if ((islogined == null)) {
                 $('#modalNotLogined').modal({backdrop: 'static', keyboard: false, style: ''})
                 $('#modalNotLogined').modal('show')
             }
-
             else {
                 sessionStorage.setItem('state', 'true')
             }
-
             $('#tbl_row').height(10);
             $(document).ready(function() {
                 var tree_container = document.getElementById("table_struct");
@@ -669,16 +666,16 @@
                                     var i = 0
                                     for (const [key, value] of Object.entries(resp)) {
 
-                                        $('#table_struct').append('<tr id="node-'+i+'" class="custom_hov treegrid-'+i+' treegrid-collapsed" style="height: 50px;">\n' +
-                                                                    '<td id="node_name-'+i+'"style="width: 240px;">'+value[0]+'</td>\n' +
+                                        $('#table_struct').append('<tr id="node-'+i+'" class="custom_hov treegrid-'+i+' treegrid-collapsed" style="height: 30px;">\n' +
+                                                                    '<td id="node_name-'+i+'"style="width: 240px; padding-left:25px">'+value[0]+'</td>\n' +
                                                                     '<td style="text-align: right">\n' +
-                                                                    '<button id="addBYApp" name="node-'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takeNodeChName(name)">\n' +
-                                                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>\n' +
+                                                                    '<button id="addBYApp" name="node-'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 20px; width: 20px; margin-left: 9px; margin-right: 28px; background-color: white;" onclick="takeNodeChName(name)">\n' +
+                                                                    '<h5 style="margin-top: -9px; margin-left: -6px; color: #aaaaaa">+</h5>\n' +
                                                                     '</button>\n' +
                                                                     '</td>\n' +
                                                                     '<td style="text-align: right">\n' +
-                                                                    '<button id="delBY-'+i+'" name="'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
-                                                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                                                    '<button id="delBY-'+i+'" name="'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right:42px ; background-color: white" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
+                                                                    '<h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>\n' +
                                                                     '</button>\n' +
                                                                     '</td>\n' +
                                                                     '</tr>');
@@ -689,17 +686,16 @@
                                                 break
                                             }
                                             else {
-                                                {#console.log(appl_lst[j])#}
-                                                $('#table_struct').append('<tr id="node-'+i+'-'+j+'" class="custom_hov treegrid-parent-'+i+'" style="height: 50px;">\n' +
-                                                                            '<td style="width: 100px">#'+appl_lst[j]+'</td>\n' +
+                                                $('#table_struct').append('<tr id="node-'+i+'-'+j+'" class="custom_hov treegrid-parent-'+i+'" style="height: 30px;">\n' +
+                                                                            '<td style="width: 100px; padding-left: 30px;">#'+appl_lst[j]+'</td>\n' +
                                                                             '<td style="text-align: right">\n' +
-                                                                            '<button id="infoABY-node-'+i+'-'+j+'" name="node-'+i+'-'+j+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
-                                                                            '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
+                                                                            '<button id="infoABY-node-'+i+'-'+j+'" name="node-'+i+'-'+j+'" value="" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: 0px;margin-right:28px ; background-color: white" onclick="get_by_app_data(name)">\n' +
+                                                                            '<h5 style="margin-top: -8px; margin-left: -2px; color: #aaaaaa">i</h5>\n' +
                                                                             '</button>\n' +
                                                                             '</td>\n' +
                                                                             '<td style="text-align: right">\n' +
-                                                                            '<button id="dellABY-'+j+'" name="node-'+i+'-'+j+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
-                                                                            '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                                                            '<button id="dellABY-'+j+'" name="node-'+i+'-'+j+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -25px;margin-right:42px ; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
+                                                                            '<h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>\n' +
                                                                             '</button>\n' +
                                                                             '</td>\n' +
                                                                             '</tr>');
@@ -707,7 +703,6 @@
                                             }
                                         }
                                         document.getElementById('node-'+i).name = j
-                                        {#console.log(document.getElementById('node-'+i).name)#}
                                         i++
                                     }
                                     $("#table_struct").treegrid()
@@ -725,11 +720,7 @@
                                     }
                                 },
                             });
-
-
-
                             document.getElementById("mpz_tbl").innerHTML = mpz_def_content
-
                         }
                         else {
                             tree_state = true
@@ -757,16 +748,16 @@
                                     var cur_ind = (parseInt(resp.by_par_len, 10) - 1);
                                     document.getElementById('modalNewByCancel').click(),
 
-                                    $('#table_struct').append('<tr id="node-'+cur_ind+'" class="custom_hov treegrid-'+cur_ind+'" style="height: 50px;">\n' +
-                                                                    '<td id="node_name-'+cur_ind+'" style="width: 240px;">'+$('#newByName').val()+'</td>\n' +
+                                    $('#table_struct').append('<tr id="node-'+cur_ind+'" class="custom_hov treegrid-'+cur_ind+'" style="height: 30px;">\n' +
+                                                                    '<td id="node_name-'+cur_ind+'" style="width: 240px;padding-left:25px">'+$('#newByName').val()+'</td>\n' +
                                                                     '<td style="text-align: right">\n' +
-                                                                    '<button id="addBYApp" name="node-'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 30px; width: 30px; margin-left: 0px; background-color: white;" onclick="takeNodeChName(name)">\n' +
-                                                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">+</h5>\n' +
+                                                                    '<button id="addBYApp" name="node-'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 20px; width: 20px; margin-left: 0px;margin-right:28px; background-color: white;" onclick="takeNodeChName(name)">\n' +
+                                                                    '<h5 style="margin-top: -9px; margin-left: -6px; color: #aaaaaa">+</h5>\n' +
                                                                     '</button>\n' +
                                                                     '</td>\n' +
                                                                     '<td style="text-align: right">\n' +
-                                                                    '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -15px; background-color: white" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
-                                                                    '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                                                    '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px;margin-right:42px; background-color: white" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
+                                                                    '<h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>\n' +
                                                                     '</button>\n' +
                                                                     '</td>\n' +
                                                                     '</tr>'),
@@ -789,7 +780,6 @@
                                 }
                             },
                         });
-
                     });
                 $("#modalNewApplBySave").click(function(s) {
                         app_name = $('#appl_by_date').val()
@@ -797,8 +787,6 @@
                         cur_app_name = p_app_name[0]+'.'+p_app_name[1]+'.'+(parseInt(p_app_name[2],10)-2000)
                         par_name_str = document.getElementById(document.getElementById('newApplByConnect').textContent).textContent
                         par_name = par_name_str.split('\n')
-
-
                         $.ajax({
                             type: "GET",
                             url: "/structure/",
@@ -822,16 +810,16 @@
                                 let p_par_name = par_node_name.split('-')
                                 let par_ind = parseInt(p_par_name[1],10)
                                 document.getElementById('modalNewApplByCancel').click()
-                               $('#'+par_node_name).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 50px;">\n' +
-                                '<td style="width: 100px">#'+cur_app_name+'</td>\n' +
+                               $('#'+par_node_name).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 30px;">\n' +
+                                '<td style="width: 100px;padding-left: 30px;">#'+cur_app_name+'</td>\n' +
                                 '<td style="text-align: right">\n' +
-                                '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
-                                '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">i</h5>\n' +
+                                '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 20px;margin-right:28px ; width: 20px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
+                                '<h5 style="margin-top: -8px; margin-left: -2px; color: #aaaaaa">i</h5>\n' +
                                 '</button>\n' +
                                 '</td>\n' +
                                 '<td style="text-align: right">\n' +
-                                '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 30px; width: 30px; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
-                                '<h5 style="margin-top: -3px; margin-left: -1px; color: #aaaaaa">-</h5>\n' +
+                                '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px;margin-right:42px ; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
+                                '<h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>\n' +
                                 '</button>\n' +
                                 '</td>\n' +
                                 '</tr>');
