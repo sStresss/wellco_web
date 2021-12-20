@@ -94,12 +94,22 @@ img {
 
 .custom_hov {
 
-  background-color: #ffffff;
+  background-color: #edeef0;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
 .custom_hov:hover {
-  background-color: #eeeeee;
+  background-color: #95b1d0;
+}
+
+.custom_btn_hov {
+
+  background-color: #edeef0;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+.custom_btn_hov:hover {
+  background-color: #95b1d0;
 }
 
 .custom_row_selected {
