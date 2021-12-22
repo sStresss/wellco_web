@@ -26,22 +26,22 @@
                 </div>
             </div>
             <div class="row" style="width: 100%; margin-top: 0px;">
-                <div class="" style="background-color: #edeef0; padding-left: -15px">
+                <div class="" style="background-color: #e3e7ef; padding-left: -15px">
                     <div class="col-sm-2" style="border-right: none; height: 900px; max-width: 248px; margin-left: 40px; margin-top: 0px;">
                         <div  style="height: 35px; margin-left: 15px; margin-top: 10px">
-                            <div class="row" style="background-color: #edeef0; margin-left: -75px; margin-top: -10px; border-bottom: 1px solid #939393">
+                            <div class="row" style="background-color: #e3e7ef; margin-left: -75px; margin-top: -10px; border-bottom: 1px solid #939393">
                                 <div class="row" style="margin-left: 25px">
-                                    <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 214px; height: 34px; font-size: 18px; border: none; outline: none; margin-left: 20px; margin-bottom: 5px; color: #000000; background-color: #edeef0">
+                                    <select id="cb_tree" class="form-select custom_hov" aria-label="Default select example" style="width: 214px; height: 34px; font-size: 18px; border: none; outline: none; margin-left: 20px; margin-bottom: 5px; color: #000000; background-color: #e3e7ef">
                                         <option id="pg" value="pg" selected>Проектные группы</option>
                                         <tr>
                                         <option id="os" value="os">Сторонние продажи</option>
                                         </tr>
                                     </select>
-                                    <button id="addPG" name="but1" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 24px; width: 24px; margin-left: 2px;margin-top: 7px ; background-color: #edeef0; outline: #edeef0; border: none" data-toggle="modal" data-target="#modalNewPg" onclick="">
+                                    <button id="addPG" name="but1" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 24px; width: 24px; margin-left: 2px;margin-top: 7px ; background-color: #e3e7ef; outline: #e3e7ef; border: none" data-toggle="modal" data-target="#modalNewPg" onclick="">
                                         <h1 style="margin-top: -10px; margin-left: -4px; color: #000000">+</h1>
                                     </button>
-                                    <button id="addBY" name="but2" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 24px; width: 24px; margin-left: 2px;margin-top: 7px ; background-color: #394350" data-toggle="modal" data-target="#modalNewBy" onclick="" hidden>
-                                        <h1 style="margin-top: -10px; margin-left: -4px; color: black">+</h1>
+                                    <button id="addBY" name="but2" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 24px; width: 24px; margin-left: 2px;margin-top: 7px ; background-color: #e3e7ef; outline: #e3e7ef; border: none" data-toggle="modal" data-target="#modalNewBy" onclick="" hidden>
+                                        <h1 style="margin-top: -10px; margin-left: -4px; color: #000000">+</h1>
                                     </button>
                                 </div>
                             </div>
@@ -52,12 +52,12 @@
                                     <tr id="node-{{ pg.pk }}" class="custom_hov treegrid-{{ pg.pk }}" style="height: 25px; max-height: 25px; color: #000000;">
                                         <td style="max-width: 200px;width: 200px;padding-left: 25px">{{ pg.pg_name }}</td>
                                         <td style="text-align: right;">
-                                            <button id="addCode" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewCode" style="height: 20px; width: 20px; margin-left: 19px; margin-right: 19px; background-color: #edeef0; border: none" onclick="takePgName(name)">
+                                            <button id="addCode" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewCode" style="height: 20px; width: 20px; margin-left: 19px; margin-right: 19px; background-color: #e3e7ef; border: none" onclick="takePgName(name)">
                                                 <h5 style="margin-top: -8px; margin-left: -5px; color: #4f565c; font-weight: normal">+</h5>
                                             </button>
                                         </td>
                                         <td style="text-align: right">
-                                            <button id="delPG-{{ pg.pk }}" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px; background-color: #edeef0; border: none" data-toggle="modal" data-target="#modalDellPg" onclick="del_pg_get_modal(name)">
+                                            <button id="delPG-{{ pg.pk }}" name="{{ pg.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px; background-color: #e3e7ef; border: none" data-toggle="modal" data-target="#modalDellPg" onclick="del_pg_get_modal(name)">
                                                 <h5 style="margin-top: -8px; margin-left: -2px; color: #4f565c; font-weight: normal">-</h5>
                                             </button>
                                         </td>
@@ -67,12 +67,12 @@
                                             <tr class="custom_hov treegrid-{{ pg.pk }}{{ code.id }} treegrid-parent-{{ pg.pk }}" style="width: 100px; height: 25px; max-height: 25px; margin-left: 0px; color: #000000">
                                                 <td style="padding-left: 30px">#{{ code.code_name }}</td>
                                                 <td style="text-align: right">
-                                                    <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewMpz" style=" height: 20px; width: 20px; margin-left: 19px; margin-right: 19px ; background-color: #edeef0; alignment: right; border: none" onclick="takeCodeName(name)">
+                                                    <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="123" data-target="#modalNewMpz" style=" height: 20px; width: 20px; margin-left: 19px; margin-right: 19px ; background-color: #e3e7ef; alignment: right; border: none" onclick="takeCodeName(name)">
                                                         <h5 style="margin-top: -8px; margin-left: -5px; color: #112945; font-weight: normal">+</h5>
                                                     </button>
                                                 </td>
                                                 <td style="text-align: right">
-                                                    <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px ; background-color: #edeef0; border: none" data-toggle="modal" data-target="#modalDellCode" onclick="del_code_get_modal(name)">
+                                                    <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px ; background-color: #e3e7ef; border: none" data-toggle="modal" data-target="#modalDellCode" onclick="del_code_get_modal(name)">
                                                         <h5 style="margin-top: -8px; margin-left: -2px; color: #112945; font-weight: normal">-</h5>
                                                     </button>
                                                 </td>
@@ -80,14 +80,14 @@
                                             {% for mpz  in mpz_lst %}
                                                 {% if  mpz.connect_id == code.id %}
                                                     <tr id="{{ mpz.pk }}" class="custom_hov treegrid-parent-{{ pg.pk }}{{ code.id }}" style="height: 25px; max-height: 25px; color: #000000">
-                                                        <td style=" padding-left: 35px; ">МПЗ №{{ mpz.mpz_appl_name }}</td>
+                                                        <td id="mpz_name-{{ mpz.pk }}" style=" padding-left: 35px; ">МПЗ №{{ mpz.mpz_appl_name }}</td>
                                                         <td style="text-align: right">
-                                                            <button id="infoMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: 19px;margin-right: 19px; background-color: #edeef0; border: none" onclick="get_mpz_data(name, {{ pg.pk }})">
+                                                            <button id="infoMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="" type="button" data-toggle="tooltip" data-placement="top" title="info" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: 19px;margin-right: 19px; background-color: #e3e7ef; border: none" onclick="get_mpz_data(name, {{ pg.pk }})">
                                                                 <h5 style="margin-top: -7px; margin-left: -1px; color: #112945; font-weight: normal">i</h5>
                                                             </button>
                                                         </td>
                                                         <td style="text-align: right">
-                                                            <button id="dellMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px; background-color: #edeef0; border: none" data-toggle="modal" data-target="#modalDellMpz" onclick="del_mpz_get_modal(name)">
+                                                            <button id="dellMPZ-{{ mpz.pk }}" name="{{ mpz.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px; background-color: #e3e7ef; border: none" data-toggle="modal" data-target="#modalDellMpz" onclick="del_mpz_get_modal(name)">
                                                                 <h5 style="margin-top: -8px; margin-left: -2px; color: #112945; font-weight: normal">-</h5>
                                                             </button>
                                                         </td>
@@ -101,56 +101,92 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4" style="margin-left: 15px; margin-top: 40px">
-                    <div class=" container row" style="margin-top: -20px">
-                        <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px">
-                            <thead class="">
-                                <tr >
-                                  <th scope="col" style="width: 250px; text-align: center"><h1 id="GlobalMpzNumConnect" hidden></h1>Колодец</th>
-                                  <th scope="col" style="width: 160px; text-align: center" >Всего в заявке</th>
-                                  <th scope="col" style="width: 160px; text-align: center" >Выдано</th>
-                                  <th scope="col" style="width: 160px; text-align: center" >К выдаче</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for type in types %}
-                                    <tr  style="height: 50px">
-                                      <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center;" >С-пласт {{ type.type_name }}</td>
-                                      <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center;"  data-toggle="modal" data-target="#modalEditMpz" class="mpz_button" onclick="getWellName({{ type }})" >
-                                          <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
-                                      </td>
-                                      <td  id="tbl_well_given-{{ type }}" style="text-align: center" >-</td>
-                                      <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >-</td>
+                <div class="column" style="margin-left: 15px; margin-top: 40px">
+                    <div class=" container row" style="margin-top: -15px; width: 1375px; min-width: 1375px">
+                        <div class="column" style="width: 590px; min-width: 590px">
+                            <div class="row" style="height: 61px; margin-left: 0px">
+                                <h1 id="mpz_tbl_head_text" style="margin-left: 0px; margin-top: 10px">
+                                    Заявка # ___
+                                </h1>
+                            </div>
+                            <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px; margin-top: -15px; width: 580px; max-width: 580px;">
+                                <thead class="">
+                                    <tr style="height: 30px; background-color: #577fae;">
+                                      <th scope="col" style="width: 200px; max-width: 200px; min-width: 200px; text-align: center;"><h1 id="GlobalMpzNumConnect" hidden></h1>
+                                          <span style="color: #ffffff; font-weight: normal">Колодец</span>
+                                      </th>
+                                      <th scope="col" style="width: 140px; text-align: center" >
+                                          <span style="color: #ffffff; font-weight: normal">
+                                              Всего в заявке
+                                          </span>
+                                      </th>
+                                      <th scope="col" style="width: 120px; text-align: center" >
+                                          <span style="color: #ffffff; font-weight: normal">
+                                              Выдано
+                                          </span>
+                                      </th>
+                                      <th scope="col" style="width: 120px; text-align: center" >
+                                          <span style="color: #ffffff; font-weight: normal">
+                                              К выдаче
+                                          </span>
+                                      </th>
                                     </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <div class=" container row" style="margin-top: -20px">
-                        <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px">
-                            <thead class="">
-                                <tr >
-                                  <th scope="col" style="width: 250px; text-align: center"><h1 id="GlobalMpzNumConnect" hidden></h1>Колодец</th>
-                                  <th scope="col" style="width: 160px; text-align: center" >Всего в заявке</th>
-                                  <th scope="col" style="width: 160px; text-align: center" >Выдано</th>
-                                  <th scope="col" style="width: 160px; text-align: center" >К выдаче</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for type in types %}
-                                    <tr  style="height: 50px">
-                                      <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center;" >С-пласт {{ type.type_name }}</td>
-                                      <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center;"  data-toggle="modal" data-target="#modalEditMpz" class="mpz_button" onclick="getWellName({{ type }})" >
-                                          <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
-                                      </td>
-                                      <td  id="tbl_well_given-{{ type }}" style="text-align: center" >-</td>
-                                      <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >-</td>
+                                </thead>
+                                <tbody>
+                                    {% for type in types %}
+                                        <tr  style="height: 30px; min-height: 30px; max-height: 30px;">
+                                          <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center;" >{{ type.type_name }}</td>
+                                          <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center;"  data-toggle="modal" data-target="#modalEditMpz" class="mpz_button" onclick="getWellName({{ type }})" >
+                                              <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
+                                          </td>
+                                          <td  id="tbl_well_given-{{ type }}" style="text-align: center" >-</td>
+                                          <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >-</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="column" style="width: 650px; min-width: 650px;">
+                            <h1 style="margin-left: 0px; margin-top: 10px">История выдачи</h1>
+                            <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px;margin-top: -15px; ">
+                                <thead class="">
+                                    <tr style="height: 30px; max-height: 30px; background-color: #577fae;">
+                                      <th scope="col" style="width: 200px; max-width: 200px; min-width: 200px; text-align: center;"><h1 id="GlobalMpzNumConnect" hidden></h1>
+                                          <span style="color: #ffffff; font-weight: normal">
+                                              Колодец
+                                          </span>
+                                      </th>
+                                      <th scope="col" style="width: 160px; text-align: center" >
+                                          <span style="color: #ffffff; font-weight: normal">
+                                              Всего в заявке
+                                          </span>
+                                      </th>
+                                      <th scope="col" style="width: 160px; text-align: center" >
+                                          <span style="color: #ffffff; font-weight: normal">
+                                              Выдано
+                                          </span>
+                                      </th>
+                                      <th scope="col" style="width: 160px; text-align: center" >
+                                          <span style="color: #ffffff; font-weight: normal">
+                                              К выдаче
+                                          </span>
+                                      </th>
                                     </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    {% for type in types %}
+                                        <tr  style="height: 30px; min-height: 30px; max-height: 30px">
+                                          <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center;" >С-пласт {{ type.type_name }}</td>
+                                          <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center;"  data-toggle="modal" data-target="#modalEditMpz" class="mpz_button" onclick="getWellName({{ type }})" >
+                                              <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
+                                          </td>
+                                          <td  id="tbl_well_given-{{ type }}" style="text-align: center" >-</td>
+                                          <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >-</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -672,13 +708,13 @@
                                         $('#table_struct').append('<tr id="node-'+i+'" class="custom_hov treegrid-'+i+' treegrid-collapsed" style="height: 30px;">\n' +
                                                                     '<td id="node_name-'+i+'"style="width: 240px; padding-left:25px">'+value[0]+'</td>\n' +
                                                                     '<td style="text-align: right">\n' +
-                                                                    '<button id="addBYApp" name="node-'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 20px; width: 20px; margin-left: 9px; margin-right: 28px; background-color: white;" onclick="takeNodeChName(name)">\n' +
-                                                                    '<h5 style="margin-top: -9px; margin-left: -6px; color: #aaaaaa">+</h5>\n' +
+                                                                    '<button id="addBYApp" name="node-'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 20px; width: 20px; margin-left: 19px; margin-right: 19px; background-color: #e3e7ef; border: none" onclick="takeNodeChName(name)">\n' +
+                                                                    '<h5 style="margin-top: -8px; margin-left: -5px; color: #4f565c; font-weight: normal">+</h5>\n' +
                                                                     '</button>\n' +
                                                                     '</td>\n' +
                                                                     '<td style="text-align: right">\n' +
-                                                                    '<button id="delBY-'+i+'" name="'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right:42px ; background-color: white" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
-                                                                    '<h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>\n' +
+                                                                    '<button id="delBY-'+i+'" name="'+i+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px; background-color: #e3e7ef; border: none" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
+                                                                    '<h5 style="margin-top: -8px; margin-left: -2px; color: #4f565c; font-weight: normal">-</h5>\n' +
                                                                     '</button>\n' +
                                                                     '</td>\n' +
                                                                     '</tr>');
@@ -692,13 +728,13 @@
                                                 $('#table_struct').append('<tr id="node-'+i+'-'+j+'" class="custom_hov treegrid-parent-'+i+'" style="height: 30px;">\n' +
                                                                             '<td style="width: 100px; padding-left: 30px;">#'+appl_lst[j]+'</td>\n' +
                                                                             '<td style="text-align: right">\n' +
-                                                                            '<button id="infoABY-node-'+i+'-'+j+'" name="node-'+i+'-'+j+'" value="" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: 0px;margin-right:28px ; background-color: white" onclick="get_by_app_data(name)">\n' +
-                                                                            '<h5 style="margin-top: -8px; margin-left: -2px; color: #aaaaaa">i</h5>\n' +
+                                                                            '<button id="infoABY-node-'+i+'-'+j+'" name="node-'+i+'-'+j+'" value="" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: 19px; margin-right: 19px; background-color: #e3e7ef; border: none" onclick="get_by_app_data(name)">\n' +
+                                                                            '<h5 style="margin-top: -7px; margin-left: -1px; color: #112945; font-weight: normal">i</h5>\n' +
                                                                             '</button>\n' +
                                                                             '</td>\n' +
                                                                             '<td style="text-align: right">\n' +
-                                                                            '<button id="dellABY-'+j+'" name="node-'+i+'-'+j+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -25px;margin-right:42px ; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
-                                                                            '<h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>\n' +
+                                                                            '<button id="dellABY-'+j+'" name="node-'+i+'-'+j+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px; background-color: #e3e7ef; border: none" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
+                                                                            '<h5 style="margin-top: -8px; margin-left: -2px; color: #4f565c; font-weight: normal">-</h5>\n' +
                                                                             '</button>\n' +
                                                                             '</td>\n' +
                                                                             '</tr>');
@@ -754,13 +790,13 @@
                                     $('#table_struct').append('<tr id="node-'+cur_ind+'" class="custom_hov treegrid-'+cur_ind+'" style="height: 30px;">\n' +
                                                                     '<td id="node_name-'+cur_ind+'" style="width: 240px;padding-left:25px">'+$('#newByName').val()+'</td>\n' +
                                                                     '<td style="text-align: right">\n' +
-                                                                    '<button id="addBYApp" name="node-'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 20px; width: 20px; margin-left: 0px;margin-right:28px; background-color: white;" onclick="takeNodeChName(name)">\n' +
-                                                                    '<h5 style="margin-top: -9px; margin-left: -6px; color: #aaaaaa">+</h5>\n' +
+                                                                    '<button id="addBYApp" name="node-'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewByAppl" style="height: 20px; width: 20px; margin-left: 19px; margin-right: 19px; background-color: #e3e7ef; border: none" onclick="takeNodeChName(name)">\n' +
+                                                                    '<h5 style="margin-top: -8px; margin-left: -5px; color: #4f565c; font-weight: normal">+</h5>\n' +
                                                                     '</button>\n' +
                                                                     '</td>\n' +
                                                                     '<td style="text-align: right">\n' +
-                                                                    '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px;margin-right:42px; background-color: white" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
-                                                                    '<h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>\n' +
+                                                                    '<button id="delBY-'+cur_ind+'" name="'+cur_ind+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px; background-color: #e3e7ef; border: none" data-toggle="modal" data-target="#modalDellBy" onclick="del_by_get_modal(name)">\n' +
+                                                                    '<h5 style="margin-top: -8px; margin-left: -2px; color: #4f565c; font-weight: normal">-</h5>\n' +
                                                                     '</button>\n' +
                                                                     '</td>\n' +
                                                                     '</tr>'),
@@ -816,13 +852,13 @@
                                $('#'+par_node_name).after('<tr id="'+next_ch_id+'" class="custom_hov treegrid-parent-'+par_ind+'" style="height: 30px;">\n' +
                                 '<td style="width: 100px;padding-left: 30px;">#'+cur_app_name+'</td>\n' +
                                 '<td style="text-align: right">\n' +
-                                '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 20px;margin-right:28px ; width: 20px; margin-left: 0px; background-color: white" onclick="get_by_app_data(name)">\n' +
-                                '<h5 style="margin-top: -8px; margin-left: -2px; color: #aaaaaa">i</h5>\n' +
+                                '<button id="infoABY-'+next_ch_id+'" name="'+next_ch_id+'" value="" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: 19px; margin-right: 19px; background-color: #e3e7ef; border: none" onclick="get_by_app_data(name)">\n' +
+                                '<h5 style="margin-top: -7px; margin-left: -1px; color: #112945; font-weight: normal">i</h5>\n' +
                                 '</button>\n' +
                                 '</td>\n' +
                                 '<td style="text-align: right">\n' +
-                                '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px;margin-right:42px ; margin-left: -25px; background-color: white" data-toggle="modal" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
-                                '<h5 style="margin-top: -9px; margin-left: -3px; color: #aaaaaa">-</h5>\n' +
+                                '<button id="dellABY-'+next_ch_id+'" name="'+next_ch_id+'" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px; background-color: #e3e7ef; border: none" data-target="#modalDellByAppl" onclick="del_byappl_get_modal(name)">\n' +
+                                '<h5 style="margin-top: -8px; margin-left: -2px; color: #4f565c; font-weight: normal">-</h5>\n' +
                                 '</button>\n' +
                                 '</td>\n' +
                                 '</tr>');
@@ -989,7 +1025,7 @@
                         this.style.backgroundColor = defaultStatus;
                         this.classList.add("custom_hov");
                 }),
-                document.getElementById(name).style.backgroundColor = '#eeeeee',
+                document.getElementById(name).style.backgroundColor = '#95b1d0',
                 $.ajax({
                     type: "GET",
                     url: "/structure/",
@@ -1003,10 +1039,55 @@
                         document.getElementById("GlobalMpzNumConnect").innerHTML = name;
                         document.getElementById("MpzNumConnect").innerHTML = name;
                         document.getElementById("MpzNumConnect").value = name;
+                        let mpz_name = ((document.getElementById("mpz_name-"+name).textContent).split('№'))[1]
+                        document.getElementById("mpz_tbl_head_text").innerHTML = 'Заявка # '+mpz_name
+
                         for (const [key, value] of Object.entries(resp)) {
+                            if (value[1] == "0") {
+                                console.log('0')
+                                color_mpz = '#aeaeae'
+                                text_weight_mpz = 'normal'
+                            }
+                            else {
+                                color_mpz = '#000000'
+                                text_weight_mpz = 'bold'
+                            }
+                            if (value[2] == "0") {
+                                console.log('0')
+                                color_given = '#aeaeae'
+                                text_weight_given = 'normal'
+                            }
+                            else {
+                                color_given = '#000000'
+                                text_weight_given = 'bold'
+                            }
+                            if (value[3] == "0") {
+                                color_pathof = '#aeaeae'
+                                text_weight_pathof = 'normal'
+                                back_pathof = '#ffffff'
+                            }
+                            else {
+                                if (parseInt(value[3],10) < 0) {
+                                    color_pathof = '#000000'
+                                    text_weight_pathof = 'bold'
+                                    back_pathof = '#d3362b'
+                                }
+                                else {
+                                    color_pathof = '#000000'
+                                    text_weight_pathof = 'bold'
+                                    back_pathof = '#ffffff'
+                                }
+                            }
                             document.getElementById('tbl_well_in_mpz-' + value[0]).innerHTML = value[1];
+                            document.getElementById('tbl_well_in_mpz-' + value[0]).style.color = color_mpz;
+                            document.getElementById('tbl_well_in_mpz-' + value[0]).style.fontWeight = text_weight_mpz;
                             document.getElementById('tbl_well_given-' + value[0]).innerHTML = value[2];
+                            document.getElementById('tbl_well_given-' + value[0]).style.color = color_given;
+                            document.getElementById('tbl_well_given-' + value[0]).style.fontWeight = text_weight_given;
                             document.getElementById('tbl_well_pathof-' + value[0]).innerHTML = value[3];
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.color = color_pathof;
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.fontWeight = text_weight_pathof;
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.backgroundColor = back_pathof;
                         }
                     },
                     error: function(result) {
@@ -1096,10 +1177,52 @@
                         document.getElementById("GlobalMpzNumConnect").innerHTML = name;
                         document.getElementById("MpzNumConnect").innerHTML = name;
                         document.getElementById("MpzNumConnect").value = name;
+                        document.getElementById("mpz_tbl_head_text").innerHTML = 'Заявка # '+node_name+' ('+par_name+')'
                         for (const [key, value] of Object.entries(resp)) {
+                            if (value[1] == "0") {
+                                console.log('0')
+                                color_mpz = '#aeaeae'
+                                text_weight_mpz = 'normal'
+                            }
+                            else {
+                                color_mpz = '#000000'
+                                text_weight_mpz = 'bold'
+                            }
+                            if (value[2] == "0") {
+                                console.log('0')
+                                color_given = '#aeaeae'
+                                text_weight_given = 'normal'
+                            }
+                            else {
+                                color_given = '#000000'
+                                text_weight_given = 'bold'
+                            }
+                            if (value[3] == "0") {
+                                color_pathof = '#aeaeae'
+                                text_weight_pathof = 'normal'
+                                back_pathof = '#ffffff'
+                            }
+                            else {
+                                if (parseInt(value[3], 10) < 0) {
+                                    color_pathof = '#000000'
+                                    text_weight_pathof = 'bold'
+                                    back_pathof = '#d3362b'
+                                } else {
+                                    color_pathof = '#000000'
+                                    text_weight_pathof = 'bold'
+                                    back_pathof = '#ffffff'
+                                }
+                            }
                             document.getElementById('tbl_well_in_mpz-' + value[0]).innerHTML = value[1];
+                            document.getElementById('tbl_well_in_mpz-' + value[0]).style.color = color_mpz;
+                            document.getElementById('tbl_well_in_mpz-' + value[0]).style.fontWeight = text_weight_mpz;
                             document.getElementById('tbl_well_given-' + value[0]).innerHTML = value[2];
+                            document.getElementById('tbl_well_given-' + value[0]).style.color = color_given;
+                            document.getElementById('tbl_well_given-' + value[0]).style.fontWeight = text_weight_given;
                             document.getElementById('tbl_well_pathof-' + value[0]).innerHTML = value[3];
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.color = color_pathof;
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.fontWeight = text_weight_pathof;
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.backgroundColor = back_pathof;
                         }
                     },
                 error: function(result) {
@@ -1142,7 +1265,6 @@
                 window.addEventListener("beforeunload", () => sessionStorage.removeItem('islocallogined'));
                 window.location.href = '/'
             }
-
         </script>
     </body>
 </html>

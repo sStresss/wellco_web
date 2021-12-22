@@ -433,6 +433,7 @@ def structure(request):
                 delta = int(p_arr[j]) - int(ppp_arr[j])
                 pppp_arr.append(delta)
             # print('MPZ DELTA: ', pppp_arr)
+            transfer_date_lst, transfer_data_lst = getMpzTransferDataArr(appl_cur_id)
             for i in range(len(types)):
                 pp_arr = []
                 pp_arr.append(str(types[i]))
@@ -442,7 +443,7 @@ def structure(request):
                 data[i] = pp_arr
                 json_data = json.dumps(data)
             json_res = json.loads(json_data)
-            # print('json_res: ', json_res)
+            print('json res: ', json_res)
             return JsonResponse(json_res, content_type='application/json')
         if req.find('get_by_data') != -1:
             data = {}
@@ -1367,3 +1368,49 @@ def pushPostgreSqlServer(data):
         well.req_num = req_num
         well.trans_date = trans_date
         well.release()
+
+#------------------------------------STRUCTURE MPZ APPL TRANSFER INFO---------------------------------------------------
+def getMpzTransferDataArr(app_id):
+    appl_trans_hystory = []
+    appl_lst = Appl_mpz.objects.all().order_by('id')
+    for mpz in appl_lst:
+        if str(mpz.pk) == str(app_id):
+            mpz_name = mpz.mpz_appl_name
+    type_rows = WellType.objects.all().order_by('id')
+    p_well_lst = Well.objects.all().order_by('id')
+    well_lst = []
+    print('appl name: ', mpz_name)
+    for well in p_well_lst:
+        if str(well.req_num) == str(mpz_name):
+            well_lst.append(well)
+    print('well lst: ', well_lst)
+    date_lst = []
+    #get header data arr
+    for row in well_lst:
+        ch_unique = False
+        trans_date = row.trans_date
+        if len(date_lst) == 0:
+            date_lst.append(trans_date)
+        else:
+            for elem in date_lst:
+                if str(elem) == (trans_date):
+                    ch_unique = True
+            if ch_unique == False:
+                date_lst.append(trans_date)
+    print('date_lst: ', date_lst)
+    #get rows data arr
+    appl_info_data_arr = []
+    for row in type_rows:
+        p_arr = []
+        well_type = row.type_name
+        p_arr.append(well_type)
+        for date in date_lst:
+            count = 0
+            for well in well_lst:
+                if str(well.type).find(well_type) != -1 and well.trans_date == date:
+                    count+=1
+            p_arr.append(str(count))
+        appl_info_data_arr.append(p_arr)
+
+    print('appl info data arr: ', appl_info_data_arr)
+    return date_lst, appl_info_data_arr
