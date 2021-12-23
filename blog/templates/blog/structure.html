@@ -25,8 +25,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row" style="width: 100%; margin-top: 0px;">
-                <div class="" style="background-color: #e3e7ef; padding-left: -15px">
+            <div class="row" style="width: 100%; margin-top: 0px; background-color: #f4f7fe; margin-left: 0px">
+                <div class="" style="background-color: #e3e7ef; padding-left: -15px; margin-left: -15px">
                     <div class="col-sm-2" style="border-right: none; height: 900px; max-width: 248px; margin-left: 40px; margin-top: 0px;">
                         <div  style="height: 35px; margin-left: 15px; margin-top: 10px">
                             <div class="row" style="background-color: #e3e7ef; margin-left: -75px; margin-top: -10px; border-bottom: 1px solid #939393">
@@ -101,9 +101,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="column" style="margin-left: 15px; margin-top: 40px">
-                    <div class=" container row" style="margin-top: -15px; width: 1375px; min-width: 1375px">
-                        <div class="column" style="width: 590px; min-width: 590px">
+                <div class="column" style="margin-left: 0px; margin-top: 40px">
+                    <div class=" container row" style="margin-top: -39px; width: 1375px; min-width: 1375px">
+                        <div class="column" style="padding-left:10px;width: 590px; min-width: 590px; background-color: white; height: 900px; width: 44.5%">
                             <div class="row" style="height: 61px; margin-left: 0px">
                                 <h1 id="mpz_tbl_head_text" style="margin-left: 0px; margin-top: 10px">
                                     Заявка # ___
@@ -146,44 +146,15 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="column" style="width: 650px; min-width: 650px;">
+                        <div class="column" style="width: 650px; min-width: 650px; margin-left: 10px">
                             <h1 style="margin-left: 0px; margin-top: 10px">История выдачи</h1>
-                            <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px;margin-top: -15px; ">
+                            <h1 id="transfer_not_found" style="margin-left: 0px; margin-top: 10px" hidden>Выдача не производилась</h1>
+                            <table id="transfer_tbl" class=" table table-bordered"  style="margin-bottom: 30px;margin-top: -15px; ">
                                 <thead class="">
-                                    <tr style="height: 30px; max-height: 30px; background-color: #577fae;">
-                                      <th scope="col" style="width: 200px; max-width: 200px; min-width: 200px; text-align: center;"><h1 id="GlobalMpzNumConnect" hidden></h1>
-                                          <span style="color: #ffffff; font-weight: normal">
-                                              Колодец
-                                          </span>
-                                      </th>
-                                      <th scope="col" style="width: 160px; text-align: center" >
-                                          <span style="color: #ffffff; font-weight: normal">
-                                              Всего в заявке
-                                          </span>
-                                      </th>
-                                      <th scope="col" style="width: 160px; text-align: center" >
-                                          <span style="color: #ffffff; font-weight: normal">
-                                              Выдано
-                                          </span>
-                                      </th>
-                                      <th scope="col" style="width: 160px; text-align: center" >
-                                          <span style="color: #ffffff; font-weight: normal">
-                                              К выдаче
-                                          </span>
-                                      </th>
+                                    <tr id="transfer_tbl_thead" style="height: 30px; max-height: 30px; background-color: #577fae;">
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    {% for type in types %}
-                                        <tr  style="height: 30px; min-height: 30px; max-height: 30px">
-                                          <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center;" >С-пласт {{ type.type_name }}</td>
-                                          <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center;"  data-toggle="modal" data-target="#modalEditMpz" class="mpz_button" onclick="getWellName({{ type }})" >
-                                              <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
-                                          </td>
-                                          <td  id="tbl_well_given-{{ type }}" style="text-align: center" >-</td>
-                                          <td  id="tbl_well_pathof-{{ type }}" style="text-align: center" >-</td>
-                                        </tr>
-                                    {% endfor %}
+                                <tbody id="transfer_tbl_body">
                                 </tbody>
                             </table>
                         </div>
@@ -1089,6 +1060,85 @@
                             document.getElementById('tbl_well_pathof-' + value[0]).style.fontWeight = text_weight_pathof;
                             document.getElementById('tbl_well_pathof-' + value[0]).style.backgroundColor = back_pathof;
                         }
+                        get_mpz_transfer_data(name)
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    },
+                });
+            }
+            function get_mpz_transfer_data(name) {
+                $.ajax({
+                    type: "GET",
+                    url: "/structure/",
+                    dataType: "json",
+                    data: {
+                    event: 'get_transfer_data_mpz',
+                        mpz_num: name
+                    },
+
+                    success: function(resp) {
+                        document.getElementById('transfer_not_found').hidden = true
+                        document.getElementById('transfer_tbl').hidden = true
+                        document.getElementById('transfer_tbl_thead').innerHTML = ''
+                        document.getElementById('transfer_tbl_body').innerHTML = ''
+                        date_lst = resp[0]
+                        data_lst = resp[1]
+                        console.log(data_lst)
+                        if (date_lst == 0) {
+                            document.getElementById('transfer_not_found').hidden = false
+                        }
+                        else {
+                            document.getElementById('transfer_tbl').hidden = false
+                        }
+                        i = 0
+                        for (;;) {
+                           if (i == date_lst.length) { break}
+                           else {
+                               $('#transfer_tbl_thead').append('<th scope="col" style="width: 100px; max-width: 100px; min-width: 100px; text-align: center;"><h1 id="GlobalMpzNumConnect" hidden></h1>\n' +
+                                '<span style="color: #ffffff; font-weight: normal">\n' +
+                                ''+date_lst[i]+'\n' +
+                                '</span>\n' +
+                                '</th>')
+                               i++
+                           }
+                        }
+                        i = 0
+                        for (;;) {
+                            if (i == data_lst.length) {break}
+                            else {
+                                j = 0
+                                p_data_lst = data_lst[i]
+                                $('#transfer_tbl_body').append('<tr id="tbl_trans_row-'+i+'"height: 30px; min-height: 30px; max-height: 30px;">\n' +
+                                                                '</tr>')
+                                for (;;) {
+                                    if (j == p_data_lst.length) {break}
+                                    else {
+                                        if (p_data_lst[j] == "0") {
+                                            console.log('0')
+                                            color_mpz = '#aeaeae'
+                                            text_weight_mpz = 'normal'
+                                        }
+                                        else {
+                                            color_mpz = '#000000'
+                                            text_weight_mpz = 'bold'
+                                        }
+                                        $('#tbl_trans_row-'+i).append('<td  id="tbl_row-'+i+j+'" scope="row" style="color: '+color_mpz+'; text-align: center; border: 1px solid #a4abb3" >'+p_data_lst[j]+'</td>')
+                                        j++
+                                    }
+                                }
+                                i++
+                            }
+                        }
+
                     },
                     error: function(result) {
                         var readyState = {
