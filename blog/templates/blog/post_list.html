@@ -45,32 +45,33 @@
                 <button id="journal" name="but1" value="val_6" type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
                     Журнал событий
                 </button>
-                <div class="col">
-                    <div class="row">
-                        <div id="well_table" class=" container-fluid row" style="margin-top: 10px">
-                        <table class=" table table-bordered"  style="margin-bottom: 30px">
-                            <thead>
-                                <tr>
-                                  <th scope="col">Cерийный номер</th>
-                                  <th scope="col">Тип</th>
-                                  <th scope="col">Дата выпуска</th>
-                                  <th scope="col">Нахождение</th>
-                                  <th scope="col">Комментарий</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for well in wells %}
-                                    <tr>
-                                      <td scope="row"  >С-пласт {{ well.serial }}</td>
-                                      <td>{{ well.type }}</td>
-                                      <td>{{ well.created_date }}</td>
-                                      <td>{{ well.locate }}</td>
-                                      <td>{{ well.comment }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                <div style="margin-top: 10px; margin-left: -6px">
+
+                                <div id="well_table" class="container-fluid row" style="">
+                                <div class="scroll" style="overflow-y: scroll; width: 1890px; height: 830px">
+                                    <table class=" table table-bordered"  style="margin-bottom: 0px;">
+                                        <thead>
+                                            <tr>
+                                              <th scope="col">Cерийный номер</th>
+                                              <th scope="col">Тип</th>
+                                              <th scope="col">Дата выпуска</th>
+                                              <th scope="col">Нахождение</th>
+                                              <th scope="col">Комментарий</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for well in wells %}
+                                            <tr>
+                                              <td scope="row"  >С-пласт {{ well.serial }}</td>
+                                              <td>{{ well.type }}</td>
+                                              <td>{{ well.created_date }}</td>
+                                              <td>{{ well.locate }}</td>
+                                              <td>{{ well.comment }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </table>
+                        </div>
                     </div>
                 </div>
             </div>
