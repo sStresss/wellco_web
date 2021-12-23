@@ -140,13 +140,12 @@ def post_list(request):
             i = 0
             check = False
             for well in well_lst:
-                if str(well.type) == str(type):
+                if (str(well.type) == str(type) and str(well.trans_date) == ''):
                     check = True
                     pp_arr = []
                     pp_arr.append(str(well.type))
                     pp_arr.append(str(well.serial))
                     pp_arr.append(str(well.created_date))
-
                     data[i] = pp_arr
                     json_data = json.dumps(data)
                     i += 1

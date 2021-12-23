@@ -324,7 +324,6 @@
                     <div id="well_selected_counter" value="" hidden>0</div>
                   </div>
                   <div class="modal-body">
-
                     <div class="content-box" style="text-align:right; background-color: #ffffff;">
                         <div class="row">
                                 <div class="column" style="margin-left: 15px">
@@ -889,10 +888,7 @@
                         event: 'get_well_lst',
                             type: type_name
                         },
-
-
                         success: function(resp) {
-
                             $("#well_table").load("/ #well_table > *");
                             var p_arr = document.getElementById("serial_lst").childNodes
                             console.log(p_arr)
