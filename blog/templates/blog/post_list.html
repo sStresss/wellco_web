@@ -45,10 +45,10 @@
                 <button id="journal" name="but1" value="val_6" type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
                     Журнал событий
                 </button>
-                <div style="margin-top: 10px; margin-left: -6px">
+                <div style="margin-top: 9px; margin-left: -6px">
 
                                 <div id="well_table" class="container-fluid row" style="">
-                                <div class="scroll" style="overflow-y: scroll; width: 1890px; height: 830px">
+                                <div class="scroll" style="overflow-y: scroll; width: 1890px; height: 784px">
                                     <table class=" table table-bordered"  style="margin-bottom: 0px;">
                                         <thead>
                                             <tr>
@@ -395,27 +395,29 @@
                             <div>
                                 <a>Период от </a>
                                 <td><input data-date-format="dd/mm/yyyy" id="m29_date_start" style="height: 23px; width: 105px; margin-left: 5px"></td>
+                                <span id="m29_date_start_connect" hidden></span>
                                 <a style="margin-left: 5px"> до </a>
                                 <td><input data-date-format="dd/mm/yyyy" id="m29_date_end" style="height: 23px; width: 105px; margin-left: 5px;margin-right: 5px;"></td>
+                                <span id="m29_date_end_connect" hidden></span>
                             </div>
                             <div class="content" style="margin-left: auto">
                                 <button id="m29_get" name="but1" value="val_5" type="button" class="btn btn-warning btn-sm" onclick="modal_m29_get_data()">
                                     Сформировать
                                 </button>
-                                <button id="m29_save" name="but1" value="val_5" type="button" class="btn btn-info btn-sm" >
+                                <button id="m29_save" name="but1" value="val_5" type="button" class="btn btn-info btn-sm" onclick="exportTableToExcel('m29_tbl')">
                                     Сохранить
                                 </button>
                             </div>
                         </div>
                         <div class="row" style="padding-top: 10px; margin-left: auto; margin-right: auto; height: 700px">
-                            <table class=" table table-bordered"  style="margin-bottom: 30px">
+                            <table id="m29_tbl" class=" table table-bordered"  style="margin-bottom: 30px; border: 1px" border="1">
                                 <thead>
                                     <tr>
                                       <th scope="col" style="text-align: center; width: 180px">Колодец</th>
-                                      <th scope="col" style="text-align: center; width: 150px">Сост. на начало</th>
+                                      <th scope="col" style="text-align: center; width: 150px">Сост. на начало <span id="m29_headtext_date_start"></span></th>
                                       <th scope="col" style="text-align: center; width: 135px">Приход</th>
                                       <th scope="col" style="text-align: center; width: 135px">Уход</th>
-                                      <th scope="col" style="text-align: center; width: 150px">Сост. на конец</th>
+                                      <th scope="col" style="text-align: center; width: 150px">Сост. на конец <span id="m29_headtext_date_end"></span></th>
                                     </tr>
                                 </thead>
                                 <tbody id="m29_tbl_body">
@@ -1070,7 +1072,13 @@
                     document.getElementById("transfer_well_counter").innerHTML = document.getElementById("serial_lst").childNodes.length
                 };
             function modal_m29_init() {
-                document.getElementById('m29_tbl_body').innerHTML = ""
+                document.getElementById('m29_tbl_body').innerHTML = "";
+                $('#m29_date_start').datepicker("setDate", "-1m");
+                $('#m29_date_end').datepicker("setDate", "-0m");
+                document.getElementById('m29_date_start_connect').innerHTML = $('#m29_date_start').val()
+                document.getElementById('m29_date_end_connect').innerHTML = $('#m29_date_end').val()
+                document.getElementById('m29_headtext_date_start').innerText = $('#m29_date_start').val()
+                document.getElementById('m29_headtext_date_end').innerText = $('#m29_date_end').val()
                 $.ajax({
                     type: "GET",
                     url: "/",
@@ -1114,6 +1122,10 @@
             };
             function modal_m29_get_data() {
                 document.getElementById('m29_tbl_body').innerHTML = ""
+                document.getElementById('m29_date_start_connect').innerHTML = $('#m29_date_start').val()
+                document.getElementById('m29_date_end_connect').innerHTML = $('#m29_date_end').val()
+                document.getElementById('m29_headtext_date_start').innerText = $('#m29_date_start').val()
+                document.getElementById('m29_headtext_date_end').innerText = $('#m29_date_end').val()
                 $.ajax({
                     type: "GET",
                     url: "/",
@@ -1220,6 +1232,30 @@
             }
             function goStatistic() {
                 window.sessionStorage.setItem('islocallogined', 'true')
+            }
+            function exportTableToExcel(tableID){
+                var downloadLink;
+                var dataType = 'application/vnd.ms-excel';
+                var tableSelect = document.getElementById(tableID);
+                var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20').replace(/#/g, '%23');
+                date_start = (document.getElementById('m29_date_start_connect').textContent).replace('/', '-').replace('/', '-')
+                date_end = (document.getElementById('m29_date_end_connect').textContent).replace('/', '-').replace('/', '-')
+                console.log(date_start)
+                console.log(date_end)
+                filename = date_start + '__' + date_end
+                filename = filename?filename+'.xls':'excel_data.xls';
+                downloadLink = document.createElement("a");
+                document.body.appendChild(downloadLink);
+                if(navigator.msSaveOrOpenBlob){
+                    var blob = new Blob(['\ufeff', tableHTML], {
+                        type: dataType
+                    });
+                    navigator.msSaveOrOpenBlob( blob, filename);
+                }else{
+                    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+                    downloadLink.download = filename;
+                    downloadLink.click();
+                }
             }
         </script>
     </body>
