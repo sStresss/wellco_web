@@ -1143,7 +1143,6 @@
                                 i++
                             }
                         }
-
                     },
                     error: function(result) {
                         var readyState = {
@@ -1279,6 +1278,7 @@
                             document.getElementById('tbl_well_pathof-' + value[0]).style.fontWeight = text_weight_pathof;
                             document.getElementById('tbl_well_pathof-' + value[0]).style.backgroundColor = back_pathof;
                         }
+                        get_buy_transfer_data(node_name, par_name)
                     },
                 error: function(result) {
                     var readyState = {
@@ -1291,6 +1291,88 @@
                         alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
                     }
                 },
+                });
+            }
+            function get_buy_transfer_data(name) {
+                $.ajax({
+                    type: "GET",
+                    url: "/structure/",
+                    dataType: "json",
+                    data: {
+                    event: 'get_transfer_data_buy',
+                        app_name: par_name,
+                        par_name: node_name
+                    },
+
+                    success: function(resp) {
+                        document.getElementById('transfer_not_found').hidden = true
+                        document.getElementById('transfer_tbl').hidden = true
+                        document.getElementById('transfer_tbl_thead').innerHTML = ''
+                        document.getElementById('transfer_tbl_body').innerHTML = ''
+                        document.getElementById('mpz_tbl_head_text_first').hidden = true
+                        document.getElementById('mpz_tbl_head_text').hidden = false
+                        document.getElementById('transfer_tbl_head_text').hidden = false
+                        document.getElementById('mpz_tbl').hidden = false
+                        date_lst = resp[0]
+                        data_lst = resp[1]
+                        console.log(data_lst)
+                        if (date_lst == 0) {
+                            document.getElementById('transfer_not_found').hidden = false
+                        }
+                        else {
+                            document.getElementById('transfer_tbl').hidden = false
+                        }
+                        i = 0
+                        for (;;) {
+                           if (i == date_lst.length) { break}
+                           else {
+                               $('#transfer_tbl_thead').append('<th scope="col" style="width: 100px; max-width: 100px; min-width: 100px; text-align: center;"><h1 id="GlobalMpzNumConnect" hidden></h1>\n' +
+                                '<span style="color: #ffffff; font-weight: normal">\n' +
+                                ''+date_lst[i]+'\n' +
+                                '</span>\n' +
+                                '</th>')
+                               i++
+                           }
+                        }
+                        i = 0
+                        for (;;) {
+                            if (i == data_lst.length) {break}
+                            else {
+                                j = 0
+                                p_data_lst = data_lst[i]
+                                $('#transfer_tbl_body').append('<tr id="tbl_trans_row-'+i+'"height: 30px; min-height: 30px; max-height: 30px;">\n' +
+                                                                '</tr>')
+                                for (;;) {
+                                    if (j == p_data_lst.length) {break}
+                                    else {
+                                        if (p_data_lst[j] == "0") {
+                                            console.log('0')
+                                            color_mpz = '#aeaeae'
+                                            text_weight_mpz = 'normal'
+                                        }
+                                        else {
+                                            color_mpz = '#000000'
+                                            text_weight_mpz = 'bold'
+                                        }
+                                        $('#tbl_trans_row-'+i).append('<td  id="tbl_row-'+i+j+'" scope="row" style="color: '+color_mpz+'; text-align: center; border: 1px solid #a4abb3" >'+p_data_lst[j]+'</td>')
+                                        j++
+                                    }
+                                }
+                                i++
+                            }
+                        }
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    },
                 });
             }
             function del_pg_get_modal(name) {

@@ -456,6 +456,18 @@ def structure(request):
             json_data = json.dumps(data)
             json_res = json.loads(json_data)
             return JsonResponse(json_res, content_type='application/json')
+        if req.find('get_transfer_data_buy') != -1:
+            print('GET BUY TRANSFER DATA!')
+            data = {}
+            appl_cur_id = p_arr[1]
+            transfer_date_lst, transfer_data_lst = getBuyTransferDataArr(p_arr[1], p_arr[2])
+            types = WellType.objects.all().order_by('id')
+            i = 0
+            data[0] = transfer_date_lst
+            data[1] = transfer_data_lst
+            json_data = json.dumps(data)
+            json_res = json.loads(json_data)
+            return JsonResponse(json_res, content_type='application/json')
         if req.find('get_by_data') != -1:
             data = {}
             buyers = Byer.objects.all().order_by('id')
@@ -1422,4 +1434,55 @@ def getMpzTransferDataArr(app_id):
         appl_info_data_arr.append(p_arr)
 
     print('appl info data arr: ', appl_info_data_arr)
+    return date_lst, appl_info_data_arr
+
+#-----------------------------------STRUCTURE BUYER APPL TRANSFER INFO--------------------------------------------------
+
+def getBuyTransferDataArr(cur_par_name, cur_req_num):
+    # appl_name = ((self.tree_sells.currentItem().text(0)).split('# '))[1]
+    # appl_parent_name = self.tree_sells.currentItem().parent().text(0)
+
+    # cur.execute("SELECT TypeName FROM tbl_type")
+    # type_rows = cur.fetchall()
+    print('par name: ', cur_par_name)
+    print('app name: ', cur_req_num)
+    type_rows = WellType.objects.all().order_by('id')
+
+    # cur.execute(
+    #     "SELECT WellType, transDate FROM tbl_main WHERE reqNum like '" + str(appl_name) + "'")
+    # well_lst = cur.fetchall()
+
+    p_well_lst = Well.objects.all().order_by('id')
+    well_lst = []
+    for well in p_well_lst:
+        if (str(well.req_num) == str(cur_req_num) and str(well.locate) == str(cur_par_name)):
+            well_lst.append(well)
+    print('well_lst: ', well_lst)
+    date_lst = []
+    for row in well_lst:
+        ch_unique = False
+        trans_date = row.trans_date
+        if len(date_lst) == 0:
+            date_lst.append(trans_date)
+        else:
+            for elem in date_lst:
+                if str(elem) == (trans_date):
+                    ch_unique = True
+            if ch_unique == False:
+                date_lst.append(trans_date)
+    # get rows data arr
+    appl_info_data_arr = []
+    for row in type_rows:
+        p_arr = []
+        well_type = row.type_name
+        for date in date_lst:
+            count = 0
+            for well in well_lst:
+                if str(well.type).find(well_type) != -1 and well.trans_date == date:
+                    count += 1
+            p_arr.append(str(count))
+        appl_info_data_arr.append(p_arr)
+    print(date_lst)
+    print(appl_info_data_arr)
+
     return date_lst, appl_info_data_arr
