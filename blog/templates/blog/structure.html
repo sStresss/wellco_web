@@ -27,7 +27,7 @@
             </div>
             <div class="row" style="width: 100%; margin-top: 0px; background-color: #f4f7fe; margin-left: 0px">
                 <div class="" style="background-color: #e3e7ef; padding-left: -15px; margin-left: -15px">
-                    <div class="col-sm-2" style="border-right: none; height: 900px; max-width: 248px; margin-left: 40px; margin-top: 0px;">
+                    <div class="col-sm-2" style="border-right: none; max-width: 248px; margin-left: 40px; margin-top: 0px;">
                         <div  style="height: 35px; margin-left: 15px; margin-top: 10px">
                             <div class="row" style="background-color: #e3e7ef; margin-left: -75px; margin-top: -10px; border-bottom: 1px solid #939393">
                                 <div class="row" style="margin-left: 25px">
@@ -105,11 +105,12 @@
                     <div class=" container row" style="margin-top: -39px; width: 1375px; min-width: 1375px">
                         <div class="column" style="padding-left:10px;width: 590px; min-width: 590px; background-color: white; height: 900px; width: 44.5%">
                             <div class="row" style="height: 61px; margin-left: 0px">
-                                <h1 id="mpz_tbl_head_text" style="margin-left: 0px; margin-top: 10px">
+                                <h1 id="mpz_tbl_head_text" style="margin-left: 0px; margin-top: 10px" hidden>
                                     Заявка # ___
                                 </h1>
+                                <h1 id="mpz_tbl_head_text_first" style="margin-left: 0px; margin-top: 10px">Выберите заявку</h1>
                             </div>
-                            <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px; margin-top: -15px; width: 580px; max-width: 580px;">
+                            <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px; margin-top: -15px; width: 580px; max-width: 580px;" hidden>
                                 <thead class="">
                                     <tr style="height: 30px; background-color: #577fae;">
                                       <th scope="col" style="width: 200px; max-width: 200px; min-width: 200px; text-align: center;"><h1 id="GlobalMpzNumConnect" hidden></h1>
@@ -147,7 +148,7 @@
                             </table>
                         </div>
                         <div class="column" style="width: 650px; min-width: 650px; margin-left: 10px">
-                            <h1 style="margin-left: 0px; margin-top: 10px">История выдачи</h1>
+                            <h1 id="transfer_tbl_head_text" style="margin-left: 0px; margin-top: 10px" hidden>История выдачи</h1>
                             <h1 id="transfer_not_found" style="margin-left: 0px; margin-top: 10px" hidden>Выдача не производилась</h1>
                             <table id="transfer_tbl" class=" table table-bordered"  style="margin-bottom: 30px;margin-top: -15px; ">
                                 <thead class="">
@@ -1090,6 +1091,10 @@
                         document.getElementById('transfer_tbl').hidden = true
                         document.getElementById('transfer_tbl_thead').innerHTML = ''
                         document.getElementById('transfer_tbl_body').innerHTML = ''
+                        document.getElementById('mpz_tbl_head_text_first').hidden = true
+                        document.getElementById('mpz_tbl_head_text').hidden = false
+                        document.getElementById('transfer_tbl_head_text').hidden = false
+                        document.getElementById('mpz_tbl').hidden = false
                         date_lst = resp[0]
                         data_lst = resp[1]
                         console.log(data_lst)
