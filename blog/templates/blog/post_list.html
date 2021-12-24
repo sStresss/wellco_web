@@ -409,31 +409,31 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="row" style="padding-top: 10px; margin-left: auto; margin-right: auto; height: 700px">
+                        <div class="row" style="padding-top: 20px; margin-left: auto; margin-right: auto; height: 700px; ">
                             <table id="m29_tbl" class=" table table-bordered"  style="margin-bottom: 30px; border: 1px" border="1">
-                                <thead>
-                                    <tr style="background-color: #577fae; margin: 0rem">
-                                      <th scope="col" style="text-align: center; width: 180px">
-                                          <a style="font-weight: normal; color: white; margin-bottom: -10px">
+                                <thead style="max-height: 30px; height: 30px">
+                                    <tr style="margin: 0.1rem;">
+                                      <th scope="col" style="text-align: center; width: 180px;background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                          <a style="font-weight: normal; color: white;">
                                             Колодец
                                           </a>
                                       </th>
-                                      <th scope="col" style="text-align: center; width: 150px">
+                                      <th scope="col" style="text-align: center; width: 150px;;background-color: #577fae;padding: 0.1rem; padding-bottom: 4px;">
                                           <a style="font-weight: normal; color: white">
-                                            Сост. на начало <a id="m29_headtext_date_start" style="color: white"></a>
+                                            Сост. на начало <a id="m29_headtext_date_start" style="color: white;"></a>
                                           </a>
                                       </th>
-                                      <th scope="col" style="text-align: center; width: 135px">
+                                      <th scope="col" style="text-align: center; width: 135px;background-color: #577fae;padding: 0.1rem; padding-bottom: 13px;">
                                           <a style="font-weight: normal; color: white">
                                             Приход
                                           </a>
                                       </th>
-                                      <th scope="col" style="text-align: center; width: 135px">
+                                      <th scope="col" style="text-align: center; width: 135px;background-color: #577fae;padding: 0.1rem; padding-bottom: 13px;">
                                           <a style="font-weight: normal; color: white">
                                             Уход
                                           </a>
                                       </th>
-                                      <th scope="col" style="text-align: center; width: 150px">
+                                      <th scope="col" style="text-align: center; width: 150px;background-color: #577fae;padding: 0.1rem; padding-bottom: 4px;">
                                           <a style="font-weight: normal; color: white">
                                             Сост. на конец <a id="m29_headtext_date_end" style="color: #ffffff;"></a>
                                           </a>
@@ -1118,11 +1118,43 @@
                                 break
                             }
                             else {
+                                if (data_arr[i][1] == "0") {
+                                    color_data_1 = '#aeaeae'
+                                    text_weight_1 = 'normal'
+                                }
+                                else {
+                                    color_data_1 = '#000000'
+                                    text_weight_1 = 'bold'
+                                }
+                                if (data_arr[i][2] == "0") {
+                                    color_data_2 = '#aeaeae'
+                                    text_weight_2 = 'normal'
+                                }
+                                else {
+                                    color_data_2 = '#000000'
+                                    text_weight_2 = 'bold'
+                                }
+                                if (data_arr[i][3] == "0") {
+                                    color_data_3 = '#aeaeae'
+                                    text_weight_3 = 'normal'
+                                }
+                                else {
+                                    color_data_3 = '#000000'
+                                    text_weight_3 = 'bold'
+                                }
+                                if (data_arr[i][4] == "0") {
+                                    color_data_4 = '#aeaeae'
+                                    text_weight_4 = 'normal'
+                                }
+                                else {
+                                    color_data_4 = '#000000'
+                                    text_weight_4 = 'bold'
+                                }
                                 $("#m29_tbl_body").append("<tr> <td scope=\"row\" style=\"text-align: center; height:30px;\" >С-пласт "+data_arr[i][0]+"</td>\n" +
-                                                            "<td style=\"text-align: center\">"+data_arr[i][1]+"</td>\n" +
-                                                            "<td style=\"text-align: center\">"+data_arr[i][3]+"</td>\n" +
-                                                            "<td style=\"text-align: center\">"+data_arr[i][4]+"</td>\n" +
-                                                            "<td style=\"text-align: center\">"+data_arr[i][2]+"</td> </tr>")
+                                                            "<td style=\"text-align: center; color: "+color_data_1+";font-weight: "+text_weight_1+"\">"+data_arr[i][1]+"</td>\n" +
+                                                            "<td style=\"text-align: center; color: "+color_data_3+";font-weight: "+text_weight_3+"\">"+data_arr[i][3]+"</td>\n" +
+                                                            "<td style=\"text-align: center; color: "+color_data_4+";font-weight: "+text_weight_4+"\">"+data_arr[i][4]+"</td>\n" +
+                                                            "<td style=\"text-align: center; color: "+color_data_2+";font-weight: "+text_weight_2+"\">"+data_arr[i][2]+"</td> </tr>")
                                 i++
                             }
                         }
@@ -1146,6 +1178,10 @@
                 document.getElementById('m29_date_end_connect').innerHTML = $('#m29_date_end').val()
                 document.getElementById('m29_headtext_date_start').innerText = $('#m29_date_start').val()
                 document.getElementById('m29_headtext_date_end').innerText = $('#m29_date_end').val()
+                time_start = $("#m29_date_start").datepicker("getDate")
+                time_end = $("#m29_date_end").datepicker("getDate")
+                if (time_start - time_end > 0) {alert('ПЕРИОД ЗАДАН НЕ ВЕРНО!')}
+                console.log('type: '+time_start)
                 $.ajax({
                     type: "GET",
                     url: "/",
@@ -1165,11 +1201,43 @@
                                 break
                             }
                             else {
-                                $("#m29_tbl_body").append("<tr> <td scope=\"row\" style=\"text-align: center\" >С-пласт "+data_arr[i][0]+"</td>\n" +
-                                                            "<td style=\"text-align: center\">"+data_arr[i][1]+"</td>\n" +
-                                                            "<td style=\"text-align: center\">"+data_arr[i][3]+"</td>\n" +
-                                                            "<td style=\"text-align: center\">"+data_arr[i][4]+"</td>\n" +
-                                                            "<td style=\"text-align: center\">"+data_arr[i][2]+"</td> </tr>")
+                                if (data_arr[i][1] == "0") {
+                                    color_data_1 = '#aeaeae'
+                                    text_weight_1 = 'normal'
+                                }
+                                else {
+                                    color_data_1 = '#000000'
+                                    text_weight_1 = 'bold'
+                                }
+                                if (data_arr[i][2] == "0") {
+                                    color_data_2 = '#aeaeae'
+                                    text_weight_2 = 'normal'
+                                }
+                                else {
+                                    color_data_2 = '#000000'
+                                    text_weight_2 = 'bold'
+                                }
+                                if (data_arr[i][3] == "0") {
+                                    color_data_3 = '#aeaeae'
+                                    text_weight_3 = 'normal'
+                                }
+                                else {
+                                    color_data_3 = '#000000'
+                                    text_weight_3 = 'bold'
+                                }
+                                if (data_arr[i][4] == "0") {
+                                    color_data_4 = '#aeaeae'
+                                    text_weight_4 = 'normal'
+                                }
+                                else {
+                                    color_data_4 = '#000000'
+                                    text_weight_4 = 'bold'
+                                }
+                                $("#m29_tbl_body").append("<tr> <td scope=\"row\" style=\"text-align: center; height:30px;\" >С-пласт "+data_arr[i][0]+"</td>\n" +
+                                                            "<td style=\"text-align: center; color: "+color_data_1+";font-weight: "+text_weight_1+"\">"+data_arr[i][1]+"</td>\n" +
+                                                            "<td style=\"text-align: center; color: "+color_data_3+";font-weight: "+text_weight_3+"\">"+data_arr[i][3]+"</td>\n" +
+                                                            "<td style=\"text-align: center; color: "+color_data_4+";font-weight: "+text_weight_4+"\">"+data_arr[i][4]+"</td>\n" +
+                                                            "<td style=\"text-align: center; color: "+color_data_2+";font-weight: "+text_weight_2+"\">"+data_arr[i][2]+"</td> </tr>")
                                 i++
                             }
                         }
