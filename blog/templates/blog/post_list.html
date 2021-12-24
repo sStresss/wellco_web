@@ -401,7 +401,7 @@
                                 <span id="m29_date_end_connect" hidden></span>
                             </div>
                             <div class="content" style="margin-left: auto">
-                                <button id="m29_get" name="but1" value="val_5" type="button" class="btn btn-warning btn-sm" onclick="modal_m29_get_data()">
+                                <button id="m29_get" name="but1" value="val_5" type="button" class="btn btn-warning btn-sm" style="margin-left: 0px;" onclick="modal_m29_get_data()">
                                     Сформировать
                                 </button>
                                 <button id="m29_save" name="but1" value="val_5" type="button" class="btn btn-info btn-sm" onclick="exportTableToExcel('m29_tbl')">
@@ -412,12 +412,32 @@
                         <div class="row" style="padding-top: 10px; margin-left: auto; margin-right: auto; height: 700px">
                             <table id="m29_tbl" class=" table table-bordered"  style="margin-bottom: 30px; border: 1px" border="1">
                                 <thead>
-                                    <tr>
-                                      <th scope="col" style="text-align: center; width: 180px">Колодец</th>
-                                      <th scope="col" style="text-align: center; width: 150px">Сост. на начало <span id="m29_headtext_date_start"></span></th>
-                                      <th scope="col" style="text-align: center; width: 135px">Приход</th>
-                                      <th scope="col" style="text-align: center; width: 135px">Уход</th>
-                                      <th scope="col" style="text-align: center; width: 150px">Сост. на конец <span id="m29_headtext_date_end"></span></th>
+                                    <tr style="background-color: #577fae; margin: 0rem">
+                                      <th scope="col" style="text-align: center; width: 180px">
+                                          <a style="font-weight: normal; color: white; margin-bottom: -10px">
+                                            Колодец
+                                          </a>
+                                      </th>
+                                      <th scope="col" style="text-align: center; width: 150px">
+                                          <a style="font-weight: normal; color: white">
+                                            Сост. на начало <a id="m29_headtext_date_start" style="color: white"></a>
+                                          </a>
+                                      </th>
+                                      <th scope="col" style="text-align: center; width: 135px">
+                                          <a style="font-weight: normal; color: white">
+                                            Приход
+                                          </a>
+                                      </th>
+                                      <th scope="col" style="text-align: center; width: 135px">
+                                          <a style="font-weight: normal; color: white">
+                                            Уход
+                                          </a>
+                                      </th>
+                                      <th scope="col" style="text-align: center; width: 150px">
+                                          <a style="font-weight: normal; color: white">
+                                            Сост. на конец <a id="m29_headtext_date_end" style="color: #ffffff;"></a>
+                                          </a>
+                                      </th>
                                     </tr>
                                 </thead>
                                 <tbody id="m29_tbl_body">
@@ -1098,7 +1118,7 @@
                                 break
                             }
                             else {
-                                $("#m29_tbl_body").append("<tr> <td scope=\"row\" style=\"text-align: center\" >С-пласт "+data_arr[i][0]+"</td>\n" +
+                                $("#m29_tbl_body").append("<tr> <td scope=\"row\" style=\"text-align: center; height:30px;\" >С-пласт "+data_arr[i][0]+"</td>\n" +
                                                             "<td style=\"text-align: center\">"+data_arr[i][1]+"</td>\n" +
                                                             "<td style=\"text-align: center\">"+data_arr[i][3]+"</td>\n" +
                                                             "<td style=\"text-align: center\">"+data_arr[i][4]+"</td>\n" +
