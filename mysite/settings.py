@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'itoDB',
         'USER': 'itoUser',
         'PASSWORD': '28108213',
-        'PORT': 5432,
+        'PORT': 54324,
     }
 }
 
