@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c345e260-c948-4e05-a42c-48aebf6e58db" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/site.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/site.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/post_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/post_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,10 +15,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/site$db_transfer.coverage" NAME="db_transfer Coverage Results" MODIFIED="1639248211019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/blog" />
     <SUITE FILE_PATH="coverage/site$test.coverage" NAME="test Coverage Results" MODIFIED="1637506608485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/site$views.coverage" NAME="views Coverage Results" MODIFIED="1637133629231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/blog" />
     <SUITE FILE_PATH="coverage/site$settings.coverage" NAME="settings Coverage Results" MODIFIED="1631868173744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mysite" />
+    <SUITE FILE_PATH="coverage/site$db_transfer.coverage" NAME="db_transfer Coverage Results" MODIFIED="1639248211019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/blog" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -290,6 +293,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/structure.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="1105">
               <caret line="1294" column="13" lean-forward="true" selection-start-line="1294" selection-start-column="13" selection-end-line="1294" selection-end-column="13" />
               <folding>
@@ -680,6 +684,10 @@
                 <element signature="e#88725#88851#0#HTML" />
                 <element signature="e#88883#89152#0#HTML" />
               </folding>
+=======
+            <state relative-caret-position="20621">
+              <caret line="1213" column="37" selection-start-line="1213" selection-start-column="37" selection-end-line="1213" selection-end-column="37" />
+>>>>>>> 9c0b67b9b0b7a30e30aab18529a5e4ebcc61fb7e
             </state>
           </provider>
         </entry>
@@ -694,11 +702,11 @@
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mysite/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2329">
-              <caret line="138" selection-start-line="138" selection-end-line="138" />
+            <state relative-caret-position="425">
+              <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
               <folding>
                 <element signature="e#307#331#0" expanded="true" />
               </folding>
@@ -720,9 +728,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="22">
               <caret line="1172" column="122" lean-forward="true" selection-start-line="1172" selection-start-column="122" selection-end-line="1172" selection-end-column="122" />
               <folding>
@@ -1031,6 +1040,10 @@
                 <element signature="e#72300#72338#0#HTML" />
                 <element signature="e#72403#72667#0#HTML" />
               </folding>
+=======
+            <state relative-caret-position="87">
+              <caret line="415" column="95" lean-forward="true" selection-start-line="415" selection-start-column="95" selection-end-line="415" selection-end-column="95" />
+>>>>>>> 9c0b67b9b0b7a30e30aab18529a5e4ebcc61fb7e
             </state>
           </provider>
         </entry>
@@ -1125,13 +1138,13 @@
         <option value="$PROJECT_DIR$/blog/test.py" />
         <option value="$PROJECT_DIR$/blog/db_transfer.py" />
         <option value="$PROJECT_DIR$/blog/apps.py" />
-        <option value="$PROJECT_DIR$/mysite/settings.py" />
         <option value="$PROJECT_DIR$/static/css/blog.css" />
         <option value="$PROJECT_DIR$/blog/templates/blog/statistic.html" />
         <option value="$PROJECT_DIR$/static/css/styles.css" />
         <option value="$PROJECT_DIR$/blog/templates/blog/structure.html" />
         <option value="$PROJECT_DIR$/blog/views.py" />
         <option value="$PROJECT_DIR$/blog/templates/blog/post_list.html" />
+        <option value="$PROJECT_DIR$/mysite/settings.py" />
       </list>
     </option>
   </component>
@@ -1145,7 +1158,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -1179,6 +1191,11 @@
             <path>
               <item name="site" type="b2602c69:ProjectViewProjectNode" />
               <item name="site" type="462c0819:PsiDirectoryNode" />
+              <item name="mysite" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="site" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -1205,16 +1222,22 @@
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="site" type="462c0819:PsiDirectoryNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../itoDB" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/venv" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -1449,12 +1472,23 @@
       <workItem from="1639809810350" duration="2499000" />
       <workItem from="1639821123073" duration="23000" />
       <workItem from="1639821156344" duration="78374000" />
+<<<<<<< HEAD
       <workItem from="1640265235531" duration="22155000" />
+=======
+      <workItem from="1640265235531" duration="14568000" />
+      <workItem from="1640333013554" duration="173000" />
+      <workItem from="1640333253374" duration="857000" />
+      <workItem from="1640334159556" duration="1723000" />
+>>>>>>> 9c0b67b9b0b7a30e30aab18529a5e4ebcc61fb7e
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="858405000" />
+=======
+    <option name="totallyTimeSpent" value="853571000" />
+>>>>>>> 9c0b67b9b0b7a30e30aab18529a5e4ebcc61fb7e
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1462,7 +1496,7 @@
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.17430703" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.17910448" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32900432" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.82569295" weight="0.32827735" />
@@ -1471,10 +1505,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32900432" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4989339" weight="0.32900432" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49840087" weight="0.32827735" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.29957357" side_tool="true" visible="true" weight="0.21320346" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.70042646" visible="true" weight="0.21320346" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3022388" side_tool="true" visible="true" weight="0.37919825" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.6977612" visible="true" weight="0.37919825" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49626866" weight="0.32792208" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1639,21 +1673,46 @@
     <entry file="file://$PROJECT_DIR$/static/img/expand.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/blog/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="142" column="77" selection-start-line="142" selection-start-column="77" selection-end-line="142" selection-end-column="77" />
+          <folding>
+            <element signature="e#706#779#0" />
+            <element signature="e#1094#2369#0" />
+            <element signature="e#1532#1606#0" />
+            <element signature="e#1723#1794#0" />
+            <element signature="e#1829#1945#0" />
+            <element signature="e#2242#2296#0" />
+            <element signature="e#2435#3851#0" />
+            <element signature="e#2840#3157#0" />
+            <element signature="e#2988#3080#0" />
+            <element signature="e#3306#3620#0" />
+            <element signature="e#3452#3543#0" />
+            <element signature="e#3900#5016#0" />
+            <element signature="e#3998#4072#0" />
+            <element signature="e#4189#4260#0" />
+            <element signature="e#4295#4411#0" />
+            <element signature="e#4884#4945#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/templates/blog/structure.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20621">
+          <caret line="1213" column="37" selection-start-line="1213" selection-start-column="37" selection-end-line="1213" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 9c0b67b9b0b7a30e30aab18529a5e4ebcc61fb7e
     <entry file="file://$PROJECT_DIR$/img/plus.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/img/sinaps_.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2329">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
-          <folding>
-            <element signature="e#307#331#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/img/collapse.png">
       <provider selected="true" editor-type-id="images" />
@@ -1928,8 +1987,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/templates/blog/structure.html">
+    <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="1105">
           <caret line="1294" column="13" lean-forward="true" selection-start-line="1294" selection-start-column="13" selection-end-line="1294" selection-end-column="13" />
           <folding>
@@ -2320,11 +2380,16 @@
             <element signature="e#88725#88851#0#HTML" />
             <element signature="e#88883#89152#0#HTML" />
           </folding>
+=======
+        <state relative-caret-position="87">
+          <caret line="415" column="95" lean-forward="true" selection-start-line="415" selection-start-column="95" selection-end-line="415" selection-end-column="95" />
+>>>>>>> 9c0b67b9b0b7a30e30aab18529a5e4ebcc61fb7e
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
+    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="22">
           <caret line="1172" column="122" lean-forward="true" selection-start-line="1172" selection-start-column="122" selection-end-line="1172" selection-end-column="122" />
           <folding>
@@ -2632,6 +2697,12 @@
             <element signature="e#72247#72399#0#HTML" />
             <element signature="e#72300#72338#0#HTML" />
             <element signature="e#72403#72667#0#HTML" />
+=======
+        <state relative-caret-position="425">
+          <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="e#307#331#0" expanded="true" />
+>>>>>>> 9c0b67b9b0b7a30e30aab18529a5e4ebcc61fb7e
           </folding>
         </state>
       </provider>
