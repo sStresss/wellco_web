@@ -1,1 +1,0 @@
-# wellco_web
