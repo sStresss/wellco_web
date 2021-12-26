@@ -24,9 +24,22 @@
                             </h1>
                         </a>
                     </div>
+                    <div class="column" style="margin-left: auto; margin-right: 0px; height: 40px; margin-top: -7px">
+                        <a class="link-hover-solid" href="{% url 'statistic' %}" style="font-size: 20px; color: white">
+                            Статистика
+                        </a>
+                    </div>
+                    <div class="column" style="margin-left: 30px; margin-right: 50px; height: 40px; margin-top: -7px">
+                        <a class="link-hover-solid" href="{% url 'structure' %}" style="font-size: 20px; color: white; height: 30px">
+                            Заявки
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="container-fluid" style="padding-top: 20px; padding-left: 30px">
+            <div class="container-fluid" style="padding-top: 0px; padding-left: 30px">
+                <h1 style="font-weight: normal; letter-spacing: normal">
+
+                </h1>
                 <button id="release" name="but1" value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter" onclick="">
                     Выпустить
                 </button>
@@ -46,32 +59,31 @@
                     Журнал событий
                 </button>
                 <div style="margin-top: 9px; margin-left: -6px">
-
-                                <div id="well_table" class="container-fluid row" style="">
-                                <div class="scroll" style="overflow-y: scroll; width: 1890px; height: 784px">
-                                    <table class=" table table-bordered"  style="margin-bottom: 0px;">
-                                        <thead>
-                                            <tr>
-                                              <th scope="col">Cерийный номер</th>
-                                              <th scope="col">Тип</th>
-                                              <th scope="col">Дата выпуска</th>
-                                              <th scope="col">Нахождение</th>
-                                              <th scope="col">Комментарий</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for well in wells %}
-                                            <tr>
-                                              <td scope="row"  >С-пласт {{ well.serial }}</td>
-                                              <td>{{ well.type }}</td>
-                                              <td>{{ well.created_date }}</td>
-                                              <td>{{ well.locate }}</td>
-                                              <td>{{ well.comment }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                    </table>
-                        </div>
+                        <div id="well_table" class="container-fluid row" style="">
+                        <div class="scroll" style="overflow-y: scroll; width: 1890px; height: 784px">
+                            <table class=" table table-bordered"  style="margin-bottom: 0px;">
+                                <thead>
+                                    <tr>
+                                      <th scope="col">Cерийный номер</th>
+                                      <th scope="col">Тип</th>
+                                      <th scope="col">Дата выпуска</th>
+                                      <th scope="col">Нахождение</th>
+                                      <th scope="col">Комментарий</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for well in wells %}
+                                    <tr>
+                                      <td scope="row"  >С-пласт {{ well.serial }}</td>
+                                      <td>{{ well.type }}</td>
+                                      <td>{{ well.created_date }}</td>
+                                      <td>{{ well.locate }}</td>
+                                      <td>{{ well.comment }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            </table>
+                </div>
                     </div>
                 </div>
             </div>
@@ -459,6 +471,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
+        <script src="/static/js/jquery.scrolly.min.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
             $('.tree').treegrid();
@@ -512,6 +525,20 @@
                 todayHighlight: true,
             });
             $('#m29_date_end').datepicker("setDate", new Date());
+            $('.scrolly').scrolly({
+                speed: 1000,
+                offset: function() {
+
+                    // If <=large, >small, and sidebar is present, use its height as the offset.
+                        if (breakpoints.active('<=large')
+                        &&	!breakpoints.active('<=small')
+                        &&	$sidebar.length > 0)
+                            return $sidebar.height();
+
+                    return 0;
+
+                }
+            });
             $(document).ready(function() {
                 console.log('123')
                 let session = window.sessionStorage.getItem('session_token')
