@@ -77,12 +77,12 @@
                                             <tr class="custom_hov treegrid-{{ pg.pk }}{{ code.id }} treegrid-parent-{{ pg.pk }}" style="width: 100px; height: 25px; max-height: 25px; margin-left: 0px; color: #000000">
                                                 <td style="padding-left: 30px">#{{ code.code_name }}</td>
                                                 <td style="text-align: right">
-                                                    <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="123" data-target="#modalNewMpz" style=" height: 20px; width: 20px; margin-left: 19px; margin-right: 19px ; background-color: #e3e7ef; alignment: right; border: none" onclick="takeCodeName(name)">
+                                                    <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewMpz" style=" height: 20px; width: 20px; margin-left: 19px; margin-right: 19px ; background-color: #e3e7ef; alignment: right; border: none" onclick="takeCodeName(name)">
                                                         <h5 style="margin-top: -8px; margin-left: -5px; color: #112945; font-weight: normal">+</h5>
                                                     </button>
                                                 </td>
                                                 <td style="text-align: right">
-                                                    <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px ; background-color: #e3e7ef; border: none" data-toggle="modal" data-target="#modalDellCode" onclick="del_code_get_modal(name)">
+                                                    <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px ; background-color: #e3e7ef; border: none" data-toggle="modal" data-target="#modalDellCode" onclick="takeCodeName(name)">
                                                         <h5 style="margin-top: -8px; margin-left: -2px; color: #112945; font-weight: normal">-</h5>
                                                     </button>
                                                 </td>
@@ -997,11 +997,13 @@
 
         }
             function takeCodeName(name) {
-            htmlData = name
-            $('#newMpzConnect').html(htmlData)
-            $('#newMpzConnect').val(htmlData)
+                console.log('MPZnAME: '+name)
+                htmlData = name
+                $('#newMpzConnect').html(htmlData)
+                $('#newMpzConnect').val(htmlData)
+                console.log('done')
 
-        }
+            }
             function get_mpz_data(name) {
                 $('.tree').treegrid('getAllNodes').each(function() {
                         this.style.backgroundColor = defaultStatus;
