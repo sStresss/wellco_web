@@ -311,10 +311,14 @@ def post_list(request):
             code_first_elem = code_lst[0].code_name
             appl_mpz_lst = Appl_mpz.objects.all().order_by('id')
             first_code_mpz_lst = []
-            for elem in appl_mpz_lst:
-                if code_lst[0].id == elem.connect_id:
-                    first_code_mpz_lst.append(elem.mpz_appl_name)
-            first_code_mpz_lst_first_elem = first_code_mpz_lst[0]
+            if len(appl_mpz_lst) != 0:
+                for elem in appl_mpz_lst:
+                    if code_lst[0].id == elem.connect_id:
+                        first_code_mpz_lst.append(elem.mpz_appl_name)
+                first_code_mpz_lst_first_elem = first_code_mpz_lst[0]
+            else:
+                first_code_mpz_lst_first_elem = ''
+
 
             return render(request, 'blog/post_list.html', {'wells': wells, 'types': types, 'type_first_elem': type_first_elem, 'wh_lst': wh_lst, 'wh_first_elem': wh_first_elem, 'code_lst': code_lst, 'code_first_elem': code_first_elem, 'first_code_mpz_lst': first_code_mpz_lst, 'first_code_mpz_lst_first_elem': first_code_mpz_lst_first_elem})
 
