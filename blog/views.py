@@ -19,7 +19,7 @@ def post_list(request):
     wells = Well.objects.all().order_by('id')
     wells = wells.reverse()
     serial = '0'
-    # mysql_data = pullMySqlBase('localhost', 3303, 'root', 'root', 'welldb')
+    # mysql_data = pullMySqlBase('localhost', 3306, 'root', 'root', 'welldb')
     # pushPostgreSqlServer(mysql_data)
     if request.method == "GET":
         req = str(request.GET)
