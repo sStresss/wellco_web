@@ -77,12 +77,12 @@
                                             <tr class="custom_hov treegrid-{{ pg.pk }}{{ code.id }} treegrid-parent-{{ pg.pk }}" style="width: 100px; height: 25px; max-height: 25px; margin-left: 0px; color: #000000">
                                                 <td style="padding-left: 30px">#{{ code.code_name }}</td>
                                                 <td style="text-align: right">
-                                                    <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="123" data-target="#modalNewMpz" style=" height: 20px; width: 20px; margin-left: 19px; margin-right: 19px ; background-color: #e3e7ef; alignment: right; border: none" onclick="takeCodeName(name)">
+                                                    <button id="addMPZ-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#modalNewMpz" style=" height: 20px; width: 20px; margin-left: 19px; margin-right: 19px ; background-color: #e3e7ef; alignment: right; border: none" onclick="takeCodeName(name)">
                                                         <h5 style="margin-top: -8px; margin-left: -5px; color: #112945; font-weight: normal">+</h5>
                                                     </button>
                                                 </td>
                                                 <td style="text-align: right">
-                                                    <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px ; background-color: #e3e7ef; border: none" data-toggle="modal" data-target="#modalDellCode" onclick="del_code_get_modal(name)">
+                                                    <button id="delCode-{{ code.pk }}" name="{{ code.pk }}" value="val_6" type="button" class="btn btn-light btn-sm" style="height: 20px; width: 20px; margin-left: -15px; margin-right: 10px ; background-color: #e3e7ef; border: none" data-toggle="modal" data-target="#modalDellCode" onclick="takeCodeName(name)">
                                                         <h5 style="margin-top: -8px; margin-left: -2px; color: #112945; font-weight: normal">-</h5>
                                                     </button>
                                                 </td>
@@ -120,7 +120,7 @@
                                 </h1>
                                 <h1 id="mpz_tbl_head_text_first" style="margin-left: 0px; margin-top: 10px">Выберите заявку</h1>
                             </div>
-                            <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px; margin-top: -15px; width: 580px; max-width: 580px;" hidden>
+                            <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px; margin-top: -10px; width: 580px; max-width: 580px;" hidden>
                                 <thead class="">
                                     <tr style="height: 30px; background-color: #577fae;">
                                       <th scope="col" style="width: 200px; max-width: 200px; min-width: 200px; text-align: center;"><h1 id="GlobalMpzNumConnect" hidden></h1>
@@ -158,16 +158,18 @@
                             </table>
                         </div>
                         <div class="column" style="width: 650px; min-width: 650px; margin-left: 10px">
-                            <h1 id="transfer_tbl_head_text" style="margin-left: 0px; margin-top: 10px" hidden>История выдачи</h1>
+                            <h1 id="transfer_tbl_head_text" style="margin-left: 0px; margin-top: 10px; height: 20px" hidden>История выдачи</h1>
                             <h1 id="transfer_not_found" style="margin-left: 0px; margin-top: 10px" hidden>Выдача не производилась</h1>
-                            <table id="transfer_tbl" class=" table table-bordered"  style="margin-bottom: 30px;margin-top: -15px; ">
-                                <thead class="">
-                                    <tr id="transfer_tbl_thead" style="height: 30px; max-height: 30px; background-color: #577fae;">
-                                    </tr>
-                                </thead>
-                                <tbody id="transfer_tbl_body">
-                                </tbody>
-                            </table>
+                            <div class="scroll_y" style="height: 634px; overflow-x: scroll; width: 1002px">
+                                <table id="transfer_tbl" class=" table table-bordered"  style="margin-bottom: 0px; height: 617px; margin-left: -6px">
+                                    <thead class="">
+                                        <tr id="transfer_tbl_thead" style="height: 30px; max-height: 30px; background-color: #577fae;">
+                                        </tr>
+                                    </thead>
+                                    <tbody id="transfer_tbl_body">
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -997,11 +999,13 @@
 
         }
             function takeCodeName(name) {
-            htmlData = name
-            $('#newMpzConnect').html(htmlData)
-            $('#newMpzConnect').val(htmlData)
+                console.log('MPZnAME: '+name)
+                htmlData = name
+                $('#newMpzConnect').html(htmlData)
+                $('#newMpzConnect').val(htmlData)
+                console.log('done')
 
-        }
+            }
             function get_mpz_data(name) {
                 $('.tree').treegrid('getAllNodes').each(function() {
                         this.style.backgroundColor = defaultStatus;

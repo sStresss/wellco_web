@@ -343,6 +343,27 @@ footer {
     -webkit-box-shadow: inset 0 0 100px rgb(14,130,155);
 }
 
+.scroll_y {
+   /*width: 200px;*/
+   height: 400px;
+    /*background: red;*/
+   overflow-x: scroll;
+  padding-left: 6px;
+  border: none;
+}
+.scroll_y::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll_y::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 0px rgb(14,130,155);
+}
+
+.scroll_y::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 100px rgb(14,130,155);
+}
+
+
 .modal-open .container-fluid, .modal-open  .container {
     -webkit-filter: blur(5px) grayscale(90%);
 }
