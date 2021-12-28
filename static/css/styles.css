@@ -353,6 +353,7 @@ footer {
 }
 .scroll_y::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 .scroll_y::-webkit-scrollbar-track {
