@@ -1,12 +1,14 @@
 {% load static %}
 <html lang="en">
     <head>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
-            <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
-            <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-            <link rel="stylesheet" href="{% static 'css/jquery.treegrid.css' %}">
-            <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <title>sinaps.workspace</title>
+        <link rel="shortcut icon" href="{% static '/image/favicon.ico' %}" type="image/x-icon">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/jquery.treegrid.css' %}">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
         <div class="background-container" style="height: 961px">
@@ -23,13 +25,13 @@
                             </h1>
                         </a>
                     </div>
-                    <div class="column" style="margin-left: auto; margin-right: 0px; height: 40px; margin-top: -7px">
-                        <a class="link-hover-solid" href="{% url 'post_list' %}" style="font-size: 20px; color: white">
+                    <div class="column" style="margin-left: auto; margin-right: 0px;  margin-top: 7px; font-family: Aeroport !important;">
+                        <a class="link-hover-solid" href="{% url 'post_list' %}" style="color: white">
                             Главная
                         </a>
                     </div>
-                    <div class="column" style="margin-left: 30px; margin-right: 50px; height: 40px; margin-top: -7px">
-                        <a class="link-hover-solid" href="{% url 'statistic' %}" style="font-size: 20px; color: white; height: 30px">
+                    <div class="column" style="margin-left: 30px; margin-right: 50px;  margin-top: 7px; font-family: Aeroport !important;">
+                        <a class="link-hover-solid" href="{% url 'statistic' %}" style="color: white;">
                             Статистика
                         </a>
                     </div>
