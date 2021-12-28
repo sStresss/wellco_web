@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         <link rel="stylesheet" href="{% static 'css/jquery.treegrid.css' %}">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
     </head>
     <body>
         <div class="background-container">
@@ -16,12 +17,12 @@
             <div class="page-header">
                 <div class="row" style="max-height: 60px; margin-left: 0px; margin-right: 0px">
                     <div class="col-sm-1" style="max-height: 60px ;vertical-align: center; margin-left: -15px">
-                        <img src="{% static '/image/sinaps_.png' %}" class="image" alt="" style="height: 45px; margin-top: 7px">
+                        <img src="{% static '/image/sinaps_.png' %}" alt="" class="wow animate__animated animate__rotateIn" style="visibility: visible; animation-duration: 5s;height: 45px; margin-top: 7px">
                     </div>
                     <div class="col-sm-5" style="max-height: 60px; margin-left: -98px">
-                        <a class="head_title" style=" cursor: pointer; margin-left: 10px; margin-top: 5px;" onclick="main_reload()">
-                            <h1 style="max-height: 40px;">
-                                С-ПЛАСТ
+                        <a class="head_title" style="margin-left: 10px; margin-top: 5px;">
+                            <h1 style="max-height: 40px; margin-top: 10px; cursor: pointer;" onclick="main_reload()">
+                                <a style="margin-left: -15px; font-family: Aeroport;height: 20px; max-height: 20px; font-size: 30px; margin-top: -15px; ">С-ПЛАСТ</a>
                             </h1>
                         </a>
                     </div>
@@ -39,7 +40,6 @@
             </div>
             <div class="container-fluid" style="padding-top: 0px; padding-left: 30px">
                 <h1 style="font-weight: normal; letter-spacing: normal">
-
                 </h1>
                 <button id="release" name="but1" value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter" onclick="">
                     Выпустить
@@ -473,6 +473,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
         <script src="/static/js/jquery.scrolly.min.js"></script>
+        <script src="/static/js/wow.min.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
             $('.tree').treegrid();
