@@ -1,6 +1,6 @@
 {% load static %}
-<html>
-    <head>
+<html >
+    <head style="">
         <title>С-ПЛАСТ</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
@@ -9,8 +9,9 @@
         <link rel="stylesheet" href="{% static 'css/jquery.treegrid.css' %}">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
-    <body>
-        <div class="background-container">
+    <body style="">
+
+        <div id="html_cont" class="background-container" style="filter: blur(10px);">
             <div id="picoutput"></div>
             <div class="page-header">
                 <div class="row" style="max-height: 60px; margin-left: 0px; margin-right: 0px">
@@ -27,50 +28,69 @@
                 </div>
             </div>
             <div class="container-fluid" style="padding-top: 20px; padding-left: 30px">
-                <button id="release" name="but1" value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter" onclick="">
+                <button disabled="true" id="release" name="but1" value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter" onclick="">
                     Выпустить
                 </button>
-                <button id="transfer" name="but1" value="val_2" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
+                <button disabled="true" id="transfer" name="but1" value="val_2" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
                     Передать
                 </button>
-                <button id="report" name="but1" value="val_3" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter_m29" onclick="modal_m29_init()">
+                <button disabled="true" id="report" name="but1" value="val_3" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter_m29" onclick="modal_m29_init()">
                     Отчет М29
                 </button>
-                <button id="statistic" name="but1" value="val_4" type="button" class="btn btn-warning btn-sm">
+                <button disabled="true" id="statistic" name="but1" value="val_4" type="button" class="btn btn-warning btn-sm">
                     <a href="{% url 'statistic' %}" style="text-decoration: none; color: black" onclick="goStatistic()">Статистика</a>
                 </button>
-                <button id="structure" name="but1" value="val_5" type="button" class="btn btn-secondary btn-sm" >
+                <button disabled="true" id="structure" name="but1" value="val_5" type="button" class="btn btn-secondary btn-sm" >
                     <a href="{% url 'structure' %}" style="text-decoration: none; color: white" onclick="goStructure()">Управление заявками</a>
                 </button>
-                <button id="journal" name="but1" value="val_6" type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
+                <button disabled="true" id="journal" name="but1" value="val_6" type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter_transfer" onclick="">
                     Журнал событий
                 </button>
                 <div style="margin-top: 9px; margin-left: -6px">
-
-                                <div id="well_table" class="container-fluid row" style="">
-                                <div class="scroll" style="overflow-y: scroll; width: 1890px; height: 784px">
-                                    <table class=" table table-bordered"  style="margin-bottom: 0px;">
-                                        <thead>
-                                            <tr>
-                                              <th scope="col">Cерийный номер</th>
-                                              <th scope="col">Тип</th>
-                                              <th scope="col">Дата выпуска</th>
-                                              <th scope="col">Нахождение</th>
-                                              <th scope="col">Комментарий</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for well in wells %}
-                                            <tr>
-                                              <td scope="row"  >С-пласт {{ well.serial }}</td>
-                                              <td>{{ well.type }}</td>
-                                              <td>{{ well.created_date }}</td>
-                                              <td>{{ well.locate }}</td>
-                                              <td>{{ well.comment }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                    </table>
+                    <div id="well_table" class="container-fluid row" style="">
+                        <div class="scroll" style="overflow-y: scroll; width: 1890px; height: 784px">
+                            <table class=" table table-bordered"  style="margin-bottom: 0px;">
+                                <thead style="">
+                                    <tr>
+                                      <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                          <a style="font-weight: normal; color: white">
+                                            Сост. на начало
+                                          </a>
+                                      </th>
+                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                          <a style="font-weight: normal; color: white">
+                                            Тип
+                                          </a>
+                                      </th>
+                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                          <a style="font-weight: normal; color: white">
+                                            Дата выпуска
+                                          </a>
+                                      </th>
+                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                          <a style="font-weight: normal; color: white">
+                                            Нахождение
+                                          </a>
+                                      </th>
+                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                          <a style="font-weight: normal; color: white">
+                                            Сост. на начало
+                                          </a>
+                                      </th>
+                                    </tr>
+                                </thead>
+                                <tbody style="">
+                                    {% for well in wells %}
+                                        <tr>
+                                          <td scope="row"  >С-пласт {{ well.serial }}</td>
+                                          <td>{{ well.type }}</td>
+                                          <td>{{ well.created_date }}</td>
+                                          <td>{{ well.locate }}</td>
+                                          <td>{{ well.comment }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -416,7 +436,6 @@
                                       <th scope="col" style="text-align: center; width: 180px;background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
                                           <a style="font-weight: normal; color: white;">
                                             Колодец
-{#                                              #}
                                           </a>
                                       </th>
                                       <th scope="col" style="text-align: center; width: 150px;;background-color: #577fae;padding: 0.1rem; padding-bottom: 4px;">
@@ -466,64 +485,26 @@
         });
         </script>
         <script>
-            var input_password = document.getElementById("modalLogin_password");
-            var input_login = document.getElementById("modalLogin_login");
-            var session_token = ''
-            input_password.addEventListener("keyup", function(event) {
-              if (event.keyCode === 13) {
-                event.preventDefault();
-                document.getElementById("modal_login_save").click();
-              }
-            });
-            input_login.addEventListener("keyup", function(event) {
-              if (event.keyCode === 13) {
-                event.preventDefault();
-                document.getElementById("modal_login_save").click();
-              }
-            });
-            $('#release_date').datepicker({
-                weekStart: 1,
-                daysOfWeekHighlighted: "6,0",
-                autoclose: true,
-                todayHighlight: true,
-            });
-            $('#release_date').datepicker("setDate", new Date());
-            $('.dropdown-toggle').dropdown();
-            $('#transaction_date').datepicker({
-                weekStart: 1,
-                daysOfWeekHighlighted: "6,0",
-                autoclose: true,
-                todayHighlight: true,
-            });
-            $('#transaction_date').datepicker("setDate", new Date());
-            $('#m29_date_start').datepicker({
-                weekStart: 1,
-                daysOfWeekHighlighted: "6,0",
-                autoclose: true,
-                todayHighlight: true,
-            });
-            $('#m29_date_start').datepicker("setDate", new Date());
-            $('#m29_date_start').datepicker("setDate", "-1m");
-            $('#m29_date_end').datepicker({
-                minDate:'-3M 0D',
-                weekStart: 1,
-                daysOfWeekHighlighted: "6,0",
-                autoclose: true,
-                todayHighlight: true,
-            });
-            $('#m29_date_end').datepicker("setDate", new Date());
+            let islogined = window.sessionStorage.getItem('islogined')
+            if (islogined == 'true') {
+                document.getElementById('html_cont').style.filter = 'blur(0px)';
+                document.getElementById('release').disabled = false;
+                document.getElementById('transfer').disabled = false;
+                document.getElementById('report').disabled = false;
+                document.getElementById('statistic').disabled = false;
+                document.getElementById('structure').disabled = false;
+                document.getElementById('journal').disabled = false;
+                console.log('user logged in')
+            }
+            else {
+                $('#modalLogin').modal({backdrop: 'static', keyboard: false, style: ''})
+                $('#modalLogin').modal('show')
+            }
             $(document).ready(function() {
-                console.log('123')
+
                 let session = window.sessionStorage.getItem('session_token')
                 let user = window.sessionStorage.getItem('session_user')
-                let islogined = window.sessionStorage.getItem('islogined')
-                if (islogined == 'true') {
-                    console.log('user logged in')
-                }
-                else {
-                    $('#modalLogin').modal({backdrop: 'static', keyboard: false, style: ''})
-                    $('#modalLogin').modal('show')
-                }
+
                 var infoModal = $('#release_serial');
                 var table = $('#well_table');
                 var trans_type = $('#transaction_action_type');
@@ -897,6 +878,53 @@
                     document.getElementById('modalLogin_password_error').hidden = true
                 })
             });
+            var input_password = document.getElementById("modalLogin_password");
+            var input_login = document.getElementById("modalLogin_login");
+            var session_token = ''
+            input_password.addEventListener("keyup", function(event) {
+              if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("modal_login_save").click();
+              }
+            });
+            input_login.addEventListener("keyup", function(event) {
+              if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("modal_login_save").click();
+              }
+            });
+            $('#release_date').datepicker({
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#release_date').datepicker("setDate", new Date());
+            $('.dropdown-toggle').dropdown();
+            $('#transaction_date').datepicker({
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#transaction_date').datepicker("setDate", new Date());
+            $('#m29_date_start').datepicker({
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#m29_date_start').datepicker("setDate", new Date());
+            $('#m29_date_start').datepicker("setDate", "-1m");
+            $('#m29_date_end').datepicker({
+                minDate:'-3M 0D',
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#m29_date_end').datepicker("setDate", new Date());
+
             function initWellTbl(name) {
                     document.getElementById('well_counter').innerHTML = 0;
                     document.getElementById('well_selected_array').innerHTML = ""
@@ -1287,10 +1315,19 @@
                             password: password_data,
                         },
                         success: function(resp) {
+                            document.getElementById('html_cont').style.filter = 'blur(0px)';
+                            document.getElementById('release').disabled = false;
+                            document.getElementById('transfer').disabled = false;
+                            document.getElementById('report').disabled = false;
+                            document.getElementById('statistic').disabled = false;
+                            document.getElementById('structure').disabled = false;
+                            document.getElementById('journal').disabled = false;
                             console.log('resp')
                             console.log(resp)
                             if (resp.result == 'success') {
                                 window.sessionStorage.setItem('islogined', 'true');
+                                window.sessionStorage.setItem('islogined', 'true');
+
                                 document.getElementById('modal_login_cancel').click()
                             }
                             else {
