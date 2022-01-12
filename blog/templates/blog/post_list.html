@@ -151,6 +151,7 @@
         {#=======================================================#}
         {#====================MODAL RELEASE======================#}
         <form method="GET">
+
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -526,6 +527,7 @@
                         name: 'modal',
                         },
                         success: function(resp) {
+                            $('#release_date').datepicker("setDate", new Date());
                             htmlData = resp.serial
                             infoModal.html(htmlData)
                         },

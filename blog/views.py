@@ -10,6 +10,7 @@ from datetime import timedelta
 import pymysql
 import json
 from dateutil.relativedelta import relativedelta
+from django.utils import timezone
 import time
 
 month_blocks_arr = []
@@ -34,9 +35,13 @@ def post_list(request):
             well.serial = p_arr[3]
             well.type = str(p_arr[2])
             date = str(p_arr[1])
+
             date_lst = date.split('/')
+            print('DATE LST: ', date_lst)
+            print('timezone: ', timezone.now())
             date = date_lst[2] + '-' + date_lst[1] + '-' + date_lst[0]
             well.locate = str(p_arr[4])
+            well.created_date = date
             well.comment = ''
             well.release()
 
