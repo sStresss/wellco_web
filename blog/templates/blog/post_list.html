@@ -1,13 +1,15 @@
 {% load static %}
 <html >
     <head style="">
-        <title>С-ПЛАСТ</title>
+        <title>sinaps.workspace</title>
+        <link rel="shortcut icon" href="{% static '/image/favicon.ico' %}" type="image/x-icon">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         <link rel="stylesheet" href="{% static 'css/jquery.treegrid.css' %}">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
     </head>
     <body style="">
 
@@ -16,13 +18,19 @@
             <div class="page-header">
                 <div class="row" style="max-height: 60px; margin-left: 0px; margin-right: 0px">
                     <div class="col-sm-1" style="max-height: 60px ;vertical-align: center; margin-left: -15px">
-                        <img src="{% static '/image/sinaps_.png' %}" class="image" alt="" style="height: 45px; margin-top: 7px">
+                        <img src="{% static '/image/sinaps_.png' %}" alt="" class="wow animate__animated animate__rotateIn" style="visibility: visible; animation-duration: 5s;height: 45px; margin-top: 7px">
                     </div>
-                    <div class="col-sm-5" style="max-height: 60px; margin-left: -98px">
-                        <a class="head_title" style=" cursor: pointer; margin-left: 10px; margin-top: 5px;" onclick="main_reload()">
-                            <h1 style="max-height: 40px;">
-                                С-ПЛАСТ
-                            </h1>
+                    <div class="col-sm-8" style="max-height: 60px; margin-left: -98px">
+                        <a class="head_title" style=" cursor: pointer; margin-left: 10px; margin-top: 5px;" onclick="backMain()">
+                            <div class="row" style="cursor: pointer;width: 800px" onclick="backMain()">
+                                <div class="column" style="margin-left: 16px">
+                                   <h1 style="max-height: 40px; margin-top: 10px">
+                                        <a style="margin-left: -25px; font-family: Aeroport;height: 20px; max-height: 20px; font-size: 30px;">
+                                            С-ПЛАСТ
+                                        </a>
+                                    </h1>
+                                </div>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -52,29 +60,29 @@
                             <table class=" table table-bordered"  style="margin-bottom: 0px;">
                                 <thead style="">
                                     <tr>
-                                      <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
-                                          <a style="font-weight: normal; color: white">
-                                            Сост. на начало
-                                          </a>
-                                      </th>
-                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
+                                      <a style="font-weight: normal; color: white">
+                                        Сост. на начало
+                                      </a>
+                                    </th>
+                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
                                           <a style="font-weight: normal; color: white">
                                             Тип
                                           </a>
                                       </th>
-                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
                                           <a style="font-weight: normal; color: white">
                                             Дата выпуска
                                           </a>
                                       </th>
-                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
                                           <a style="font-weight: normal; color: white">
                                             Нахождение
                                           </a>
                                       </th>
-                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
                                           <a style="font-weight: normal; color: white">
-                                            Сост. на начало
+                                            Комментарий
                                           </a>
                                       </th>
                                     </tr>
@@ -144,6 +152,7 @@
         {#=======================================================#}
         {#====================MODAL RELEASE======================#}
         <form method="GET">
+
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -519,6 +528,7 @@
                         name: 'modal',
                         },
                         success: function(resp) {
+                            $('#release_date').datepicker("setDate", new Date());
                             htmlData = resp.serial
                             infoModal.html(htmlData)
                         },

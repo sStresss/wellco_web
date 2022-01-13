@@ -6,7 +6,7 @@ from django.utils import timezone
 class Well(models.Model):
     serial = models.CharField(max_length=10)
     type = models.CharField(max_length=15)
-    created_date = models.DateField(default=timezone.now)
+    created_date = models.DateField()
     locate = models.CharField(max_length=30)
     comment = models.CharField(max_length=100)
     req_num = models.CharField(max_length=10)
@@ -99,6 +99,17 @@ class Appl_by_data(models.Model):
 
     def __str__(self):
         return f'{self.id}'
+
+class Hystory(models.Model):
+    serial = models.CharField(max_length=10)
+    type = models.CharField(max_length=15)
+    created_date = models.DateField(default=timezone.now)
+
+    def release(self):
+        self.save()
+
+    def __str__(self):
+        return self.serial
 
 
 

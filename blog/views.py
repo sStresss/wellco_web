@@ -10,6 +10,7 @@ from datetime import timedelta
 import pymysql
 import json
 from dateutil.relativedelta import relativedelta
+from django.utils import timezone
 import time
 
 month_blocks_arr = []
@@ -19,7 +20,8 @@ def post_list(request):
     wells = Well.objects.all().order_by('id')
     wells = wells.reverse()
     serial = '0'
-    # mysql_data = pullMySqlBase('localhost', 3303, 'root', 'root', 'welldb')
+    # mysql_data = pullMySqlBase('localhost', 3306, 'root', 'root', 'welldb')
+    # mysql_data = pullMySqlBase('172.22.2.129', 3306, 'itouser', 'sinaps281082', 'welldb')
     # pushPostgreSqlServer(mysql_data)
     if request.method == "GET":
         req = str(request.GET)
@@ -33,9 +35,13 @@ def post_list(request):
             well.serial = p_arr[3]
             well.type = str(p_arr[2])
             date = str(p_arr[1])
+
             date_lst = date.split('/')
+            print('DATE LST: ', date_lst)
+            print('timezone: ', timezone.now())
             date = date_lst[2] + '-' + date_lst[1] + '-' + date_lst[0]
             well.locate = str(p_arr[4])
+            well.created_date = date
             well.comment = ''
             well.release()
 
@@ -311,10 +317,14 @@ def post_list(request):
             code_first_elem = code_lst[0].code_name
             appl_mpz_lst = Appl_mpz.objects.all().order_by('id')
             first_code_mpz_lst = []
-            for elem in appl_mpz_lst:
-                if code_lst[0].id == elem.connect_id:
-                    first_code_mpz_lst.append(elem.mpz_appl_name)
-            first_code_mpz_lst_first_elem = first_code_mpz_lst[0]
+            if len(appl_mpz_lst) != 0:
+                for elem in appl_mpz_lst:
+                    if code_lst[0].id == elem.connect_id:
+                        first_code_mpz_lst.append(elem.mpz_appl_name)
+                first_code_mpz_lst_first_elem = first_code_mpz_lst[0]
+            else:
+                first_code_mpz_lst_first_elem = ''
+
 
             return render(request, 'blog/post_list.html', {'wells': wells, 'types': types, 'type_first_elem': type_first_elem, 'wh_lst': wh_lst, 'wh_first_elem': wh_first_elem, 'code_lst': code_lst, 'code_first_elem': code_first_elem, 'first_code_mpz_lst': first_code_mpz_lst, 'first_code_mpz_lst_first_elem': first_code_mpz_lst_first_elem})
 
@@ -622,15 +632,35 @@ def statistic(request):
         req_dict = request.GET.dict()
         p_arr = []
         if req.find('stat_get_release_data') != -1:
+            print('RELEASE TBL PREPEARE')
+            start_time = datetime.now()
+            print('time_start: ', start_time)
             release_subhead_arr = makeReleaseSubHead()
+            subhead_time = datetime.now()
+            print('time_subhead: ', subhead_time-start_time)
             release_head_arr = makeReleaseHead(release_subhead_arr)
+            head_time = datetime.now()
+            print('time_head: ', head_time-subhead_time)
             release_data = makeReleaseData()
+            data_time = datetime.now()
+            print('time_data: ', data_time-head_time)
             release_color = getReleaseColorArray()
+            color_time = datetime.now()
+            print('time_color: ', color_time-data_time)
+            print('RELEASE TBL PREPEARE')
             transfer_head_arr = makeTransferHead()
+            p_head_time = datetime.now()
+            print('time_head: ', p_head_time-color_time)
             transfer_subhead_arr = makeTransferSubHead(transfer_head_arr)
+            p_subhead_time = datetime.now()
+            print('time_subhead: ', p_subhead_time-p_head_time)
             transfer_color = getTransferColorArray(transfer_head_arr)
+            p_color_time = datetime.now()
+            print('time_color: ', p_color_time-p_subhead_time)
             transfer_data = getReleaseResultDataArray()
-            print('TRANSFER DATA: ', transfer_data)
+            p_data_time = datetime.now()
+            print('time_data: ', p_data_time-p_color_time)
+            # print('TRANSFER DATA: ', transfer_data)
 
             data = {}
             data[0] = release_head_arr
@@ -1066,6 +1096,7 @@ def getReleaseResultDataArray():
 def getInRequestsDataArr():
     #GET IN REQUESTS DATA ARRAY
     #GET PG DATA LST
+    start_time = datetime.now()
     obj_lst_arr = []
     in_req_arr = []
     p_arr = []
@@ -1208,9 +1239,11 @@ def getInRequestsDataArr():
     p_arr.append(summ_ind)
     p_arr.append(pp_arr)
     obj_lst_arr.append(p_arr)
+    print('in_req_time: ', datetime.now() - start_time)
     return obj_lst_arr
 
 def getReleaseDataArray():
+    start_time = datetime.now()
     #GET RELEASE DATA ARRAY
     #GET PM DATA ARRAY
 
@@ -1300,9 +1333,11 @@ def getReleaseDataArray():
     p_arr.append(summ_ind)
     p_arr.append(pp_arr)
     release_data_arr.append(p_arr)
+    print('rel_time: ', datetime.now() - start_time)
     return release_data_arr
 
 def getDeltaDataArr(in_req_data_array, release_data_array):
+    start_time = datetime.now()
     delta_data_arr = []
     i = 0
     j = 0
@@ -1327,10 +1362,11 @@ def getDeltaDataArr(in_req_data_array, release_data_array):
         p_arr.append(pp_arr)
         delta_data_arr = p_arr
         delta_data_array = delta_data_arr
+    print('delta_time: ', datetime.now() - start_time)
     return delta_data_arr
 
 def getTransferColorArray(head_arr):
-    print('LEN HEAD ARR: ', head_arr)
+    # print('LEN HEAD ARR: ', head_arr)
     i = 0
     ch_count = 0
     p_color_arr = []
@@ -1347,8 +1383,8 @@ def getTransferColorArray(head_arr):
             p_color_arr.append(check)
             p_color_arr.append(check)
     release_color_arr = p_color_arr
-    print("TRANSFER COLOR LEN: ", release_color_arr.__len__())
-    print("TRANSFER COLOR LEN: ", release_color_arr)
+    # print("TRANSFER COLOR LEN: ", release_color_arr.__len__())
+    # print("TRANSFER COLOR LEN: ", release_color_arr)
     return release_color_arr
 
 #----------------------------------------------DB TRANSFER--------------------------------------------------------------
@@ -1443,8 +1479,8 @@ def getBuyTransferDataArr(cur_par_name, cur_req_num):
 
     # cur.execute("SELECT TypeName FROM tbl_type")
     # type_rows = cur.fetchall()
-    print('par name: ', cur_par_name)
-    print('app name: ', cur_req_num)
+    # print('par name: ', cur_par_name)
+    # print('app name: ', cur_req_num)
     type_rows = WellType.objects.all().order_by('id')
 
     # cur.execute(
@@ -1456,7 +1492,7 @@ def getBuyTransferDataArr(cur_par_name, cur_req_num):
     for well in p_well_lst:
         if (str(well.req_num) == str(cur_req_num) and str(well.locate) == str(cur_par_name)):
             well_lst.append(well)
-    print('well_lst: ', well_lst)
+    # print('well_lst: ', well_lst)
     date_lst = []
     for row in well_lst:
         ch_unique = False
@@ -1481,7 +1517,7 @@ def getBuyTransferDataArr(cur_par_name, cur_req_num):
                     count += 1
             p_arr.append(str(count))
         appl_info_data_arr.append(p_arr)
-    print(date_lst)
-    print(appl_info_data_arr)
+    # print(date_lst)
+    # print(appl_info_data_arr)
 
     return date_lst, appl_info_data_arr
