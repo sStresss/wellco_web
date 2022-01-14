@@ -230,7 +230,7 @@
         <form method="GET">
             <div class="modal fade" id="exampleModalCenter_transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" style="min-width: 1040px; margin-left: -270px">
+                <div class="modal-content" style="min-width: 1102px; margin-left: -560px">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Перемещение</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -246,94 +246,120 @@
                     <div class="content-box" style="text-align:right; background-color: #ffffff;">
                         <div class="row">
                             <div class="content-box" style="text-align: left; margin-left: 15px; width: 440px;">
-                            <div class="row" style="min-width: 1040px">
-                            <div class="col" style="min-width: 500px">
-                                <button id="button_add" style="margin-left: 0px;" name="but1"  value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_well_lst" onclick="initWellTbl({{ type_first_elem }})">
-                                    Добавить
-                                </button>
-                                <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px;">
-                                    <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px;">
-                                        <th scope="col" ><span style="margin-left: 32px">Тип колодца</span></th>
-                                        <th scope="col"><span style="margin-left: 235px">Количество</span></th>
-                                    </div>
-                                    <div class="row" id="" >
-                                        <div class="scroll" style="height: 300px; overflow-y: scroll">
-                                        <table id="transfer_well_lst" class="tree" style="margin-left: 20px; width: 450px;">
-                                        </table>
+                                <div class="row" style="min-width: 1100px">
+                                    <div class="col" style="min-width: 500px">
+                                        <button id="button_add" style="margin-left: 0px;" name="but1"  value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_well_lst" onclick="initWellTbl({{ type_first_elem }})">
+                                            Добавить
+                                        </button>
+                                        <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px;">
+                                            <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px;">
+                                                <th scope="col" ><span style="margin-left: 32px">Тип колодца</span></th>
+                                                <th scope="col"><span style="margin-left: 235px">Количество</span></th>
+                                            </div>
+                                            <div class="row" id="" >
+                                                <div class="scroll" style="height: 300px; overflow-y: scroll">
+                                                <table id="transfer_well_lst" class="tree" style="margin-left: 20px; width: 450px;">
+                                                </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-left: 0px; margin-top: 5px">
+                                            <div clacc="column">
+                                                <td>Всего к передаче:</td>
+                                                    <br>
+                                                    <br>
+                                                <td>Дата передачи:</td>
+                                                    <br>
+                                                    <br>
+                                                <td>Действие:</td>
+                                                    <br>
+                                                    <br>
+                                                <td><span id="transfer_field_text">Шифр:</span></td>
+                                                    <br>
+                                                    <br>
+                                                <td>Заявка:</td>
+                                            </div>
+                                            <div class="column" style="margin-left: 5px;">
+
+                                                <td><span id="transfer_well_counter">0</span></td>
+                                                    <br>
+                                                    <br>
+                                                <td><input data-date-format="dd/mm/yyyy" id="transaction_date" style="height: 23px; width: 105px"></td>
+                                                    <br>
+                                                    <br>
+                                                <td>
+                                                    <select id="transaction_action_type" class="form-select" aria-label="Default select example">
+                                                      <option value="transfer" selected>Перемещение</option>
+                                                        <tr>
+                                                            <option value="selling">Продажа</option>
+                                                        </tr>
+                                                    </select>
+                                                </td>
+                                                    <br>
+                                                    <br>
+                                                <td>
+                                                    <select id="transfer_code_num" class="form-select" aria-label="Default select example" style="width: 130px">
+                                                      <option selected>{{ code_first_elem }}</option>
+                                                        {% for code in code_lst %}
+                                                            <tr>
+                                                            {% if code.code_name != code_first_elem %}
+                                                                <tr>
+                                                                <option value="{{ code.code_name }}">{{ code.code_name }}</option>
+                                                                </tr>
+                                                            {% endif %}
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </select>
+                                                </td>
+                                                    <br>
+                                                    <br>
+                                                <td>
+                                                    <select id="transfer_mpz_num" class="form-select" aria-label="Default select example" style="width: 130px;">
+                                                      <option selected>{{ first_code_mpz_lst_first_elem }}</option>
+                                                        {% for mpz in first_code_mpz_lst %}
+                                                            <tr>
+                                                            {% if mpz != first_code_mpz_lst_first_elem %}
+                                                                <tr>
+                                                                <option value="{{ mpz }}">{{ mpz }}</option>
+                                                                </tr>
+                                                            {% endif %}
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </select>
+                                                </td>
+                                            </div>
                                         </div>
                                     </div>
-                                  </div>
-                            <div class="row" style="margin-left: 0px; margin-top: 5px">
-                                <div clacc="column">
-                                    <td>Всего к передаче:</td>
-                                        <br>
-                                        <br>
-                                    <td>Дата передачи:</td>
-                                        <br>
-                                        <br>
-                                    <td>Действие:</td>
-                                        <br>
-                                        <br>
-                                    <td><span id="transfer_field_text">Шифр:</span></td>
-                                        <br>
-                                        <br>
-                                    <td>Заявка:</td>
-                                </div>
-                                <div class="column" style="margin-left: 5px;">
-
-                                    <td><span id="transfer_well_counter">0</span></td>
-                                        <br>
-                                        <br>
-                                    <td><input data-date-format="dd/mm/yyyy" id="transaction_date" style="height: 23px; width: 105px"></td>
-                                        <br>
-                                        <br>
-                                    <td>
-                                        <select id="transaction_action_type" class="form-select" aria-label="Default select example">
-                                          <option value="transfer" selected>Перемещение</option>
-                                            <tr>
-                                                <option value="selling">Продажа</option>
-                                            </tr>
-                                        </select>
-                                    </td>
-                                        <br>
-                                        <br>
-                                    <td>
-                                        <select id="transfer_code_num" class="form-select" aria-label="Default select example" style="width: 130px">
-                                          <option selected>{{ code_first_elem }}</option>
-                                            {% for code in code_lst %}
-                                                <tr>
-                                                {% if code.code_name != code_first_elem %}
-                                                    <tr>
-                                                    <option value="{{ code.code_name }}">{{ code.code_name }}</option>
-                                                    </tr>
-                                                {% endif %}
+                                    <div class="col" style="margin-left: -30px">
+                                        <span id="trans_modal_mpz_num" style="font-family: Aeroport !important; font-size: 20px">Заявка # {{ first_code_mpz_lst_first_elem }}</span>
+                                        <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px; margin-top: 0px; width: 580px; max-width: 580px;" >
+                                            <thead class="">
+                                                <tr style="height: 30px; background-color: #577fae;">
+                                                  <th scope="col" style="width: 200px; max-width: 200px; min-width: 200px; text-align: center;">
+                                                      <span style="color: #ffffff; font-weight: normal">Колодец</span>
+                                                  </th>
+                                                  <th scope="col" style="width: 140px; text-align: center" >
+                                                      <span style="color: #ffffff; font-weight: normal">
+                                                          Всего в заявке
+                                                      </span>
+                                                  </th>
+                                                  <th scope="col" style="width: 120px; text-align: center" >
+                                                      <span style="color: #ffffff; font-weight: normal">
+                                                          Выдано
+                                                      </span>
+                                                  </th>
+                                                  <th scope="col" style="width: 120px; text-align: center" >
+                                                      <span style="color: #ffffff; font-weight: normal">
+                                                          К выдаче
+                                                      </span>
+                                                  </th>
                                                 </tr>
-                                            {% endfor %}
-                                        </select>
-                                    </td>
-                                        <br>
-                                        <br>
-                                    <td>
-                                        <select id="transfer_mpz_num" class="form-select" aria-label="Default select example" style="width: 130px;">
-                                          <option selected>{{ first_code_mpz_lst_first_elem }}</option>
-                                            {% for mpz in first_code_mpz_lst %}
-                                                <tr>
-                                                {% if mpz != first_code_mpz_lst_first_elem %}
-                                                    <tr>
-                                                    <option value="{{ mpz }}">{{ mpz }}</option>
-                                                    </tr>
-                                                {% endif %}
-                                                </tr>
-                                            {% endfor %}
-                                        </select>
-                                    </td>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                            </div>
-                            <div class="col" style="margin-left: -30px">
-                                <span id="trans_modal_mpz_num" style="font-family: Aeroport !important; font-size: 20px">Заявка # {{ first_code_mpz_lst_first_elem }}</span>
-                            </div>
-                            </div>
                             </div>
                         </div>
                       </div>
@@ -350,10 +376,10 @@
         {#====================MODAL WELL LST ====================#}
         <form method="GET">
             <div class="modal fade" id="modal_well_lst" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
+              <div class="modal-dialog modal-dialog-centered" role="document" style="margin-left: 1252px">
+                <div class="modal-content" style="">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Список колодцев</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Добавить колодцы</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -1405,6 +1431,12 @@
                     downloadLink.download = filename;
                     downloadLink.click();
                 }
+            }
+            function createMpzApplTbl(mpz_name) {
+
+            }
+            function createMpzApplTbl(appl_name, mpz_name) {
+
             }
         </script>
     </body>
