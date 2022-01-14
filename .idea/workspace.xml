@@ -28,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1275">
-              <caret line="329" column="30" lean-forward="true" selection-start-line="329" selection-start-column="30" selection-end-line="329" selection-end-column="30" />
+            <state relative-caret-position="425">
+              <caret line="247" column="243" selection-start-line="247" selection-start-column="243" selection-end-line="247" selection-end-column="243" />
               <folding>
                 <element signature="n#head#0;n#html#0;n#!!top" />
                 <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -487,16 +487,15 @@
       <workItem from="1641876878464" duration="8762000" />
       <workItem from="1641895133477" duration="10744000" />
       <workItem from="1642058408568" duration="1298000" />
-      <workItem from="1642062955011" duration="6247000" />
+      <workItem from="1642062955011" duration="6560000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40210000" />
+    <option name="totallyTimeSpent" value="40523000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12100213" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -512,7 +511,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.12676056" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.40520042" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -604,8 +603,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1275">
-          <caret line="329" column="30" lean-forward="true" selection-start-line="329" selection-start-column="30" selection-end-line="329" selection-end-column="30" />
+        <state relative-caret-position="425">
+          <caret line="247" column="243" selection-start-line="247" selection-start-column="243" selection-end-line="247" selection-end-column="243" />
           <folding>
             <element signature="n#head#0;n#html#0;n#!!top" />
             <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
