@@ -230,7 +230,7 @@
         <form method="GET">
             <div class="modal fade" id="exampleModalCenter_transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content" style="min-width: 1040px; margin-left: -270px">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Перемещение</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -246,6 +246,8 @@
                     <div class="content-box" style="text-align:right; background-color: #ffffff;">
                         <div class="row">
                             <div class="content-box" style="text-align: left; margin-left: 15px; width: 440px;">
+                            <div class="row" style="min-width: 1040px">
+                            <div class="col" style="min-width: 500px">
                                 <button id="button_add" style="margin-left: 0px;" name="but1"  value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_well_lst" onclick="initWellTbl({{ type_first_elem }})">
                                     Добавить
                                 </button>
@@ -326,6 +328,11 @@
                                         </select>
                                     </td>
                                 </div>
+                            </div>
+                            </div>
+                            <div class="col" style="margin-left: -30px">
+                                <span id="trans_modal_mpz_num" style="font-family: Aeroport !important; font-size: 20px">Заявка # {{ first_code_mpz_lst_first_elem }}</span>
+                            </div>
                             </div>
                             </div>
                         </div>
@@ -648,18 +655,15 @@
                             if (i == appl_data_arr[1].length) {
                                     break
                                 }
-                                else {
-                                    console.log('==========================')
-                                    console.log(appl_data_arr[1][i][0])
-                                    console.log(cur_app_name)
-                                    if (appl_data_arr[1][i][0] == cur_app_name) {
-                                        $('#transfer_mpz_num').append('<option selected>'+appl_data_arr[1][i][1][0]+'</option>')
-                                        cur_ind = i
-                                        cur_first_name = appl_data_arr[1][i][1][0]
-                                    }
-
+                            else {
+                                if (appl_data_arr[1][i][0] == cur_app_name) {
+                                    $('#transfer_mpz_num').append('<option selected>'+appl_data_arr[1][i][1][0]+'</option>')
+                                    cur_ind = i
+                                    cur_first_name = appl_data_arr[1][i][1][0]
+                                    document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+ cur_first_name + " (" + cur_app_name + ")"
                                 }
-                                i++
+                            }
+                            i++
                         }
                         i = 0
                         for (;;){
@@ -670,7 +674,6 @@
                                     if (appl_data_arr[1][cur_ind][1][i] != cur_first_name) {
                                         $('#transfer_mpz_num').append('<option>'+appl_data_arr[1][cur_ind][1][i]+'</option>')
                                     }
-
                                 }
                                 i++
                         }
@@ -683,13 +686,12 @@
                                     break
                                 }
                                 else {
-                                    console.log('==========================')
-                                    console.log(appl_data_arr[0][i][0])
-                                    console.log(cur_app_name)
                                     if (appl_data_arr[0][i][0] == cur_app_name) {
                                         $('#transfer_mpz_num').append('<option selected>'+appl_data_arr[0][i][1][0]+'</option>')
                                         cur_ind = i
                                         cur_first_name = appl_data_arr[0][i][1][0]
+                                        document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+cur_first_name
+
                                     }
                                 }
                                 i++
@@ -702,6 +704,7 @@
                                 else {
                                     if (appl_data_arr[0][cur_ind][1][i] != cur_first_name) {
                                         $('#transfer_mpz_num').append('<option>'+appl_data_arr[0][cur_ind][1][i]+'</option>')
+
                                     }
                                 }
                                 i++
@@ -718,6 +721,7 @@
                         document.getElementById('transfer_mpz_num').innerText = ''
                         $('#transfer_code_num').append('<option selected>'+first_buyer_name+'</option>')
                         $('#transfer_mpz_num').append('<option selected>'+first_buyer_appl_name+'</option>')
+                        document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+first_buyer_appl_name + "(" + first_buyer_name + ")"
                         let i = 0
                         for (;;){
                             if (i == appl_data_arr[1].length) {
@@ -754,6 +758,7 @@
                         document.getElementById('transfer_mpz_num').innerText = ''
                         $('#transfer_code_num').append('<option selected>'+first_code_name+'</option>')
                         $('#transfer_mpz_num').append('<option selected>'+first_code_appl_name+'</option>')
+                        document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+first_code_appl_name
                         let i = 0
                         for (;;){
                             if (i == appl_data_arr[0].length) {
@@ -886,6 +891,14 @@
                 })
                 $("#modalLogin_password").focus(function (s) {
                     document.getElementById('modalLogin_password_error').hidden = true
+                })
+                $("#transfer_mpz_num").change(function (s) {
+                    if (trans_type.val() === 'selling') {
+                        document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+ $("#transfer_mpz_num").val() + " (" + $("#transfer_code_num").val() + ")"
+                    }
+                    else {
+                        document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+ $("#transfer_mpz_num").val()
+                    }
                 })
             });
             var input_password = document.getElementById("modalLogin_password");
