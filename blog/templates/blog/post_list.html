@@ -156,7 +156,7 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Выпуск колодца</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitleRelease">Выпуск колодца</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -229,9 +229,9 @@
         <form method="GET">
             <div class="modal fade" id="exampleModalCenter_transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content" style="min-width: 1040px; margin-left: -250px">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Перемещение</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitleTras">Перемещение</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -245,7 +245,7 @@
                     <div class="content-box" style="text-align:right; background-color: #ffffff;">
                         <div class="row">
                             <div class="content-box" style="text-align: left; margin-left: 15px; width: 440px;">
-                                <button id="button_add" style="margin-left: 0px;" name="but1"  value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_well_lst" onclick="initWellTbl({{ type_first_elem }})">
+                                <button id="button_add" style="margin-left: 0px;" name="{{ type_first_elem }}"  value="val_1" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_well_lst" onclick="initWellTbl(name)">
                                     Добавить
                                 </button>
                                 <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px;">
@@ -253,7 +253,7 @@
                                         <th scope="col" ><span style="margin-left: 32px">Тип колодца</span></th>
                                         <th scope="col"><span style="margin-left: 235px">Количество</span></th>
                                     </div>
-                                    <div class="row" id="" >
+                                    <div class="row" id="">
                                         <div class="scroll" style="height: 300px; overflow-y: scroll">
                                         <table id="transfer_well_lst" class="tree" style="margin-left: 20px; width: 450px;">
                                         </table>
@@ -345,7 +345,7 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Список колодцев</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitleWellLst">Список колодцев</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -382,7 +382,7 @@
                                         <th scope="col"><span style="margin-left: 92px">Серийный номер</span></th>
                                         <th scope="col"><span style="margin-left: 49px">Произведен</span></th>
                                     </div>
-                                    <div class="row" id="" >
+                                    <div class="row">
                                         <div class="scroll" style="height: 527px; overflow-y: scroll">
                                         <table id="modal_well_lst_table" class="tree" style="margin-left: 10px; width: 467px;" >
                                             <tr id="123" onclick="tbl_well_click(id())">
@@ -412,7 +412,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px; width: 800px; max-height: 800px; height: 800px">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Отчет М29</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitleM29">Отчет М29</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -935,19 +935,22 @@
             $('#m29_date_end').datepicker("setDate", new Date());
 
             function initWellTbl(name) {
+                console.log('name')
+                console.log(name)
+                console.log('-----')
                     document.getElementById('well_counter').innerHTML = 0;
                     document.getElementById('well_selected_array').innerHTML = ""
                     document.getElementById('well_selected_counter').innerHTML = 0
                     type_name = $('#modal_cb_type_lst_first').val()
                     document.getElementById("modal_well_lst_table").innerHTML = "";
-                    $("#modal_cb_type_lst").val($("#modal_cb_type_lst option:first").val());
+                    $("#modal_cb_type_lst").val(name);
                     $.ajax({
                         type: "GET",
                         url: "/",
                         dataType: "json",
                         data: {
                         event: 'get_well_lst',
-                            type: type_name
+                            type: name
                         },
                         success: function(resp) {
                             $("#well_table").load("/ #well_table > *");
