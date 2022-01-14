@@ -230,7 +230,7 @@
         <form method="GET">
             <div class="modal fade" id="exampleModalCenter_transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" style="min-width: 1102px; margin-left: -560px">
+                <div class="modal-content" style="min-width: 1105px; margin-left: -560px">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Перемещение</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -252,7 +252,7 @@
                                             Добавить
                                         </button>
                                         <div class="content-box" style="border: 1px solid #d2d2d2; width: 470px; margin-top: 10px;">
-                                            <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px;">
+                                            <div class="row" style="border-bottom: 1px solid #d2d2d2; margin-left: 0px; width: 468px; background-color: #577fae; color: white">
                                                 <th scope="col" ><span style="margin-left: 32px">Тип колодца</span></th>
                                                 <th scope="col"><span style="margin-left: 235px">Количество</span></th>
                                             </div>
@@ -332,23 +332,23 @@
                                     </div>
                                     <div class="col" style="margin-left: -30px">
                                         <span id="trans_modal_mpz_num" style="font-family: Aeroport !important; font-size: 20px">Заявка # {{ first_code_mpz_lst_first_elem }}</span>
-                                        <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px; margin-top: 0px; width: 580px; max-width: 580px;" >
-                                            <thead class="">
-                                                <tr style="height: 30px; background-color: #577fae;">
-                                                  <th scope="col" style="width: 200px; max-width: 200px; min-width: 200px; text-align: center;">
+                                        <table id="mpz_tbl" class=" table table-bordered"  style="margin-bottom: 30px; margin-top: 10px; width: 580px; max-width: 580px;" >
+                                            <thead class="" style="padding: 0rem">
+                                                <tr style="height: 26px; background-color: #577fae; padding: 0rem">
+                                                  <th scope="col" style="width: 200px; max-width: 200px; min-width: 200px; text-align: center; padding: 0rem; vertical-align: middle">
                                                       <span style="color: #ffffff; font-weight: normal">Колодец</span>
                                                   </th>
-                                                  <th scope="col" style="width: 140px; text-align: center" >
+                                                  <th scope="col" style="width: 140px; text-align: center; padding: 0rem; vertical-align: middle" >
                                                       <span style="color: #ffffff; font-weight: normal">
                                                           Всего в заявке
                                                       </span>
                                                   </th>
-                                                  <th scope="col" style="width: 120px; text-align: center" >
+                                                  <th scope="col" style="width: 120px; text-align: center; padding: 0rem; vertical-align: middle" >
                                                       <span style="color: #ffffff; font-weight: normal">
                                                           Выдано
                                                       </span>
                                                   </th>
-                                                  <th scope="col" style="width: 120px; text-align: center" >
+                                                  <th scope="col" style="width: 120px; text-align: center; padding: 0rem; vertical-align: middle" >
                                                       <span style="color: #ffffff; font-weight: normal">
                                                           К выдаче
                                                       </span>
@@ -356,6 +356,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {% for type in types %}
+                                                    <tr  style="height: 40px; min-height: 30px; max-height: 30px;">
+                                                      <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center; padding: 0rem; vertical-align: middle" >{{ type.type_name }}</td>
+                                                      <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" class="">
+                                                          <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
+                                                      </td>
+                                                      <td  id="tbl_well_given-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" >-</td>
+                                                      <td  id="tbl_well_pathof-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" >-</td>
+                                                    </tr>
+                                                {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
@@ -376,8 +386,8 @@
         {#====================MODAL WELL LST ====================#}
         <form method="GET">
             <div class="modal fade" id="modal_well_lst" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document" style="margin-left: 1252px">
-                <div class="modal-content" style="">
+              <div class="modal-dialog modal-dialog-centered" role="document" style="margin-left: 1255px">
+                <div class="modal-content" style="height: 759px">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Добавить колодцы</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
