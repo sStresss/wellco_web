@@ -360,10 +360,26 @@
                                                     <tr  style="height: 40px; min-height: 30px; max-height: 30px;">
                                                       <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center; padding: 0rem; vertical-align: middle" >{{ type.type_name }}</td>
                                                       <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" class="">
-                                                          <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">{{ type.income }}</span>
+                                                        {% if type.income != "0" %}
+                                                            <span style="z-index: 1; font-weight: bold" id="tbl_well_in_mpz-{{ type }}">{{ type.income }}</span>
+                                                        {% endif %}
+                                                        {% if type.income == "0" %}
+                                                            <span style="z-index: 1; color: #aeaeae" id="tbl_well_in_mpz-{{ type }}">{{ type.income }}</span>
+                                                        {% endif %}
                                                       </td>
-                                                      <td  id="tbl_well_given-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" >{{ type.outcome }}</td>
-                                                      <td  id="tbl_well_pathof-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" >{{ type.delta }}</td>
+                                                      {% if type.outcome != "0" %}
+                                                            <td  id="tbl_well_given-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle; font-weight: bold" >{{ type.outcome }}</td>
+                                                      {% endif %}
+                                                      {% if type.outcome == "0" %}
+                                                            <td  id="tbl_well_given-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle; color: #aeaeae" >{{ type.outcome }}</td>
+                                                      {% endif %}
+                                                      {% if type.delta != "0" %}
+                                                            <td  id="tbl_well_pathof-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle; font-weight: bold" >{{ type.delta }}</td>
+                                                      {% endif %}
+                                                      {% if type.delta == "0" %}
+                                                            <td  id="tbl_well_pathof-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle; color: #aeaeae;" >{{ type.delta }}</td>
+                                                      {% endif %}
+
                                                     </tr>
                                                 {% endfor %}
                                             </tbody>

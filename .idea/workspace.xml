@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/blog/templates/blog/post_list.html" line="761" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/blog/templates/blog/post_list.html" line="777" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea6960ad-a56b-4b1c-b20f-5ee1221c8466" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/post_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/post_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-699">
-              <caret line="699" column="78" selection-start-line="699" selection-start-column="78" selection-end-line="699" selection-end-column="78" />
+            <state relative-caret-position="506">
+              <caret line="379" column="177" selection-start-line="379" selection-start-column="177" selection-end-line="379" selection-end-column="177" />
               <folding>
                 <element signature="e#6716#6739#0#DjangoTemplate" />
                 <element signature="e#7455#7510#0#DjangoTemplate" />
@@ -35,6 +34,12 @@
                 <element signature="e#13518#13540#0#DjangoTemplate" />
                 <element signature="e#14604#14659#0#DjangoTemplate" />
                 <element signature="e#14672#14727#0#DjangoTemplate" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#1;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -43,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="365" column="32" lean-forward="true" selection-start-line="365" selection-start-column="32" selection-end-line="365" selection-end-column="32" />
+            <state relative-caret-position="391">
+              <caret line="377" column="34" lean-forward="true" selection-start-line="377" selection-start-column="34" selection-end-line="377" selection-end-column="34" />
               <folding>
                 <element signature="e#817#890#0" />
                 <element signature="e#1297#2700#0" />
@@ -85,11 +90,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/structure.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="1044" selection-start-line="1044" selection-end-line="1090" selection-end-column="29" />
+            <state relative-caret-position="190">
+              <caret line="89" column="45" selection-start-line="89" selection-start-column="43" selection-end-line="89" selection-end-column="45" />
               <folding>
                 <element signature="n#head#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -105,9 +109,6 @@
                 <element signature="n#a#0;n#div#2;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#3;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#a#0;n#div#3;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -115,16 +116,11 @@
                 <element signature="n#tr#0;n#select#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#button#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#button#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="e#6175#6198#0#DjangoTemplate" />
                 <element signature="n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#td#1;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#button#0;n#td#1;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#td#2;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#button#0;n#td#2;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="e#7860#7887#0#DjangoTemplate" />
-                <element signature="e#7928#7962#0#DjangoTemplate" />
                 <element signature="n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#td#1;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#button#0;n#td#1;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -541,6 +537,7 @@
       <find>!important</find>
       <find>transfer_mpz_num</find>
       <find>session</find>
+      <find>if</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -782,7 +779,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63944000" />
+    <option name="totallyTimeSpent" value="65073000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -887,11 +884,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/structure.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="1044" selection-start-line="1044" selection-end-line="1090" selection-end-column="29" />
+        <state relative-caret-position="190">
+          <caret line="89" column="45" selection-start-line="89" selection-start-column="43" selection-end-line="89" selection-end-column="45" />
           <folding>
             <element signature="n#head#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -907,9 +903,6 @@
             <element signature="n#a#0;n#div#2;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#3;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#a#0;n#div#3;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -917,16 +910,11 @@
             <element signature="n#tr#0;n#select#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#button#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#button#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="e#6175#6198#0#DjangoTemplate" />
             <element signature="n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#td#1;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#button#0;n#td#1;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#td#2;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#button#0;n#td#2;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="e#7860#7887#0#DjangoTemplate" />
-            <element signature="e#7928#7962#0#DjangoTemplate" />
             <element signature="n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#td#1;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#button#0;n#td#1;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -1279,8 +1267,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="365" column="32" lean-forward="true" selection-start-line="365" selection-start-column="32" selection-end-line="365" selection-end-column="32" />
+        <state relative-caret-position="391">
+          <caret line="377" column="34" lean-forward="true" selection-start-line="377" selection-start-column="34" selection-end-line="377" selection-end-column="34" />
           <folding>
             <element signature="e#817#890#0" />
             <element signature="e#1297#2700#0" />
@@ -1319,8 +1307,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/post_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-699">
-          <caret line="699" column="78" selection-start-line="699" selection-start-column="78" selection-end-line="699" selection-end-column="78" />
+        <state relative-caret-position="506">
+          <caret line="379" column="177" selection-start-line="379" selection-start-column="177" selection-end-line="379" selection-end-column="177" />
           <folding>
             <element signature="e#6716#6739#0#DjangoTemplate" />
             <element signature="e#7455#7510#0#DjangoTemplate" />
@@ -1332,6 +1320,12 @@
             <element signature="e#13518#13540#0#DjangoTemplate" />
             <element signature="e#14604#14659#0#DjangoTemplate" />
             <element signature="e#14672#14727#0#DjangoTemplate" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
