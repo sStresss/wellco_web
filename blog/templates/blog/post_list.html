@@ -697,6 +697,7 @@
                                     cur_ind = i
                                     cur_first_name = appl_data_arr[1][i][1][0]
                                     document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+ cur_first_name + " (" + cur_app_name + ")"
+                                    getByApplData(cur_app_name, cur_first_name)
                                 }
                             }
                             i++
@@ -727,6 +728,7 @@
                                         cur_ind = i
                                         cur_first_name = appl_data_arr[0][i][1][0]
                                         document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+cur_first_name
+                                        getMpzApplData(cur_first_name)
 
                                     }
                                 }
@@ -758,6 +760,7 @@
                         $('#transfer_code_num').append('<option selected>'+first_buyer_name+'</option>')
                         $('#transfer_mpz_num').append('<option selected>'+first_buyer_appl_name+'</option>')
                         document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+first_buyer_appl_name + "(" + first_buyer_name + ")"
+                        getByApplData(first_buyer_name, first_buyer_appl_name)
                         let i = 0
                         for (;;){
                             if (i == appl_data_arr[1].length) {
@@ -795,6 +798,7 @@
                         $('#transfer_code_num').append('<option selected>'+first_code_name+'</option>')
                         $('#transfer_mpz_num').append('<option selected>'+first_code_appl_name+'</option>')
                         document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+first_code_appl_name
+                        getMpzApplData(first_code_appl_name)
                         let i = 0
                         for (;;){
                             if (i == appl_data_arr[0].length) {
@@ -931,9 +935,11 @@
                 $("#transfer_mpz_num").change(function (s) {
                     if (trans_type.val() === 'selling') {
                         document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+ $("#transfer_mpz_num").val() + " (" + $("#transfer_code_num").val() + ")"
+                        getByApplData($("#transfer_code_num").val(), $("#transfer_mpz_num").val())
                     }
                     else {
                         document.getElementById('trans_modal_mpz_num').innerHTML = "Заявка # "+ $("#transfer_mpz_num").val()
+                        getMpzApplData($("#transfer_mpz_num").val())
                     }
                 })
             });
@@ -1442,11 +1448,145 @@
                     downloadLink.click();
                 }
             }
-            function createMpzApplTbl(mpz_name) {
+            function getByApplData(by_name, appl_name) {
+                $.ajax({
+                    type: "GET",
+                    url: "/",
+                    dataType: "json",
+                    data: {
+                    event: 'get_by_appl_data',
+                        by_name: by_name,
+                        appl_name: appl_name
+                    },
+                    success: function(resp) {
+                        for (const [key, value] of Object.entries(resp)) {
+                            if (value[1] == "0") {
+                                color_mpz = '#aeaeae'
+                                text_weight_mpz = 'normal'
+                            }
+                            else {
+                                color_mpz = '#000000'
+                                text_weight_mpz = 'bold'
+                            }
+                            if (value[2] == "0") {
+                                color_given = '#aeaeae'
+                                text_weight_given = 'normal'
+                            }
+                            else {
+                                color_given = '#000000'
+                                text_weight_given = 'bold'
+                            }
+                            if (value[3] == "0") {
+                                color_pathof = '#aeaeae'
+                                text_weight_pathof = 'normal'
+                                back_pathof = '#ffffff'
+                            }
+                            else {
+                                if (parseInt(value[3],10) < 0) {
+                                    color_pathof = '#000000'
+                                    text_weight_pathof = 'bold'
+                                    back_pathof = '#d3362b'
+                                }
+                                else {
+                                    color_pathof = '#000000'
+                                    text_weight_pathof = 'bold'
+                                    back_pathof = '#ffffff'
+                                }
+                            }
+                            document.getElementById('tbl_well_in_mpz-' + value[0]).innerHTML = value[1];
+                            document.getElementById('tbl_well_in_mpz-' + value[0]).style.color = color_mpz;
+                            document.getElementById('tbl_well_in_mpz-' + value[0]).style.fontWeight = text_weight_mpz;
+                            document.getElementById('tbl_well_given-' + value[0]).innerHTML = value[2];
+                            document.getElementById('tbl_well_given-' + value[0]).style.color = color_given;
+                            document.getElementById('tbl_well_given-' + value[0]).style.fontWeight = text_weight_given;
+                            document.getElementById('tbl_well_pathof-' + value[0]).innerHTML = value[3];
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.color = color_pathof;
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.fontWeight = text_weight_pathof;
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.backgroundColor = back_pathof;
+                        }
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    }
+                });
 
             }
-            function createMpzApplTbl(appl_name, mpz_name) {
-
+            function getMpzApplData(mpz_name) {
+                $.ajax({
+                    type: "GET",
+                    url: "/",
+                    dataType: "json",
+                    data: {
+                    event: 'get_mpz_appl_data',
+                        name: mpz_name
+                    },
+                    success: function(resp) {
+                        for (const [key, value] of Object.entries(resp)) {
+                            if (value[1] == "0") {
+                                color_mpz = '#aeaeae'
+                                text_weight_mpz = 'normal'
+                            }
+                            else {
+                                color_mpz = '#000000'
+                                text_weight_mpz = 'bold'
+                            }
+                            if (value[2] == "0") {
+                                color_given = '#aeaeae'
+                                text_weight_given = 'normal'
+                            }
+                            else {
+                                color_given = '#000000'
+                                text_weight_given = 'bold'
+                            }
+                            if (value[3] == "0") {
+                                color_pathof = '#aeaeae'
+                                text_weight_pathof = 'normal'
+                                back_pathof = '#ffffff'
+                            }
+                            else {
+                                if (parseInt(value[3],10) < 0) {
+                                    color_pathof = '#000000'
+                                    text_weight_pathof = 'bold'
+                                    back_pathof = '#d3362b'
+                                }
+                                else {
+                                    color_pathof = '#000000'
+                                    text_weight_pathof = 'bold'
+                                    back_pathof = '#ffffff'
+                                }
+                            }
+                            document.getElementById('tbl_well_in_mpz-' + value[0]).innerHTML = value[1];
+                            document.getElementById('tbl_well_in_mpz-' + value[0]).style.color = color_mpz;
+                            document.getElementById('tbl_well_in_mpz-' + value[0]).style.fontWeight = text_weight_mpz;
+                            document.getElementById('tbl_well_given-' + value[0]).innerHTML = value[2];
+                            document.getElementById('tbl_well_given-' + value[0]).style.color = color_given;
+                            document.getElementById('tbl_well_given-' + value[0]).style.fontWeight = text_weight_given;
+                            document.getElementById('tbl_well_pathof-' + value[0]).innerHTML = value[3];
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.color = color_pathof;
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.fontWeight = text_weight_pathof;
+                            document.getElementById('tbl_well_pathof-' + value[0]).style.backgroundColor = back_pathof;
+                        }
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    }
+                });
             }
         </script>
     </body>
