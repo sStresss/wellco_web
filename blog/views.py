@@ -12,6 +12,8 @@ import json
 from dateutil.relativedelta import relativedelta
 from django.utils import timezone
 import time
+from django.db.models import F
+from django.db.models import CharField, Value
 
 month_blocks_arr = []
 
@@ -305,7 +307,9 @@ def post_list(request):
             return JsonResponse(data, content_type='application/json')
         else:
             # get type list
-            types = WellType.objects.all().order_by('id')
+            types = WellType.objects.all().order_by('id').annotate(income=Value('', output_field=CharField())).annotate(outcome=Value('', output_field=CharField())).annotate(delta=Value('', output_field=CharField()))
+            p_types = types
+            # print('val: ', types.values('mycolumn'))
             type_first_elem = types[0].type_name
 
             # get wh list
@@ -325,9 +329,60 @@ def post_list(request):
             else:
                 first_code_mpz_lst_first_elem = ''
 
+            # =======================================================
+            well_lst = Appl_mpz_data.objects.all().order_by('id')
+            for elem in appl_mpz_lst:
+                if elem.mpz_appl_name == first_code_mpz_lst_first_elem:
+                    appl_cur_id = elem.pk
+            data = {}
+            arr = []
+            p_arr = []
+            for type in types:
+                value = 0
+                for well in well_lst:
+                    if str(well.applID) == str(appl_cur_id) and str(well.typeID) == str(type.id):
+                        value = int(well.w_value)
+                p_arr.append(value)
+            # print('MPZ IN: ', p_arr)
+            wells = Well.objects.all().order_by('id')
+            appls = Appl_mpz.objects.all().order_by('id')
+            mpz_cur_num = '0'
+            for appl in appls:
+                if str(appl.id) == str(appl_cur_id):
+                    mpz_cur_num = str(appl.mpz_appl_name)
+            ppp_arr = []
+            for type in types:
+                well_counter = 0
+                for well in wells:
+                    if str(well.req_num) == str(mpz_cur_num) and str(well.type) == str(type.type_name):
+                        well_counter+=1
+                ppp_arr.append(well_counter )
+            # print('MPZ OUT: ', ppp_arr)
+            j = 0
+            pppp_arr = []
+            for j in range(len(types)):
+                delta = int(p_arr[j]) - int(ppp_arr[j])
+                pppp_arr.append(delta)
+            # print('MPZ DELTA: ', pppp_arr)
+            for i in range(len(types)):
+                pp_arr = []
+                pp_arr.append(str(types[i]))
+                pp_arr.append(str(p_arr[i]))
+                pp_arr.append(str(ppp_arr[i]))
+                pp_arr.append(str(pppp_arr[i]))
+                data[i] = pp_arr
+                json_data = json.dumps(data)
+            first_appl_data = json.loads(json_data)
+            print('json res1: ', first_appl_data)
+            # =======================================================
+            i = 0
+            for type in p_types:
+                type.income = str(p_arr[i])
+                type.outcome = str(ppp_arr[i])
+                type.delta = str(pppp_arr[i])
+                i+=1
 
-
-            return render(request, 'blog/post_list.html', {'wells': wells, 'types': types, 'type_first_elem': type_first_elem, 'wh_lst': wh_lst, 'wh_first_elem': wh_first_elem, 'code_lst': code_lst, 'code_first_elem': code_first_elem, 'first_code_mpz_lst': first_code_mpz_lst, 'first_code_mpz_lst_first_elem': first_code_mpz_lst_first_elem})
+            return render(request, 'blog/post_list.html', {'wells': wells, 'p_types': p_types, 'type_first_elem': type_first_elem, 'wh_lst': wh_lst, 'wh_first_elem': wh_first_elem, 'code_lst': code_lst, 'code_first_elem': code_first_elem, 'first_code_mpz_lst': first_code_mpz_lst, 'first_code_mpz_lst_first_elem': first_code_mpz_lst_first_elem, 'first_appl_data': first_appl_data})
 
 def structure(request):
     if request.method == "GET":
@@ -411,7 +466,6 @@ def structure(request):
         if req.find('get_mpz') != -1:
             well_lst = Appl_mpz_data.objects.all().order_by('id')
             types = WellType.objects.all().order_by('id')
-            appl_lst = Appl_mpz.objects.all().order_by('id')
             appl_cur_id = p_arr[1]
             data = {}
             arr = []
@@ -1475,13 +1529,6 @@ def getMpzTransferDataArr(app_id):
 #-----------------------------------STRUCTURE BUYER APPL TRANSFER INFO--------------------------------------------------
 
 def getBuyTransferDataArr(cur_par_name, cur_req_num):
-    # appl_name = ((self.tree_sells.currentItem().text(0)).split('# '))[1]
-    # appl_parent_name = self.tree_sells.currentItem().parent().text(0)
-
-    # cur.execute("SELECT TypeName FROM tbl_type")
-    # type_rows = cur.fetchall()
-    # print('par name: ', cur_par_name)
-    # print('app name: ', cur_req_num)
     type_rows = WellType.objects.all().order_by('id')
 
     # cur.execute(

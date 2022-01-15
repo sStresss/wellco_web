@@ -1035,62 +1035,61 @@
                     event: 'get_mpz',
                         mpz_num: name
                     },
+                    success: function(resp) {
+                            document.getElementById("GlobalMpzNumConnect").innerHTML = name;
+                            document.getElementById("MpzNumConnect").innerHTML = name;
+                            document.getElementById("MpzNumConnect").value = name;
+                            let mpz_name = ((document.getElementById("mpz_name-"+name).textContent).split('№'))[1]
+                            document.getElementById("mpz_tbl_head_text").innerHTML = 'Заявка # '+mpz_name
 
-                success: function(resp) {
-                        document.getElementById("GlobalMpzNumConnect").innerHTML = name;
-                        document.getElementById("MpzNumConnect").innerHTML = name;
-                        document.getElementById("MpzNumConnect").value = name;
-                        let mpz_name = ((document.getElementById("mpz_name-"+name).textContent).split('№'))[1]
-                        document.getElementById("mpz_tbl_head_text").innerHTML = 'Заявка # '+mpz_name
-
-                        for (const [key, value] of Object.entries(resp)) {
-                            if (value[1] == "0") {
-                                console.log('0')
-                                color_mpz = '#aeaeae'
-                                text_weight_mpz = 'normal'
-                            }
-                            else {
-                                color_mpz = '#000000'
-                                text_weight_mpz = 'bold'
-                            }
-                            if (value[2] == "0") {
-                                console.log('0')
-                                color_given = '#aeaeae'
-                                text_weight_given = 'normal'
-                            }
-                            else {
-                                color_given = '#000000'
-                                text_weight_given = 'bold'
-                            }
-                            if (value[3] == "0") {
-                                color_pathof = '#aeaeae'
-                                text_weight_pathof = 'normal'
-                                back_pathof = '#ffffff'
-                            }
-                            else {
-                                if (parseInt(value[3],10) < 0) {
-                                    color_pathof = '#000000'
-                                    text_weight_pathof = 'bold'
-                                    back_pathof = '#d3362b'
+                            for (const [key, value] of Object.entries(resp)) {
+                                if (value[1] == "0") {
+                                    console.log('0')
+                                    color_mpz = '#aeaeae'
+                                    text_weight_mpz = 'normal'
                                 }
                                 else {
-                                    color_pathof = '#000000'
-                                    text_weight_pathof = 'bold'
+                                    color_mpz = '#000000'
+                                    text_weight_mpz = 'bold'
+                                }
+                                if (value[2] == "0") {
+                                    console.log('0')
+                                    color_given = '#aeaeae'
+                                    text_weight_given = 'normal'
+                                }
+                                else {
+                                    color_given = '#000000'
+                                    text_weight_given = 'bold'
+                                }
+                                if (value[3] == "0") {
+                                    color_pathof = '#aeaeae'
+                                    text_weight_pathof = 'normal'
                                     back_pathof = '#ffffff'
                                 }
+                                else {
+                                    if (parseInt(value[3],10) < 0) {
+                                        color_pathof = '#000000'
+                                        text_weight_pathof = 'bold'
+                                        back_pathof = '#d3362b'
+                                    }
+                                    else {
+                                        color_pathof = '#000000'
+                                        text_weight_pathof = 'bold'
+                                        back_pathof = '#ffffff'
+                                    }
+                                }
+                                document.getElementById('tbl_well_in_mpz-' + value[0]).innerHTML = value[1];
+                                document.getElementById('tbl_well_in_mpz-' + value[0]).style.color = color_mpz;
+                                document.getElementById('tbl_well_in_mpz-' + value[0]).style.fontWeight = text_weight_mpz;
+                                document.getElementById('tbl_well_given-' + value[0]).innerHTML = value[2];
+                                document.getElementById('tbl_well_given-' + value[0]).style.color = color_given;
+                                document.getElementById('tbl_well_given-' + value[0]).style.fontWeight = text_weight_given;
+                                document.getElementById('tbl_well_pathof-' + value[0]).innerHTML = value[3];
+                                document.getElementById('tbl_well_pathof-' + value[0]).style.color = color_pathof;
+                                document.getElementById('tbl_well_pathof-' + value[0]).style.fontWeight = text_weight_pathof;
+                                document.getElementById('tbl_well_pathof-' + value[0]).style.backgroundColor = back_pathof;
                             }
-                            document.getElementById('tbl_well_in_mpz-' + value[0]).innerHTML = value[1];
-                            document.getElementById('tbl_well_in_mpz-' + value[0]).style.color = color_mpz;
-                            document.getElementById('tbl_well_in_mpz-' + value[0]).style.fontWeight = text_weight_mpz;
-                            document.getElementById('tbl_well_given-' + value[0]).innerHTML = value[2];
-                            document.getElementById('tbl_well_given-' + value[0]).style.color = color_given;
-                            document.getElementById('tbl_well_given-' + value[0]).style.fontWeight = text_weight_given;
-                            document.getElementById('tbl_well_pathof-' + value[0]).innerHTML = value[3];
-                            document.getElementById('tbl_well_pathof-' + value[0]).style.color = color_pathof;
-                            document.getElementById('tbl_well_pathof-' + value[0]).style.fontWeight = text_weight_pathof;
-                            document.getElementById('tbl_well_pathof-' + value[0]).style.backgroundColor = back_pathof;
-                        }
-                        get_mpz_transfer_data(name)
+                            get_mpz_transfer_data(name)
                     },
                     error: function(result) {
                         var readyState = {

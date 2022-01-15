@@ -356,14 +356,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% for type in types %}
+                                                {% for type in p_types %}
                                                     <tr  style="height: 40px; min-height: 30px; max-height: 30px;">
                                                       <td  id="tbl_row-{{ type }}" scope="row" style="text-align: center; padding: 0rem; vertical-align: middle" >{{ type.type_name }}</td>
                                                       <td  id="tbl_well_in_mpz_cont-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" class="">
-                                                          <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">-</span>
+                                                          <span style="z-index: 1" id="tbl_well_in_mpz-{{ type }}">{{ type.income }}</span>
                                                       </td>
-                                                      <td  id="tbl_well_given-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" >-</td>
-                                                      <td  id="tbl_well_pathof-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" >-</td>
+                                                      <td  id="tbl_well_given-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" >{{ type.outcome }}</td>
+                                                      <td  id="tbl_well_pathof-{{ type }}" style="text-align: center; padding: 0rem; vertical-align: middle" >{{ type.delta }}</td>
                                                     </tr>
                                                 {% endfor %}
                                             </tbody>
