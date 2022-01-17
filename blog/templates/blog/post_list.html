@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
     </head>
     <body style="">
-
         <div id="html_cont" class="background-container" style="filter: blur(10px);">
             <div id="picoutput"></div>
             <div class="page-header">
@@ -421,7 +420,7 @@
                                 <div class="column" style="margin-left: 5px">
                                     <select id="modal_cb_type_lst" class="form-select" aria-label="Default select example">
                                         <option id="modal_cb_type_lst_first" value="{{ type_first_elem }}" selected>{{ type_first_elem }}</option>
-                                          {% for type in types %}
+                                          {% for type in p_types %}
                                                 <tr>
                                                 {% if type.pk > 1 %}
                                                     <tr>

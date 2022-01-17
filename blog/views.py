@@ -365,9 +365,6 @@ def post_list(request):
             cur_appl = Appl_byer.objects.get(by_appl_name=str(cur_app_name), connect_id=int(cur_by_id))
             cur_app_id = cur_appl.pk
 
-            # for by in buyers_lst:
-            #     if by.by_name == p_arr[2]:
-            #         cur_by_id = by.id
             app_lst = Appl_byer.objects.order_by('id')
             for app in app_lst:
                 if app.by_appl_name == p_arr[1] and app.connect_id == cur_by_id:
@@ -447,7 +444,7 @@ def post_list(request):
                         value = int(well.w_value)
                 p_arr.append(value)
             # print('MPZ IN: ', p_arr)
-            wells = Well.objects.all().order_by('id')
+            wells = Well.objects.all().order_by('id').reverse()
             appls = Appl_mpz.objects.all().order_by('id')
             mpz_cur_num = '0'
             for appl in appls:
