@@ -479,6 +479,9 @@
                   <div class="modal-body" style="">
                     <div class="content-box" style="background-color: #ffffff;">
                         <div class="row" style="margin-left: auto; margin-right: auto">
+                            <div id="connect_m29_date_start" hidden></div>
+                            <div id="connect_m29_date_end" hidden></div>
+                            <div id="connect_m29_type" hidden></div>
                             <div>
                                 <a>Период от </a>
                                 <td><input data-date-format="dd/mm/yyyy" id="m29_date_start" style="height: 23px; width: 105px; margin-left: 5px"></td>
@@ -530,6 +533,78 @@
                                 <tbody id="m29_tbl_body">
                                 </tbody>
                             </table>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+        {#=======================================================#}
+        {#=======================MODAL M29 DETAIL================#}
+        <form method="GET">
+            <div class="modal fade" id="exampleModalCenter_m29_detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px; width: 800px; max-height: 800px; height: 800px">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Отчет М29 детализация</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" style="">
+                    <div class="content-box" style="background-color: #ffffff;">
+                        <div class="row" style="margin-left: auto; margin-right: auto">
+                            <div>
+                                <a>Период от </a>
+                                <td><span id="m29_detail_date_start" style="height: 23px; width: 105px; margin-left: 5px; border: none; font-weight: bold"></span></td>
+                                <a style="margin-left: 5px"> до </a>
+                                <td><span id="m29_detail_date_end" style="height: 23px; width: 105px; margin-left: 5px;margin-right: 5px; border: none; font-weight: bold"></span></td>
+                                <a style="margin-left: 5px"> Детализация по колодцам: </a>
+                                <td><span id="m29_detail_type" style="height: 23px; width: 105px; margin-left: 5px;margin-right: 5px; border: none; font-weight: bold"></span></td>
+                            </div>
+                            <div class="content" style="margin-left: auto">
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 20px; margin-left: auto; margin-right: auto; height: 700px; ">
+                            <div id="" class="scroll" style="overflow-y: scroll; height: 683px">
+                                <table id="m29_tbl" class=" table table-bordered"  style="margin-bottom: 0px; border: 1px" border="1">
+                                    <thead style="max-height: 30px; height: 30px">
+                                        <tr style="margin: 0.1rem;">
+                                          <th scope="col" style="text-align: center; width: 180px;background-color: #577fae; padding: 0.1rem; padding-bottom: 13px;">
+                                              <a style="font-weight: normal; color: white;">
+                                                Колодец
+                                              </a>
+                                          </th>
+                                          <th scope="col" style="text-align: center; width: 150px;;background-color: #577fae;padding: 0.1rem; padding-bottom: 4px;">
+                                              <a style="font-weight: normal; color: white">
+                                                Сост. на начало <a id="m29_headtext_date_start" style="color: white;"></a>
+                                              </a>
+                                          </th>
+                                          <th scope="col" style="text-align: center; width: 135px;background-color: #577fae;padding: 0.1rem; padding-bottom: 13px;">
+                                              <a style="font-weight: normal; color: white">
+                                                Приход
+                                              </a>
+                                          </th>
+                                          <th scope="col" style="text-align: center; width: 135px;background-color: #577fae;padding: 0.1rem; padding-bottom: 13px;">
+                                              <a style="font-weight: normal; color: white">
+                                                Расход
+                                              </a>
+                                          </th>
+                                          <th scope="col" style="text-align: center; width: 150px;background-color: #577fae;padding: 0.1rem; padding-bottom: 4px;">
+                                              <a style="font-weight: normal; color: white">
+                                                Сост. на конец <a id="m29_headtext_date_end" style="color: #ffffff;"></a>
+                                              </a>
+                                          </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="m29_detail_tbl_body" style="">
+
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                       </div>
                   </div>
@@ -1259,7 +1334,7 @@
                                     color_data_4 = '#000000'
                                     text_weight_4 = 'bold'
                                 }
-                                $("#m29_tbl_body").append("<tr> <td scope=\"row\" style=\"text-align: center; height:30px;\" >С-пласт "+data_arr[i][0]+"</td>\n" +
+                                $("#m29_tbl_body").append("<tr> name=\""+data_arr[i][0]+"\" <td scope=\"row\" style=\"text-align: center; height:30px; cursor: pointer;\" data-toggle=\"modal\" data-target=\"#exampleModalCenter_m29_detail\" class=\"mpz_button\" onclick=\"getM29Detail('"+data_arr[i][0]+"')\">С-пласт "+data_arr[i][0]+"</td>\n" +
                                                             "<td style=\"text-align: center; color: "+color_data_1+";font-weight: "+text_weight_1+"\">"+data_arr[i][1]+"</td>\n" +
                                                             "<td style=\"text-align: center; color: "+color_data_3+";font-weight: "+text_weight_3+"\">"+data_arr[i][3]+"</td>\n" +
                                                             "<td style=\"text-align: center; color: "+color_data_4+";font-weight: "+text_weight_4+"\">"+data_arr[i][4]+"</td>\n" +
@@ -1342,7 +1417,7 @@
                                     color_data_4 = '#000000'
                                     text_weight_4 = 'bold'
                                 }
-                                $("#m29_tbl_body").append("<tr> <td scope=\"row\" style=\"text-align: center; height:30px;\" >С-пласт "+data_arr[i][0]+"</td>\n" +
+                                $("#m29_tbl_body").append("<tr> name=\""+data_arr[i][0]+"\" <td scope=\"row\" style=\"text-align: center; height:30px; cursor: pointer;\" data-toggle=\"modal\" data-target=\"#exampleModalCenter_m29_detail\" class=\"mpz_button\" onclick=\"getM29Detail('"+data_arr[i][0]+"')\">С-пласт "+data_arr[i][0]+"</td>\n" +
                                                             "<td style=\"text-align: center; color: "+color_data_1+";font-weight: "+text_weight_1+"\">"+data_arr[i][1]+"</td>\n" +
                                                             "<td style=\"text-align: center; color: "+color_data_3+";font-weight: "+text_weight_3+"\">"+data_arr[i][3]+"</td>\n" +
                                                             "<td style=\"text-align: center; color: "+color_data_4+";font-weight: "+text_weight_4+"\">"+data_arr[i][4]+"</td>\n" +
@@ -1589,6 +1664,86 @@
                             document.getElementById('tbl_well_pathof-' + value[0]).style.fontWeight = text_weight_pathof;
                             document.getElementById('tbl_well_pathof-' + value[0]).style.backgroundColor = back_pathof;
                         }
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    }
+                });
+            }
+            function getM29Detail(type) {
+                document.getElementById('m29_detail_tbl_body').textContent = ""
+                document.getElementById('m29_detail_date_start').innerText = document.getElementById('m29_date_start_connect').textContent
+                document.getElementById('m29_detail_date_end').innerText = document.getElementById('m29_date_end_connect').textContent
+                document.getElementById('m29_detail_type').innerText = 'С-Пласт' + type
+                $.ajax({
+                    type: "GET",
+                    url: "/",
+                    dataType: "json",
+                    data: {
+                    event: 'm29_detail_get_data',
+                        start_time: $('#m29_date_start').val(),
+                        end_time: $('#m29_date_end').val(),
+                        type: type
+                    },
+                    success: function(resp) {
+                        let arr = resp[0]
+                        i = 0
+                        for (;;) {
+                            if (i == arr.length) {
+                                break
+                            }
+                            else {
+                                let value = arr[i]
+                                if (value[1].toString() == "0") {
+                                    color_data_1 = '#aeaeae'
+                                    text_weight_1 = 'normal'
+                                }
+                                else {
+                                    color_data_1 = '#000000'
+                                    text_weight_1 = 'bold'
+                                }
+                                if (value[2].toString() == "0") {
+                                    color_data_2 = '#aeaeae'
+                                    text_weight_2 = 'normal'
+                                }
+                                else {
+                                    color_data_2 = '#000000'
+                                    text_weight_2 = 'bold'
+                                }
+                                if (value[3].toString() == "0") {
+                                    color_data_3 = '#aeaeae'
+                                    text_weight_3 = 'normal'
+                                }
+                                else {
+                                    color_data_3 = '#000000'
+                                    text_weight_3 = 'bold'
+                                }
+                                if (value[4].toString() == "0") {
+                                    color_data_4 = '#aeaeae'
+                                    text_weight_4 = 'normal'
+                                }
+                                else {
+                                    color_data_4 = '#000000'
+                                    text_weight_4 = 'bold'
+                                }
+                                $("#m29_detail_tbl_body").append("<tr> name=\"\" <td scope=\"row\" style=\"text-align: center; height:30px; cursor: pointer;\"\">С-пласт "+value[0]+"</td>\n" +
+                                "<td style=\"text-align: center; color: "+color_data_1+";font-weight: "+text_weight_1+"\">"+value[1]+"</td>\n" +
+                                "<td style=\"text-align: center; color: "+color_data_3+";font-weight: "+text_weight_3+"\">"+value[3]+"</td>\n" +
+                                "<td style=\"text-align: center; color: "+color_data_4+";font-weight: "+text_weight_4+"\">"+value[4]+"</td>\n" +
+                                "<td style=\"text-align: center; color: "+color_data_2+";font-weight: "+text_weight_2+"\">"+value[2]+"</td> </tr>")
+                            }
+                            i++
+                        }
+                        console.log(arr)
+
                     },
                     error: function(result) {
                         var readyState = {

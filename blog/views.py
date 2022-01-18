@@ -14,6 +14,7 @@ from django.utils import timezone
 import time
 from django.db.models import F
 from django.db.models import CharField, Value
+import dateutil
 
 month_blocks_arr = []
 
@@ -354,6 +355,15 @@ def post_list(request):
             json_res = json.loads(json_data)
             print('json res1: ', json_res)
             # ================================
+            return JsonResponse(json_res, content_type='application/json')
+        if req.find('m29_detail_get_data') != -1:
+            print('m29 DETAIL!')
+            res_arr = getM29DetailDateArr(str(p_arr[1]), str(p_arr[2]), str(p_arr[3]))
+            print('M29 DETAIL RES: ', res_arr)
+            data = {}
+            data[0] = res_arr
+            json_data = json.dumps(data)
+            json_res = json.loads(json_data)
             return JsonResponse(json_res, content_type='application/json')
         if req.find('get_by_appl_data') != -1:
             print('by name: ', p_arr[1])
@@ -1678,3 +1688,117 @@ def getBuyTransferDataArr(cur_par_name, cur_req_num):
     # print(appl_info_data_arr)
 
     return date_lst, appl_info_data_arr
+
+# ------------------------------------------M29 DETAIL INFO INFO--------------------------------------------------------
+
+def getM29DetailDateArr(date_start, date_end, p_type):
+    arr = []
+    res_arr = []
+    #get start range date
+    date = date_start
+    date = date.split('/')
+    p_start = datetime.now().date()
+    date_start = p_start.replace(int(date[2]),int(date[1]),int(date[0]))
+    #get end range date
+    date = date_end
+    date = date.split('/')
+    p_start = datetime.now().date()
+    date_end = p_start.replace(int(date[2]),int(date[1]),int(date[0]))
+    date = str(date_end.year) + '-' + str(date_end.month) + '-' + str(date_end.day)
+    arr.append(date)
+    date_delta = date_end - dateutil.relativedelta.relativedelta(days=1)
+    date = str(date_delta.year) + '-' + str(date_delta.month) + '-' + str(date_delta.day)
+    arr.append(date)
+    print('TYPE: ', p_type)
+    rows = Well.objects.filter(type=p_type)
+
+    while date_delta != date_start:
+        date_delta = date_delta - dateutil.relativedelta.relativedelta(days=1)
+        date = str(date_delta.year) + '-' + str(date_delta.month) + '-' + str(date_delta.day)
+        arr.append(str(date_delta))
+    for elem in arr:
+        p_arr = []
+        state_lst = getReport(str(elem), rows)
+        p_arr.append(elem)
+        for p_elem in state_lst:
+            p_arr.append(str(p_elem))
+        res_arr.append(p_arr)
+
+    return res_arr
+
+def getReport(date, rows):
+    arr = []
+    # refactor start range date to datetime obj
+    range_start = date
+    date_arr_start = range_start.split('-')
+    p_range_start = datetime.now().date()
+    range_start = p_range_start.replace(int(date_arr_start[0]), int(date_arr_start[1]), int(date_arr_start[2]))
+
+    # # refactor end range date to datetime obj
+    range_end = date
+    date_arr_end = range_end.split('-')
+    p_range_end = datetime.now().date()
+    range_end = p_range_end.replace(int(date_arr_end[0]), int(date_arr_end[1]), int(date_arr_end[2]))
+
+    p_arr = []
+    count_start = 0
+    count_end = 0
+    count_input = 0
+    count_output = 0
+
+
+    # get state by start and end range
+    for row in rows:
+        rel_date = str(row.created_date)
+        date_arr = rel_date.split('-')
+        p_rel_date = datetime.now().date()
+        rel_date = p_rel_date.replace(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]))
+
+        if row.trans_date != '':
+            trans_date = str(row.trans_date)
+            date_arr = trans_date.split('.')
+            p_trans_date = datetime.now().date()
+            trans_date = p_trans_date.replace(int(date_arr[2]), int(date_arr[1]), int(date_arr[0]))
+
+        if (rel_date < range_start and row.trans_date == '') or (
+                rel_date < range_start and range_start <= trans_date):
+            check_start = True
+        else:
+            check_start = False
+
+        if (rel_date <= range_end and row.trans_date == '') or (
+                rel_date <= range_end and range_end < trans_date):
+            check_end = True
+        else:
+            check_end = False
+
+        if (rel_date >= range_start) and (rel_date <= range_end):
+            check_input = True
+        else:
+            check_input = False
+
+        if row.trans_date != '':
+            if (trans_date >= range_start) and (trans_date <= range_end):
+                check_output = True
+            else:
+                check_output = False
+        else:
+            check_output = False
+
+        if check_start == True:
+            count_start += 1
+        if check_end == True:
+            count_end += 1
+        if check_input == True:
+            count_input += 1
+        if check_output == True:
+            count_output += 1
+
+    p_arr.append(str(count_start))
+    p_arr.append(str(count_end))
+    p_arr.append(str(count_input))
+    p_arr.append(str(count_output))
+
+    arr.append(p_arr)
+
+    return p_arr
