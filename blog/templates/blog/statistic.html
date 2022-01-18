@@ -125,13 +125,19 @@
         var transfer_table_height = 0
         var transfer_table_width = 0
         var transfer_color_array = []
+        let cur_year = new Date().getFullYear()
+        buildTables(cur_year);
         $(document).ready(function() {
+        });
+        function buildTables(year) {
+            console.log(year);
              $.ajax({
                 type: "GET",
                 url: "/statistic/",
                 dataType: "json",
                 data: {
-                name: 'stat_get_release_data',
+                    name: 'stat_get_data',
+                    year: year
                 },
                 success: function(resp) {
                     let release_head_arr = resp[0]
@@ -149,6 +155,7 @@
                     transfer_table_width = transfer_color_arr.length
                     transfer_table_height = transfer_data_arr.length
                     i = 0
+                    let cur_year_len = parseInt(year,10) - 2018
                     for (;;) {
                         if (i == release_head_arr.length) {
                             break
@@ -164,15 +171,27 @@
                                 if (j == release_subhead_arr[i].length) {break}
                                 else {
                                     if (i == 0) {
-                                        $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 70px; padding-right: 70px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
-                                        ""+release_subhead_arr[i][j]+"" +
-                                        "</th>")
+                                            $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 70px; padding-right: 70px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
+                                            ""+release_subhead_arr[i][j]+"" +
+                                            "</th>")
                                     }
                                     else {
-                                        if (i > 0 && i < 4){
-                                            $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px;text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
-                                        ""+release_subhead_arr[i][j]+"" +
-                                        "</th>")
+                                        if (i > 0 && i < cur_year_len){
+                                            console.log('---------------')
+                                            console.log((release_subhead_arr[i][j]).toString())
+                                            console.log(year.toString())
+                                            console.log('================')
+                                            if ((release_subhead_arr[i][j]).toString() == year.toString()) {
+                                                $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px;text-align: center; font-weight: normal; background-color: #577fae; color: white\">\n" +
+                                                    "" + release_subhead_arr[i][j] + "" +
+                                                    "</th>")
+                                                }
+                                            else {
+                                                    $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px;text-align: center; font-weight: normal; background-color: #8cbcd0; \">\n" +
+                                                        "" + release_subhead_arr[i][j] + "" +
+                                                        "</th>")
+                                                    }
+
                                         }
                                         else {
                                             if (i == release_head_arr.length-1) {
@@ -328,7 +347,7 @@
                     }
                 }
             });
-        });
+        }
         function release_data_item_was_clicked(i,j) {
             console.log(i)
             console.log(j)

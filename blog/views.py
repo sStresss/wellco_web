@@ -776,15 +776,25 @@ def statistic(request):
         req = str(request.GET)
         req_dict = request.GET.dict()
         p_arr = []
-        if req.find('stat_get_release_data') != -1:
-            release_subhead_arr = makeReleaseSubHead()
-            release_head_arr = makeReleaseHead(release_subhead_arr)
-            release_data = makeReleaseData()
-            release_color = getReleaseColorArray()
+        for elem in req_dict.items():
+            p_arr.append(elem[1])
+        if req.find('stat_get_data') != -1:
+            release_subhead_arr = makeReleaseSubHead(p_arr[1])
+            print('1111111111111111111111111111111111111')
+            release_head_arr = makeReleaseHead(release_subhead_arr, p_arr[1])
+            print('22222222222222222222222222222222222222')
+            release_data = makeReleaseData(p_arr[1])
+            print('3333333333333333333333333333333333333')
+            release_color = getReleaseColorArray(p_arr[1])
+            print('444444444444444444444444444444444444444444')
             transfer_head_arr = makeTransferHead()
+            print('555555555555555555555555555555555555')
             transfer_subhead_arr = makeTransferSubHead(transfer_head_arr)
+            print('666666666666666666666666666666666')
             transfer_color = getTransferColorArray(transfer_head_arr)
+            print('7777777777777777777777777777777777777')
             transfer_data = getReleaseResultDataArray()
+            print('88888888888888888888888888888888888888888')
 
             data = {}
             data[0] = release_head_arr
@@ -803,11 +813,11 @@ def statistic(request):
                           {'load': 'success'})
 
 #----------------------------------------STATISTIC RELEASE HEAD---------------------------------------------------------
-def makeReleaseHead(release_subhead_arr):
+def makeReleaseHead(release_subhead_arr, cur_year):
     month_arr = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь',
                  'Ноябрь', 'Декабрь']
     #start custom init
-    years_count, cur_years_lst = getYearsCount()
+    years_count, cur_years_lst = getYearsCount(cur_year)
     cur_count = getSummTblBackCellCount(int(years_count))
     i = -1
     cell_name = ''
@@ -841,9 +851,9 @@ def makeReleaseHead(release_subhead_arr):
         j+=1
     return res_arr
 
-def getYearsCount():
+def getYearsCount(cur_year):
     arr = []
-    now = int(datetime.now().date().year)
+    now = int(cur_year)
     count = 1
     st_date = 2020
     arr.append(st_date)
@@ -859,11 +869,11 @@ def getSummTblBackCellCount(years_count):
 
 #----------------------------------------STATISTIC RELEASE SUBHEAD------------------------------------------------------
 
-def makeReleaseSubHead():
+def makeReleaseSubHead(year):
     # start custom init
     cell_name = ''
-    years_count, cur_years_lst = getYearsCount()
-    month_blocks_arr = getWeekLst()
+    years_count, cur_years_lst = getYearsCount(year)
+    month_blocks_arr = getWeekLst(year)
     cur_count = len(month_blocks_arr) + 2 + years_count
     i = -1
     p_arr = []
@@ -897,21 +907,21 @@ def makeReleaseSubHead():
 
     return res_arr
 
-def getSummTblFrontCellCount(years_count):
-    week_arr = getWeekLst()
+def getSummTblFrontCellCount(years_count,year):
+    week_arr = getWeekLst(year)
     count = 0
     for elem in week_arr:
         count = count + int(elem[1])
     res = count + 2 + years_count
     return res
 
-def getWeekLst():
+def getWeekLst(year):
     p_arr = []
     week_arr = []
     res_arr = []
     cur_month = 1
     past_month = 0
-    cur_year = int(datetime.now().year)
+    cur_year = int(year)
     week_lst = culcWeekLst(cur_year)
     count = 0
     i = 1
@@ -1013,12 +1023,12 @@ def getMonthCount(year, month):
 
     return count
 
-def getSubblocks():
+def getSubblocks(year):
     arr = []
     name_arr = []
     p_name_arr = []
     count = 0
-    month_blocks_arr = getWeekLst()
+    month_blocks_arr = getWeekLst(year)
     for elem in month_blocks_arr:
         weight = 120 / int(elem[1])
         names = elem[2]
@@ -1035,7 +1045,7 @@ def getSubblocks():
 
 #----------------------------------------STATISTIC RELEASE DATA---------------------------------------------------------
 
-def makeReleaseData():
+def makeReleaseData(year):
     data = []
     p_data = []
     # get well type lst
@@ -1045,9 +1055,9 @@ def makeReleaseData():
     # cur.execute("SELECT WellType, Location FROM tbl_main")
     # loc_rows = cur.fetchall()
     for row in welltype_rows:
-        years_stat = getYearsStat(row.type_name, well_rows)
-        week_stat = getWeekStat(row.type_name, well_rows)
-        cur_count_stat = getCurState(row.type_name, well_rows)
+        years_stat = getYearsStat(row.type_name, well_rows, year)
+        week_stat = getWeekStat(row.type_name, well_rows, year)
+        cur_count_stat = getCurState(row.type_name, well_rows,year)
         p_data.append('С-пласт ' + str(row.type_name))
         for elem in years_stat:
             p_data.append(elem)
@@ -1058,9 +1068,10 @@ def makeReleaseData():
         p_data = []
     return data
 
-def getYearsStat(type, well_rows):
+def getYearsStat(type, well_rows,p_year):
     res_arr = []
-    years_count, years_arr = getYearsCount()
+    years_count, years_arr = getYearsCount(p_year)
+    print('years arr: ', years_arr)
 
     for year in years_arr:
         count = 0
@@ -1072,11 +1083,12 @@ def getYearsStat(type, well_rows):
             if t_row == str(type) and y_row == str(year):
                 count+=1
         res_arr.append(count)
+    print('res arr: ', res_arr)
     return res_arr
 
-def getWeekStat(cur_well_type, well_rows):
+def getWeekStat(cur_well_type, well_rows, year):
     res_arr = []
-    month_blocks_arr = getWeekLst()
+    month_blocks_arr = getWeekLst(year)
     for elem in month_blocks_arr:
         i = 0
         mon_count = 0
@@ -1090,8 +1102,8 @@ def getWeekStat(cur_well_type, well_rows):
             start_day = int(week_start[i])
             end_day = int(week_end[i])
             date = datetime.now().date()
-            date_start = date.replace(int(datetime.now().year), int(mon), start_day)
-            date_end = date.replace(int(datetime.now().year), int(mon), end_day)
+            date_start = date.replace(int(year), int(mon), start_day)
+            date_end = date.replace(int(year), int(mon), end_day)
             for well in well_rows:
                 date_rel = str(well.created_date)
                 p_day_rel = date_rel.split('-')
@@ -1112,21 +1124,42 @@ def getWeekStat(cur_well_type, well_rows):
         mon_arr = []
     return res_arr
 
-def getCurState(cur_well_type, loc_arr):
+def getCurState(cur_well_type, loc_arr, year):
     count = 0
-    for well in loc_arr:
-        type = str(well.type)
-        loc = str(well.locate)
-        if type.find(cur_well_type) != -1 and loc.find('склад') != -1:
-            count+=1
+    curYear = datetime.now().year
+    if int(curYear) == int(year):
+        for well in loc_arr:
+            type = str(well.type)
+            loc = str(well.locate)
+            if type.find(cur_well_type) != -1 and loc.find('склад') != -1:
+                count+=1
+    else:
+        for well in loc_arr:
+            type = str(well.type)
+            loc = str(well.locate)
+            if well.trans_date == '':
+                trans = 0
+                creat = int((str(well.created_date)).split('-')[0])
+                if type.find(cur_well_type) != -1 and int(creat)<=int(year):
+                    count += 1
+            else:
+                trans = int((str(well.trans_date)).split('.')[2])
+                creat = int((str(well.created_date)).split('-')[0])
+                # print('create: ', creat)
+                # print('trans: ', trans)
+                # print('year: ', year)
+                if type.find(cur_well_type) != -1 and int(creat) <= int(year) and int(trans) > int(year):
+                    # print('qqqqqqqqqqqqqqqqqqq')
+                    count+=1
+    print('GET CUR STATE DONE')
     return count
 
-def getReleaseColorArray():
+def getReleaseColorArray(year):
     res_arr = []
     check = "0"
-    month_blocks_arr = getWeekLst()
-    years_count, cur_years_lst = getYearsCount()
-    cur_count = getSummTblFrontCellCount(int(years_count))
+    month_blocks_arr = getWeekLst(year)
+    years_count, cur_years_lst = getYearsCount(year)
+    cur_count = getSummTblFrontCellCount(int(years_count), year)
     for elem in month_blocks_arr:
         if check == "1":
             check = "0"
@@ -1134,9 +1167,16 @@ def getReleaseColorArray():
             check = "1"
         for p_elem in elem[2]:
             res_arr.append(check)
-    res_arr.append('1')
+    cur_year = datetime.now().year
+    if int(year) == int(cur_year):
+        res_arr.append('1')
+    print('RES ARR: ', res_arr)
+    print('LEN RES ARR: ', len(res_arr))
+    print('CUR COUNT: ', cur_count)
+
     while len(res_arr) != cur_count:
         res_arr.insert(0, "0")
+
     return res_arr
 
 #----------------------------------------STATISTIC TRANSFER HEAD--------------------------------------------------------
