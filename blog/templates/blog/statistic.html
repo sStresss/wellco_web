@@ -126,10 +126,16 @@
         var transfer_table_width = 0
         var transfer_color_array = []
         let cur_year = new Date().getFullYear()
-        buildTables(cur_year);
+        buildTables('2020');
         $(document).ready(function() {
         });
         function buildTables(year) {
+            document.getElementById("release_table_head").innerHTML = ""
+            document.getElementById("release_table_subhead").innerHTML = ""
+            document.getElementById("release_table_data").innerHTML = ""
+            document.getElementById("transfer_table_head").innerHTML = ""
+            document.getElementById("transfer_table_subhead").innerHTML = ""
+            document.getElementById("transfer_table_data").innerHTML = ""
             console.log(year);
              $.ajax({
                 type: "GET",
@@ -155,7 +161,8 @@
                     transfer_table_width = transfer_color_arr.length
                     transfer_table_height = transfer_data_arr.length
                     i = 0
-                    let cur_year_len = parseInt(year,10) - 2018
+                    let cur_year = new Date().getFullYear()
+                    let cur_year_len = parseInt(cur_year,10) - 2018
                     for (;;) {
                         if (i == release_head_arr.length) {
                             break
@@ -171,7 +178,7 @@
                                 if (j == release_subhead_arr[i].length) {break}
                                 else {
                                     if (i == 0) {
-                                            $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 70px; padding-right: 70px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
+                                            $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px; padding-left: 50px; padding-right: 50px; text-align: center; font-weight: normal; background-color: #8cbcd0 \">\n" +
                                             ""+release_subhead_arr[i][j]+"" +
                                             "</th>")
                                     }
@@ -182,12 +189,12 @@
                                             console.log(year.toString())
                                             console.log('================')
                                             if ((release_subhead_arr[i][j]).toString() == year.toString()) {
-                                                $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px;text-align: center; font-weight: normal; background-color: #577fae; color: white\">\n" +
+                                                $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px;text-align: center; font-weight: normal; background-color: #577fae; color: white\" >\n" +
                                                     "" + release_subhead_arr[i][j] + "" +
                                                     "</th>")
                                                 }
                                             else {
-                                                    $("#release_table_subhead").append("<th id=\"12\" scope=\"col\" style=\"min-width: 2px; font-size: 12px;text-align: center; font-weight: normal; background-color: #8cbcd0; \">\n" +
+                                                    $("#release_table_subhead").append("<th id=\"12\" class= \"custom_tbl_hov\" scope=\"col\"  onclick=\"refreshReleaseTbl('" + release_subhead_arr[i][j] + "')\">\n" +
                                                         "" + release_subhead_arr[i][j] + "" +
                                                         "</th>")
                                                     }
@@ -484,6 +491,10 @@
             window.addEventListener("beforeunload", () => sessionStorage.removeItem('islogined'));
             window.addEventListener("beforeunload", () => sessionStorage.removeItem('islocallogined'));
             window.location.href = '/'
+        }
+        function refreshReleaseTbl(year) {
+            console.log(year)
+            buildTables(year)
         }
 
     </script>

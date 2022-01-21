@@ -393,3 +393,21 @@ footer {
 			/*width: 16em;*/
 }
 
+.custom_tbl_hov {
+
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  font-size: 12px;
+  background-color: #8cbcd0;
+  font-weight: normal;
+  text-align: center;
+  min-width: 2px;
+}
+.custom_tbl_hov:hover {
+  background-color: #95b1d0;
+  cursor: pointer;
+}
+
+/*style="min-width: 2px; font-size: 12px;text-align: center; font-weight: normal; background-color: #8cbcd0; cursor: pointer "*/
+

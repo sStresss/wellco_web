@@ -863,7 +863,7 @@ def makeReleaseHead(release_subhead_arr, cur_year):
 
 def getYearsCount(cur_year):
     arr = []
-    now = int(cur_year)
+    now = 2022
     count = 1
     st_date = 2020
     arr.append(st_date)
