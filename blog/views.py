@@ -417,6 +417,23 @@ def post_list(request):
             json_res = json.loads(json_data)
             # ================================
             return JsonResponse(json_res, content_type='application/json')
+        if req.find('well_edit') != -1:
+            print('WELL EDIT')
+            well_lst = Well.objects.all()
+            for elem in well_lst:
+                if elem.serial == p_arr[1]:
+                    print('CATCH!!!')
+                    cur_id = elem.pk
+                    break
+            date_lst = p_arr[3].split('/')
+            date = date_lst[2] + '-' + date_lst[1] + '-' + date_lst[0]
+            record = Well.objects.get(id=cur_id)
+            print('RECORD: ', record)
+            record.type = str(p_arr[2])
+            record.created_date = date
+            record.save(update_fields=['type', 'created_date'])
+            json_res = {'result': str('success')}
+            return JsonResponse(json_res, content_type='application/json')
         else:
             # get type list
             types = WellType.objects.all().order_by('id').annotate(income=Value('', output_field=CharField())).annotate(outcome=Value('', output_field=CharField())).annotate(delta=Value('', output_field=CharField()))

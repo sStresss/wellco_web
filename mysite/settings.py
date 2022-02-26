@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wellco',
+        'NAME': 'itoDB',
         'USER': 'itoUser1',
         'PASSWORD': '28108213',
-        'HOST': '172.22.2.129',
+        'HOST': 'loopback',
         'PORT': 54324,
     }
 }

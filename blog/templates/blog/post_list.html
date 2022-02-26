@@ -56,44 +56,53 @@
                 <div style="margin-top: 9px; margin-left: -6px">
                     <div id="well_table" class="container-fluid row" style="">
                         <div class="scroll" style="overflow-y: scroll; width: 1890px; height: 784px">
-                            <table class=" table table-bordered"  style="margin-bottom: 0px;">
+                            <span id="tbl_row_connect_serial" hidden></span>
+                            <span id="tbl_row_connect_type" hidden></span>
+                            <span id="tbl_row_connect_date_release" hidden></span>
+                            <table class=" table table-bordered"  style="margin-bottom: 0px; border-spacing: 0px">
                                 <thead style="">
                                     <tr>
                                     <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
                                       <a style="font-weight: normal; color: white">
-                                        Сост. на начало
+                                        Серийный номер
                                       </a>
                                     </th>
-                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
-                                          <a style="font-weight: normal; color: white">
-                                            Тип
-                                          </a>
-                                      </th>
-                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
-                                          <a style="font-weight: normal; color: white">
-                                            Дата выпуска
-                                          </a>
-                                      </th>
-                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
-                                          <a style="font-weight: normal; color: white">
-                                            Нахождение
-                                          </a>
-                                      </th>
-                                    <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
-                                          <a style="font-weight: normal; color: white">
-                                            Комментарий
-                                          </a>
-                                      </th>
+                                        <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
+                                              <a style="font-weight: normal; color: white">
+                                                Тип
+                                              </a>
+                                          </th>
+                                        <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
+                                              <a style="font-weight: normal; color: white">
+                                                Дата выпуска
+                                              </a>
+                                          </th>
+                                        <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
+                                              <a style="font-weight: normal; color: white">
+                                                Нахождение
+                                              </a>
+                                          </th>
+                                        <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
+                                              <a style="font-weight: normal; color: white">
+                                                Комментарий
+                                              </a>
+                                        </th>
+                                        <th scope="col" style="text-align: center; background-color: #577fae; padding: 0.1rem; padding-bottom: 7px;">
+                                        </th>
+
                                     </tr>
                                 </thead>
                                 <tbody style="">
                                     {% for well in wells %}
-                                        <tr>
-                                          <td scope="row"  >С-пласт {{ well.serial }}</td>
-                                          <td>{{ well.type }}</td>
-                                          <td>{{ well.created_date }}</td>
-                                          <td>{{ well.locate }}</td>
-                                          <td>{{ well.comment }}</td>
+                                        <tr class="mpz_button" style="">
+                                            <td scope="row"  >С-пласт {{ well.serial }}</td>
+                                            <td>{{ well.type }}</td>
+                                            <td>{{ well.created_date }}</td>
+                                            <td>{{ well.locate }}</td>
+                                            <td>{{ well.comment }}</td>
+                                            <td style="text-align: center; padding: 0rem">
+                                                <img id="{{ well.type }}_{{ well.serial }}" name="{{ well.created_date }}" about="{{ well.created_date }}" src="{% static '/image/well_edit.png' %}" alt="" class="" style="margin-top: 8px; margin-left: 3px; visibility: visible; height: 27px;cursor: pointer" onclick="wellEdit(id, name)" data-toggle="modal" data-target="#modalWellEdit"/>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
@@ -151,7 +160,6 @@
         {#=======================================================#}
         {#====================MODAL RELEASE======================#}
         <form method="GET">
-
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -613,6 +621,63 @@
             </div>
         </form>
         {#=======================================================#}
+        {#=======================MODAL WELL EDIT================#}
+        <form method="GET">
+            <div class="modal fade" id="modalWellEdit" tabindex="-1" role="dialog" aria-labelledby="modalWellEdit" aria-hidden="true" >
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px; width: 388px; max-height: 800px; height: 800px">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Редактирование</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" style="margin-left: 10px">
+                    <div class="content-box" style="text-align:right; background-color: #ffffff;">
+                        <div class="row">
+                            <div class="col-sm-5" style="min-width: 180px">
+                            <td>Серийный номер:</td>
+                              <br>
+                              <br>
+                            <td>Тип:</td>
+                              <br>
+                              <br>
+                            <td>Дата выпуска:</td>
+                              <br>
+                            </div>
+                            <div  class="col-sm-4" style="text-align: left;">
+                                <span  id="well_edit_serial" style="height: 23px;"></span>
+                                <br>
+                                <br>
+                                <select id="well_edit_type" class="form-select" aria-label="Default select example" style="width: 120px;">
+                                  <option id="well_edit_type_first" selected></option>
+                                    {% for type in p_types %}
+                                        <tr>
+                                        {% if type.pk > 1 %}
+                                            <tr>
+                                            <option value="{{ type.type_name }}">{{ type.type_name }}</option>
+                                            </tr>
+                                        {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </select>
+                                <br>
+                                <br>
+                                <input data-date-format="dd/mm/yyyy" id="well_edit_release_date" style="height: 23px; margin-top: 0px; width: 120px">
+                                <br>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="modal_well_edit_cancel" type="button" class="btn btn-secondary" data-dismiss="modal" >Отмена</button>
+                    <button id="modal_well_edit_save" type="button" class="btn btn-primary" onclick="wellEditSave()">Сохранить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+        {#=======================================================#}
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -627,6 +692,7 @@
         });
         </script>
         <script>
+            const month_lst = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']
             let islogined = window.sessionStorage.getItem('islogined')
             if (islogined == 'true') {
                 document.getElementById('html_cont').style.filter = 'blur(0px)';
@@ -1055,6 +1121,13 @@
                 todayHighlight: true,
             });
             $('#release_date').datepicker("setDate", new Date());
+            $('#well_edit_release_date').datepicker({
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+            });
+            $('#well_edit_release_date').datepicker("setDate", new Date());
             $('.dropdown-toggle').dropdown();
             $('#transaction_date').datepicker({
                 weekStart: 1,
@@ -1744,6 +1817,49 @@
                         }
                         console.log(arr)
 
+                    },
+                    error: function(result) {
+                        var readyState = {
+                        1: "Loading",
+                        2: "Loaded",
+                        3: "Interactive",
+                        4: "Complete"
+                        };
+                        if(result.readyState !== 0 && result.status !== 0 && result.responseText !== undefined) {
+                            alert("readyState: " + readyState[result.readyState] + "\n status: " + result.status + "\n\n responseText: " + result.responseText);
+                        }
+                    }
+                });
+            }
+            function wellEdit(type_lst, dateRelease) {
+                {#$('#well_edit_serial').val(type_lst.split('_')[1])#}
+                document.getElementById('well_edit_serial').innerText = type_lst.split('_')[1]
+                document.getElementById('well_edit_type_first').innerText = type_lst.split('_')[0]
+                let cur_mon = (dateRelease.split(' '))[1]
+                let cur_month_ind = 0
+                for (let i=0; i<month_lst.length;i++) {
+                    {#console.log()#}
+                    {#console.log(cur_mon)#}
+                    if (month_lst[i] == cur_mon) {cur_month_ind = i+1;break}
+
+                }
+                $('#well_edit_release_date').datepicker("setDate", new Date((dateRelease.split(' '))[2]+'-'+cur_month_ind+'-'+(dateRelease.split(' '))[0]));
+            }
+            function wellEditSave() {
+                $.ajax({
+                    type: "GET",
+                    url: "/",
+                    dataType: "json",
+                    data: {
+                    event: 'well_edit',
+                        serial: document.getElementById('well_edit_serial').textContent,
+                        type: $('#well_edit_type').val(),
+                        date: $('#well_edit_release_date').val()
+                    },
+                    success: function(resp) {
+                        console.log('edit success');
+                        document.getElementById('modal_well_edit_cancel').click();
+                        $("#well_table").load("/ #well_table > *");
                     },
                     error: function(result) {
                         var readyState = {
